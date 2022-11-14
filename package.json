@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npx tsc",
     "start": "node server.js",
-    "dev-ts": "concurrently \"npx tsc --watch\" \"nodemon -q ./src/server.js\""
+    "dev-ts": "concurrently \"npx tsc --watch\" \"nodemon -q server.js\""
   },
   "author": "ptudw_Nhom9",
   "license": "ISC",
