@@ -3,3 +3,4 @@
 /views/**/*.js
 /views/*.js
 /*.js
+/public/**/*.js
