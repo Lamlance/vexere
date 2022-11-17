@@ -78,7 +78,13 @@
   float: left;
   flex-shrink: 0;
 }
-
+.vexere_tienich_list{
+  list-style-type: none;
+}
+.vexere_tienich_list > li{
+  background-color: gainsboro;
+  margin: 0.5rem;
+}
 @media only screen and (max-width:400px) {
   .vexere_hinhxe_slider_wrapper{
     width: 100vw;
