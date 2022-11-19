@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chi Tiet</title>
+  <link rel="stylesheet" type="text/css" href="/css/ChiTiet.css">
+</head>
+
+<body>
+  <template id="chi-tiet-template">
+    <!-- Cửa sổ thông tin cơ bản -->
+    <div class="vexere_thong_tin_wrapper">
+
+      <!-- Hình xe -->
+      <div class="vexere_hinhxe_wrapper">
+        <img src="" alt="Hinh xe">
+      </div>
+
+      <!-- Thông tin cơ bản đi đến -->
+      <div>
+        <h3> {Tên Nhà Xe} </h3>
+        <p> {Loại xe} - {Số chỗ}</p>
+        <div class="vexere_thoigian_container">
+          <div class="vexere_diden_icon">
+            <img style="width: 100%;" alt="icon" />
+          </div>
+          <div>
+            <h3>{Giờ khởi hành}</h3>
+            <p>{Địa điểm đón}</p>
+          </div>
+          <div>
+            <h3>{Giờ tới nơi}</h3>
+            <p>{Địa điểm trả}</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Giá và chi tiết -->
+      <div class="vexere_gia_chitiet">
+        <h3>{Giá vé} VND</h3>
+        <div>
+          <h3>{Số chỗ còn trống}</h3>
+        </div>
+        <div class="vexere_thongtin_action">
+          <h4>Thông tin chi tiết 🔽</h4>
+          <button>Đặt vé</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bảng thông tin chi tiết -->
+    <div class="vexere_bang_chi_tiet">
+      <div class="vexere_chitiet_tab">
+        <button value="0">Hình xe</button>
+        <button value="1">Tiện ích</button>
+        <button value="2">Đón trả</button>
+        <button value="3">Chính sách</button>
+        <button value="4">Đánh giá</button>
+      </div>
+
+      <!-- Hình xe -->
+      <div class="vexere_hinhxe_slider_wrapper vexere_chitiet_tab_item">
+        <div class="vexere_hinhxe_slider_display">
+          <!-- <div class="vexere_hinhxe_slider_display_img">
+            <img />
+          </div>
+          <div class="vexere_hinhxe_slider_display_img">
+            <img />
+          </div>
+          <div class="vexere_hinhxe_slider_display_img">
+            <img />
+          </div> -->
+        </div>
+      </div>
+
+      <!-- Tiện ích nhà xe  -->
+      <div class="vexere_tienich_wrapper vexere_chitiet_tab_item">
+        <ul class="vexere_tienich_list">
+          <li>
+            <h3>🚽 Toilet</h3>
+            <p>Nhà vệ sinh trên xe</p>
+          </li>
+          <li>
+            <h3>🧼 Khử khuẩn</h3>
+            <p>Nhà xe có thực hiện phun khử trùng Nano Bạc lên xe nhằm bảo vệ an toàn cho hành khách mùa Covid</p>
+          </li>
+          <li>
+            <h3>🧴 Nước rửa tay</h3>
+            <p>Nhà xe có trang bị nước rửa tay diệt khuẩn trước khi lên xe và trong xe</p>
+          </li>
+          <li>
+            <h3>🌡️ Đo thân nhiệt</h3>
+            <p>Hành khách sẽ được đo thân nhiệt trước khi lên xe để xác định không nghi nhiễm/ lan truyền vi rút Covid
+              cho
+              hành khách khác.</p>
+          </li>
+          <li>
+            <h3>😷 Khuyến cáo đeo khẩu trang</h3>
+            <p>Có đảm bảo khuyến cáo tất cả hành khách đeo khẩu trang khi lên xe.</p>
+          </li>
+          <li>
+            <h3>🥤 Nước uống</h3>
+            <p>Nhà xe có phục vụ nước cho hành khách.</p>
+          </li>
+          <li>
+            <h3>🔨 Búa phá kính</h3>
+            <p>Dùng để phá kính ô tô thoát hiểm trong trường hợp khẩn cấp.</p>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Điểm đón trả -->
+      <div class="vexere_dontra_chitiet_wrapper vexere_chitiet_tab_item">
+        <p>
+          Lưu ý
+          Các mốc thời gian đón, trả bên dưới là thời gian dự kiến.
+          Lịch này có thể thay đổi tùy tình hình thưc tế.
+        </p>
+        <ul>
+          <li>
+            {Thời gian đón 1} * {Địa điểm đón 1}
+          </li>
+          <li>
+            {Thời gian đón 2} * {Địa điểm đón 2}
+          </li>
+          <li>
+            {Thời gian đón 3} * {Địa điểm đón 3}
+          </li>
+          <li>
+            {Thời gian đón 4} * {Địa điểm đón 4}
+          </li>
+        </ul>
+        <ul>
+          <li>
+            {Thời gian trả 1} * {Địa điểm trả 1}
+          </li>
+          <li>
+            {Thời gian trả 2} * {Địa điểm trả 2}
+          </li>
+          <li>
+            {Thời gian trả 3} * {Địa điểm trả 3}
+          </li>
+          <li>
+            {Thời gian trả 4} * {Địa điểm trả 4}
+          </li>
+          <li>
+            {Thời gian trả 5} * {Địa điểm trả 5}
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </template>
+
+  <script rel="modulepreload" type="text/javascript" src="/js/ChiTiet/ChiTiet.js">
+  </script>
+</body>
+
+</html>

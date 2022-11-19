@@ -12,8 +12,11 @@ app.use(express_1.default.static(__dirname + "/public"));
 app.get('/', (req, res) => {
     res.status(200).sendFile("views/index.html", { root: __dirname });
 });
-app.get('/Lam/ChiTiet', (req, res) => {
+app.get('/ChiTiet', (req, res) => {
     res.status(200).sendFile(`${__dirname}/views/ChiTiet/ChiTiet.html`);
+});
+app.get('/ChiTiet2', (req, res) => {
+    res.status(200).sendFile(`${__dirname}/views/ChiTiet/ChiTietTemplate.html`);
 });
 app.listen(port, () => {
     console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
