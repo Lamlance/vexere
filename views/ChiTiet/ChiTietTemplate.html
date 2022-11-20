@@ -12,10 +12,10 @@
 <body>
   <template id="chi-tiet-template">
     <!-- Cửa sổ thông tin cơ bản -->
-    <div class="vexere_thong_tin_wrapper">
+    <div class="vexere_info_wrapper">
 
       <!-- Hình xe -->
-      <div class="vexere_hinhxe_wrapper">
+      <div class="vexere_bus_image_wrapper">
         <img src="" alt="Hinh xe">
       </div>
 
@@ -23,8 +23,8 @@
       <div>
         <h3> {Tên Nhà Xe} </h3>
         <p> {Loại xe} - {Số chỗ}</p>
-        <div class="vexere_thoigian_container">
-          <div class="vexere_diden_icon">
+        <div class="vexere_time_container">
+          <div class="vexere_departure_icon">
             <img style="width: 100%;" alt="icon" />
           </div>
           <div>
@@ -40,12 +40,12 @@
       </div>
 
       <!-- Giá và chi tiết -->
-      <div class="vexere_gia_chitiet">
+      <div class="vexere_gia_brief_info">
         <h3>{Giá vé} VND</h3>
         <div>
           <h3>{Số chỗ còn trống}</h3>
         </div>
-        <div class="vexere_thongtin_action">
+        <div class="vexere_info_action">
           <h4>Thông tin chi tiết 🔽</h4>
           <button>Đặt vé</button>
         </div>
@@ -54,8 +54,8 @@
     </div>
 
     <!-- Bảng thông tin chi tiết -->
-    <div class="vexere_bang_chi_tiet">
-      <div class="vexere_chitiet_tab">
+    <div class="vexere_detail_info_container">
+      <div class="vexere_detail_info_select_tab">
         <button value="0">Hình xe</button>
         <button value="1">Tiện ích</button>
         <button value="2">Đón trả</button>
@@ -64,23 +64,15 @@
       </div>
 
       <!-- Hình xe -->
-      <div class="vexere_hinhxe_slider_wrapper vexere_chitiet_tab_item">
-        <div class="vexere_hinhxe_slider_display">
-          <!-- <div class="vexere_hinhxe_slider_display_img">
-            <img />
-          </div>
-          <div class="vexere_hinhxe_slider_display_img">
-            <img />
-          </div>
-          <div class="vexere_hinhxe_slider_display_img">
-            <img />
-          </div> -->
+      <div class="vexere_bus_image_slider_wrapper js_vexere_detail_tab_item">
+        <div class="vexere_bus_image_slider">
+          
         </div>
       </div>
 
       <!-- Tiện ích nhà xe  -->
-      <div class="vexere_tienich_wrapper vexere_chitiet_tab_item">
-        <ul class="vexere_tienich_list">
+      <div class="js_vexere_detail_tab_item">
+        <ul class="vexere_utility_list">
           <li>
             <h3>🚽 Toilet</h3>
             <p>Nhà vệ sinh trên xe</p>
@@ -95,9 +87,7 @@
           </li>
           <li>
             <h3>🌡️ Đo thân nhiệt</h3>
-            <p>Hành khách sẽ được đo thân nhiệt trước khi lên xe để xác định không nghi nhiễm/ lan truyền vi rút Covid
-              cho
-              hành khách khác.</p>
+            <p>Hành khách sẽ được đo thân nhiệt trước khi lên xe để xác định không nghi nhiễm/ lan truyền vi rút Covid cho hành khách khác.</p>
           </li>
           <li>
             <h3>😷 Khuyến cáo đeo khẩu trang</h3>
@@ -115,7 +105,7 @@
       </div>
 
       <!-- Điểm đón trả -->
-      <div class="vexere_dontra_chitiet_wrapper vexere_chitiet_tab_item">
+      <div class="vexere_from_to_detail_wrapper js_vexere_detail_tab_item">
         <p>
           Lưu ý
           Các mốc thời gian đón, trả bên dưới là thời gian dự kiến.
