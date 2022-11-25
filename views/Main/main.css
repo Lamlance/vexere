@@ -17,3 +17,16 @@ ul>li {
 ul>li>a {
     text-decoration: none;
 }
+
+.item:hover,
+.item:focus {
+    background-color: #fafafa;
+    color: #D1822B;
+}
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.3;
+}
+
+

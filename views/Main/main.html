@@ -17,6 +17,10 @@
 			crossorigin="anonymous"
 		></script>
 
+		<script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.7/dist/autoComplete.min.js"></script>
+
+		
+
 		<link rel="stylesheet" href="main.css" />
 	</head>
 	<body>
@@ -68,15 +72,49 @@
 
 				<div class="search_bar container">
 					<div class="btn-group w-100 row">
-						<div class="btn btn-light start col-4 py-3">Điểm đi</div>
-						<div class="btn btn-light end col-4 py-3">Điểm đến</div>
-						<div class="btn btn-light date col-2 py-3">Ngày đi</div>
-						<div class="btn btn-warning submit col-2 py-3"> Tìm kiếm</div>
+						<div class="btn btn-light start col-4 py-3 completeIt">
+							<input
+								type="text"
+								class="bg-light form-control border-0"
+								id="start-place"
+								placeholder="Điểm đi"
+								autocomplete="off"
+								autofocus
+							/>
+							<div class="auto_complete_place">
+
+							</div>
+						</div>
+						<div class="btn btn-light end col-4 py-3">
+							<input
+								type="text"
+								placeholder="Điểm đến"
+								class="bg-light form-control border-0"
+								id="end-place"
+								autocomplete="off"
+								autofocus
+							/>
+							<div class="auto_complete_place">
+								
+							</div>
+						</div>
+						<div class="btn btn-light date col-2 py-3">
+							<input
+								type="text"
+								placeholder="Ngay khoi hanh"
+								class="bg-light border-0 form-control"
+							/>
+						</div>
+						<div
+							class="btn btn-warning submit col-2 py-3 text-center"
+						>
+							<a href="#" class="form-control bg-warning border-0">Tìm vé</a>
+						</div>
 					</div>
 				</div>
 			</section>
 
-			<section id="vouchers">
+			<section id="routes">
 				<div class="container mt-5">
 					<h4 class="">Tuyến đường phổ biến</h4>
 
@@ -610,5 +648,7 @@
 				</div>
 			</div>
 		</footer>
+
+		<script src="main.js"></script>
 	</body>
 </html>
