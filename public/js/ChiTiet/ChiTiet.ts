@@ -1,3 +1,5 @@
+import CarPicture from "../../json/CarPicture";
+
 //Chi tiet template maker
 interface imgAtribute {
   src: string,
