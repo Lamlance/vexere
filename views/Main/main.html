@@ -19,8 +19,6 @@
 
 		<script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.7/dist/autoComplete.min.js"></script>
 
-		
-
 		<link rel="stylesheet" href="main.css" />
 	</head>
 	<body>
@@ -71,8 +69,8 @@
 				</p>
 
 				<div class="search_bar container">
-					<div class="btn-group w-100 row">
-						<div class="btn btn-light start col-4 py-3 completeIt">
+					<div class="bg-light rounded w-100 row">
+						<div class="start col-4 py-3 completeIt">
 							<input
 								type="text"
 								class="bg-light form-control border-0"
@@ -81,11 +79,11 @@
 								autocomplete="off"
 								autofocus
 							/>
-							<div class="auto_complete_place">
+							<div class="auto_complete_place dropdown-menu">
 
 							</div>
 						</div>
-						<div class="btn btn-light end col-4 py-3">
+						<div class="bg-light rounded nd col-4 py-3">
 							<input
 								type="text"
 								placeholder="Điểm đến"
@@ -94,26 +92,29 @@
 								autocomplete="off"
 								autofocus
 							/>
-							<div class="auto_complete_place">
-								
+							<div class="auto_complete_place"></div>
+						</div>
+						<div class="bg-light rounded date col-2 py-3">
+							<div>
+								<i class="calendar icon"></i>
+								<input
+									type="text"
+									placeholder="Ngay khoi hanh"
+									class="bg-light border-0 form-control"
+								/>
 							</div>
 						</div>
-						<div class="btn btn-light date col-2 py-3">
-							<input
-								type="text"
-								placeholder="Ngay khoi hanh"
-								class="bg-light border-0 form-control"
-							/>
-						</div>
 						<div
-							class="btn btn-warning submit col-2 py-3 text-center"
+							class="bg-warning rounded-end col-2 py-3 text-center"
 						>
-							<a href="#" class="form-control bg-warning border-0">Tìm vé</a>
+							<a href="#" class="form-control bg-warning border-0"
+								>Tìm vé</a
+							>
 						</div>
 					</div>
 				</div>
 			</section>
-
+			<!-- Test on git -->
 			<section id="routes">
 				<div class="container mt-5">
 					<h4 class="">Tuyến đường phổ biến</h4>
