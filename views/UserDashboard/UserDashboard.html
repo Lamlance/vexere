@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/public/css/UserDashboard.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="sidebar">
+      <div class="user_infor">
+        <img src="" alt="user_image" class="user_image" />
+        <h3 class="user_login_name inline_block">
+          {UserDisplay.userDisplayName}
+        </h3>
+      </div>
+      <div class="sidebar_navigation">
+        <ul>
+          <li>Thay đổi thông tin tài khoản</li>
+          <li>Đơn hàng</li>
+          <li>Giỏ hàng</li>
+        </ul>
+      </div>
+    </div>
+    <div class="sidebar_display">
+      View change depend on userOption
+      <div class="user_change_acount_information unactive">
+        <div class="user_change_title">
+          <h2>Hồ sơ của tôi</h2>
+          <p>Quản lý thông tin hồ sơ để bảo mật tài khoản</p>
+        </div>
+        <div class="user_change_information_form_layout">
+          <div class="user_change_information_form">
+            <form action="" method="GET">
+              <div>
+                <label for="username">
+                  Tên đăng nhập
+                  <input type="text" name="user_login_name" id="user_login_name"
+                    value={UserInformation.userLoginName} />
+                </label>
+                <div class="user_name_display inline_block mgl5"></div>
+              </div>
+              <div>
+                <label for="user_name_display">
+                  Tên
+                  <input type="text" name="user_name_display" id="user_name_display" value={UserInformation.userName} />
+                </label>
+                <div class="user_name_display inline_block mgl5"></div>
+              </div>
+              <div>
+                <label for="user_password">
+                  Mật khẩu
+                  <input type="password" name="user_passowrd" id="user_password" value={UserInformation.userPassword} />
+                </label>
+                <div class="user_password inline_block"></div>
+              </div>
+              <div class="test">
+                <label for="email">
+                  Email
+                  <input type="text" name="email" id="email" value={UserInformation.userEmail}
+                    pattern="[^@\s]+@[^@\s]+\.[^@\s]+" title="Invalid email address" />
+                </label>
+                <div class="email inline_block"></div>
+              </div>
+              <div>
+                <label for="phone_number">
+                  Số điện thoại
+                  <input type="text" name="phone_number" id="phone_number" value={UserInformation.userPhoneNumber} />
+                </label>
+                <div class="inline_block"></div>
+              </div>
+              <div>
+                <label for="birthday">
+                  <div class="birthday_lable">Ngày sinh</div>
+                  <input type="date" name="birthday" id="birthday" />
+                </label>
+                <div class="inline_block"></div>
+              </div>
+              <div>
+                <button class="save_button">Lưu</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="user_invoice_information active">
+        test user_invoice_information
+        <div class="tab_navigation">
+          <div class="tab_button">
+            <button>Tất cả</button>
+            <button>Chờ xác nhận</button>
+            <button>Đã giao</button>
+            <button>Đã huỷ</button>
+          </div>
+        </div>
+      </div>
+      <div class="user_cart_information unactive">
+        test cart infomation
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
