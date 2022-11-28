@@ -1,6 +1,2 @@
-/node_modules
-/src
-/views/**/*.js
-/views/*.js
-/*.js
-/public/**/*.js
+server.js
+node_modules

@@ -15,9 +15,9 @@ app.get('/ChiTiet', (req, res) => {
 app.get('/ChiTiet2', (req, res) => {
     res.status(200).sendFile(`${__dirname}/views/ChiTiet/ChiTietTemplate.html`);
 });
-app.get("/", (req, res) => {
-	res.status(200).sendFile("views/index.html", { root: __dirname });
+app.get('/main', (req, res) => {
+    res.status(200).sendFile(`${__dirname}/views/Main/main.html`);
 });
 app.listen(port, () => {
-	console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
+    console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
 });
