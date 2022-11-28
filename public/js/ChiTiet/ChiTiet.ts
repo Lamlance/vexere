@@ -1,12 +1,15 @@
 import CarPicture from "../../json/CarPicture";
+import FromTo from "../../json/FromTo";
+import Rating from "../../json/Rating";
+import Utility from "../../json/Utility";
 
 //Chi tiet template maker
 interface imgAtribute {
   src: string,
   alt: string
 }
-const makeImgSrcArray = () => {
-  const arr = Array<imgAtribute>(5);
+const makeImgSrcArray = (amount:number = 5) => {
+  const arr = Array<imgAtribute>(amount);
   for (let index = 0; index < arr.length; index++) {
     const data: imgAtribute = {
       src: `image/image${index}.png`,

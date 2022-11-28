@@ -1,9 +1,7 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
-
-
 import * as url from 'url';
-const __filename = url.fileURLToPath(import.meta.url);
+
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 dotenv.config();
