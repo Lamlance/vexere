@@ -19,6 +19,12 @@ app.get("/Filter", (req: Request, res: Response) => {
   res.status(200).sendFile(`${__dirname}/views/Filter/Filter.html`);
 });
 
+app.get("/UserDashboard", (req: Request, res: Response) => {
+  res
+    .status(200)
+    .sendFile(`${__dirname}/views/UserDashboard/UserDashboard.html`);
+});
+
 app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
 });

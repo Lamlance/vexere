@@ -18,6 +18,11 @@ app.get("/Lam/ChiTiet", (req, res) => {
 app.get("/Filter", (req, res) => {
     res.status(200).sendFile(`${__dirname}/views/Filter/Filter.html`);
 });
+app.get("/UserDashboard", (req, res) => {
+    res
+        .status(200)
+        .sendFile(`${__dirname}/views/UserDashboard/UserDashboard.html`);
+});
 app.listen(port, () => {
     console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
 });
