@@ -6,57 +6,61 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="/public/css/UserDashboard.css">
+  <link rel="stylesheet" href="/css/UserDashboard.css">
 </head>
 
 <body>
   <div class="container">
     <div class="sidebar">
-      <div class="user_infor">
-        <img src="" alt="user_image" class="user_image" />
-        <h3 class="user_login_name inline_block">
+      <div class="user-infor">
+        <img src="/assets/testUserImg.jpg" width="100px" height="100px" alt="user-image" class="user-image" />
+        <h3 class="user-login-name inline-block">
           {UserDisplay.userDisplayName}
         </h3>
       </div>
-      <div class="sidebar_navigation">
+      <div class="sidebar-navigation">
         <ul>
-          <li>Thay đổi thông tin tài khoản</li>
-          <li>Đơn hàng</li>
-          <li>Giỏ hàng</li>
+          <li class="active-tab">Thay đổi thông tin tài khoản</li>
+          <li>Thành viên {thường}</li>
+          <li>Vé của tôi</li>
+          <li>Ưu đãi</li>
+          <li>Quản lý thẻ</li>
+          <li>Nhận xét chuyến đi</li>
+          <li>Đăng xuất</li>
         </ul>
       </div>
     </div>
-    <div class="sidebar_display">
+    <div class="sidebar-display">
       View change depend on userOption
-      <div class="user_change_acount_information unactive">
-        <div class="user_change_title">
+      <div class="user-change-acount-information active">
+        <div class="user-change-title">
           <h2>Hồ sơ của tôi</h2>
           <p>Quản lý thông tin hồ sơ để bảo mật tài khoản</p>
         </div>
-        <div class="user_change_information_form_layout">
-          <div class="user_change_information_form">
+        <div class="user-change-information-form-layout">
+          <div class="user-change-information-form">
             <form action="" method="GET">
               <div>
                 <label for="username">
                   Tên đăng nhập
-                  <input type="text" name="user_login_name" id="user_login_name"
+                  <input type="text" name="user-login-name" id="user-login-name"
                     value={UserInformation.userLoginName} />
                 </label>
-                <div class="user_name_display inline_block mgl5"></div>
+                <div class="user-name-display inline-block mgl5"></div>
               </div>
               <div>
-                <label for="user_name_display">
+                <label for="user-name-display">
                   Tên
-                  <input type="text" name="user_name_display" id="user_name_display" value={UserInformation.userName} />
+                  <input type="text" name="user-name-display" id="user-name-display" value={UserInformation.userName} />
                 </label>
-                <div class="user_name_display inline_block mgl5"></div>
+                <div class="user-name-display inline-block mgl5"></div>
               </div>
               <div>
-                <label for="user_password">
+                <label for="user-password">
                   Mật khẩu
-                  <input type="password" name="user_passowrd" id="user_password" value={UserInformation.userPassword} />
+                  <input type="password" name="user-passowrd" id="user-password" value={UserInformation.userPassword} />
                 </label>
-                <div class="user_password inline_block"></div>
+                <div class="user-password inline-block"></div>
               </div>
               <div class="test">
                 <label for="email">
@@ -64,33 +68,48 @@
                   <input type="text" name="email" id="email" value={UserInformation.userEmail}
                     pattern="[^@\s]+@[^@\s]+\.[^@\s]+" title="Invalid email address" />
                 </label>
-                <div class="email inline_block"></div>
+                <div class="email inline-block"></div>
               </div>
               <div>
-                <label for="phone_number">
+                <label for="phone-number">
                   Số điện thoại
-                  <input type="text" name="phone_number" id="phone_number" value={UserInformation.userPhoneNumber} />
+                  <input type="text" name="phone-number" id="phone-number" value={UserInformation.userPhoneNumber} />
                 </label>
-                <div class="inline_block"></div>
+                <div class="inline-block"></div>
               </div>
               <div>
                 <label for="birthday">
-                  <div class="birthday_lable">Ngày sinh</div>
+                  <div class="birthday-lable">Ngày sinh</div>
                   <input type="date" name="birthday" id="birthday" />
                 </label>
-                <div class="inline_block"></div>
+                <div class="inline-block"></div>
               </div>
               <div>
-                <button class="save_button">Lưu</button>
+                <button class="save-button">Lưu</button>
               </div>
             </form>
           </div>
         </div>
+
+
       </div>
-      <div class="user_invoice_information active">
-        test user_invoice_information
-        <div class="tab_navigation">
-          <div class="tab_button">
+      <div class="user-invoice-ticket unactive">
+        <div class="tab">
+          <div>
+            <button class="tab-links">Hiện tại</button>
+            <button class="tab-links">Đã di</button>
+            <button class="tab-links">Đã huỷ</button>
+          </div>
+
+          <div class="tab-content">content1</div>
+          <div class="tab-content">content2</div>
+          <div class="tab-content">content3</div>
+        </div>
+      </div>
+      <div class="user-invoice-information unactive">
+        test user-invoice-information
+        <div class="tab-navigation">
+          <div class="tab-button">
             <button>Tất cả</button>
             <button>Chờ xác nhận</button>
             <button>Đã giao</button>
@@ -98,7 +117,7 @@
           </div>
         </div>
       </div>
-      <div class="user_cart_information unactive">
+      <div class="user-cart-information unactive">
         test cart infomation
       </div>
     </div>
