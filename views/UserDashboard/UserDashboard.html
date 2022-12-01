@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="/css/UserDashboard.css">
+  <script src="/js/UserDashboard/UserDashboard.js" defer></script>
 </head>
 
 <body>
@@ -19,20 +20,20 @@
         </h3>
       </div>
       <div class="sidebar-navigation">
-        <ul>
-          <li class="active-tab">Thay đổi thông tin tài khoản</li>
-          <li>Thành viên {thường}</li>
-          <li>Vé của tôi</li>
-          <li>Ưu đãi</li>
-          <li>Quản lý thẻ</li>
-          <li>Nhận xét chuyến đi</li>
-          <li>Đăng xuất</li>
+        <ul class="sidebar-list">
+          <li class="list-item active-tab">Thay đổi thông tin tài khoản</li>
+          <li class="list-item">Thành viên {thường}</li>
+          <li class="list-item">Vé của tôi</li>
+          <li class="list-item">Ưu đãi</li>
+          <li class="list-item">Quản lý thẻ</li>
+          <li class="list-item">Nhận xét chuyến đi</li>
+          <li class="list-item">Đăng xuất</li>
         </ul>
       </div>
     </div>
     <div class="sidebar-display">
       View change depend on userOption
-      <div class="user-change-acount-information active">
+      <div class="sidebar-display-list user-change-acount-information active">
         <div class="user-change-title">
           <h2>Hồ sơ của tôi</h2>
           <p>Quản lý thông tin hồ sơ để bảo mật tài khoản</p>
@@ -93,7 +94,7 @@
 
 
       </div>
-      <div class="user-invoice-ticket unactive">
+      <div class="sidebar-display-list  user-invoice-ticket unactive">
         <div class="tab">
           <div>
             <button class="tab-links">Hiện tại</button>
@@ -106,7 +107,7 @@
           <div class="tab-content">content3</div>
         </div>
       </div>
-      <div class="user-invoice-information unactive">
+      <div class="sidebar-display-list user-invoice-information unactive">
         test user-invoice-information
         <div class="tab-navigation">
           <div class="tab-button">

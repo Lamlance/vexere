@@ -18,9 +18,9 @@
   margin-top: 2em;
 }
 
-.sidebar-display {
+/* .sidebar-display {
   margin-right: 10em;
-}
+} */
 
 .sidebar-navigation {
   border-radius: 5px;
@@ -28,8 +28,13 @@
   border-style: solid;
 }
 
-.sidebar-navigation>ul>li {
+.sidebar-list>li {
   margin-bottom: 1em;
+  padding-bottom: 0.4em;
+}
+
+.sidebar-list>li:hover {
+  cursor: pointer;
 }
 
 .inline-block {
@@ -39,6 +44,10 @@
 .sidebar-navigation>ul>li {
   list-style-type: none;
   padding-right: 2em;
+}
+
+.user-change-acount-information {
+  margin-right: 10em;
 }
 
 .container label {
