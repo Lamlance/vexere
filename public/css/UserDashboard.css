@@ -1,4 +1,9 @@
+* {
+  font-family: 'Poppins', sans-serif;
+}
+
 .container {
+  background-color: #fff;
   display: flex;
   justify-content: space-between;
   margin: 5em 9em;
@@ -10,27 +15,54 @@
 }
 
 .user-infor>.user-image {
-  position: relative;
+  border-radius: 20%;
 }
 
-.user-infor>h3 {
-  position: absolute;
-  margin-top: 2em;
+.user-infor>.user-image:hover {
+  cursor: pointer;
+}
+
+.user-login-name {
+  margin-left: .5em;
+  font-weight: 500;
+}
+
+.user-login-name:hover {
+  cursor: pointer;
+}
+
+.user-infor {
+  display: flex;
+  align-items: center;
 }
 
 /* .sidebar-display {
   margin-right: 10em;
 } */
 
+.sidebar-display {
+  color: black !important;
+}
+
 .sidebar-navigation {
   border-radius: 5px;
   border: 1px;
+  width: 20em;
+  height: 21em;
   border-style: solid;
+}
+
+.user-rank-span {
+  font-weight: 600;
 }
 
 .sidebar-list>li {
   margin-bottom: 1em;
   padding-bottom: 0.4em;
+}
+
+.sidebar-list>li:last-child {
+  color: #FFCC33;
 }
 
 .sidebar-list>li:hover {
@@ -72,47 +104,92 @@
 }
 
 .container input[type=date] {
-  width: 30.25em;
-  font-size: 1.1em;
+  width: 33.99em;
+  height: 1.9em;
+  font-size: .8em;
 }
 
 .container .save-button {
+  font-weight: 600;
   font-size: 1.1em;
-  margin-left: 30em;
+  margin-left: 33em;
   border: none;
-  background-color: orange;
-  padding: .5em .8em;
+  background-color: #FFCC33;
+  padding: .5em 1em;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 10%;
   opacity: 0.8;
+}
+
+.container .save-button:hover {
+  transform: scale(1.1);
+  transition: .3s ease-in-out;
 }
 
 .mgl5 {
   margin-left: 5em;
 }
 
-/* Invoice */
-.user-invoice-ticket>.tab {
+/* User rank */
+.user-rank-display {
+  margin-top: 4em;
+  margin-right: 34em;
+}
+
+.user-rank-display>h3 {
+  font-size: 2em;
+}
+
+/* Invoice-ticket */
+.user-invoice-ticket-display>.tab {
   width: 50em;
 }
 
 .tab>div>.tab-links {
+  font-size: 1em;
+  padding: 1em;
   display: inline-block;
   border: none;
   background-color: #fff;
 }
 
-.tab>div>.tab-links:hover {
-  background-color: #ddd;
+.tab>div>.tab-links:not(:first-child) {
+  margin-left: 16em;
 }
 
+.tab>div>.tab-links:hover {
+  border: none;
+  cursor: pointer;
+}
+
+/* Promotion Display */
+
+.user-promotion-display {
+  margin-top: 4em;
+  margin-right: 43em;
+}
+
+/* Manage Card Display */
+
+.user-manage-card {
+  margin-top: 4em;
+  margin-right: 41em;
+}
+
+/* Review Trip */
+
+.user-review-trip {
+  margin-top: 4em;
+  margin-right: 37em;
+}
 
 
 /* Cart */
 
 .active-tab {
-  color: blue;
-  font-size: 1.05em;
+  color: #0A6EBD;
+  transition: .115s ease-in-out;
+
 }
 
 .active {

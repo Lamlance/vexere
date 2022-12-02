@@ -6,33 +6,38 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="/css/UserDashboard.css">
-  <script src="/js/UserDashboard/UserDashboard.js" defer></script>
+  <script src="https://kit.fontawesome.com/3233d35d96.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/public/css/UserDashboard.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    rel="stylesheet">
 </head>
 
 <body>
   <div class="container">
     <div class="sidebar">
       <div class="user-infor">
-        <img src="/assets/testUserImg.jpg" width="100px" height="100px" alt="user-image" class="user-image" />
-        <h3 class="user-login-name inline-block">
-          {UserDisplay.userDisplayName}
-        </h3>
+        <img src="/public/assets/testUserImg.jpg" width="64px" height="64px" alt="user-image" class="user-image" />
+        <h4 class="user-login-name inline-block">
+          Hàn Phú
+        </h4>
       </div>
       <div class="sidebar-navigation">
         <ul class="sidebar-list">
-          <li class="list-item active-tab">Thay đổi thông tin tài khoản</li>
-          <li class="list-item">Thành viên {thường}</li>
-          <li class="list-item">Vé của tôi</li>
-          <li class="list-item">Ưu đãi</li>
-          <li class="list-item">Quản lý thẻ</li>
-          <li class="list-item">Nhận xét chuyến đi</li>
-          <li class="list-item">Đăng xuất</li>
+          <li class="list-item active-tab"> <i class="fa-solid fa-user"></i> Thay đổi thông tin tài khoản</li>
+          <li class="list-item"><i class="fa-solid fa-tags"></i> Thành viên <span class="user-rank-span">bạc</span>
+          </li>
+          <li class="list-item"><i class="fa-solid fa-ticket"></i> Vé của tôi</li>
+          <li class="list-item"><i class="fa-solid fa-gift"></i> Ưu đãi</li>
+          <li class="list-item"><i class="fa-sharp fa-solid fa-credit-card-blank"></i> Quản lý thẻ</li>
+          <li class="list-item"><i class="fa-solid fa-comment"></i> Nhận xét chuyến đi</li>
+          <li class=""><i class="fa-sharp fa-solid fa-right-from-bracket"></i> Đăng xuất</li>
         </ul>
       </div>
     </div>
     <div class="sidebar-display">
-      View change depend on userOption
       <div class="sidebar-display-list user-change-acount-information active">
         <div class="user-change-title">
           <h2>Hồ sơ của tôi</h2>
@@ -44,29 +49,28 @@
               <div>
                 <label for="username">
                   Tên đăng nhập
-                  <input type="text" name="user-login-name" id="user-login-name"
-                    value={UserInformation.userLoginName} />
+                  <input type="text" name="user-login-name" id="user-login-name" value="hanphu234" />
                 </label>
                 <div class="user-name-display inline-block mgl5"></div>
               </div>
               <div>
                 <label for="user-name-display">
                   Tên
-                  <input type="text" name="user-name-display" id="user-name-display" value={UserInformation.userName} />
+                  <input type="text" name="user-name-display" id="user-name-display" value="Hàn Thọ Nhật Phú" />
                 </label>
                 <div class="user-name-display inline-block mgl5"></div>
               </div>
               <div>
                 <label for="user-password">
                   Mật khẩu
-                  <input type="password" name="user-passowrd" id="user-password" value={UserInformation.userPassword} />
+                  <input type="password" name="user-passowrd" id="user-password" value="hanphu1234" />
                 </label>
                 <div class="user-password inline-block"></div>
               </div>
               <div class="test">
                 <label for="email">
                   Email
-                  <input type="text" name="email" id="email" value={UserInformation.userEmail}
+                  <input type="text" name="email" id="email" value="phu@testemail.com"
                     pattern="[^@\s]+@[^@\s]+\.[^@\s]+" title="Invalid email address" />
                 </label>
                 <div class="email inline-block"></div>
@@ -74,7 +78,7 @@
               <div>
                 <label for="phone-number">
                   Số điện thoại
-                  <input type="text" name="phone-number" id="phone-number" value={UserInformation.userPhoneNumber} />
+                  <input type="text" name="phone-number" id="phone-number" value="0123456789" />
                 </label>
                 <div class="inline-block"></div>
               </div>
@@ -94,35 +98,47 @@
 
 
       </div>
-      <div class="sidebar-display-list  user-invoice-ticket unactive">
+
+      <div class="sidebar-display-list  user-rank-display unactive">
+        <div>
+          <h4>Bạn hiện đang là thành viên bạc</h4>
+        </div>
+      </div>
+
+      <div class="sidebar-display-list  user-invoice-ticket-display unactive">
         <div class="tab">
           <div>
-            <button class="tab-links">Hiện tại</button>
-            <button class="tab-links">Đã di</button>
+            <button class="tab-links active-tab">Hiện tại</button>
+            <button class="tab-links">Đã đi</button>
             <button class="tab-links">Đã huỷ</button>
           </div>
 
-          <div class="tab-content">content1</div>
-          <div class="tab-content">content2</div>
-          <div class="tab-content">content3</div>
+          <div class="tab-content active">content1</div>
+          <div class="tab-content unactive">content2</div>
+          <div class="tab-content unactive">content3</div>
         </div>
       </div>
-      <div class="sidebar-display-list user-invoice-information unactive">
-        test user-invoice-information
-        <div class="tab-navigation">
-          <div class="tab-button">
-            <button>Tất cả</button>
-            <button>Chờ xác nhận</button>
-            <button>Đã giao</button>
-            <button>Đã huỷ</button>
-          </div>
+
+      <div class="sidebar-display-list  user-promotion-display unactive">
+        <div>
+          <h3>Uu dai</h3>
         </div>
       </div>
-      <div class="user-cart-information unactive">
-        test cart infomation
+
+      <div class="sidebar-display-list  user-manage-card unactive">
+        <div>
+          <h3>Quan ly the</h3>
+        </div>
+      </div>
+
+      <div class="sidebar-display-list  user-review-trip unactive">
+        <div>
+          <h3>Nhan xet chuyen di</h3>
+        </div>
       </div>
     </div>
   </div>
+  <script type="module" src="/public/js/UserDashboard/UserDashboard.js"></script>
 </body>
 
 </html>
