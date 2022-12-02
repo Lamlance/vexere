@@ -4,7 +4,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: Arial, Helvetica, sans-serif,'Poppins', sans-serif;
 }
 
 body {
@@ -88,13 +88,55 @@ header p {
 
 .range-input {
   position: relative;
+  overflow: hidden;
+  height: 20px;
+  background: linear-gradient(grey, grey) no-repeat center;
+  background-size: 100% 2px;
 }
 
-.range-input input {
+/* .range-input > input {
   position: absolute;
   width: 100%;
-  height: 5px;
-  top: -5px;
+  pointer-events: none;
+
+} */
+
+#min-price-slider,#max-price-slider{
+  position: absolute;
+  box-sizing: border-box;
+  appearance: none;
+  width: calc(100% - 20px);
+  margin: 0;
+  padding: 0 2px;
+  
+  overflow: hidden;
+  border: 0;
+  border-radius: 1px;
+  outline: none;
   background: none;
+
   pointer-events: none;
 }
+
+.range-input > input[type=range]::-webkit-slider-thumb{/*Webkit Browsers like Chrome and Safari*/
+  pointer-events: auto;
+}
+.range-input > input[type=range]::-moz-range-thumb{/*Firefox*/
+  pointer-events: auto;
+}
+.range-input > input[type=range]::-ms-thumb{/*Internet Explorer*/
+  pointer-events: auto;
+}
+
+#max-price-slider{
+  right: 0;
+}
+#min-price-slider{
+  left: 0;
+}
+
+/* #max-price-slider{
+  width: calc(100% - 10px);
+  right: 0;
+  top: 0;
+} */

@@ -6,6 +6,7 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
 app.use(express.static(__dirname + "/public"));
+app.use(express.static(__dirname + "/views"));
 app.get('/', (req, res) => {
     res.status(200).sendFile("views/index.html", { root: __dirname });
 });
@@ -31,6 +32,11 @@ app.get("/UserDashboard", (req, res) => {
     res
         .status(200)
         .sendFile(`${__dirname}/views/UserDashboard/UserDashboard.html`);
+});
+app.use("/Search", (req, res) => {
+    res.status(200).sendFile("Search.html", {
+        root: `${__dirname}/views/`
+    });
 });
 app.listen(port, () => {
     console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
