@@ -10,6 +10,7 @@
 }
 
 /* Change infor */
+
 .user-infor {
   margin-bottom: 3em;
 }
@@ -35,10 +36,6 @@
   display: flex;
   align-items: center;
 }
-
-/* .sidebar-display {
-  margin-right: 10em;
-} */
 
 .sidebar-display {
   color: black !important;
@@ -162,6 +159,11 @@
   cursor: pointer;
 }
 
+.book-ticket-span>a {
+  text-decoration: none;
+  color: #0A6EBD;
+}
+
 /* Promotion Display */
 
 .user-promotion-display {
@@ -182,7 +184,6 @@
   margin-top: 4em;
   margin-right: 37em;
 }
-
 
 /* Cart */
 
