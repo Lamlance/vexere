@@ -1,5 +1,5 @@
 #banner {
-    background: url(/assets/leaderboard.png);
+    background: url(/public/assets/leaderboard.png);
     background-size: cover;
     height: max(800px,80vh);
     display: flex;
@@ -25,7 +25,7 @@ ul>li {
 ul>li>a {
     text-decoration: none;
 }
-
+/* 
 .item:hover,
 .item:focus {
     background-color: #fafafa;
@@ -35,13 +35,13 @@ ul>li>a {
 .disabled {
     pointer-events: none;
     opacity: 0.3;
-}
+} */
 
 
 .search_bar > table > thead div{
     width: 100%;
 }
-.search_bar{
+.search_bar {
     display: grid;
     place-items: center;
     width: 100%;
