@@ -5,32 +5,49 @@
 }
 
 /* Change infor */
-.user_infor {
+.user-infor {
   margin-bottom: 3em;
 }
 
-.user_infor>.user_image {
+.user-infor>.user-image {
   position: relative;
 }
 
-.user_infor>h3 {
+.user-infor>h3 {
   position: absolute;
+  margin-top: 2em;
 }
 
-.sidebar_display {
+/* .sidebar-display {
   margin-right: 10em;
+} */
+
+.sidebar-navigation {
+  border-radius: 5px;
+  border: 1px;
+  border-style: solid;
 }
 
-.sidebar_navigation>ul>li {
+.sidebar-list>li {
   margin-bottom: 1em;
+  padding-bottom: 0.4em;
 }
 
-.inline_block {
+.sidebar-list>li:hover {
+  cursor: pointer;
+}
+
+.inline-block {
   display: inline-block;
 }
 
-.sidebar_navigation>ul>li {
+.sidebar-navigation>ul>li {
   list-style-type: none;
+  padding-right: 2em;
+}
+
+.user-change-acount-information {
+  margin-right: 10em;
 }
 
 .container label {
@@ -50,17 +67,18 @@
   margin: 0 0 1em 2em;
 }
 
-.container .birthday_lable {
+.container .birthday-lable {
   display: inline-block;
 }
 
 .container input[type=date] {
-  width: 37em;
+  width: 30.25em;
+  font-size: 1.1em;
 }
 
-.container .save_button {
+.container .save-button {
   font-size: 1.1em;
-  float: right;
+  margin-left: 30em;
   border: none;
   background-color: orange;
   padding: .5em .8em;
@@ -74,10 +92,28 @@
 }
 
 /* Invoice */
+.user-invoice-ticket>.tab {
+  width: 50em;
+}
+
+.tab>div>.tab-links {
+  display: inline-block;
+  border: none;
+  background-color: #fff;
+}
+
+.tab>div>.tab-links:hover {
+  background-color: #ddd;
+}
 
 
 
 /* Cart */
+
+.active-tab {
+  color: blue;
+  font-size: 1.05em;
+}
 
 .active {
   display: block;

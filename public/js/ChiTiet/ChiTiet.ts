@@ -171,14 +171,12 @@ class ChiTietElement extends HTMLElement {
     styleLinkElem.setAttribute("rel", "stylesheet");
     styleLinkElem.setAttribute("href", "/css/ChiTiet.css");
 
-
     let templateContent = template.content;
     this.shadowRoot?.appendChild(styleLinkElem);
     this.shadowRoot?.appendChild(templateContent.cloneNode(true));
 
     this.detailTabs = <NodeListOf<HTMLElement>>this.shadowRoot?.querySelectorAll(".js_vexere_detail_tab_item");
     this.currentDisplayedDetailTab = 0;
-
 
     this.addDetailImage();
     this.addOpenDatailClickHandle();
@@ -209,11 +207,11 @@ class ChiTietElement extends HTMLElement {
     chiTiet.style.display = "none";
 
     chiTietAction?.addEventListener('click', () => {
-      chiTietAction.innerHTML = ( !this.displayChiTiet ) ? `Thông tin chi tiết 🔼` : `Thông tin chi tiết 🔽`;
-      this.displayChiTiet = !this.displayChiTiet;
-      const chiTietElement = <HTMLElement>this.shadowRoot?.querySelector(".vexere_detail_info_container");
-      chiTietElement.style.display = (this.displayChiTiet) ? "" : "none";
-    });
+        chiTietAction.innerHTML = ( !this.displayChiTiet ) ? `Thông tin chi tiết 🔼` : `Thông tin chi tiết 🔽`;
+        this.displayChiTiet = !this.displayChiTiet;
+        const chiTietElement = <HTMLElement>this.shadowRoot?.querySelector(".vexere_detail_info_container");
+        chiTietElement.style.display = (this.displayChiTiet) ? "" : "none";
+      });
   }
 
   addDetailTabClickHandle() {
@@ -221,30 +219,18 @@ class ChiTietElement extends HTMLElement {
       ele.style.display = (index != 0) ? "none" : "";
     });
 
-    const buttons = this.shadowRoot?.querySelectorAll(".vexere_detail_info_select_tab > button");
-    if (buttons) {
-      buttons.forEach((btn) => {
-        btn.addEventListener("click", (event) => {
-          const btnClickValue = Number.parseInt((<HTMLButtonElement>event.target).value);
-          if (!isNaN(btnClickValue) && btnClickValue < this.detailTabs.length) {
-            this.detailTabs.forEach((ele, index) => {
-              ele.style.display = "none";
-            });
-            this.detailTabs[btnClickValue].style.display = "";
-          }
-        });
-      })
-    }
   }
 
 }
 
+
+
 customElements.define("chi-tiet-element", ChiTietElement);
 
-// const body = document.body;
-// Array<number>(5).fill(0).forEach(() => {
-//   const chiTietElement = document.createElement("chi-tiet-element");
-//   body.appendChild(chiTietElement);
-// });
 
+const body = document.body;
+Array<number>(5).fill(0).forEach(() => {
+  const chiTietElement = document.createElement("chi-tiet-element");
+  body.appendChild(chiTietElement);
+});
 export default ChiTietElement;;
