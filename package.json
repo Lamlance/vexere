@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "project web",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "build": "npx tsc",
     "start": "node server.js",

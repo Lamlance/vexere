@@ -1,15 +1,12 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
-import hello from "./routes/lam";
-
-console.log(hello);
 
 import * as url from 'url';
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 dotenv.config();
 const app: Express = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8000;
 
 app.use(express.static(__dirname + "/public"));
 app.use(express.static(__dirname + "/views"));
