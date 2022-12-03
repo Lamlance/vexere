@@ -1,4 +1,4 @@
-import ChiTietElement from "../ChiTiet/ChiTiet.js";
+import ChiTietElement from "../ChiTiet/DetailClass.js";
 const Don = [
     {
         Name: "Sapa",
