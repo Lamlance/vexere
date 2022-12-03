@@ -1,5 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
+import hello from "./routes/lam";
+console.log(hello);
 import * as url from 'url';
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 dotenv.config();
