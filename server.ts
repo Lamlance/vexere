@@ -29,6 +29,10 @@ app.get('/An/Main', (req: Request, res: Response) => {
     res.status(200).sendFile(`${ __dirname}/views/Main/main.html`);
 });
 
+app.get('/An/BookingHistoryDetail', (req: Request, res: Response) => {
+  res.status(200).sendFile(`${ __dirname}/views/BookingHistory/DetailBooking.html`);
+});
+
 
 app.get("/", (req: Request, res: Response) => {
   res.status(200).sendFile("views/index.html", { root: __dirname });
