@@ -38,6 +38,11 @@ app.use("/Search", (req, res) => {
         root: `${__dirname}/views/`
     });
 });
+app.use("/BusHouse", (req, res) => {
+    res.status(200).sendFile("BusHouse.html", {
+        root: `${__dirname}/views/`
+    });
+});
 app.listen(port, () => {
     console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
 });

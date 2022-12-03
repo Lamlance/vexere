@@ -34,7 +34,7 @@ body *{
 
 .search_result_filter{
   padding-inline: 0.5rem;
-  background-color: beige;
+  background-color:  rgba(226, 222, 222, 0.425);
 }
 
 #price-minmax-label{

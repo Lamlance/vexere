@@ -50,6 +50,12 @@ app.use("/Search",(req:Request,res:Response)=>{
   })
 });
 
+app.use("/BusHouse",(req:Request,res:Response)=>{
+  res.status(200).sendFile("BusHouse.html",{
+    root:`${__dirname}/views/`
+  })
+});
+
 app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
 });
