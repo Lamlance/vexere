@@ -1,5 +1,5 @@
 #banner {
-    background: url(/public/assets/leaderboard.png);
+    background: url(/assets/leaderboard.png);
     background-size: cover;
     height: max(800px,80vh);
     display: flex;

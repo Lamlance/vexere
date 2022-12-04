@@ -3,10 +3,11 @@
   "version": "0.0.1",
   "description": "project web",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "build": "npx tsc",
     "start": "node server.js",
-    "dev-ts": "concurrently \"npx tsc --watch\" \"nodemon -q server.js\""
+    "dev-ts": "concurrently \"npx tsc --watch\" \"nodemon --experimental-modules --es-module-specifier-resolution=node -q server.js\""
   },
   "author": "ptudw_Nhom9",
   "license": "ISC",
