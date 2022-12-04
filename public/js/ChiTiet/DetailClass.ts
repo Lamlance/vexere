@@ -68,10 +68,12 @@ class ChiTietElement extends HTMLElement {
   }
 
   addDetailImage() {
-    const imgDisplayWrapper = this.shadowRoot?.querySelector(".vexere_bus_image_slider_display");
+    console.log("Adding image")
+    const imgDisplayWrapper = this.shadowRoot?.querySelector(".vexere_bus_image_slider");
     const imgDatas = makeImgSrcArray();
 
     imgDatas.forEach((item) => {
+      console.log("image")
       const imgDivWrap = document.createElement("div");
       const image = document.createElement("img");
       image.src = item.src;
