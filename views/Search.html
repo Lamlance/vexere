@@ -68,7 +68,7 @@
       <!-- Thông tin cơ bản đi đến -->
       <div>
         <h3 class="js-bus-house-name"> {Tên Nhà Xe} </h3>
-        <p> <span class="js-bus-type">{Loại xe}</span> - <span class="js-seat-amount">{Số chỗ}</span></p>
+        <p> <span class="js-bus-type">{Loại xe}</span> - <span class="js-seat-amount">{Số}</span>chỗ</p>
         <div class="vexere_time_container">
           <div class="vexere_departure_icon">
             <div>
@@ -97,7 +97,7 @@
       <div class="vexere_gia_brief_info">
         <h3 class="js-ticket-price">Từ 300,000 VND</h3>
         <div>
-          <h3 class="js-empty-seat">{Số chỗ còn trống}</h3>
+          <h3><span class="js-empty-seat">{Số chỗ còn trống}</span> chỗ còn trống</h3>
         </div>
         <div class="vexere_info_action">
           <h4>Thông tin chi tiết 🔽</h4>
@@ -354,8 +354,72 @@
             </p>
           </div>
         </section>
-        
+
       </div>
+    </div>
+
+    <!-- Bảng thanh toán -->
+    <div class="vexere_checkout_container">
+
+      <!-- Chọn chỗ -->
+      <section class="vexere_checout_seat_select js_checkout_item">
+        <div class="vexere_checout_seat_select_instruction">
+          <p>🟥: Chỗ không được chọn </p>
+          <p>🟦: Chỗ được chọn (<span class="js_seat_price">300000</span> VND)</p>
+          <p>🟩: Chỗ bạn đã chọn</p>
+        </div>
+        <div class="vexere_checout_seat_select_action">
+
+        </div>
+        <div>
+
+        </div>
+      </section>
+
+      <!-- Chọn vị trí đón trả-->
+      <section class="vexere_checkout_location_select js_checkout_item">
+        <section>
+          <h3>Điểm đón</h3>
+          <ul class="vexere_checkout_from_location">
+
+          </ul>
+        </section>
+        
+        <section>
+          <h3>Điểm Trả</h3>
+          <ul class="vexere_checkout_to_location">
+
+          </ul>
+        </section>
+        
+      </section>
+
+      <!-- Thông tin người đặt -->
+      <section class="vexere_checkout_info_select js_checkout_item">
+        <h3>Thông tin</h3>
+        <form onsubmit="(event)=>{event.preventDefault()}">
+          <label>Họ Tên
+            <input type="text" name="checkout_name" required/>
+          </label>
+          <label>Số điện thoại
+            <input type="text" name="checkout_name" required/>
+          </label>
+          <label>Email
+            <input type="text" name="checkout_name" required/>
+          </label>
+          <label>Lưu ý thêm cho nhân viên
+            <textarea rows="5" cols="12"></textarea>
+          </label>
+        </form>
+      </section>
+
+      <!-- NAV -->
+      <section class="vexere_checkout_nav js_checkout_action">
+        <button value="-1">Back</button>
+        <p>Ghế <span class="js_checkout_seat"></span></p>
+        <p>Tổng cộng: <span class="js_checkout_price">0</span>đ</p>
+        <button value="1">Next</button>
+      </section>
     </div>
   </template>
 

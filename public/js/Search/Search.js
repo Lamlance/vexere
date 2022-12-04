@@ -194,6 +194,22 @@ function DiemTraCheckBoxes() {
 DiemTraCheckBoxes();
 function PopulateSearchResult() {
     const allResult = document.querySelectorAll("#search_result_display > chi-tiet-element");
+    function createCheckOutLocationList(data, radioName, checkedDefault) {
+        const liArr = [];
+        data.Sub.forEach((str) => {
+            const li = document.createElement("li");
+            const radio = document.createElement("input");
+            const label = document.createElement("label");
+            radio.type = "radio";
+            radio.value = str;
+            radio.name = radioName;
+            label.appendChild(radio);
+            label.innerHTML += str;
+            li.appendChild(label);
+            liArr.push(li);
+        });
+        return liArr;
+    }
     allResult.forEach((result) => {
         if (result.shadowRoot) {
             const name = result.shadowRoot.querySelector(".js-bus-house-name");
@@ -202,7 +218,7 @@ function PopulateSearchResult() {
             type.innerText = LoaiXe[Math.floor(Math.random() * LoaiXe.length)];
             const seatAmount = result.shadowRoot.querySelector(".js-seat-amount");
             const seats = SoCho[Math.floor(Math.random() * SoCho.length)];
-            seatAmount.innerText = `${seats.toFixed(0)} chỗ`;
+            seatAmount.innerText = `${seats.toFixed(0)} `;
             const fromTime = result.shadowRoot.querySelector(".js-from-time");
             const toTime = result.shadowRoot.querySelector(".js-to-time");
             const randTime = TuyenGio[Math.floor(Math.random() * TuyenGio.length)];
@@ -212,10 +228,20 @@ function PopulateSearchResult() {
             const toLocation = result.shadowRoot.querySelector(".js-to-location");
             const diemDon = Don[Math.floor(Math.random() * Don.length)];
             const diemTra = Tra[Math.floor(Math.random() * Tra.length)];
-            fromLocation.innerText = `${diemDon.Name} - ${diemDon.Sub[Math.floor(Math.random() * diemDon.Sub.length)]}`;
-            toLocation.innerText = `${diemTra.Name} - ${diemTra.Sub[Math.floor(Math.random() * diemTra.Sub.length)]}`;
+            const diemDonSub = diemDon.Sub[Math.floor(Math.random() * diemDon.Sub.length)];
+            const diemTraSub = diemTra.Sub[Math.floor(Math.random() * diemTra.Sub.length)];
+            fromLocation.innerText = `${diemDon.Name} - ${diemDonSub}`;
+            toLocation.innerText = `${diemTra.Name} - ${diemTraSub}`;
             const emptySeat = result.shadowRoot.querySelector(".js-empty-seat");
-            emptySeat.innerText = `${Math.floor(Math.random() * seats) + 1} chỗ còn trống`;
+            emptySeat.innerText = `${Math.floor(Math.random() * seats) + 1}`;
+            const fromUl = result.shadowRoot.querySelector(".vexere_checkout_from_location");
+            createCheckOutLocationList(diemDon, "don", diemDonSub).forEach((li) => {
+                fromUl?.appendChild(li);
+            });
+            const toUl = result.shadowRoot.querySelector(".vexere_checkout_to_location");
+            createCheckOutLocationList(diemTra, "don", diemTraSub).forEach((li) => {
+                toUl?.appendChild(li);
+            });
         }
     });
 }
@@ -232,6 +258,5 @@ function AdjustEmptySeat() {
             seatValue.innerText = newVal.toFixed(0);
         };
     });
-    console.log(buttons);
 }
 AdjustEmptySeat();

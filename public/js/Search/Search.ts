@@ -78,28 +78,28 @@ const SoCho = [
 ]
 const TuyenGio = [
   {
-    from:"22:28",
-    to:"3:43"
+    from: "22:28",
+    to: "3:43"
   },
   {
-    from:"22:28",
-    to:"4:28"
+    from: "22:28",
+    to: "4:28"
   },
   {
-    from:"23:00",
-    to:"5:00"
+    from: "23:00",
+    to: "5:00"
   },
   {
-    from:"23:30",
-    to:"4:20"
+    from: "23:30",
+    to: "4:20"
   },
   {
-    from:"13:30",
-    to:"19:20"
+    from: "13:30",
+    to: "19:20"
   },
   {
-    from:"12:30",
-    to:"18:20"
+    from: "12:30",
+    to: "18:20"
   }
 ]
 
@@ -229,48 +229,83 @@ function DiemTraCheckBoxes() {
 }
 DiemTraCheckBoxes();
 
-function PopulateSearchResult(){
-  const allResult = <NodeListOf<HTMLElement>> document.querySelectorAll("#search_result_display > chi-tiet-element");
-  allResult.forEach((result)=>{
-    if(result.shadowRoot){
-      const name = <HTMLHtmlElement> result.shadowRoot.querySelector(".js-bus-house-name");
+function PopulateSearchResult() {
+  const allResult = <NodeListOf<HTMLElement>>document.querySelectorAll("#search_result_display > chi-tiet-element");
+  function createCheckOutLocationList(data: { Name: string, Sub: string[] },radioName:string,checkedDefault:string) {
+    const liArr: HTMLLIElement[] = [];
+
+    data.Sub.forEach((str) => {
+      const li = document.createElement("li");
+      const radio = document.createElement("input");
+      const label = document.createElement("label");
+
+      radio.type = "radio";
+      radio.value = str;
+      radio.name = radioName;
+
+      label.appendChild(radio);
+      label.innerHTML += str;
+
+      li.appendChild(label);
+      liArr.push(li);
+    })
+
+
+    return liArr;
+  }
+
+  allResult.forEach((result) => {
+    if (result.shadowRoot) {
+      const name = <HTMLHtmlElement>result.shadowRoot.querySelector(".js-bus-house-name");
       name.innerText = NhaXe[Math.floor(Math.random() * NhaXe.length)];
 
-      const type = <HTMLSpanElement> result.shadowRoot.querySelector(".js-bus-type");
+      const type = <HTMLSpanElement>result.shadowRoot.querySelector(".js-bus-type");
       type.innerText = LoaiXe[Math.floor(Math.random() * LoaiXe.length)];
 
-      const seatAmount = <HTMLSpanElement> result.shadowRoot.querySelector(".js-seat-amount");
+      const seatAmount = <HTMLSpanElement>result.shadowRoot.querySelector(".js-seat-amount");
       const seats = SoCho[Math.floor(Math.random() * SoCho.length)];
-      seatAmount.innerText = `${seats.toFixed(0)} chỗ`;
+      seatAmount.innerText = `${seats.toFixed(0)} `;
 
-      const fromTime = <HTMLHtmlElement> result.shadowRoot.querySelector(".js-from-time");
-      const toTime = <HTMLHtmlElement> result.shadowRoot.querySelector(".js-to-time");
+      const fromTime = <HTMLHtmlElement>result.shadowRoot.querySelector(".js-from-time");
+      const toTime = <HTMLHtmlElement>result.shadowRoot.querySelector(".js-to-time");
       const randTime = TuyenGio[Math.floor(Math.random() * TuyenGio.length)];
       fromTime.innerText = randTime.from;
       toTime.innerText = randTime.to;
 
-      const fromLocation = <HTMLParagraphElement> result.shadowRoot.querySelector(".js-from-location");
-      const toLocation = <HTMLParagraphElement> result.shadowRoot.querySelector(".js-to-location");
+      const fromLocation = <HTMLParagraphElement>result.shadowRoot.querySelector(".js-from-location");
+      const toLocation = <HTMLParagraphElement>result.shadowRoot.querySelector(".js-to-location");
       const diemDon = Don[Math.floor(Math.random() * Don.length)];
       const diemTra = Tra[Math.floor(Math.random() * Tra.length)];
-      fromLocation.innerText = `${diemDon.Name} - ${diemDon.Sub[Math.floor(Math.random() * diemDon.Sub.length)]}`;
-      toLocation.innerText = `${diemTra.Name} - ${diemTra.Sub[Math.floor(Math.random() * diemTra.Sub.length)]}`;
+      const diemDonSub = diemDon.Sub[Math.floor(Math.random() * diemDon.Sub.length)];
+      const diemTraSub = diemTra.Sub[Math.floor(Math.random() * diemTra.Sub.length)]
+      fromLocation.innerText = `${diemDon.Name} - ${diemDonSub}`;
+      toLocation.innerText = `${diemTra.Name} - ${diemTraSub}`;
 
-      const emptySeat = <HTMLHtmlElement> result.shadowRoot.querySelector(".js-empty-seat");
-      emptySeat.innerText = `${Math.floor(Math.random() * seats) + 1} chỗ còn trống`
- 
+      const emptySeat = <HTMLHtmlElement>result.shadowRoot.querySelector(".js-empty-seat");
+      emptySeat.innerText = `${Math.floor(Math.random() * seats) + 1}`;
+
+      const fromUl = result.shadowRoot.querySelector(".vexere_checkout_from_location");
+      createCheckOutLocationList(diemDon,"don",diemDonSub).forEach((li)=>{
+        fromUl?.appendChild(li);
+      });
+      const toUl = result.shadowRoot.querySelector(".vexere_checkout_to_location");
+      createCheckOutLocationList(diemTra,"don",diemTraSub).forEach((li)=>{
+        toUl?.appendChild(li);
+      });
     }
   })
 }
 PopulateSearchResult();
 
-function AdjustEmptySeat(){
-  const buttons = <NodeListOf<HTMLButtonElement>> document.querySelectorAll("#filter_by_empty_seat_action > button");
-  const seatValue = <HTMLSpanElement> document.querySelector("#filter_by_empty_seat_action > span");
 
-  buttons.forEach((btn)=>{
-    btn.onclick = (ev)=>{
-      const change =  Number.parseInt(btn.value) ? Number.parseInt(btn.value) : 0;
+
+function AdjustEmptySeat() {
+  const buttons = <NodeListOf<HTMLButtonElement>>document.querySelectorAll("#filter_by_empty_seat_action > button");
+  const seatValue = <HTMLSpanElement>document.querySelector("#filter_by_empty_seat_action > span");
+
+  buttons.forEach((btn) => {
+    btn.onclick = (ev) => {
+      const change = Number.parseInt(btn.value) ? Number.parseInt(btn.value) : 0;
       const currVal = Number.parseInt(seatValue.innerText);
       console.log(currVal);
       const newVal = (isNaN(currVal) || (currVal + change) < 0 || (currVal + change) >= 20) ? currVal : (Number.parseInt(seatValue.innerText) + change);
@@ -278,6 +313,5 @@ function AdjustEmptySeat(){
     }
   });
 
-  console.log(buttons);
 }
 AdjustEmptySeat();
