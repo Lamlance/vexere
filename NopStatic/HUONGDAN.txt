@@ -1,0 +1,33 @@
+Em chào cô/thầy 👋 em xin giải thích cái "flow" của tụi em
+
+0.Nav bar:
+  a) Ấn logo NavBar để trở về index
+  b) Nav bar trong trang "search" có "user" thay cho "đăng nhập" (để giả dụ đã đăng nhập), ấn vào sẽ đưa tới trang profile của người dùng
+
+1.Trang index: 
+  a) cô/thầy có thể gõ vào thanh search địa điểm đi/tới nó sẽ suggest (địa điểm suggest làm fake). Ấn vào địa điểm sẽ tự điền vào thanh search
+  b)Ấn "tìm vé" sẽ dẫn tới trang "search"
+  c)Ở dưới footer có các "Nhà xe". Ấn vào nhà xe bất kì sẽ dẫn tới trang thông tin nhà xe
+
+2.Trang "Nhà xe":
+  a)Có các tab để di chuyển giữa các thông tin nhà xe (có tất cả 3tab)
+
+3.Trang search
+  a)Bảng "filter" bên trái có thể tương tác nhưng sẽ không thay đổi gì hết
+    a1) Sử dụng các checkbox, ấn vào ▶️ sẽ mở sub checkbox, nếu ấn vào checkbox cha thì checkbox con tự check
+    a2)Thanh search không hoạt động chỉ gõ text vào tượng trưng
+    a3)Price slider cho phép điều chỉnh giá
+    a4)Số ghế trống có thể ấn +,-
+  b)List thể hiện danh sách xe tìm được
+    b1)Ấn "Thông tin chi tiết 🔽" sẽ mở bảng thông tin chi tiết (ấn lại để đóng)
+      b1.1)Có các tab để di chuyến các mục thông tin
+    b2)Ấn đặt vé để mở bảng đặt vé
+      b2.1)Ấn các nút "Back" và "Next" trong bảng đặt vé để di chuyển giữa các tab (có 3 tab tất cả)
+      b2.2)Có thể ấn các ghế ngồi để chọn chỗ (tại tab 1)
+      b2.*)Các tab còn lại chỉ hiện thị tượng trưng ko có chức năng gì đặc biệt
+
+4.Trang "user"
+  a)Là trang dashboard có các option phía trái (hiện tại có 2 option là có nội dung "thay đổi thông tin tài khoản","Vé của tôi")
+    a1) Trang "thay đổi thông tin tài khoản" có form để người dùng tương tác (không có chức năng trong bài nộp)
+    a2) Trang "Vé của tôi" có các tab để lọc loại Vé  
+      a2.1)Nếu lọc theo "Đã đi" sẽ có hiện vé. Ấn "Đã thanh toán" sẽ đưa người dùng tới trang BookingInfo
