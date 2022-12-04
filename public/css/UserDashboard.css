@@ -1,8 +1,30 @@
 * {
   font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 /* Navbar */
+.brand {
+  padding: .1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.brand-name:hover {
+  transition: .2s ease-in-out;
+  color: #0191ff;
+  cursor: pointer;
+}
+
+.brand-name {
+  color: #0A6EBD;
+  font-size: 1.5em;
+  transform: translate(0, 10%);
+}
+
 .nav-item>.login {
   color: #0A6EBD;
 }
@@ -10,6 +32,7 @@
 .nav-item>.login:hover {
   color: #0191ff;
 }
+
 
 /* .brand {
   padding: .8em;
