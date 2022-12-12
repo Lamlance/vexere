@@ -1,0 +1,213 @@
+<main class="container mt-5">
+    <div class="row">
+        <div class="ticket-information col-8">
+            <h4 class="text-primary payment-status">
+                {{paymentStatus}}
+            </h4>
+            <p>
+                Chúng tôi đã gửi thông tin chuyến đi đến SĐT
+                <b>{{userPhone}}</b> và email <b>{{userEmail}}</b>, bạn
+                hãy kiểm tra thật kĩ nhé!
+            </p>
+            <hr />
+
+            <h5 class="general-information">Thông tin vé</h5>
+            <h6 class="license-plate">Biển số xe</h6>
+            <div class="btn-group mt-2 mb-5">
+                <button type="button" class="btn btn-dark rounded">
+                    {{busPlate}}
+                </button>
+                <div class="vl"></div>
+                <button type="button" class="btn btn-warning rounded">
+                    Vị trí xe
+                </button>
+            </div>
+
+            <h6 class="phone-number">Số điện thoại</h6>
+
+            <div class="container">
+                <div class="row">
+                    <p class="col-6 fw-bold">Phụ xe 1:</p>
+                    <p class="col-6 text-primary">{{staffPhone}}</p>
+                </div>
+
+                <div class="row">
+                    <p class="col-6 fw-bold">Tài xế 1:</p>
+                    <p class="col-6 text-primary">{{driverPhone}}</p>
+                </div>
+
+                <div class="row">
+                    <p class="col-6 fw-bold">Hotline:</p>
+                    <p class="col-6 text-primary">{{hotlinePhone}}</p>
+                </div>
+            </div>
+
+            <p>
+                <b>Lưu ý: </b>
+                Mọi thông tin về chuyến đi sẽ được VeXeRe thông báo đến
+                quý khách qua email ngay sau khi nhà xe cập nhật thông
+                tin. Thông thường nhà xe sẽ cập nhật thông tin này trễ
+                nhất 15-30 phút trước giờ khởi hành tuỳ thuộc vào kế
+                hoạch của nhà xe.
+            </p>
+            <p>
+                Nếu gặp vấn đề khi ra xe, quý khách vui lòng liên hệ
+                theo số Hotline của nhà xe
+            </p>
+            <hr />
+
+            <h5 class="guiding">Hướng dẫn lên xe</h5>
+
+            <p>
+                Bạn cần ra điểm đón trước 15 phút, đưa SMS hoặc email
+                xác nhận thanh toán của VeXeRe cho nhân viên văn phòng
+                vé để đổi chứng từ giấy.
+            </p>
+
+            <p>
+                Khi lên xe, bạn xuất trình chứng từ giấy cho tài xế hoặc
+                phụ xe
+            </p>
+            <hr />
+
+            <h5 class="pick-up-des">Điểm đón</h5>
+            <h6>{{pickUpAddress}}</h6>
+            <p class="text-secondary">{{pickUpAddress}}</p>
+            <a href="#" class="text-primary text-decoration-none">Xem bản đồ</a>
+            <p>Đón lúc: <b>{{pickUpTime}}</b></p>
+
+            <hr />
+
+            <h5 class="drop-off-des">Điểm trả</h5>
+            <h6>{{dropOffAddress}}</h6>
+            <p class="text-secondary">{{dropOffAddress}}</p>
+            <a href="#" class="text-primary text-decoration-none">Xem bản đồ</a>
+            <p>Trả lúc: <b>{{dropOffTime}}</b></p>
+
+            <hr />
+
+            <h5 class="policy">Chính sách</h5>
+            <h6>Huỷ đơn hàng và hoàn tiền</h6>
+
+            <li>Không hỗ trợ huỷ vé</li>
+            <li>Còn 2 ngày nữa khởi hành</li>
+
+            <a href="#" class="btn btn-danger w-100 mt-2"> Huỷ vé </a>
+
+            <hr />
+
+            <h5 class="other-services">
+                Các dịch vụ khác dành cho bạn
+            </h5>
+
+
+            <div class="card" style="width: 18rem">
+                <img src="/public/assets/thue-xe-may-da-lat-4.jpg" class="card-img-top" alt="Thuê xe máy" />
+                <div class="card-body">
+                    <a href="#" class="h5 card-title text-decoration-none text-black">Thuê xe máy tại Đà Lạt</a>
+                    <h6 class="card-subtitle my-1 text-muted">
+                        Xe máy đời mới, chỉ từ 90k, liên hệ 0918765437
+                    </h6>
+                </div>
+            </div>
+
+            <hr />
+
+            <h5 class="questions">Câu hỏi thường gặp</h5>
+            <a href="#" class="text-primary text-decoration-none">
+                Câu hỏi thường gặp
+            </a>
+        </div>
+        <div class="col-4 container">
+            <div class="row user-information container">
+                <div class="row">
+                    <h5>Thông tin chuyến đi</h5>
+                    <h6 class="text-secondary">MÃ ĐƠN HÀNG</h6>
+                    <p>{{ticketId}}</p>
+                </div>
+
+                <hr />
+                <div class="row">
+                    <h6 class="text-secondary">HỌ VÀ TÊN</h6>
+                    <p>{{userName}}</p>
+                </div>
+
+                <hr />
+                <div class="row">
+                    <h6 class="text-secondary">SỐ ĐIỆN THOẠI</h6>
+                    <p>{{phone}}</p>
+                </div>
+
+                <hr />
+                <div class="row">
+                    <h6 class="text-secondary">SỐ CMND/CCCD</h6>
+                    <p>{{citzenId}}</p>
+                </div>
+
+                <hr />
+                <div class="row">
+                    <h6 class="text-secondary">EMAIL</h6>
+                    <p>{{email}}</p>
+                </div>
+
+                <hr />
+                <div class="row">
+                    <h6 class="text-secondary">NHÀ XE</h6>
+                    <p>{{busHouse}}</p>
+                </div>
+
+                <hr />
+                <div class="row">
+                    <h6 class="text-secondary">TUYẾN ĐƯỜNG</h6>
+                    <p>{{route}}</p>
+                </div>
+
+                <hr />
+                <div class="row">
+                    <h6 class="text-secondary">LOẠI XE</h6>
+                    <p>{{busType}}</p>
+                </div>
+
+                <hr />
+                <div class="row">
+                    <h6 class="text-secondary">MÃ GHẾ</h6>
+                    <p>{{seat}}</p>
+                </div>
+            </div>
+            <div class="row payment-information container">
+                <h5>Thông tin giao dịch</h5>
+
+                <div class="row">
+                    <h6 class="col-6">Phương thức thanh toán</h6>
+                    <p class="col-6 text-end">{{paymentMethod}}</p>
+                </div>
+
+                <hr />
+
+                <div class="row">
+                    <h6 class="col-6">Trạng thái</h6>
+                    <p class="col-6 text-end">{{paymentStatus}}</p>
+                </div>
+
+                <hr />
+
+                <div class="row">
+                    <h6 class="col-6">Giá vé</h6>
+                    <p class="col-6 text-end">{{price}}</p>
+                </div>
+
+                <hr />
+
+                <div class="row">
+                    <h6 class="col-6">Tổng tiền</h6>
+                    <p class="col-6 text-end fw-bold">{{totalPrice}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+<div class="w-100 fixed-bottom p-2 bg-light border-1">
+    <a href="#" class="btn btn-primary w-100"> Đặt vé khứ hồi </a>
+</div>
