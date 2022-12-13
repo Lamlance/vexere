@@ -1,7 +1,10 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import { ExpressHandlebars } from "express-handlebars";
-import fakeIndexHandler from "./routes/fakeindex/fakeIndex";
+
+import indexHandler from "./routes/Index/index";
+import bookingDetailHandler from "./routes/BookingDetail/bookingDetail";
+
 import * as url from 'url';
 import { PrismaClient } from "@prisma/client";
 import { auth, requiresAuth } from 'express-openid-connect';
@@ -14,19 +17,20 @@ import usersGenerate from "./routes/test/createMockData/mockUser";
 
 import checkUser from "./routes/db/checkUser";
 
-
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 const sessionManager = new UserSessionManager();
 export { sessionManager }
 
 dotenv.config();
 const app: Express = express();
+
 const handlebars = new ExpressHandlebars({
   layoutsDir: `${__dirname}/views/layouts`,
   partialsDir: `${__dirname}/views/partials`,
   defaultLayout: "layout",
   extname: "hbs",
 });
+
 const port = process.env.PORT || 8000;
 const configAuth = {
   authRequired: false,
@@ -58,14 +62,14 @@ app.use(express.static(__dirname + "/public"));
 app.engine("hbs", handlebars.engine);
 app.set("view engine", "hbs");
 
-app.get("/", fakeIndexHandler);
+app.get("/", indexHandler);
+
+app.get("/booking_detail", bookingDetailHandler);
 
 app.get("/api/test/generate/locations", locationGenerate);
 app.get("/api/test/generate/routes", routeGenerate);
 app.get("/api/test/generate/bushouses",busHouseGenerate);
 app.get("/api/test/generate/users",usersGenerate);
-
-
 app.get("/api/test/profile", (req, res) => {
   res.json({
     status: req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out',
@@ -73,6 +77,7 @@ app.get("/api/test/profile", (req, res) => {
     userDB: null
   });
 })
+
 app.listen(port, () => {
   console.log(`App listening on http://localhost:${port}`);
 });
