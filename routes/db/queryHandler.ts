@@ -32,7 +32,7 @@ const arrayQueryHandler = (queue: string | string[] | undefined): string[] => {
 }
 
 const signleIntQueryHandler = (queue: string | string[] | undefined, defaultValue: number = 0): number => {
-  const query = Number.parseInt(singleQuery(queue));
+  const query = Number.parseInt(singleQueryHandler(queue));
   return (isNaN(query)) ? defaultValue : query;
 }
 
@@ -49,7 +49,7 @@ const arrayIntQueryHandler = (queue: string | string[] | undefined): number[] =>
 }
 
 const signleFloatQueryHandler = (queue: string | string[] | undefined, defaultValue: number = 0): number => {
-  const query = Number.parseFloat(singleQuery(queue));
+  const query = Number.parseFloat(singleQueryHandler(queue));
   return (isNaN(query)) ? defaultValue : query;
 }
 
