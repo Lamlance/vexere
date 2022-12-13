@@ -8,6 +8,10 @@
     flex-direction: column;
 }
 
+.other-links {
+    background-color: lightgrey;
+}
+
 *{
     margin: 0;
     padding: 0;
