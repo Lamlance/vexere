@@ -1,60 +1,50 @@
 import express, {Request, Response} from 'express';
-import { prisma } from '../../server';
+import { prisma } from '../../../server';
 
-const routeData:{id:number,startlocation:number,endlocation:number}[] = [
+const locationsData:{id:number,name:string}[] = [
   {
-    id:1,
-    startlocation:5,
-    endlocation:7
+    id: 1,	
+    name:"Hà Nội"
   },
   {
     id:2,
-    startlocation:7,
-    endlocation:5
+    name:"Quảng Bình"
   },
   {
     id:3,
-    startlocation:5,
-    endlocation:8
+    name:"Ninh Bình"
   },
   {
     id:4,
-    startlocation:8,
-    endlocation:5
+    name:"Đà Năng"
   },
   {
     id:5,
-    startlocation:5,
-    endlocation:9
+    name:"Sài Gòn"
   },
   {
     id:6,
-    startlocation:9,
-    endlocation:5
+    name: "Sa Pa"
   },
   {
     id:7,
-    startlocation:1,
-    endlocation:3
+    name:"Vũng Tàu"
   },
   {
     id:8,
-    startlocation:3,
-    endlocation:1
+    name:"Đà Lạt"
   },
   {
     id:9,
-    startlocation:2,
-    endlocation:4,
+    name:"Nha Trang"
   },
   {
     id:10,
-    startlocation:4,
-    endlocation:2
+    name:"Phan Thiết"
   }
 ]
 
-const routeGenerate = async (req:Request,res:Response)=>{
+const locationGenerate = async (req:Request,res:Response)=>{
   if(req.method !== "GET"){
     res.status(200).json({error:"Plese use a GET method"});
     return;
@@ -72,15 +62,15 @@ const routeGenerate = async (req:Request,res:Response)=>{
   }
 
   await prisma.$connect();
-  const createResult = await prisma.route.createMany({
-    data:routeData,
+  const createResult = await prisma.location.createMany({
+    data:locationsData,
     skipDuplicates:true
   });
   
   res.status(200).json({
     insertCount: createResult.count
   });
-}
+} 
 
-export default routeGenerate;
-export {routeData}
+export default locationGenerate;
+export {locationsData};

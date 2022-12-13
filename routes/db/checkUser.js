@@ -1,11 +1,11 @@
 import { prisma, sessionManager } from '../../server';
-async function createUser(req, res, next) {
+async function checkUser(req, res, next) {
     // console.log("Userd login callback middleware");
     if (!req.oidc.isAuthenticated()) {
         next();
         return;
     }
-    if (req.oidc.user && req.oidc.user.sid && sessionManager.isLogged(req.oidc.user.sid)) {
+    if (req.oidc.user && req.oidc.user.sid && sessionManager.checkAndRefreshed(req.oidc.user.sid)) {
         // console.log("Already logged");
         next();
         return;
@@ -67,4 +67,4 @@ async function createUser(req, res, next) {
     }
     next();
 }
-export default createUser;
+export default checkUser;
