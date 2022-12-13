@@ -33,7 +33,7 @@ const configAuth = {
   auth0Logout: true,
   secret: process.env.SECRETE,
   baseURL: `http://localhost:${port}`,
-  clientID: 'lC9I51KD1kbdhWIetiIT93nqURAXDNe4',
+  clientID: process.env.CLIENT_ID,
   issuerBaseURL: 'https://dev-j07rhfbc.us.auth0.com',  
 };
 if (!process.env.BASE_URL && process.env.NODE_ENV !== 'production') {
