@@ -2,27 +2,9 @@ import { Request, Response, NextFunction } from 'express';
 import { prisma } from '../../server';
 import { singleIntQueryHandler } from './queryHandler';
 
-async function searchRoute(
-  req: Request<{}, {}, {}, {
-    page?: string,
-    fromId: string,
-    toId: string
-  },{}>,
-  res: Response) {
-
-  if (!(req.query && req.query.fromId && req.query.toId)) {
-    res.status(210).json([]);
-    return;
-  }
-
-
-
+async function searchRouteFromDB(fromId:number,toId:number,page:number = 0) {
   const itemPerPage = 5;
   await prisma.$connect();
-  const page = singleIntQueryHandler(req.query.page,0);
-  const formId = singleIntQueryHandler(req.query.fromId);
-  const toId = singleIntQueryHandler(req.query.toId);
-
   const route = await prisma.route.findFirst({
     select:{
       id:true,
@@ -35,15 +17,17 @@ async function searchRoute(
     },
     where:{
       AND:[
-        {startLocId: formId},
+        {startLocId: fromId},
         {endLocId: toId},
       ]
     }
   })
 
   if(!route){
-    res.status(200).json([]);
-    return;
+    return {
+      route: {},
+      routeDetail: [],
+    };
   }
 
   const routeDetail = await prisma.routeDetail.findMany({
@@ -73,12 +57,34 @@ async function searchRoute(
       }
     }
   })
-  
-  res.status(200).json({
+
+  return {
     route: route,
-    detail:routeDetail
-  });
+    routeDetail: routeDetail
+  };
 }
 
-export default searchRoute;
+async function searchRouteAPI(
+  req: Request<{}, {}, {}, {
+    page?: string,
+    fromId: string,
+    toId: string
+  },{}>,
+  res: Response) {
 
+  if (!(req.query && req.query.fromId && req.query.toId)) {
+    res.status(210).json([]);
+    return;
+  }
+
+  const page = singleIntQueryHandler(req.query.page,0);
+  const fromId = singleIntQueryHandler(req.query.fromId);
+  const toId = singleIntQueryHandler(req.query.toId);
+
+  const ans = await searchRouteFromDB(fromId,toId,page);
+  
+  res.json(ans);
+}
+
+export default searchRouteAPI;
+export {searchRouteFromDB}
