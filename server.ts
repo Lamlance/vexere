@@ -14,8 +14,11 @@ import locationGenerate from "./routes/test/createMockData/mockLocation";
 import routeGenerate from "./routes/test/createMockData/mockRoute";
 import busHouseGenerate from "./routes/test/createMockData/mockBusHouse";
 import usersGenerate from "./routes/test/createMockData/mockUser";
+import busGenerate from "./routes/test/createMockData/mockBus";
+import routeDetailGenerate from "./routes/test/createMockData/mockRouteDetail";
 
 import checkUser from "./routes/db/checkUser";
+import searchRoute from "./routes/db/searchRoute";
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 const sessionManager = new UserSessionManager();
@@ -70,6 +73,11 @@ app.get("/api/test/generate/locations", locationGenerate);
 app.get("/api/test/generate/routes", routeGenerate);
 app.get("/api/test/generate/bushouses",busHouseGenerate);
 app.get("/api/test/generate/users",usersGenerate);
+app.get("/api/test/generate/buses",busGenerate);
+app.get("/api/test/generate/details",routeDetailGenerate);
+app.get("/api/test/search",searchRoute)
+
+
 app.get("/api/test/profile", (req, res) => {
   res.json({
     status: req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out',

@@ -1,56 +1,56 @@
 import express, {Request, Response} from 'express';
 import { prisma } from '../../../server';
 
-const routeData:{id:number,startlocation:number,endlocation:number}[] = [
+const routeData:{id:number,startLocId:number,endLocId:number}[] = [
   {
     id:1,
-    startlocation:5,
-    endlocation:7
+    startLocId:5,
+    endLocId:7
   },
   {
     id:2,
-    startlocation:7,
-    endlocation:5
+    startLocId:7,
+    endLocId:5
   },
   {
     id:3,
-    startlocation:5,
-    endlocation:8
+    startLocId:5,
+    endLocId:8
   },
   {
     id:4,
-    startlocation:8,
-    endlocation:5
+    startLocId:8,
+    endLocId:5
   },
   {
     id:5,
-    startlocation:5,
-    endlocation:9
+    startLocId:5,
+    endLocId:9
   },
   {
     id:6,
-    startlocation:9,
-    endlocation:5
+    startLocId:9,
+    endLocId:5
   },
   {
     id:7,
-    startlocation:1,
-    endlocation:3
+    startLocId:1,
+    endLocId:3
   },
   {
     id:8,
-    startlocation:3,
-    endlocation:1
+    startLocId:3,
+    endLocId:1
   },
   {
     id:9,
-    startlocation:2,
-    endlocation:4,
+    startLocId:2,
+    endLocId:4,
   },
   {
     id:10,
-    startlocation:4,
-    endlocation:2
+    startLocId:4,
+    endLocId:2
   }
 ]
 

@@ -12,13 +12,13 @@ model testtable {
   randNum Int?
 }
 
-model User{
-  id Int  @id @default(autoincrement())
-  Name String
-  email String?
-  phone String? @db.VarChar(15)
+model User {
+  id      Int     @id @default(autoincrement())
+  Name    String
+  email   String?
+  phone   String? @db.VarChar(15)
   isAdmin Boolean @default(false)
-  uuid String
+  uuid    String
 }
 
 model Location {
@@ -26,66 +26,72 @@ model Location {
   name String
 
   StartRoute Route[] @relation("starting")
-  EndRoute Route[] @relation("ending")
+  EndRoute   Route[] @relation("ending")
 }
 
 model Route {
   id Int @id @default(autoincrement())
 
-  start Location @relation(name: "starting" ,fields: [startlocation], references: [id])
-  startlocation Int
+  startLoc   Location @relation(name: "starting", fields: [startLocId], references: [id])
+  startLocId Int
 
-  end Location @relation(name: "ending",fields: [endlocation],references: [id])
-  endlocation Int
+  endtLoc  Location @relation(name: "ending", fields: [endLocId], references: [id])
+  endLocId Int
 
-  routeDetail RouteDetail[] @relation("route")
+  RouteDetail RouteDetail[]
 }
-model RouteDetail{
-  id Int @id @default(autoincrement())
-  start DateTime
-  end DateTime
-  price Decimal @db.Money
 
-  route Route @relation(name: "route",fields: [routeId],references: [id])
+model RouteDetail {
+  id         Int      @id @default(autoincrement())
+  startTime  DateTime
+  endTime    DateTime
+  price      Decimal  @db.Money
+  remainSeat Int
+
+  route   Route @relation(fields: [routeId], references: [id])
   routeId Int
 
-  bus Bus @relation(name: "busRoute",fields: [busId],references: [id])
+  bus   Bus @relation(name: "busRoute", fields: [busId], references: [id])
   busId Int
 
   ticket Ticket[] @relation("routeDetail")
 }
 
-
-model BusHouse{
-  id Int @id @default(autoincrement())
+model BusHouse {
+  id   Int    @id @default(autoincrement())
   Name String @db.Char(50)
 
+  buses Bus[]
 }
-model Bus{
-  id Int @id @default(autoincrement())
-  plate String @db.Char(20)
+
+model Bus {
+  id         Int    @id @default(autoincrement())
+  plate      String @db.Char(20)
   seatAmount Int
-  type Int
+  type       Int
+
+  house    BusHouse @relation(fields: [busHouse], references: [id])
+  busHouse Int
 
   busroute RouteDetail[] @relation("busRoute")
 }
 
-model Ticket{
-  id Int @id @default(autoincrement())
-  rating Int
+model Ticket {
+  id      Int     @id @default(autoincrement())
+  rating  Int
   comment String?
 
-  routeDetail RouteDetail @relation(name: "routeDetail",fields: [routeDetailId],references: [id])
+  routeDetail   RouteDetail @relation(name: "routeDetail", fields: [routeDetailId], references: [id])
   routeDetailId Int
 
   rate Rating? @relation("ticketRating")
 }
 
-model Rating{
-  id Int @id @default(autoincrement())
-  rating Int
+model Rating {
+  id      Int     @id @default(autoincrement())
+  rating  Int
   comment String?
 
-  ticket Ticket @relation(name: "ticketRating",fields: [ticketId],references: [id])
-  ticketId Int @unique
+  ticket   Ticket @relation(name: "ticketRating", fields: [ticketId], references: [id])
+  ticketId Int    @unique
 }

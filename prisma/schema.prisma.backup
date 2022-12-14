@@ -15,9 +15,10 @@ model testtable {
 model User{
   id Int  @id @default(autoincrement())
   Name String
-  emai String
-  phone String @db.VarChar(15)
+  email String?
+  phone String? @db.VarChar(15)
   isAdmin Boolean @default(false)
+  uuid String
 }
 
 model Location {
@@ -43,6 +44,7 @@ model RouteDetail{
   id Int @id @default(autoincrement())
   start DateTime
   end DateTime
+  price Decimal @db.Money
 
   route Route @relation(name: "route",fields: [routeId],references: [id])
   routeId Int
@@ -70,15 +72,19 @@ model Bus{
 
 model Ticket{
   id Int @id @default(autoincrement())
+  rating Int
+  comment String?
 
   routeDetail RouteDetail @relation(name: "routeDetail",fields: [routeDetailId],references: [id])
   routeDetailId Int
 
-  rating Rating? @relation("ticketRating")
+  rate Rating? @relation("ticketRating")
 }
 
 model Rating{
   id Int @id @default(autoincrement())
+  rating Int
+  comment String?
 
   ticket Ticket @relation(name: "ticketRating",fields: [ticketId],references: [id])
   ticketId Int @unique
