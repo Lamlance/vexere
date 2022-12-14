@@ -41,6 +41,7 @@
 .vexere_time_container {
   display: grid;
   grid-template-columns: 0.4fr 1.6fr;
+  row-gap: 0.5rem;
 }
 
 .vexere_departure_icon {

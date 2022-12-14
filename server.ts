@@ -14,8 +14,12 @@ import locationGenerate from "./routes/test/createMockData/mockLocation";
 import routeGenerate from "./routes/test/createMockData/mockRoute";
 import busHouseGenerate from "./routes/test/createMockData/mockBusHouse";
 import usersGenerate from "./routes/test/createMockData/mockUser";
+import busGenerate from "./routes/test/createMockData/mockBus";
+import routeDetailGenerate from "./routes/test/createMockData/mockRouteDetail";
 
 import checkUser from "./routes/db/checkUser";
+import searchRouteAPI from "./routes/db/searchRoute";
+import searchRouteHandler from "./routes/Search/search";
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 const sessionManager = new UserSessionManager();
@@ -48,6 +52,7 @@ if (process.env.RENDER_EXTERNAL_URL) {
 }
 
 app.use(auth(configAuth));
+
 app.use((req, res, next)=>{
   res.locals.user = req.oidc.user;
   next()
@@ -62,14 +67,21 @@ app.use(express.static(__dirname + "/public"));
 app.engine("hbs", handlebars.engine);
 app.set("view engine", "hbs");
 
-app.get("/", indexHandler);
 
-app.get("/booking_detail", bookingDetailHandler);
+app.get("/",indexHandler);
+app.get("/booking_detail",bookingDetailHandler);
+app.get("/search",searchRouteHandler);
+
 
 app.get("/api/test/generate/locations", locationGenerate);
 app.get("/api/test/generate/routes", routeGenerate);
 app.get("/api/test/generate/bushouses",busHouseGenerate);
 app.get("/api/test/generate/users",usersGenerate);
+app.get("/api/test/generate/buses",busGenerate);
+app.get("/api/test/generate/details",routeDetailGenerate);
+app.get("/api/test/search",searchRouteAPI)
+
+
 app.get("/api/test/profile", (req, res) => {
   res.json({
     status: req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out',

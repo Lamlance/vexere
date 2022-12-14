@@ -1,0 +1,48 @@
+<div class="vexere_info_wrapper">
+
+  <!-- Hình xe -->
+  <div class="vexere_bus_image_wrapper">
+    <!-- <img src="/assets/bus-img2.png" alt="Hinh xe"> -->
+  </div>
+
+  <!-- Thông tin cơ bản đi đến -->
+  <div>
+    <h3 class="js-bus-house-name"> {{detail.bus.house.Name}} </h3>
+    <p> <span class="js-bus-type">Loại xe {{detail.bus.type}}</span> - <span class="js-seat-amount"> </p>
+    <div class="vexere_time_container">
+      <div class="vexere_departure_icon">
+        <div>
+          <img style="width: 100%;" src="/assets/from-icon.png" alt="icon" />
+        </div>
+        <div style="flex:1; display:flex; align-items: center;">
+          <img style="width: 100%;" src="/assets/dot-line.png" alt="icon" />
+        </div>
+        <div>
+          <img style="width: 100%;" src="/assets/to-icon.png" alt="icon" />
+        </div>
+      </div>
+      <div>
+        <h3 class="js-from-time">{{detail.startTime}}</h3>
+        <p class="js-from-location">{{route.startLoc.name}}</p>
+      </div>
+      <div>
+        <h3 class="js-to-time">{{detail.endTime}}</h3>
+        <p class="js-to-location">{{route.endtLoc.name}}</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Giá và chi tiết -->
+  <div class="vexere_gia_brief_info">
+    <h3 class="js-ticket-price">Từ {{detail.price}} VND</h3>
+    <div>
+      <h3><span class="js-empty-seat">{{detail.remainSeat}}</span> chỗ còn trống</h3>
+    </div>
+    <div class="vexere_info_action">
+      <h4>Thông tin chi tiết 🔽</h4>
+      <button>Đặt vé</button>
+    </div>
+  </div>
+
+</div>
