@@ -52,6 +52,7 @@ if (process.env.RENDER_EXTERNAL_URL) {
 }
 
 app.use(auth(configAuth));
+
 app.use((req, res, next)=>{
   res.locals.user = req.oidc.user;
   next()
@@ -66,8 +67,9 @@ app.use(express.static(__dirname + "/public"));
 app.engine("hbs", handlebars.engine);
 app.set("view engine", "hbs");
 
-app.get("/", indexHandler);
-app.get("/booking_detail", bookingDetailHandler);
+
+app.get("/",indexHandler);
+app.get("/booking_detail",bookingDetailHandler);
 app.get("/search",searchRouteHandler);
 
 
