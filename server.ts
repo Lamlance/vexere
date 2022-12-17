@@ -69,7 +69,7 @@ app.set("view engine", "hbs");
 
 
 app.get("/",indexHandler);
-app.get("/booking_detail",bookingDetailHandler);
+app.get("/ticket",bookingDetailHandler);
 app.get("/search",searchRouteHandler);
 
 
