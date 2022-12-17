@@ -39,10 +39,22 @@
         <tbody>
           <tr>
             <td>
-              <div class="auto_complete_place" id="auto-complete-start"></div>
+              <div id="auto-complete-start" class="auto_complete_place">
+                <ul class="start-locations-list">
+                  {{#each locations1 }}
+                    <li>{{this}}</li>
+                  {{/each}}
+                </ul>
+              </div>
             </td>
             <td>
-              <div class="auto_complete_place" id="auto-complete-end"></div>
+              <div id="auto-complete-end" class="auto_complete_place">
+                <ul class="end-locations-list">
+                  {{#each locations2 }}
+                    <li>{{this}}</li>
+                  {{/each}}
+                </ul>
+              </div>
             </td>
           </tr>
         </tbody>

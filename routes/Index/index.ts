@@ -1,8 +1,24 @@
 import express, { Express, Request, Response } from "express";
+import { prisma as prismaClient } from "../../server";
 
-const indexHandler = (req: Request, res: Response) => {
+
+
+const indexHandler = async (req: Request, res: Response) => {
+  
+  let data = await prismaClient.location.findMany({
+    select: {
+      name: true,
+    }
+  });
+
+  let locations = data.map(loc => loc.name);
+  console.log(locations);
+  
   res.locals.title = "Trang chủ";
   res.locals.cssPath = "/css/index.css";
+  res.locals.locations1 = locations;
+  res.locals.locations2 = locations;
+
   res.render("index");
 }
 
