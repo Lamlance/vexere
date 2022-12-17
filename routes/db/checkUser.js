@@ -1,4 +1,16 @@
 import { prisma, sessionManager } from '../../server';
+async function getUserFromDB(uuid, email) {
+    await prisma.$connect();
+    const userSaved = await prisma.user.findFirst({
+        where: {
+            OR: [
+                { email: email },
+                { uuid: { contains: uuid } }
+            ]
+        }
+    });
+    return userSaved;
+}
 async function checkUser(req, res, next) {
     // console.log("Userd login callback middleware");
     if (!req.oidc.isAuthenticated()) {
@@ -68,3 +80,4 @@ async function checkUser(req, res, next) {
     next();
 }
 export default checkUser;
+export { getUserFromDB };

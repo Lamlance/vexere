@@ -15,7 +15,7 @@
             <h6 class="license-plate">Biển số xe</h6>
             <div class="btn-group mt-2 mb-5">
                 <button type="button" class="btn btn-dark rounded">
-                    {{busPlate}}
+                    {{ busPlate }}
                 </button>
                 <div class="vl"></div>
                 <button type="button" class="btn btn-warning rounded">
@@ -123,43 +123,38 @@
                 <div class="row">
                     <h5>Thông tin chuyến đi</h5>
                     <h6 class="text-secondary">MÃ ĐƠN HÀNG</h6>
-                    <p>{{ticketId}}</p>
+                    <p>{{ ticket.id }}</p>
                 </div>
 
                 <hr />
                 <div class="row">
                     <h6 class="text-secondary">HỌ VÀ TÊN</h6>
-                    <p>{{userName}}</p>
+                    <p>{{ user.name }}</p>
                 </div>
 
                 <hr />
                 <div class="row">
                     <h6 class="text-secondary">SỐ ĐIỆN THOẠI</h6>
-                    <p>{{phone}}</p>
+                    <p>{{ user.phone }}</p>
                 </div>
 
                 <hr />
-                <div class="row">
-                    <h6 class="text-secondary">SỐ CMND/CCCD</h6>
-                    <p>{{citzenId}}</p>
-                </div>
-
-                <hr />
+                
                 <div class="row">
                     <h6 class="text-secondary">EMAIL</h6>
-                    <p>{{email}}</p>
+                    <p>{{ user.email }}</p>
                 </div>
 
                 <hr />
                 <div class="row">
                     <h6 class="text-secondary">NHÀ XE</h6>
-                    <p>{{busHouse}}</p>
+                    <p>{{  }}</p>
                 </div>
 
                 <hr />
                 <div class="row">
                     <h6 class="text-secondary">TUYẾN ĐƯỜNG</h6>
-                    <p>{{route}}</p>
+                    <p>{{  }}</p>
                 </div>
 
                 <hr />
