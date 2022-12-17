@@ -30,33 +30,43 @@ const bookingDetailHandler = async (req, res) => {
     const routeDetail = await prisma.routeDetail.findFirst({
         where: {
             AND: [
-                { routeId: { equals: ticket.routeDetailId } },
+                { id: { equals: ticket.routeDetailId } },
             ]
         },
-        select: {
-            routeId: true,
-            bus: {
+        include: {
+            Bus: {
                 select: {
                     plate: true,
                     type: true,
-                    house: {
+                    BusHouse: {
                         select: {
                             Name: true
                         }
                     }
                 }
-            },
+            }
         }
     });
-    const route = await prisma.routeDetail.findFirst({
+    const route = await prisma.route.findFirst({
         where: {
-            AND: [{ routeId: routeDetail?.routeId }]
+            AND: [{ id: { equals: routeDetail?.routeId } }]
         },
-        select: 
+        select: {
+            Location_Route_startLocIdToLocation: {
+                select: { name: true }
+            },
+            Location_Route_endLocIdToLocation: {
+                select: { name: true }
+            }
+        }
     });
     console.log(ticket);
     res.locals.title = "Thông tin thanh toán";
     res.locals.cssPath = "/css/DetailBooking.css";
-    res.render("bookingDetail");
+    res.render("ticket", {
+        ticket: ticket,
+        detail: routeDetail,
+        route: route,
+    });
 };
 export default bookingDetailHandler;

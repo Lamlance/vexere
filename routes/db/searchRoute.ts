@@ -8,10 +8,10 @@ async function searchRouteFromDB(fromId:number,toId:number,page:number = 0) {
   const route = await prisma.route.findFirst({
     select:{
       id:true,
-      startLoc:{
+      Location_Route_startLocIdToLocation:{
         select:{name:true}
       },
-      endtLoc:{
+      Location_Route_endLocIdToLocation:{
         select:{name:true}
       }
     },
@@ -45,10 +45,10 @@ async function searchRouteFromDB(fromId:number,toId:number,page:number = 0) {
       endTime: true,
       price: true,
       remainSeat: true,
-      bus:{
+      Bus:{
         select:{
           type: true,
-          house:{
+          BusHouse:{
             select:{
               Name:true
             }
