@@ -6,11 +6,12 @@ const searchRouteHandler = async (
   req: Request<{}, {}, {}, {
     page?: string,
     fromId: string,
-    toId: string
+    toId: string,
+    date: string
   }, {}>,
   res: Response) => {
 
-  if (!(req.query && req.query.fromId && req.query.toId)) {
+  if (!(req.query && req.query.fromId && req.query.toId )) {
     res.render("search",{});
     return;
   }
