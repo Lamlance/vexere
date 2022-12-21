@@ -16,6 +16,8 @@ import routeDetailGenerate from "./routes/test/createMockData/mockRouteDetail";
 import checkUser from "./routes/db/checkUser";
 import searchRouteAPI from "./routes/db/searchRoute";
 import searchRouteHandler from "./routes/Search/search";
+import createTicket from "./routes/Ticket/ticket";
+import bodyParser from "body-parser";
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 const sessionManager = new UserSessionManager();
 export { sessionManager };
@@ -43,6 +45,8 @@ if (process.env.RENDER_EXTERNAL_URL) {
     configAuth.baseURL = process.env.RENDER_EXTERNAL_URL;
 }
 app.use(auth(configAuth));
+app.use(bodyParser.urlencoded({ extended: false }));
+const bodyPraseObj = bodyParser.json();
 app.use((req, res, next) => {
     res.locals.user = req.oidc.user;
     next();
@@ -54,7 +58,8 @@ app.use(express.static(__dirname + "/public"));
 app.engine("hbs", handlebars.engine);
 app.set("view engine", "hbs");
 app.get("/", indexHandler);
-app.get("/ticket", bookingDetailHandler);
+app.get("/user/ticket", bookingDetailHandler);
+app.post("/api/ticket", bodyPraseObj, createTicket);
 app.get("/search", searchRouteHandler);
 app.get("/api/test/generate/locations", locationGenerate);
 app.get("/api/test/generate/routes", routeGenerate);

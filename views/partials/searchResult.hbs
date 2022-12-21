@@ -7,8 +7,8 @@
 
   <!-- Thông tin cơ bản đi đến -->
   <div>
-    <h3 class="js-bus-house-name"> {{detail.bus.house.Name}} </h3>
-    <p> <span class="js-bus-type">Loại xe {{detail.bus.type}}</span> - <span class="js-seat-amount"> </p>
+    <h3 class="js-bus-house-name"> {{detail.Bus.BusHouse.Name}} </h3>
+    <p> <span class="js-bus-type">Loại xe {{detail.Bus.type}}</span> </p>
     <div class="vexere_time_container">
       <div class="vexere_departure_icon">
         <div>
@@ -23,11 +23,11 @@
       </div>
       <div>
         <h3 class="js-from-time">{{detail.startTime}}</h3>
-        <p class="js-from-location">{{route.startLoc.name}}</p>
+        <p class="js-from-location">{{route.Location_Route_startLocIdToLocation.name}}</p>
       </div>
       <div>
         <h3 class="js-to-time">{{detail.endTime}}</h3>
-        <p class="js-to-location">{{route.endtLoc.name}}</p>
+        <p class="js-to-location">{{route.Location_Route_endLocIdToLocation.name}}</p>
       </div>
 
     </div>
@@ -41,7 +41,10 @@
     </div>
     <div class="vexere_info_action">
       <h4>Thông tin chi tiết 🔽</h4>
-      <button>Đặt vé</button>
+      <form method="post" target="_blank" action="/api/ticket">
+        <input type="number" name="detailId" style="display: none;" value="{{detail.id}}" readonly >
+        <button>Đặt vé</button>
+      </form>
     </div>
   </div>
 

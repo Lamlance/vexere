@@ -73,7 +73,7 @@
   cursor: pointer;
 }
 
-.vexere_info_action>button {
+.vexere_info_action> form >button {
   padding: 1rem 2rem;
 }
 

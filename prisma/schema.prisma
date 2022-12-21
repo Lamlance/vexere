@@ -61,13 +61,21 @@ model RouteDetail {
 }
 
 model Ticket {
-  id            Int         @id @default(autoincrement())
+  id            Int          @id @default(autoincrement())
   comment       String?
   routeDetailId Int
+  status        TicketStatus @default(WAITING)
   userId        Int
   Rating        Rating?
-  RouteDetail   RouteDetail @relation(fields: [routeDetailId], references: [id])
+  RouteDetail   RouteDetail  @relation(fields: [routeDetailId], references: [id])
   User          User        @relation(fields: [userId], references: [id])
+}
+
+enum TicketStatus {
+  WAITING
+  ACCEPT
+  PAID
+  CANCELED
 }
 
 model User {

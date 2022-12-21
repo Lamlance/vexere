@@ -30,17 +30,20 @@ async function searchRouteFromDB(fromId:number,toId:number,page:number = 0) {
     };
   }
 
+  const today = new Date();
+  const tommorrow = new Date(today.getTime() + 1*8.64e+7)
   const routeDetail = await prisma.routeDetail.findMany({
     take: itemPerPage,
     skip: itemPerPage * page,
     where:{
       AND:[
-        {startTime:{gt: new Date((new Date()).getDate() + 1) }},
+        {startTime:{gt: new Date("05 October 2011 14:48 UTC")}},
         {remainSeat:{gt:0}},
         {routeId:route.id}
       ]
     },
     select:{
+      id:true,
       startTime:true,
       endTime: true,
       price: true,
@@ -50,7 +53,8 @@ async function searchRouteFromDB(fromId:number,toId:number,page:number = 0) {
           type: true,
           BusHouse:{
             select:{
-              Name:true
+              Name:true,
+              id: true
             }
           }
         }

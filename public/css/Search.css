@@ -45,57 +45,10 @@ body *{
 /* filter */
 
 /* Price rage */
-.range-input {
-  display: grid;
-  place-items: center;
-  position: relative;
-  overflow: hidden;
-  height: 40px;
-  background: linear-gradient(grey, grey) no-repeat center;
-  background-size: 100% 2px;
+.price-range{
+  display: flex;
+  flex-direction: row;
 }
-
-.range-input > input[type=range] {
-  position: absolute;
-  width: 100%;
-  pointer-events: none;
-
-}
-
-#min-price-slider,#max-price-slider{
-  position: absolute;
-  box-sizing: border-box;
-  appearance: none;
-  width: calc(100% - 20px);
-  margin: 0;
-  padding: 0 2px;
-  
-  overflow: hidden;
-  border: 0;
-  border-radius: 1px;
-  outline: none;
-  background: none;
-
-  pointer-events: none;
-}
-
-.range-input > input[type=range]::-webkit-slider-thumb{/*Webkit Browsers like Chrome and Safari*/
-  pointer-events: auto;
-}
-.range-input > input[type=range]::-moz-range-thumb{/*Firefox*/
-  pointer-events: auto;
-}
-.range-input > input[type=range]::-ms-thumb{/*Internet Explorer*/
-  pointer-events: auto;
-}
-
-#max-price-slider{
-  right: 0;
-}
-#min-price-slider{
-  left: 0;
-}
-
 /* Empty seat */
 #filter_by_empty_seat *{
   margin: 0;

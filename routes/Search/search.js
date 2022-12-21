@@ -1,6 +1,7 @@
 import { singleIntQueryHandler } from "../db/queryHandler";
 import { searchRouteFromDB } from "../db/searchRoute";
 const searchRouteHandler = async (req, res) => {
+    console.log(req.query.busHouse);
     if (!(req.query && req.query.fromId && req.query.toId)) {
         res.render("search", {});
         return;
