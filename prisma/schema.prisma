@@ -1,40 +1,50 @@
-generator client {
-  provider = "prisma-client-js"
-}
-
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-model testtable {
-  id      Int  @id @default(autoincrement())
-  randNum Int?
+generator client {
+  provider = "prisma-client-js"
 }
 
-model User {
-  id      Int     @id @default(autoincrement())
-  Name    String
-  phone   String? @db.VarChar(15)
-  isAdmin Boolean @default(false)
-  email   String?
-  uuid    String
+model Bus {
+  id          Int           @id @default(autoincrement())
+  plate       String        @db.Char(20)
+  seatAmount  Int
+  type        Int
+  busHouse    Int
+  BusHouse    BusHouse      @relation(fields: [busHouse], references: [id])
+  RouteDetail RouteDetail[]
+}
+
+model BusHouse {
+  id   Int    @id @default(autoincrement())
+  Name String @db.Char(50)
+  Bus  Bus[]
 }
 
 model Location {
-  id         Int     @id @default(autoincrement())
-  name       String
-  EndRoute   Route[] @relation("ending")
-  StartRoute Route[] @relation("starting")
+  id                               Int     @id @default(autoincrement())
+  name                             String
+  Route_Route_endLocIdToLocation   Route[] @relation("Route_endLocIdToLocation")
+  Route_Route_startLocIdToLocation Route[] @relation("Route_startLocIdToLocation")
+}
+
+model Rating {
+  id       Int     @id @default(autoincrement())
+  rating   Int
+  comment  String?
+  ticketId Int     @unique
+  Ticket   Ticket  @relation(fields: [ticketId], references: [id])
 }
 
 model Route {
-  id          Int           @id @default(autoincrement())
-  startLocId  Int
-  endLocId    Int
-  endtLoc     Location      @relation("ending", fields: [endLocId], references: [id])
-  startLoc    Location      @relation("starting", fields: [startLocId], references: [id])
-  RouteDetail RouteDetail[]
+  id                                  Int           @id @default(autoincrement())
+  startLocId                          Int
+  endLocId                            Int
+  Location_Route_endLocIdToLocation   Location      @relation("Route_endLocIdToLocation", fields: [endLocId], references: [id])
+  Location_Route_startLocIdToLocation Location      @relation("Route_startLocIdToLocation", fields: [startLocId], references: [id])
+  RouteDetail                         RouteDetail[]
 }
 
 model RouteDetail {
@@ -45,40 +55,40 @@ model RouteDetail {
   startTime  DateTime
   remainSeat Int
   routeId    Int
-  bus        Bus      @relation("busRoute", fields: [busId], references: [id])
-  route      Route    @relation(fields: [routeId], references: [id])
-  ticket     Ticket[] @relation("routeDetail")
-}
-
-model BusHouse {
-  id    Int    @id @default(autoincrement())
-  Name  String @db.Char(50)
-  buses Bus[]
-}
-
-model Bus {
-  id         Int           @id @default(autoincrement())
-  plate      String        @db.Char(20)
-  seatAmount Int
-  type       Int
-  busHouse   Int
-  house      BusHouse      @relation(fields: [busHouse], references: [id])
-  busroute   RouteDetail[] @relation("busRoute")
+  Bus        Bus      @relation(fields: [busId], references: [id])
+  Route      Route    @relation(fields: [routeId], references: [id])
+  Ticket     Ticket[]
 }
 
 model Ticket {
-  id            Int         @id @default(autoincrement())
-  rating        Int
+  id            Int          @id @default(autoincrement())
   comment       String?
   routeDetailId Int
-  rate          Rating?     @relation("ticketRating")
-  routeDetail   RouteDetail @relation("routeDetail", fields: [routeDetailId], references: [id])
+  status        TicketStatus @default(WAITING)
+  userId        Int
+  Rating        Rating?
+  RouteDetail   RouteDetail  @relation(fields: [routeDetailId], references: [id])
+  User          User        @relation(fields: [userId], references: [id])
 }
 
-model Rating {
-  id       Int     @id @default(autoincrement())
-  rating   Int
-  comment  String?
-  ticketId Int     @unique
-  ticket   Ticket  @relation("ticketRating", fields: [ticketId], references: [id])
+enum TicketStatus {
+  WAITING
+  ACCEPT
+  PAID
+  CANCELED
+}
+
+model User {
+  id      Int      @id @default(autoincrement())
+  Name    String
+  phone   String?  @db.VarChar(15)
+  isAdmin Boolean  @default(false)
+  email   String?
+  uuid    String
+  Ticket  Ticket[]
+}
+
+model testtable {
+  id      Int  @id @default(autoincrement())
+  randNum Int?
 }

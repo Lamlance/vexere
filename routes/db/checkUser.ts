@@ -1,6 +1,19 @@
 import { Request, Response, NextFunction } from 'express';
 import { prisma, sessionManager } from '../../server';
 
+async function getUserFromDB(uuid:string,email?:string) {
+  await prisma.$connect();
+  const userSaved = await prisma.user.findFirst({
+    where: {
+      OR: [
+        { email: email },
+        { uuid: { contains: uuid } }
+      ]
+    }
+  });
+  return userSaved;
+}
+
 async function checkUser(req: Request, res: Response, next: NextFunction) {
   // console.log("Userd login callback middleware");
   if (!req.oidc.isAuthenticated()) {
@@ -78,3 +91,5 @@ async function checkUser(req: Request, res: Response, next: NextFunction) {
 }
 
 export default checkUser;
+
+export {getUserFromDB}

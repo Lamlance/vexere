@@ -1,5 +1,5 @@
 interface UserDataInput {
-  id: Number,
+  id: number,
   Name: string,
   email?: string | null | undefined,
   phone?: string | null | undefined,
@@ -8,7 +8,7 @@ interface UserData extends UserDataInput {
   createTime: Date
 }
 class UserSessionManager {
-  private users: { [key: string]: UserData };
+  public users: { [key: string]: UserData };
 
   constructor() {
     this.users = {};

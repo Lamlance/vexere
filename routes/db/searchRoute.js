@@ -6,10 +6,10 @@ async function searchRouteFromDB(fromId, toId, page = 0) {
     const route = await prisma.route.findFirst({
         select: {
             id: true,
-            startLoc: {
+            Location_Route_startLocIdToLocation: {
                 select: { name: true }
             },
-            endtLoc: {
+            Location_Route_endLocIdToLocation: {
                 select: { name: true }
             }
         },
@@ -26,27 +26,31 @@ async function searchRouteFromDB(fromId, toId, page = 0) {
             routeDetail: [],
         };
     }
+    const today = new Date();
+    const tommorrow = new Date(today.getTime() + 1 * 8.64e+7);
     const routeDetail = await prisma.routeDetail.findMany({
         take: itemPerPage,
         skip: itemPerPage * page,
         where: {
             AND: [
-                { startTime: { gt: new Date((new Date()).getDate() + 1) } },
+                { startTime: { gt: new Date("05 October 2011 14:48 UTC") } },
                 { remainSeat: { gt: 0 } },
                 { routeId: route.id }
             ]
         },
         select: {
+            id: true,
             startTime: true,
             endTime: true,
             price: true,
             remainSeat: true,
-            bus: {
+            Bus: {
                 select: {
                     type: true,
-                    house: {
+                    BusHouse: {
                         select: {
-                            Name: true
+                            Name: true,
+                            id: true
                         }
                     }
                 }
