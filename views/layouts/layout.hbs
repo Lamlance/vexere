@@ -16,7 +16,7 @@
 
 <body>
   <!--header-->
-  <nav class="navbar navbar-expand-lg bg-light p-3">
+  {{!-- <nav class="navbar navbar-expand-lg bg-light p-3">
     <div class="container-fluid">
       <a href="#" class="brand">
         <img src="/assets/icon_vxr_full.svg" alt="Logo" />
@@ -35,14 +35,48 @@
               <a class="nav-link" aria-current="page" href="#">EN</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Đăng nhập</a>
+              {{#if userName}}
+                <a class="nav-link active" aria-current="page" href="#">{{userName}}</a>
+              {{else}}
+                <a class="nav-link active" aria-current="page" href="#">Đăng nhập</a>
+              {{/if}}
             </li>
           </ul>
         </div>
       </div>
     </div>
-  </nav>
+  </nav> --}}
   <!--/header-->
+  <nav>
+    <div class="container">
+      <div class="nav-logo">
+        <a href="#" class="logo-link">
+          <img src="/assets/icon_vxr_full.svg" alt="Logo" />
+        </a>
+      </div>
+      <div class="nav-links">
+        <ul class="nav-ul">
+            <li class="nav-li-item">
+              <a class="nav-link" aria-current="page" href="#">Thuê xe</a>
+            </li>
+            <li class="nav-li-item">
+              <a class="nav-link" aria-current="page" href="#">Trở thành đối tác</a>
+            </li>
+            <li class="nav-li-item">
+              <a class="nav-link" aria-current="page" href="#">EN</a>
+            </li>
+            <li class="nav-li-item">
+              {{#if userName}}
+                <a class="nav-link active" aria-current="page" href="#">{{userName}}</a>
+              {{else}}
+                <a class="nav-link active" aria-current="page" href="#">Đăng nhập</a>
+              {{/if}}
+            </li>
+          </ul>
+      </div>
+    </div>
+  </nav>
+
 
   {{{body}}}
 
