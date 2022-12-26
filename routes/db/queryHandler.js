@@ -24,6 +24,9 @@ const arrayQueryHandler = (queue) => {
     return empty;
 };
 const singleIntQueryHandler = (queue, defaultValue = 0) => {
+    if (typeof queue === "number") {
+        return queue;
+    }
     const query = Number.parseInt(singleQueryHandler(queue));
     return (isNaN(query)) ? defaultValue : query;
 };

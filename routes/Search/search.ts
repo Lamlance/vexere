@@ -7,14 +7,18 @@ const searchRouteHandler = async (
     page?: string,
     fromId: string,
     toId: string,
-    date: string
+    date: string,
+    busHouse?: string[]
   }, {}>,
   res: Response) => {
 
-  if (!(req.query && req.query.fromId && req.query.toId )) {
-    res.render("search",{});
+  console.log(req.query.busHouse);
+
+  if (!(req.query && req.query.fromId && req.query.toId)) {
+    res.render("search", {});
     return;
   }
+
 
   const page = singleIntQueryHandler(req.query.page, 0);
   const fromId = singleIntQueryHandler(req.query.fromId);
@@ -22,12 +26,13 @@ const searchRouteHandler = async (
 
   const ans = await searchRouteFromDB(fromId, toId, page);
 
-  ans.routeDetail.forEach((detail)=>{
+  ans.routeDetail.forEach((detail) => {
     detail.startTime = detail.startTime.toLocaleString();
     detail.endTime = detail.endTime.toLocaleString();
   })
 
-  res.render("search",ans);
+
+  res.render("search", ans);
 }
 
 export default searchRouteHandler;

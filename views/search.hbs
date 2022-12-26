@@ -5,22 +5,21 @@
 
 <!-- main -->
 <div class="search_result_container">
-  <section class="search_result_filter">
+  <form method="get" accept="/search" class="search_result_filter">
     <!-- Price range -->
     <section>
-      <label style="width: 100%;">
+      <div style="width: 100%;">
         <div id="price-label">Giá vé</div>
 
-        <div class="range-input">
-          <input id="min-price-slider" type="range" class="range-min" min="0" max="2000000" step="1000">
-          <input id="max-price-slider" type="range" class="range-max" min="0" max="2000000" step="1000">
+        <div class="price-range">
+          <label> Giá thấp nhất
+            <input id="min-price-slider" type="number" class="range-min" min="0" max="2000000" step="1000">
+          </label>
+          <label> Giá cao nhất
+            <input id="max-price-slider" type="number" class="range-max" min="0" max="2000000" step="1000">
+          </label>
         </div>
-
-        <div id="price-minmax-label">
-          <span style="text-align: left;">₫0</span>
-          <span style="text-align: right;">₫2000000</span>
-        </div>
-      </label>
+      </div>
     </section>
 
     <!--Seats -->
@@ -41,17 +40,19 @@
       <ul>
         {{#each routeDetail}}
         <li><label>
-            <input type="checkbox" name="busHouse" value="Bảo Yến" />
-            {{bus.house.Name}}
-        </label></li>
+            <input type="checkbox" name="busHouse" value={{Bus.BusHouse.id}} />
+            {{Bus.BusHouse.Name}}
+          </label></li>
         {{/each}}
       </ul>
     </section>
-  </section>
+
+    <input type="submit" value="Apply" />
+  </form>
 
   <section id="search_result_display" class="search_result_display">
     {{#each routeDetail}}
-      {{> searchResult detail=this route=../route }}
+    {{> searchResult detail=this route=../route }}
     {{/each}}
   </section>
 </div>
