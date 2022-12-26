@@ -1,7 +1,7 @@
 #banner {
 	background: url(/assets/leaderboard.png);
 	background-size: cover;
-	height: max(800px, 80vh);
+	height: max(500px, 80vh);
 	display: flex;
 	justify-content: center;
 	align-content: center;
@@ -23,7 +23,7 @@ ul {
 }
 
 ul > li {
-	padding: 0.25rem 0rem;
+	padding: 0.25rem 0.25rem;
 }
 
 ul > li > a {
@@ -45,12 +45,12 @@ ul > li > a {
 	margin-top: 0.5rem;
 	position: absolute;
 	width: 95%;
-	overflow: auto;
+	overflow: hidden;
 	z-index: 100;
 	max-height: 250px;
 	border-radius: 0.5rem;
-	overflow: scroll;
-  display: none;
+	/* overflow: scroll; */
+	display: none;
 }
 .auto_complete_place > ul {
 	border-radius: 0.5rem;
@@ -78,13 +78,11 @@ ul > li > a {
 .search_bar > table > tbody > tr:first-of-type > td {
 	position: relative;
 }
-.search_bar > table > thead > tr> td {
+.search_bar > table > thead > tr > td {
 	max-height: 80px;
 }
 
-
-.vexere_search_btn{
-	background-color: yellow;
+.vexere_search_btn {
+	background-color: rgb(248, 174, 0);
 	height: 100%;
 }
-

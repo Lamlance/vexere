@@ -27,11 +27,19 @@ function main() {
         if (!input || !suggest) {
             return;
         }
+        console.log(input);
         input.addEventListener("focusin", () => {
             suggest.style.display = "block";
         });
-        input.addEventListener("focusout", () => {
-            suggest.style.display = "none";
+        // input.addEventListener("focusout", () => {
+        //   suggest.style.display = "none";
+        // })
+        const liArr = suggest.querySelectorAll("ul li");
+        liArr.forEach((li) => {
+            li.addEventListener("click", () => {
+                input.value = li.innerText;
+                suggest.style.display = "none";
+            });
         });
         input.addEventListener("input", () => {
             console.log(input.value);
