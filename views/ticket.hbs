@@ -15,7 +15,7 @@
             <h6 class="license-plate">Biển số xe</h6>
             <div class="btn-group mt-2 mb-5">
                 <button type="button" class="btn btn-dark rounded">
-                    {{busPlate}}
+                    {{ detail.Bus.plate }}
                 </button>
                 <div class="vl"></div>
                 <button type="button" class="btn btn-warning rounded">
@@ -71,18 +71,16 @@
             <hr />
 
             <h5 class="pick-up-des">Điểm đón</h5>
-            <h6>{{pickUpAddress}}</h6>
+            <h6>{{route.Location_Route_startLocIdToLocation.name}}</h6>
             <p class="text-secondary">{{pickUpAddress}}</p>
-            <a href="#" class="text-primary text-decoration-none">Xem bản đồ</a>
-            <p>Đón lúc: <b>{{pickUpTime}}</b></p>
+            <p>Đón lúc: <b>{{detail.startTime}}</b></p>
 
             <hr />
 
             <h5 class="drop-off-des">Điểm trả</h5>
-            <h6>{{dropOffAddress}}</h6>
+            <h6>{{route.Location_Route_endLocIdToLocation.name}}</h6>
             <p class="text-secondary">{{dropOffAddress}}</p>
-            <a href="#" class="text-primary text-decoration-none">Xem bản đồ</a>
-            <p>Trả lúc: <b>{{dropOffTime}}</b></p>
+            <p>Trả lúc: <b>{{detail.endTime}}</b></p>
 
             <hr />
 
@@ -94,85 +92,61 @@
 
             <a href="#" class="btn btn-danger w-100 mt-2"> Huỷ vé </a>
 
-            <hr />
-
-            <h5 class="other-services">
-                Các dịch vụ khác dành cho bạn
-            </h5>
-
-
-            <div class="card" style="width: 18rem">
-                <img src="/public/assets/thue-xe-may-da-lat-4.jpg" class="card-img-top" alt="Thuê xe máy" />
-                <div class="card-body">
-                    <a href="#" class="h5 card-title text-decoration-none text-black">Thuê xe máy tại Đà Lạt</a>
-                    <h6 class="card-subtitle my-1 text-muted">
-                        Xe máy đời mới, chỉ từ 90k, liên hệ 0918765437
-                    </h6>
-                </div>
-            </div>
-
-            <hr />
-
-            <h5 class="questions">Câu hỏi thường gặp</h5>
-            <a href="#" class="text-primary text-decoration-none">
-                Câu hỏi thường gặp
-            </a>
         </div>
         <div class="col-4 container">
             <div class="row user-information container">
                 <div class="row">
                     <h5>Thông tin chuyến đi</h5>
                     <h6 class="text-secondary">MÃ ĐƠN HÀNG</h6>
-                    <p>{{ticketId}}</p>
+                    <p>{{ ticket.id }}</p>
                 </div>
 
                 <hr />
                 <div class="row">
                     <h6 class="text-secondary">HỌ VÀ TÊN</h6>
-                    <p>{{userName}}</p>
+                    <p>{{ user.name }}</p>
                 </div>
 
                 <hr />
                 <div class="row">
                     <h6 class="text-secondary">SỐ ĐIỆN THOẠI</h6>
-                    <p>{{phone}}</p>
+                    <p>{{ user.phone }}</p>
                 </div>
 
                 <hr />
-                <div class="row">
-                    <h6 class="text-secondary">SỐ CMND/CCCD</h6>
-                    <p>{{citzenId}}</p>
-                </div>
-
-                <hr />
+                
                 <div class="row">
                     <h6 class="text-secondary">EMAIL</h6>
-                    <p>{{email}}</p>
+                    <p>{{ user.email }}</p>
                 </div>
 
                 <hr />
                 <div class="row">
                     <h6 class="text-secondary">NHÀ XE</h6>
-                    <p>{{busHouse}}</p>
+                    <p>{{ detail.Bus.BusHouse.Name }}</p>
                 </div>
 
                 <hr />
                 <div class="row">
                     <h6 class="text-secondary">TUYẾN ĐƯỜNG</h6>
-                    <p>{{route}}</p>
+                    <p>
+                        {{ route.Location_Route_startLocIdToLocation.name }}
+                        -
+                        {{ route.Location_Route_endLocIdToLocation.name }}
+                    </p>
                 </div>
 
                 <hr />
                 <div class="row">
                     <h6 class="text-secondary">LOẠI XE</h6>
-                    <p>{{busType}}</p>
+                    <p>{{ detail.Bus.type }}</p>
                 </div>
 
-                <hr />
+                {{!-- <hr />
                 <div class="row">
                     <h6 class="text-secondary">MÃ GHẾ</h6>
                     <p>{{seat}}</p>
-                </div>
+                </div> --}}
             </div>
             <div class="row payment-information container">
                 <h5>Thông tin giao dịch</h5>

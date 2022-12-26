@@ -54,7 +54,7 @@ app.use(express.static(__dirname + "/public"));
 app.engine("hbs", handlebars.engine);
 app.set("view engine", "hbs");
 app.get("/", indexHandler);
-app.get("/booking_detail", bookingDetailHandler);
+app.get("/ticket", bookingDetailHandler);
 app.get("/search", searchRouteHandler);
 app.get("/api/test/generate/locations", locationGenerate);
 app.get("/api/test/generate/routes", routeGenerate);

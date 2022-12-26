@@ -1,90 +1,88 @@
 #banner {
-    background: url(/assets/leaderboard.png);
-    background-size: cover;
-    height: max(800px,80vh);
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    flex-direction: column;
+	background: url(/assets/leaderboard.png);
+	background-size: cover;
+	height: max(500px, 80vh);
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	flex-direction: column;
 }
 
 .other-links {
-    background-color: lightgrey;
+	background-color: lightgrey;
 }
 
-*{
-    margin: 0;
-    padding: 0;
+* {
+	margin: 0;
+	padding: 0;
 }
 
 ul {
-    list-style-type: none;
-    padding-left: 0;
+	list-style-type: none;
+	padding-left: 0;
 }
 
-ul>li {
-    padding: 0.25rem 0rem;
+ul > li {
+	padding: 0.25rem 0.25rem;
 }
 
-ul>li>a {
-    text-decoration: none;
-}
-/* 
-.item:hover,
-.item:focus {
-    background-color: #fafafa;
-    color: #D1822B;
+ul > li > a {
+	text-decoration: none;
 }
 
-.disabled {
-    pointer-events: none;
-    opacity: 0.3;
-} */
-
-
-.search_bar > table > thead div{
-    width: 100%;
+.search_bar > table > thead div {
+	width: 100%;
 }
 .search_bar {
-    display: grid;
-    place-items: center;
-    width: 100%;
+	display: grid;
+	place-items: center;
+	width: 100%;
 }
-.search_bar > table{
-    width: 100%;
+.search_bar > table {
+	width: 100%;
 }
-.auto_complete_place{
-    margin-top: 0.5rem;
-    position: absolute;
-    width: 95%;
-    overflow:auto;
-    z-index: 100;
-    max-height: 250px;
-    border-radius: 0.5rem;
+.auto_complete_place {
+	margin-top: 0.5rem;
+	position: absolute;
+	width: 95%;
+	overflow: hidden;
+	z-index: 100;
+	max-height: 250px;
+	border-radius: 0.5rem;
+	/* overflow: scroll; */
+	display: none;
 }
-.auto_complete_place > ul{
-    border-radius: 0.5rem;
+.auto_complete_place > ul {
+	border-radius: 0.5rem;
 }
-.auto_complete_place > ul > li{
-    padding-inline: 0.5rem;
-    cursor: pointer;
+.auto_complete_place > ul > li {
+	padding-inline: 0.5rem;
+	cursor: pointer;
 }
-.auto_complete_place > ul > li{
-    padding-inline: 0.5rem;
-    cursor: pointer;
+.auto_complete_place > ul > li {
+	padding-inline: 0.5rem;
+	cursor: pointer;
 }
-.auto_complete_place > ul > li:hover{
-    background-image: linear-gradient(rgb(0 0 0/40%) 0 0);
+.auto_complete_place > ul > li:hover {
+	background-image: linear-gradient(rgb(0 0 0/40%) 0 0);
 }
-.auto_complete_place > ul > li:first-of-type{
-    border-radius:0.5rem 0.5rem 0 0;
+.auto_complete_place > ul > li:first-of-type {
+	border-radius: 0.5rem 0.5rem 0 0;
 }
-.auto_complete_place > ul > li:last-of-type{
-    border-radius:0 0 0.5rem 0.5rem;
+.auto_complete_place > ul > li:last-of-type {
+	border-radius: 0 0 0.5rem 0.5rem;
 }
-.auto_complete_place > ul{
-    background-color: #fafafa;
+.auto_complete_place > ul {
+	background-color: #fafafa;
 }
-.search_bar > table > tbody > tr:first-of-type > td{
-    position: relative;
+.search_bar > table > tbody > tr:first-of-type > td {
+	position: relative;
+}
+.search_bar > table > thead > tr > td {
+	max-height: 80px;
+}
+
+.vexere_search_btn {
+	background-color: rgb(248, 174, 0);
+	height: 100%;
 }
