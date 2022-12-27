@@ -80,7 +80,7 @@ app.get("/search", searchRouteHandler);
 app.get("/userDashboard", userDashboardHandler);
 
 app.get("/user/ticket",bookingDetailHandler);
-app.post("/api/ticket",bodyPraseObj,createTicket)
+app.post("/api/ticket",bodyPraseObj,createTicket);
 app.get("/search",searchRouteHandler);
 
 app.get("/api/test/generate/locations", locationGenerate);

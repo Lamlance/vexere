@@ -1,6 +1,16 @@
 import { prisma, sessionManager } from "../../server";
 import { getUserFromDB } from "../db/checkUser";
 import { singleIntQueryHandler } from "../db/queryHandler";
+import dotenv from "dotenv";
+import { createHmac } from "crypto";
+import fetch from "node-fetch";
+dotenv.config();
+const MOMO_PARTNER_CODE = process.env.MOMO_PARTNER_CODE;
+const MOMO_ACCESS_KEY = process.env.MOMO_ACCESS_KEY;
+const MOMO_SECRET_KEY = process.env.MOMO_SECRET_KEY;
+console.log(MOMO_PARTNER_CODE);
+console.log(MOMO_ACCESS_KEY);
+console.log(MOMO_SECRET_KEY);
 const bookingDetailHandler = async (req, res) => {
     if (!req.oidc.isAuthenticated() || !req.oidc.user || !req.oidc.user.sub) {
         res.redirect("/login");
@@ -23,6 +33,7 @@ const bookingDetailHandler = async (req, res) => {
             AND: [{ id: ticketId }, { userId: userData.id }]
         }
     });
+    console.log(ticket);
     if (!ticket) {
         res.redirect("/");
         return;
@@ -60,13 +71,72 @@ const bookingDetailHandler = async (req, res) => {
             }
         }
     });
-    console.log(ticket);
+    let transactionStatus = "Chưa thanh toán";
+    let payUrl = "";
+    if (MOMO_ACCESS_KEY !== undefined && MOMO_PARTNER_CODE !== undefined && MOMO_SECRET_KEY !== undefined) {
+        const id = `${ticket.id}-${ticket.userId}`;
+        const newPayment = {
+            amount: 50000,
+            payment_info: `Thanh toán vé xe từ ${route?.Location_Route_startLocIdToLocation} đến ${route?.Location_Route_endLocIdToLocation}`
+        };
+        const data = {
+            partnerCode: MOMO_PARTNER_CODE,
+            requestId: id,
+            amount: newPayment.amount,
+            orderId: id,
+            orderInfo: newPayment.payment_info,
+            redirectUrl: `http://localhost:8000/user/ticket?ticketId=${ticket.id}`,
+            ipnUrl: `http://localhost:8000/user/ticket?ticketId=${ticket.id}`,
+            requestType: "captureWallet",
+            extraData: "",
+            lang: "vi",
+            signature: "",
+        };
+        let message = `accessKey=${MOMO_ACCESS_KEY}&orderId=${data.orderId}&partnerCode=${data.partnerCode}&requestId=${data.requestId}`;
+        data.signature = createHmac("sha256", MOMO_SECRET_KEY)
+            .update(message)
+            .digest("hex");
+        fetch("https://test-payment.momo.vn/v2/gateway/api/query", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        }).then(async (result) => {
+            let json = await result.json();
+            if (json.resultCode == 0) {
+                transactionStatus = "Đã thanh toán";
+            }
+        });
+        if (transactionStatus === "Chưa thanh toán") {
+            message = `accessKey=${MOMO_ACCESS_KEY}&amount=${data.amount}&extraData=${data.extraData}&ipnUrl=${data.ipnUrl}&orderId=${data.orderId}&orderInfo=${data.orderInfo}&partnerCode=${data.partnerCode}&redirectUrl=${data.redirectUrl}&requestId=${data.requestId}&requestType=${data.requestType}`;
+            data.signature = createHmac("sha256", MOMO_SECRET_KEY)
+                .update(message)
+                .digest("hex");
+            fetch("https://test-payment.momo.vn/v2/gateway/api/create", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            }).then(async (result) => {
+                const json = await result.json();
+                console.log(json);
+                payUrl = json.payUrl;
+                // if (json.payUrl) {
+                // }
+            });
+        }
+    }
+    console.log(transactionStatus);
+    console.log(payUrl);
     res.locals.title = "Thông tin thanh toán";
-    res.locals.cssPath = "/css/DetailBooking.css";
     res.render("ticket", {
         ticket: ticket,
         detail: routeDetail,
         route: route,
+        transactionStatus: transactionStatus,
+        payUrl: payUrl
     });
 };
 export default bookingDetailHandler;
