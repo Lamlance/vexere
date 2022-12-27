@@ -3,7 +3,8 @@ import dotenv from "dotenv";
 import { ExpressHandlebars } from "express-handlebars";
 
 import indexHandler from "./routes/Index/index";
-import bookingDetailHandler from "./routes/BookingDetail/bookingDetail";
+// import bookingDetailHandler,{PaymentLogic} from "./routes/Ticket/TicketAn/TicketAn";
+import ticketDetailHandler from "./routes/BookingDetail/bookingDetail";
 
 import * as url from "url";
 import { PrismaClient } from "@prisma/client";
@@ -75,11 +76,13 @@ app.engine("hbs", handlebars.engine);
 app.set("view engine", "hbs");
 
 app.get("/", indexHandler);
-app.get("/booking_detail", bookingDetailHandler);
+// app.get("/booking_detail", bookingDetailHandler);
+// app.get("/ticket/pay",bookingDetailHandler,PaymentLogic);
+
 app.get("/search", searchRouteHandler);
 app.get("/userDashboard", userDashboardHandler);
 
-app.get("/user/ticket",bookingDetailHandler);
+app.get("/user/ticket",ticketDetailHandler);
 app.post("/api/ticket",bodyPraseObj,createTicket)
 app.get("/search",searchRouteHandler);
 
