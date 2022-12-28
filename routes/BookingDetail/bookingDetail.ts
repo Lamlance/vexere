@@ -147,7 +147,6 @@ const bookingDetailHandler = async (req: Request<
           body: JSON.stringify(data),
         }).then(async (result) => {
           const json = await result.json();
-          console.log(json);
           payUrl = json.payUrl;
 
           res.locals.title = "Thông tin thanh toán";
@@ -165,12 +164,11 @@ const bookingDetailHandler = async (req: Request<
 }
 
 export const bookingDetailCallbackHandler = async (req: Request, res: Response) => {
-  console.log(req.query);
+  let ticketId = parseInt(req.query.extraData);
 
   if (req.query.resultCode == 0) {
     // cập nhật trong database
-    let transactionStatus = "Thanh toán thành công";
-    let ticketId = parseInt(req.query.extraData);
+    let transactionStatus = "Thanh toán thành công!";
     const updateTicket = await prisma.ticket.update({
       where: {
         id: ticketId,
@@ -182,16 +180,18 @@ export const bookingDetailCallbackHandler = async (req: Request, res: Response) 
     res.locals.title = "Thông tin thanh toán";
 
     // Render lại trong trang thanh toán thành công
-    res.render("ticket", {
+    res.render("paymentStatus", {
       transactionStatus: transactionStatus,
+      ticketId: ticketId,
     });
   } else {
-    let transactionStatus = "Thanh toán thất bại"
+    let transactionStatus = "Thanh toán thất bại! Hãy thử lại."
     res.locals.title = "Thông tin thanh toán";
 
     // Render lại trong trang thanh toán thất bại
-    res.render("ticket", {
+    res.render("paymentStatus", {
       transactionStatus: transactionStatus,
+      ticketId: ticketId,
     });
   }
 }
