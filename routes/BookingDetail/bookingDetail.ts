@@ -3,7 +3,7 @@ import { prisma, sessionManager } from "../../server";
 import { getUserFromDB } from "../db/checkUser";
 import { singleIntQueryHandler } from "../db/queryHandler";
 import dotenv from "dotenv";
-import { createHmac } from "crypto";
+import { createHmac, randomUUID } from "crypto";
 import fetch from "node-fetch";
 
 dotenv.config();
@@ -11,10 +11,6 @@ dotenv.config();
 const MOMO_PARTNER_CODE: String | undefined = process.env.MOMO_PARTNER_CODE;
 const MOMO_ACCESS_KEY: String | undefined = process.env.MOMO_ACCESS_KEY;
 const MOMO_SECRET_KEY: String | undefined = process.env.MOMO_SECRET_KEY;
-
-console.log(MOMO_PARTNER_CODE);
-console.log(MOMO_ACCESS_KEY);
-console.log(MOMO_SECRET_KEY);
 
 
 
@@ -89,90 +85,115 @@ const bookingDetailHandler = async (req: Request<
         select: { name: true }
       }
     }
-  })
+  });
 
 
-  let transactionStatus = "Chưa thanh toán";
-  let payUrl = "";
+  // Get status
+  const ticketStatus = ticket.status;
+
+
+  let transactionStatus = ticketStatus === "WAITING" ? "Chưa thanh toán" : "Đã thanh toán";
 
   if (MOMO_ACCESS_KEY !== undefined && MOMO_PARTNER_CODE !== undefined && MOMO_SECRET_KEY !== undefined) {
-
-    const id = `${ticket.id}-${ticket.userId}`;
-
-    const newPayment = {
-      amount: 50000,
-      payment_info: `Thanh toán vé xe từ ${route?.Location_Route_startLocIdToLocation} đến ${route?.Location_Route_endLocIdToLocation}`
-    }
-
-    const data = {
-      partnerCode: MOMO_PARTNER_CODE,
-      requestId: id,
-      amount: newPayment.amount,
-      orderId: id,
-      orderInfo: newPayment.payment_info,
-      redirectUrl: `http://localhost:8000/user/ticket?ticketId=${ticket.id}`,
-      ipnUrl: `http://localhost:8000/user/ticket?ticketId=${ticket.id}`,
-      requestType: "captureWallet",
-      extraData: "",
-      lang: "vi",
-      signature: "",
-    };
-
-    let message = `accessKey=${MOMO_ACCESS_KEY}&orderId=${data.orderId}&partnerCode=${data.partnerCode}&requestId=${data.requestId}`;
-    data.signature = createHmac("sha256", MOMO_SECRET_KEY)
-      .update(message)
-      .digest("hex");
+    const id = `${ticket.id}-${ticket.userId}` + randomUUID();
 
 
-    fetch("https://test-payment.momo.vn/v2/gateway/api/query", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    }).then(async (result) => {
-      let json = await result.json();
-      if (json.resultCode == 0) {
-        transactionStatus = "Đã thanh toán";
-      }
-    });
+    if (transactionStatus == "Đã thanh toán") {
+      res.locals.title = "Thông tin thanh toán";
 
-    if (transactionStatus === "Chưa thanh toán") {
-      message = `accessKey=${MOMO_ACCESS_KEY}&amount=${data.amount}&extraData=${data.extraData}&ipnUrl=${data.ipnUrl}&orderId=${data.orderId}&orderInfo=${data.orderInfo}&partnerCode=${data.partnerCode}&redirectUrl=${data.redirectUrl}&requestId=${data.requestId}&requestType=${data.requestType}`;
-		  data.signature = createHmac("sha256", MOMO_SECRET_KEY)
-			.update(message)
-			.digest("hex");
-
-      fetch("https://test-payment.momo.vn/v2/gateway/api/create", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      }).then(async (result) => {
-        const json = await result.json();
-        console.log(json);
-        payUrl = json.payUrl;
-        // if (json.payUrl) {
-        // }
+      res.render("ticket", {
+        ticket: ticket,
+        detail: routeDetail,
+        route: route,
+        transactionStatus: transactionStatus,
       });
+    } else {
+      let payUrl = "";
+      const newPayment = {
+        amount: 50000,
+        payment_info: `Thanh toán vé xe`
+      }
+
+      const data = {
+        partnerCode: MOMO_PARTNER_CODE,
+        requestId: id,
+        amount: newPayment.amount,
+        orderId: id,
+        orderInfo: newPayment.payment_info,
+        redirectUrl: `http://localhost:8000/user/ticket/callback`,
+        ipnUrl: `http://localhost:8000/user/ticket?ticketId=${ticket.id}`,
+        requestType: "captureWallet",
+        extraData: ticket.id,
+        lang: "vi",
+        signature: "",
+      };
+
+      let message = `accessKey=${MOMO_ACCESS_KEY}&orderId=${data.orderId}&partnerCode=${data.partnerCode}&requestId=${data.requestId}`;
+      data.signature = createHmac("sha256", MOMO_SECRET_KEY)
+        .update(message)
+        .digest("hex");
+
+      if (transactionStatus === "Chưa thanh toán") {
+        let message = `accessKey=${MOMO_ACCESS_KEY}&amount=${data.amount}&extraData=${data.extraData}&ipnUrl=${data.ipnUrl}&orderId=${data.orderId}&orderInfo=${data.orderInfo}&partnerCode=${data.partnerCode}&redirectUrl=${data.redirectUrl}&requestId=${data.requestId}&requestType=${data.requestType}`;
+        data.signature = createHmac("sha256", MOMO_SECRET_KEY)
+          .update(message)
+          .digest("hex");
+
+        fetch("https://test-payment.momo.vn/v2/gateway/api/create", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }).then(async (result) => {
+          const json = await result.json();
+          console.log(json);
+          payUrl = json.payUrl;
+
+          res.locals.title = "Thông tin thanh toán";
+          res.render("ticket", {
+            ticket: ticket,
+            detail: routeDetail,
+            route: route,
+            transactionStatus: transactionStatus,
+            payUrl: payUrl,
+          });
+        });
+      }
     }
-
   }
+}
 
-  console.log(transactionStatus);
-  console.log(payUrl);
+export const bookingDetailCallbackHandler = async (req: Request, res: Response) => {
+  console.log(req.query);
 
-  res.locals.title = "Thông tin thanh toán";
-  
+  if (req.query.resultCode == 0) {
+    // cập nhật trong database
+    let transactionStatus = "Thanh toán thành công";
+    let ticketId = parseInt(req.query.extraData);
+    const updateTicket = await prisma.ticket.update({
+      where: {
+        id: ticketId,
+      },
+      data: {
+        status: "PAID",
+      },
+    })
+    res.locals.title = "Thông tin thanh toán";
 
-  res.render("ticket", {
-    ticket: ticket,
-    detail: routeDetail,
-    route: route,
-    transactionStatus: transactionStatus,
-    payUrl: payUrl
-  });
+    // Render lại trong trang thanh toán thành công
+    res.render("ticket", {
+      transactionStatus: transactionStatus,
+    });
+  } else {
+    let transactionStatus = "Thanh toán thất bại"
+    res.locals.title = "Thông tin thanh toán";
+
+    // Render lại trong trang thanh toán thất bại
+    res.render("ticket", {
+      transactionStatus: transactionStatus,
+    });
+  }
 }
 
 export default bookingDetailHandler;

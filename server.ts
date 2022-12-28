@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import { ExpressHandlebars } from "express-handlebars";
 
 import indexHandler from "./routes/Index/index";
+import {bookingDetailCallbackHandler} from "./routes/BookingDetail/bookingDetail";
 import bookingDetailHandler from "./routes/BookingDetail/bookingDetail";
 
 import * as url from "url";
@@ -79,9 +80,10 @@ app.get("/booking_detail", bookingDetailHandler);
 app.get("/search", searchRouteHandler);
 app.get("/userDashboard", userDashboardHandler);
 
-app.get("/user/ticket",bookingDetailHandler);
-app.post("/api/ticket",bodyPraseObj,createTicket);
-app.get("/search",searchRouteHandler);
+app.get("/user/ticket", bookingDetailHandler);
+app.get("/user/ticket/callback", bookingDetailCallbackHandler);
+app.post("/api/ticket", bodyPraseObj, createTicket);
+app.get("/search", searchRouteHandler);
 
 app.get("/api/test/generate/locations", locationGenerate);
 app.get("/api/test/generate/routes", routeGenerate);
