@@ -66,6 +66,7 @@ model Ticket {
   routeDetailId Int
   status        TicketStatus @default(WAITING)
   userId        Int
+  isAdmin Boolean @default(false)
   Rating        Rating?
   RouteDetail   RouteDetail  @relation(fields: [routeDetailId], references: [id])
   User          User        @relation(fields: [userId], references: [id])

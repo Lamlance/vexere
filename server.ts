@@ -22,7 +22,7 @@ import checkUser from "./routes/db/checkUser";
 import searchRouteAPI from "./routes/db/searchRoute";
 import searchRouteHandler from "./routes/Search/search";
 import userDashboardHandler from "./routes/UserDashboard/UserDashboard";
-import createTicket from "./routes/Ticket/ticket";
+import ticketHanlder from "./routes/Ticket/ticket";
 import bodyParser from "body-parser";
 
 const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
@@ -83,7 +83,7 @@ app.get("/search", searchRouteHandler);
 app.get("/userDashboard", userDashboardHandler);
 
 app.get("/user/ticket",ticketDetailHandler);
-app.post("/api/ticket",bodyPraseObj,createTicket)
+app.post("/api/ticket",bodyPraseObj,ticketHanlder)
 app.get("/search",searchRouteHandler);
 
 app.get("/api/test/generate/locations", locationGenerate);
