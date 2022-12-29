@@ -1,0 +1,16 @@
+#admin-wrapper{
+  display: grid;
+  grid-template-columns: 0.4fr 1.6fr;
+  background-color: azure;
+  height: 100vh;
+}
+#admin-tab-select{
+  background-color: green;
+}
+#admin-tab-display{
+  background-color: red;
+}
+.tab-display{
+  display: grid;
+  grid-template-columns: 0.5fr 1.5fr;
+}

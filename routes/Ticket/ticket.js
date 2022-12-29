@@ -1,7 +1,7 @@
 import { prisma, sessionManager } from "../../server";
 import { getUserFromDB } from "../db/checkUser";
 import { singleIntQueryHandler } from "../db/queryHandler";
-async function createTicket(req, res) {
+async function ticketHanlder(req, res) {
     if (!req.oidc.user || !req.oidc.isAuthenticated()) {
         console.log("User haven't logged in");
         res.redirect("/");
@@ -17,36 +17,11 @@ async function createTicket(req, res) {
             res.status(303).redirect(`/user/ticket?ticketId=${ticketData.data.id}`);
             return;
         }
-        default:
-            break;
+        case "PUT": {
+            // const updatedTicket = await PUT(req);
+        }
     }
-}
-async function PUT(req) {
-    if (!req.oidc.user || !req.oidc.isAuthenticated()) {
-        console.log("User haven't logged in");
-        return {
-            status: 401,
-            data: null
-        };
-    }
-    if (!req.body) {
-        console.log("Req body", req.body);
-        return {
-            status: 404,
-            data: null
-        };
-    }
-    const detailId = singleIntQueryHandler(req.body.detailId, -1);
-    console.log(req.body.detailId);
-    if (detailId < 0) {
-        console.log("Failed Id");
-        return {
-            status: 400,
-            data: null
-        };
-    }
-    await prisma.$connect();
-    const userData = (sessionManager.users[req.oidc.user.sid] || (await getUserFromDB(req.oidc.user.sub, req.oidc.user.email)));
+    res.redirect("/");
 }
 async function POST(req) {
     if (!req.oidc.user || !req.oidc.isAuthenticated()) {
@@ -97,4 +72,4 @@ async function POST(req) {
         data: ticketData
     };
 }
-export default createTicket;
+export default ticketHanlder;

@@ -25,6 +25,9 @@ import userDashboardHandler from "./routes/UserDashboard/UserDashboard";
 import ticketHanlder from "./routes/Ticket/ticket";
 import bodyParser from "body-parser";
 
+import adminDashBoard from "./routes/Admin/admin";
+import adminTicketAPI from "./routes/Admin/ticket";
+
 const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 const sessionManager = new UserSessionManager();
 export { sessionManager };
@@ -101,6 +104,9 @@ app.get("/api/test/profile", (req, res) => {
     userDB: null,
   });
 });
+
+app.get("/admin",adminDashBoard);
+app.use("/admin/api/ticket",adminTicketAPI);
 
 app.listen(port, () => {
   console.log(`App listening on http://localhost:${port}`);

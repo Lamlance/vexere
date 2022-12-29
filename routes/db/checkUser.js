@@ -36,12 +36,7 @@ async function checkUser(req, res, next) {
         // console.log(userSaved);
         if (userSaved) {
             if (userSaved.uuid && userSaved.uuid.includes(req.oidc.user.sub)) {
-                sessionManager.addUser(req.oidc.user.sid, {
-                    id: userSaved.id,
-                    Name: userSaved.Name,
-                    email: userSaved.email,
-                    phone: userSaved.phone
-                });
+                sessionManager.addUser(req.oidc.user.sid, userSaved);
                 next();
                 return;
             }
@@ -52,12 +47,7 @@ async function checkUser(req, res, next) {
                 },
                 data: userSaved
             });
-            sessionManager.addUser(req.oidc.user.sid, {
-                id: update.id,
-                Name: update.Name,
-                email: update.email,
-                phone: update.phone
-            });
+            sessionManager.addUser(req.oidc.user.sid, update);
             next();
             return;
         }
@@ -70,12 +60,7 @@ async function checkUser(req, res, next) {
             data: newUser
         });
         // console.log("NewUser",newlyCreatedUser);
-        sessionManager.addUser(req.oidc.user.sid, {
-            id: newlyCreatedUser.id,
-            Name: newlyCreatedUser.Name,
-            email: newlyCreatedUser.email,
-            phone: newlyCreatedUser.phone
-        });
+        sessionManager.addUser(req.oidc.user.sid, newlyCreatedUser);
     }
     next();
 }
