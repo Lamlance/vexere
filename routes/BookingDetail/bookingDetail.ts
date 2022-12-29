@@ -91,7 +91,6 @@ const bookingDetailHandler = async (req: Request<
   // Get status
   const ticketStatus = ticket.status;
 
-
   let transactionStatus = ticketStatus === "WAITING" ? "Chưa thanh toán" : "Đã thanh toán";
 
   if (MOMO_ACCESS_KEY !== undefined && MOMO_PARTNER_CODE !== undefined && MOMO_SECRET_KEY !== undefined) {

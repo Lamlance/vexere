@@ -118,7 +118,6 @@ const bookingDetailHandler = async (req, res) => {
                     body: JSON.stringify(data),
                 }).then(async (result) => {
                     const json = await result.json();
-                    console.log(json);
                     payUrl = json.payUrl;
                     res.locals.title = "Thông tin thanh toán";
                     res.render("ticket", {
@@ -134,7 +133,6 @@ const bookingDetailHandler = async (req, res) => {
     }
 };
 export const bookingDetailCallbackHandler = async (req, res) => {
-    console.log(req.query);
     let ticketId = parseInt(req.query.extraData);
     if (req.query.resultCode == 0) {
         // cập nhật trong database

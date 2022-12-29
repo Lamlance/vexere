@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import methodOverride from "method-override";
 import { ExpressHandlebars } from "express-handlebars";
 import indexHandler from "./routes/Index/index";
 import { bookingDetailCallbackHandler } from "./routes/BookingDetail/bookingDetail";
@@ -20,11 +21,14 @@ import searchRouteHandler from "./routes/Search/search";
 import userDashboardHandler from "./routes/UserDashboard/UserDashboard";
 import createTicket from "./routes/Ticket/ticket";
 import bodyParser from "body-parser";
+import { adminAddRouteDetailHandler, adminEditRouteDetailHandler, addRouteDetailHandler, editRouteDetailHandler, deleteRouteDetailHandler } from "./routes/RouteDetailAdmin/routeDetailAdmin";
+import adminRouteDetailHandler from "./routes/RouteDetailAdmin/routeDetailAdmin";
 const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 const sessionManager = new UserSessionManager();
 export { sessionManager };
 dotenv.config();
 const app = express();
+app.use(methodOverride('_method'));
 const handlebars = new ExpressHandlebars({
     layoutsDir: `${__dirname}/views/layouts`,
     partialsDir: `${__dirname}/views/partials`,
@@ -68,6 +72,12 @@ app.get("/user/ticket", bookingDetailHandler);
 app.get("/user/ticket/callback", bookingDetailCallbackHandler);
 app.post("/api/ticket", bodyPraseObj, createTicket);
 app.get("/search", searchRouteHandler);
+app.get("/admin/route_detail", adminRouteDetailHandler);
+app.get("/admin/route_detail/add", adminAddRouteDetailHandler);
+app.get("/admin/route_detail/edit/:id", adminEditRouteDetailHandler); // pass query route detail id
+app.post("/api/route_detail/add", addRouteDetailHandler);
+app.put("/api/route_detail/edit/:id", editRouteDetailHandler);
+app.delete("/api/route_detail/delete/:id", deleteRouteDetailHandler);
 app.get("/api/test/generate/locations", locationGenerate);
 app.get("/api/test/generate/routes", routeGenerate);
 app.get("/api/test/generate/bushouses", busHouseGenerate);
