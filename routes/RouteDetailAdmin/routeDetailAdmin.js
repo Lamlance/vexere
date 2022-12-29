@@ -67,7 +67,6 @@ export const adminEditRouteDetailHandler = async (req, res) => {
         res.redirect("/admin/route_detail");
         return;
     }
-    console.log(routeDetailData.startTime.toISOString().slice(0, 16));
     res.locals.title = "Chỉnh sửa tuyến xe";
     res.render("RouteDetailAdmin/routeDetailUpdate", {
         id: routeDetailData.id,
@@ -80,27 +79,37 @@ export const adminEditRouteDetailHandler = async (req, res) => {
     });
 };
 export const addRouteDetailHandler = async (req, res) => {
+    console.log(req.body.startTime);
+    console.log(req.body.endTime);
     const routeDetailData = {
-        busId: singleIntQueryHandler(req.query.busId),
-        price: singleIntQueryHandler(req.query.price),
-        startTime: new Date(req.query.startTime),
-        endTime: new Date(req.query.endTime),
-        remainSeat: singleIntQueryHandler(req.query.remainSeat),
-        routeId: singleIntQueryHandler(req.query.routeId)
+        busId: singleIntQueryHandler(req.body.busId),
+        price: singleIntQueryHandler(req.body.price),
+        startTime: new Date(req.body.startTime),
+        endTime: new Date(req.body.endTime),
+        remainSeat: singleIntQueryHandler(req.body.remainSeat),
+        routeId: singleIntQueryHandler(req.body.routeId)
     };
+    console.log(routeDetailData);
     const newRouteDetail = await prisma.routeDetail.create({
-        data: routeDetailData,
+        data: {
+            busId: routeDetailData.busId,
+            price: routeDetailData.price,
+            startTime: routeDetailData.startTime,
+            endTime: routeDetailData.endTime,
+            remainSeat: routeDetailData.remainSeat,
+            routeId: routeDetailData.routeId
+        },
     });
     res.redirect("/admin/route_detail");
 };
 export const editRouteDetailHandler = async (req, res) => {
     const routeDetailData = {
-        busId: singleIntQueryHandler(req.query.busId),
-        price: singleIntQueryHandler(req.query.price),
-        startTime: new Date(req.query.startTime),
-        endTime: new Date(req.query.endTime),
-        remainSeat: singleIntQueryHandler(req.query.remainSeat),
-        routeId: singleIntQueryHandler(req.query.routeId)
+        busId: singleIntQueryHandler(req.body.busId),
+        price: singleIntQueryHandler(req.body.price),
+        startTime: new Date(req.body.startTime),
+        endTime: new Date(req.body.endTime),
+        remainSeat: singleIntQueryHandler(req.body.remainSeat),
+        routeId: singleIntQueryHandler(req.body.routeId)
     };
     const newRouteDetail = await prisma.routeDetail.update({
         where: {
