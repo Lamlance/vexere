@@ -1,31 +1,22 @@
-function main(){
+
+function mainAdmin() {
   const selectUL = document.getElementById("admin-tab-select");
   const displayUL = document.getElementById("admin-tab-display");
-  if(!selectUL || ! displayUL){
+  if (!selectUL || !displayUL) {
     return;
   }
 
-  const selectTabs = <NodeListOf<HTMLLIElement>> selectUL.querySelectorAll("li");
-  const displayTab = <NodeListOf<HTMLLIElement>> displayUL.querySelectorAll(".js-tab-display");
+  const selectTabs = <NodeListOf<HTMLLIElement>>selectUL.querySelectorAll("li");
+  const displayTab = <NodeListOf<HTMLLIElement>>displayUL.querySelectorAll(".js-tab-display");
 
-  selectTabs.forEach((select,selectId)=>{
-    select.addEventListener("click",()=>{
-      displayTab.forEach((display,displayId)=>{
+  selectTabs.forEach((select, selectId) => {
+    select.addEventListener("click", () => {
+      displayTab.forEach((display, displayId) => {
         display.style.display = (selectId === displayId) ? "block" : "none"
       })
     })
   })
+
 }
 
-async function fetchTicket(){
-  console.log("Fetching ticket...")
-  const fetchData = await fetch("/admin/api/ticket");
-  try {
-    const tickets = await fetchData.json();
-    console.log(tickets);
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-main();
+mainAdmin();

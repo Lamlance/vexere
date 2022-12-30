@@ -2,61 +2,61 @@ import { prisma } from '../../../server';
 const today = new Date();
 const routeDetailData = [
     {
-        "id": 1, "remainSeat": 19, "routeId": 8, "busId": 4,
+        "remainSeat": 19, "routeId": 8, "busId": 4,
         startTime: new Date(today.getTime() + 3 * 8.64e+7),
         endTime: new Date(today.getTime() + 5 * 8.64e+7),
         price: 0
     },
     {
-        "id": 2, "remainSeat": 18, "routeId": 5, "busId": 1,
+        "remainSeat": 18, "routeId": 5, "busId": 1,
         startTime: new Date(today.getTime() + 3 * 8.64e+7),
         endTime: new Date(today.getTime() + 5 * 8.64e+7),
         price: 0
     },
     {
-        "id": 3, "remainSeat": 15, "routeId": 3, "busId": 6,
+        "remainSeat": 15, "routeId": 3, "busId": 6,
         startTime: new Date(today.getTime() + 3 * 8.64e+7),
         endTime: new Date(today.getTime() + 5 * 8.64e+7),
         price: 0
     },
     {
-        "id": 4, "remainSeat": 40, "routeId": 4, "busId": 8,
+        "remainSeat": 40, "routeId": 4, "busId": 8,
         startTime: new Date(today.getTime() + 3 * 8.64e+7),
         endTime: new Date(today.getTime() + 5 * 8.64e+7),
         price: 0
     },
     {
-        "id": 5, "remainSeat": 33, "routeId": 2, "busId": 8,
+        "remainSeat": 33, "routeId": 2, "busId": 8,
         startTime: new Date(today.getTime() + 3 * 8.64e+7),
         endTime: new Date(today.getTime() + 5 * 8.64e+7),
         price: 0
     },
     {
-        "id": 6, "remainSeat": 19, "routeId": 7, "busId": 2,
+        "remainSeat": 19, "routeId": 7, "busId": 2,
         startTime: new Date(today.getTime() + 3 * 8.64e+7),
         endTime: new Date(today.getTime() + 5 * 8.64e+7),
         price: 0
     },
     {
-        "id": 7, "remainSeat": 38, "routeId": 5, "busId": 3,
+        "remainSeat": 38, "routeId": 5, "busId": 3,
         startTime: new Date(today.getTime() + 3 * 8.64e+7),
         endTime: new Date(today.getTime() + 5 * 8.64e+7),
         price: 0
     },
     {
-        "id": 8, "remainSeat": 26, "routeId": 3, "busId": 5,
+        "remainSeat": 26, "routeId": 3, "busId": 5,
         startTime: new Date(today.getTime() + 3 * 8.64e+7),
         endTime: new Date(today.getTime() + 5 * 8.64e+7),
         price: 0
     },
     {
-        "id": 9, "remainSeat": 40, "routeId": 1, "busId": 3,
+        "remainSeat": 40, "routeId": 1, "busId": 3,
         startTime: new Date(today.getTime() + 3 * 8.64e+7),
         endTime: new Date(today.getTime() + 5 * 8.64e+7),
         price: 0
     },
     {
-        "id": 10, "remainSeat": 17, "routeId": 7, "busId": 7,
+        "remainSeat": 17, "routeId": 7, "busId": 7,
         startTime: new Date(today.getTime() + 3 * 8.64e+7),
         endTime: new Date(today.getTime() + 5 * 8.64e+7),
         price: 0

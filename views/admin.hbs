@@ -1,7 +1,10 @@
 <link rel="stylesheet" href="/css/global.css" />
 <link rel="stylesheet" href="/css/Admin.css" />
 <link rel="stylesheet" href="/css/index.css" />
-<script src="/js/Admin/Admin.js" defer></script>
+
+<script type="module" src="/js/Admin/Admin.js" defer></script>
+<script type="module" src="/js/Admin/Ticket.js" defer></script>
+
 <div id="admin-wrapper">
   <ul id="admin-tab-select">
     <li value="0">Quản lí nhà xe</li>
@@ -41,11 +44,21 @@
     <li class="js-tab-display">
       <section class="tab-display">
         <section>
-          <div onclick="fetchTicket()">REFRESH</div>
-          <ul>
+          <div id="ticket-refresh-btn">REFRESH</div>
+          <ul id="ticket-display-list">
           </ul>
         </section>
-        <section>Form Quản vé xe</section>
+        <section>
+          <form id="ticket-display-form">
+            <input name="id" type="number" readonly />
+            <textarea name="comment" rows="5" cols="12" placeholder="Ticket Commet"></textarea>
+            <select name="ticket-status">
+              <option value="WAITING">WAITING</option>
+              <option value="PAID">PAID</option>
+              <option value="CANCELED">CANCELED</option>
+            </select>
+          </form>
+        </section>
       </section>
 
     </li>

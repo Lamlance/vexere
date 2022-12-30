@@ -14,3 +14,8 @@
   display: grid;
   grid-template-columns: 0.5fr 1.5fr;
 }
+
+#ticket-display-form{
+  display: flex;
+  flex-direction: column;
+}

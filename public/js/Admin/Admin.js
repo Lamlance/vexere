@@ -1,5 +1,5 @@
 "use strict";
-function main() {
+function mainAdmin() {
     const selectUL = document.getElementById("admin-tab-select");
     const displayUL = document.getElementById("admin-tab-display");
     if (!selectUL || !displayUL) {
@@ -15,15 +15,4 @@ function main() {
         });
     });
 }
-async function fetchTicket() {
-    console.log("Fetching ticket...");
-    const fetchData = await fetch("/admin/api/ticket");
-    try {
-        const tickets = await fetchData.json();
-        console.log(tickets);
-    }
-    catch (error) {
-        console.log(error);
-    }
-}
-main();
+mainAdmin();
