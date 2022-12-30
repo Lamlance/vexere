@@ -9,7 +9,7 @@
 
 <main>
   <section id="banner" class="container-fluid">
-    <p class="text-center text-light display-6 fw-bolder">
+    <p class="text-center text-light display-6 fw-bolder text_slogan">
       VeXeRe - Cam kết hoàn 150% nếu nhà xe không giữ vé
     </p>
     <form method="get" action="/search" class="search_bar container">
@@ -33,12 +33,13 @@
             </td>
 
             <td>
-              <div class="btn btn-light date col-2 py-3 rounded-0">
+              <div class="btn btn-light date col-2 py-3 rounded-0 ">
+                {{!-- <img src="/assets/pickdate_vex_blue_24dp.svg" alt="pickup"> --}}
                 <input id="start-date-input" type="date" name="date" placeholder="Ngày khởi hành"
                   class="bg-light border-0 form-control" required />
               </div>
             </td>
-            <td style="background-color: #ffd333; border-end-end-radius: 5px; border-start-end-radius: 8px;">
+            <td style="background-color: #ffd333; border-end-end-radius: 50px; border-start-end-radius: 50px;">
               <div class="search_div" style="display: flex; justify-content:center;">
                 <button style="margin-top:.8em; background-color: #ffd333; border: none; padding:0 2rem" class="vexere_search_btn" type="submit"><p>Tìm chuyến</p></button>  
               </div>
