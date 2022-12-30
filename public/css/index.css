@@ -356,7 +356,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 	background-color: #f8f8f8;
 }
 
-.footer>p {
+.footer {
 	padding: 1em 0em;
 	font-family: 'Roboto', sans-serif;
 	font-size: 14px;
