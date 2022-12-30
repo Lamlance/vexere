@@ -55,7 +55,7 @@ if (process.env.RENDER_EXTERNAL_URL) {
 }
 
 app.use(auth(configAuth));
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }));
 
 const bodyPraseObj = bodyParser.json();
 
@@ -79,9 +79,9 @@ app.get("/booking_detail", bookingDetailHandler);
 app.get("/search", searchRouteHandler);
 app.get("/userDashboard", userDashboardHandler);
 
-app.get("/user/ticket",bookingDetailHandler);
-app.post("/api/ticket",bodyPraseObj,createTicket)
-app.get("/search",searchRouteHandler);
+app.get("/user/ticket", bookingDetailHandler);
+app.post("/api/ticket", bodyPraseObj, createTicket);
+app.get("/search", searchRouteHandler);
 
 app.get("/api/test/generate/locations", locationGenerate);
 app.get("/api/test/generate/routes", routeGenerate);
