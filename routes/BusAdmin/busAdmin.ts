@@ -1,6 +1,27 @@
+import { Bus, PrismaClient } from "@prisma/client";
 import express, { Express, Request, Response } from "express";
 import { prisma, sessionManager } from "../../server";
 import { singleIntQueryHandler } from "../db/queryHandler";
+
+interface AdminBusAPI_PUT {
+  data: string | Bus;
+}
+interface AdminBusAPI_DELETE {
+  data: string | Bus;
+}
+interface AdminBusAPI_POST {
+  data: string | Bus;
+}
+interface AdminBusAPI_GET {
+  data: string | Bus[];
+}
+
+export type {
+  AdminBusAPI_PUT,
+  AdminBusAPI_DELETE,
+  AdminBusAPI_POST,
+  AdminBusAPI_GET,
+};
 
 const busAdminHandler = async (req: Request, res: Response) => {
   if (!req.oidc.isAuthenticated() || !req.oidc.user || !req.oidc.user.sub) {
