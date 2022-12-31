@@ -17,10 +17,9 @@ async function PUT(req) {
             data: null
         };
     }
-    const ticketId = singleIntQueryHandler(req.body.ticketId, -1);
-    console.log(req.body.ticketId);
-    if (ticketId < 0 || !req.body.status) {
-        console.log("Failed body content");
+    // console.log(req.body.ticketId);
+    if (req.body.ticketId < 0 || !req.body.status || isNaN(req.body.ticketId)) {
+        console.log("Failed body content", req.body);
         return {
             status: 400,
             data: null
@@ -37,10 +36,11 @@ async function PUT(req) {
     try {
         const updateProduct = await prisma.ticket.update({
             where: {
-                id: ticketId,
+                id: req.body.ticketId,
             },
             data: {
-                status: (req.body.status in TicketStatus) ? req.body.status : TicketStatus.WAITING
+                status: (req.body.status in TicketStatus) ? req.body.status : TicketStatus.WAITING,
+                comment: req.body.comment
             }
         });
         return {
@@ -73,8 +73,11 @@ async function adminTicketAPI(req, res) {
             res.status(200).json(getData);
             return;
         }
-        default:
-            break;
+        case "PUT": {
+            const updateData = await PUT(req);
+            res.status(updateData.status).json(updateData.data);
+            return;
+        }
     }
 }
 async function GET(page = 0) {

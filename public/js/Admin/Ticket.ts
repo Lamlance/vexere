@@ -9,18 +9,36 @@ type Ticket = {
   status: "WAITING" | "PAID" | "CANCELED";
   userId: number;
 }
-class TicketInfo{
-  public ticket: Ticket[]
+class TicketsInfo{
+  // public ticket: TicketElement[]
+  public ticketMap: {[key:number]:TicketElement}
   constructor(){
-    this.ticket = [];
+    // this.ticket = [];
+    this.ticketMap = {};
   }
-  public setTicket(tickets: Ticket[]){
-    this.ticket = tickets;
+  public setTickets(tickets: TicketElement[]){
+    // this.ticket = tickets;
+    this.ticketMap = {};
+    // this.ticket.forEach((ticket)=>{
+    //   this.ticketMap[ticket.getTicket().id] = ticket;
+    // })
+    tickets.forEach((ticket)=>{
+      this.ticketMap[ticket.getTicket().id] = ticket;
+    })
+  }
+  public addElement(ticket: TicketElement){
+    // this.ticket.push(ticket);
+    this.ticketMap[ticket.getTicket().id] = ticket;
+  }
+  public updateElement(ticketId:number,comment:string,status:("WAITING" | "PAID" | "CANCELED")){
+    if(this.ticketMap[ticketId]){
+      this.ticketMap[ticketId].updateTicketData(comment,status);
+    }
   }
 }
 
 
-const ticketInfo = new TicketInfo();
+const ticketInfo = new TicketsInfo();
 
 
 async function fetchTicket() {
@@ -39,15 +57,15 @@ async function fetchTicket() {
     if(!Array.isArray(tickets)){
       return null;
     }
-    ticketInfo.ticket = [];
-    tickets.forEach((ticket:Ticket)=>{
-      ticketInfo.ticket.push(ticket);
-    })
 
-    const ticketLi:any[] = [];
-    ticketInfo.ticket.forEach(ticket=>{
-      const newTicket = new TicketElement(ticket,ticketForm)
-      ticketLi.push(newTicket);
+    const ticketLi:HTMLLIElement[] = [];
+
+    tickets.forEach(ticket=>{
+      const newTicket = new TicketElement(ticket,ticketForm);
+      ticketInfo.addElement(newTicket);
+      const li = document.createElement("li");
+      li.appendChild(newTicket);
+      ticketLi.push(li);
     })
 
     console.log(ticketLi);
@@ -60,4 +78,40 @@ async function fetchTicket() {
   }
 }
 
+async function updateTicket(event:SubmitEvent) {
+  event.preventDefault();
+  const form = <HTMLFormElement>event.target;
+  if(!form){
+    return;
+  }
+  const inputs = form.elements;
+  const ticketId = (<HTMLInputElement>inputs.namedItem("ticket-id"))?.valueAsNumber;
+  const comment = (<HTMLInputElement>inputs.namedItem("comment"))?.value;
+  const status = (<HTMLInputElement>inputs.namedItem("ticket-status"))?.value;
+
+  if(!(ticketId && status)){
+    console.log(inputs,ticketId,comment,status)
+    return;
+  }
+
+  const fetchUpdate = await fetch("/admin/api/ticket",{
+    method:"PUT",
+    cache:"no-cache",
+    credentials:"same-origin",
+    headers:{"Content-Type":"application/json"},
+    body: JSON.stringify({
+      ticketId: ticketId,
+      status: status,
+      comment: comment
+    })
+  });
+  console.log(fetchUpdate);
+  try {
+    const updateTicket:Ticket = await fetchUpdate.json();
+    ticketInfo.updateElement(updateTicket.id,updateTicket.comment ? updateTicket.comment : "",updateTicket.status);
+    console.log(updateTicket);
+  } catch (error) {console.log(error)}
+}
+
 document.getElementById("ticket-refresh-btn")?.addEventListener("click",fetchTicket);
+document.getElementById("ticket-display-form")?.addEventListener("submit",updateTicket)

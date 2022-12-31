@@ -106,7 +106,7 @@ app.get("/api/test/profile", (req, res) => {
 });
 
 app.get("/admin",adminDashBoard);
-app.use("/admin/api/ticket",adminTicketAPI);
+app.use("/admin/api/ticket",bodyPraseObj,adminTicketAPI);
 
 app.listen(port, () => {
   console.log(`App listening on http://localhost:${port}`);

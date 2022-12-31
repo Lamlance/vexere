@@ -4,7 +4,13 @@ import { singleIntQueryHandler } from "../db/queryHandler";
 import express, { Express, Request, Response } from "express";
 import { getUserFromDB } from "../db/checkUser";
 
-async function PUT(req: Request<{}, {}, {ticketId: string,status: TicketStatus},{}>) {
+interface UpdateTicketBody{
+  ticketId: number,
+  status: TicketStatus,
+  comment?: string 
+}
+
+async function PUT(req: Request<{}, {},UpdateTicketBody,{}>) {
   if (!req.oidc.user || !req.oidc.isAuthenticated()) {
     console.log("User haven't logged in");
     return {
@@ -21,11 +27,10 @@ async function PUT(req: Request<{}, {}, {ticketId: string,status: TicketStatus},
     }
   }
 
-  const ticketId = singleIntQueryHandler(req.body.ticketId, -1);
-  console.log(req.body.ticketId);
+  // console.log(req.body.ticketId);
 
-  if (ticketId < 0 || !req.body.status) {
-    console.log("Failed body content");
+  if (req.body.ticketId < 0 || !req.body.status || isNaN(req.body.ticketId)) {
+    console.log("Failed body content",req.body);
     return {
       status: 400,
       data: null
@@ -46,10 +51,11 @@ async function PUT(req: Request<{}, {}, {ticketId: string,status: TicketStatus},
   try {
     const updateProduct = await prisma.ticket.update({
       where: {
-        id: ticketId,
+        id: req.body.ticketId,
       },
       data: {
-        status: (req.body.status in TicketStatus) ? req.body.status : TicketStatus.WAITING
+        status: (req.body.status in TicketStatus) ? req.body.status : TicketStatus.WAITING,
+        comment: req.body.comment
       }
     })
     return{
@@ -66,7 +72,7 @@ async function PUT(req: Request<{}, {}, {ticketId: string,status: TicketStatus},
 
 }
 
-async function adminTicketAPI(req:Request<{},{},{},{page:string}>,res:Response) {
+async function adminTicketAPI(req:Request<{},{},UpdateTicketBody,{page:string}>,res:Response) {
   if (!req.oidc.isAuthenticated() || !req.oidc.user) {
     res.status(400).json({});
     return;
@@ -86,8 +92,11 @@ async function adminTicketAPI(req:Request<{},{},{},{page:string}>,res:Response) 
       res.status(200).json(getData);
       return;
     }
-    default:
-      break;
+    case "PUT":{
+      const updateData = await PUT(req);
+      res.status(updateData.status).json(updateData.data);
+      return;
+    }
   }
 }
 

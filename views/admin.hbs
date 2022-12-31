@@ -16,13 +16,14 @@
 
     <li class="js-tab-display">
       <section class="tab-display ">
-        <section>
+        <section class="tab-display-option">
           <ul>
             <li> REFRESH </li>
             <li> THÊM NHÀ XE </li>
           </ul>
         </section>
-        <section>
+        
+        <section class="tab-display-form">
           Form Quản lí nhà xe
         </section>
       </section>
@@ -30,37 +31,42 @@
 
     <li class="js-tab-display">
       <section class="tab-display">
-        <section>
+        <section class="tab-display-option">
           <ul>
             <li> REFRESH </li>
             <li> THÊM XE </li>
           </ul>
         </section>
-        <section>Form Quản lí xe</section>
+
+        <section class="tab-display-form">
+          Form Quản lí xe
+        </section>
       </section>
 
     </li>
 
     <li class="js-tab-display">
       <section class="tab-display">
-        <section>
+        <section class="tab-display-option">
           <div id="ticket-refresh-btn">REFRESH</div>
           <ul id="ticket-display-list">
           </ul>
-        </section>
+        </section class="tab-display-form">
+
         <section>
           <form id="ticket-display-form">
-            <input name="id" type="number" readonly />
+            <input name="ticket-id" type="number" readonly />
             <textarea name="comment" rows="5" cols="12" placeholder="Ticket Commet"></textarea>
             <select name="ticket-status">
               <option value="WAITING">WAITING</option>
               <option value="PAID">PAID</option>
               <option value="CANCELED">CANCELED</option>
             </select>
+            <input type="submit" value="Update Ticket" />
           </form>
         </section>
       </section>
-
     </li>
+
   </ul>
 </div>
