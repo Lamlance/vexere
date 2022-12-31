@@ -1,0 +1,72 @@
+<link rel="stylesheet" href="/css/global.css" />
+<link rel="stylesheet" href="/css/Admin.css" />
+<link rel="stylesheet" href="/css/index.css" />
+
+<script type="module" src="/js/Admin/Admin.js" defer></script>
+<script type="module" src="/js/Admin/Ticket.js" defer></script>
+
+<div id="admin-wrapper">
+  <ul id="admin-tab-select">
+    <li value="0">Quản lí nhà xe</li>
+    <li value="1">Quản lí xe</li>
+    <li value="2">Quản lí vé xe</li>
+  </ul>
+
+  <ul id="admin-tab-display">
+
+    <li class="js-tab-display">
+      <section class="tab-display ">
+        <section class="tab-display-option">
+          <ul>
+            <li> REFRESH </li>
+            <li> THÊM NHÀ XE </li>
+          </ul>
+        </section>
+        
+        <section class="tab-display-form">
+          Form Quản lí nhà xe
+        </section>
+      </section>
+    </li>
+
+    <li class="js-tab-display">
+      <section class="tab-display">
+        <section class="tab-display-option">
+          <ul>
+            <li> REFRESH </li>
+            <li> THÊM XE </li>
+          </ul>
+        </section>
+
+        <section class="tab-display-form">
+          Form Quản lí xe
+        </section>
+      </section>
+
+    </li>
+
+    <li class="js-tab-display">
+      <section class="tab-display">
+        <section class="tab-display-option">
+          <div id="ticket-refresh-btn">REFRESH</div>
+          <ul id="ticket-display-list">
+          </ul>
+        </section class="tab-display-form">
+
+        <section>
+          <form id="ticket-display-form">
+            <input name="ticket-id" type="number" readonly />
+            <textarea name="comment" rows="5" cols="12" placeholder="Ticket Commet"></textarea>
+            <select name="ticket-status">
+              <option value="WAITING">WAITING</option>
+              <option value="PAID">PAID</option>
+              <option value="CANCELED">CANCELED</option>
+            </select>
+            <input type="submit" value="Update Ticket" />
+          </form>
+        </section>
+      </section>
+    </li>
+
+  </ul>
+</div>

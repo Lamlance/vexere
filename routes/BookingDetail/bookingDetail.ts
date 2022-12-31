@@ -3,7 +3,7 @@ import { prisma, sessionManager } from "../../server";
 import { getUserFromDB } from "../db/checkUser";
 import { singleIntQueryHandler } from "../db/queryHandler";
 
-const bookingDetailHandler = async (req: Request <
+const ticketDetailHandler = async (req: Request <
   {},{},{},{
     ticketId:string
   }>, res: Response) => {
@@ -89,4 +89,4 @@ const bookingDetailHandler = async (req: Request <
   });
 }
 
-export default bookingDetailHandler;
+export default ticketDetailHandler;

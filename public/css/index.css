@@ -145,6 +145,7 @@ nav {
 	margin-bottom: 1em;
 }
 
+
 .item:hover,
 .item:focus {
 	background-color: #fafafa;
@@ -152,10 +153,11 @@ nav {
 }
 
 .disabled {
+  pointer-events: none;
+  opacity: 0.3;
 	pointer-events: none;
 	opacity: 0.3;
 }
-
 
 
 ul>li {
@@ -168,6 +170,9 @@ ul>li>a {
 
 .search_bar>table>thead div {
 	width: 100%;
+}
+.search_bar>table>thead div {
+
 }
 
 
@@ -195,6 +200,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 	content: url("/assets/pickdate_vex_blue_24dp.svg");
 	color: rgba(0, 0, 0, 0);
 }
+
 
 ::-webkit-calendar-picker-indicator:hover {
 	-webkit-box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.04);
@@ -290,7 +296,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 	z-index: 100;
 	max-height: 250px;
 	border-radius: 0.5rem;
-	overflow: scroll;
+	overflow: scroll; 
 	display: none;
 }
 
@@ -341,6 +347,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 	border-radius: 8px;
 	height: 100%;
 }
+
 
 .vexere_search_btn p {
 	color: #564f48;

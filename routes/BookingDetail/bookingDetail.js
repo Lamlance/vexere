@@ -1,7 +1,7 @@
 import { prisma, sessionManager } from "../../server";
 import { getUserFromDB } from "../db/checkUser";
 import { singleIntQueryHandler } from "../db/queryHandler";
-const bookingDetailHandler = async (req, res) => {
+const ticketDetailHandler = async (req, res) => {
     if (!req.oidc.isAuthenticated() || !req.oidc.user || !req.oidc.user.sub) {
         res.redirect("/login");
         return;
@@ -69,4 +69,4 @@ const bookingDetailHandler = async (req, res) => {
         route: route,
     });
 };
-export default bookingDetailHandler;
+export default ticketDetailHandler;

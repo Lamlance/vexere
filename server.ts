@@ -3,7 +3,8 @@ import dotenv from "dotenv";
 import { ExpressHandlebars } from "express-handlebars";
 
 import indexHandler from "./routes/Index/index";
-import bookingDetailHandler from "./routes/BookingDetail/bookingDetail";
+// import bookingDetailHandler,{PaymentLogic} from "./routes/Ticket/TicketAn/TicketAn";
+import ticketDetailHandler from "./routes/BookingDetail/bookingDetail";
 
 import * as url from "url";
 import { PrismaClient } from "@prisma/client";
@@ -21,8 +22,11 @@ import checkUser from "./routes/db/checkUser";
 import searchRouteAPI from "./routes/db/searchRoute";
 import searchRouteHandler from "./routes/Search/search";
 import userDashboardHandler from "./routes/UserDashboard/UserDashboard";
-import createTicket from "./routes/Ticket/ticket";
+import ticketHanlder from "./routes/Ticket/ticket";
 import bodyParser from "body-parser";
+
+import adminDashBoard from "./routes/Admin/admin";
+import adminTicketAPI from "./routes/Admin/ticket";
 
 import busAdminHandler from "./routes/BusAdmin/busAdmin";
 
@@ -77,9 +81,15 @@ app.engine("hbs", handlebars.engine);
 app.set("view engine", "hbs");
 
 app.get("/", indexHandler);
-app.get("/booking_detail", bookingDetailHandler);
+// app.get("/booking_detail", bookingDetailHandler);
+// app.get("/ticket/pay",bookingDetailHandler,PaymentLogic);
+
 app.get("/search", searchRouteHandler);
 app.get("/userDashboard", userDashboardHandler);
+
+app.get("/user/ticket",ticketDetailHandler);
+app.post("/api/ticket",bodyPraseObj,ticketHanlder)
+app.get("/search",searchRouteHandler);
 
 app.get("/user/ticket", bookingDetailHandler);
 app.post("/api/ticket", bodyPraseObj, createTicket);
@@ -100,6 +110,9 @@ app.get("/api/test/profile", (req, res) => {
     userDB: null,
   });
 });
+
+app.get("/admin",adminDashBoard);
+app.use("/admin/api/ticket",bodyPraseObj,adminTicketAPI);
 
 app.use("/admin/api/bus", busAdminHandler);
 
