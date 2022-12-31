@@ -24,6 +24,8 @@ import userDashboardHandler from "./routes/UserDashboard/UserDashboard";
 import createTicket from "./routes/Ticket/ticket";
 import bodyParser from "body-parser";
 
+import busAdminHandler from "./routes/BusAdmin/busAdmin";
+
 const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 const sessionManager = new UserSessionManager();
 export { sessionManager };
@@ -98,6 +100,8 @@ app.get("/api/test/profile", (req, res) => {
     userDB: null,
   });
 });
+
+app.use("/admin/api/bus", busAdminHandler);
 
 app.listen(port, () => {
   console.log(`App listening on http://localhost:${port}`);
