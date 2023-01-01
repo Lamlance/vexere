@@ -5,12 +5,15 @@ const adminDashBoard = async (req, res) => {
         res.redirect("/");
         return;
     }
+    console.log("Is loggedin");
     await prisma.$connect();
-    const userData = (sessionManager.users[req.oidc.user.sid] || (await getUserFromDB(req.oidc.user.sub, req.oidc.user.email)));
+    const userData = sessionManager.users[req.oidc.user.sid] ||
+        (await getUserFromDB(req.oidc.user.sub, req.oidc.user.email));
+    console.log(userData);
     if (!userData.isAdmin) {
         return {
             status: 400,
-            data: null
+            data: null,
         };
     }
     res.render("admin");

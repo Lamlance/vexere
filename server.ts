@@ -97,6 +97,7 @@ app.get("/", indexHandler);
 app.get("/search", searchRouteHandler);
 app.get("/userDashboard", userDashboardHandler);
 
+
 // app.get("/user/ticket", bookingDetailHandler);
 // app.get("/user/ticket",ticketDetailHandler);
 app.get("/search", searchRouteHandler);
@@ -136,10 +137,10 @@ app.get("/api/test/profile", (req, res) => {
   });
 });
 
-app.get("/admin",adminDashBoard);
-app.use("/admin/api/ticket",bodyPraseObj,adminTicketAPI);
+app.get("/admin", adminDashBoard);
+app.use("/admin/api/ticket", bodyPraseObj, adminTicketAPI);
 
-app.use("/admin/api/bus", busAdminHandler);
+app.use("/admin/api/bus", bodyPraseObj, busAdminHandler);
 
 app.listen(port, () => {
   console.log(`App listening on http://localhost:${port}`);

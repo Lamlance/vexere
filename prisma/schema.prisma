@@ -72,13 +72,7 @@ model Ticket {
   userId        Int
   Rating        Rating?
   RouteDetail   RouteDetail  @relation(fields: [routeDetailId], references: [id])
-  User          User        @relation(fields: [userId], references: [id])
-}
-
-enum TicketStatus {
-  WAITING
-  PAID
-  CANCELED
+  User          User         @relation(fields: [userId], references: [id])
 }
 
 model User {

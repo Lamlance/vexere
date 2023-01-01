@@ -82,7 +82,7 @@ nav {
 	align-items: center;
 }
 
-.login {
+.login, .user_loggedin {
 	font-family: 'Roboto', sans-serif;
 	background: #1861c5;
 	border: 1px solid #6797bb;
@@ -109,7 +109,7 @@ nav {
 
 
 .login:hover,
-.login:active {
+.login:active, .user_loggedin:hover, .user_loggedin:active {
 	background-color: initial;
 	background-position: 0 0;
 	color: #6797bb;
@@ -117,7 +117,7 @@ nav {
 	transform: scale(1.1);
 }
 
-.login:active {
+.login:active, .user_loggedin:active {
 	opacity: .5;
 }
 
@@ -153,8 +153,8 @@ nav {
 }
 
 .disabled {
-  pointer-events: none;
-  opacity: 0.3;
+	pointer-events: none;
+	opacity: 0.3;
 	pointer-events: none;
 	opacity: 0.3;
 }
@@ -171,9 +171,8 @@ ul>li>a {
 .search_bar>table>thead div {
 	width: 100%;
 }
-.search_bar>table>thead div {
 
-}
+.search_bar>table>thead div {}
 
 
 .search_bar {
@@ -296,7 +295,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 	z-index: 100;
 	max-height: 250px;
 	border-radius: 0.5rem;
-	overflow: scroll; 
+	overflow: scroll;
 	display: none;
 }
 
