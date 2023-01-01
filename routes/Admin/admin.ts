@@ -8,17 +8,23 @@ const adminDashBoard = async (req: Request, res: Response) => {
     return;
   }
 
-  await prisma.$connect();
-  const userData = (sessionManager.users[req.oidc.user.sid] || (await getUserFromDB(req.oidc.user.sub, req.oidc.user.email)));
+  console.log("Is loggedin");
 
-  if(!userData.isAdmin){
-    return{
-      status:400,
-      data:null
-    }
+  await prisma.$connect();
+  const userData =
+    sessionManager.users[req.oidc.user.sid] ||
+    (await getUserFromDB(req.oidc.user.sub, req.oidc.user.email));
+
+  console.log(userData);
+
+  if (!userData.isAdmin) {
+    return {
+      status: 400,
+      data: null,
+    };
   }
 
   res.render("admin");
-}
+};
 
 export default adminDashBoard;
