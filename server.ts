@@ -1,10 +1,15 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
+import methodOverride from "method-override";
 import { ExpressHandlebars } from "express-handlebars";
 
 import indexHandler from "./routes/Index/index";
+
+//AN
+import { bookingDetailCallbackHandler } from "./routes/BookingDetail/bookingDetail";
+import bookingDetailHandler from "./routes/BookingDetail/bookingDetail";
 // import bookingDetailHandler,{PaymentLogic} from "./routes/Ticket/TicketAn/TicketAn";
-import ticketDetailHandler from "./routes/BookingDetail/bookingDetail";
+//import ticketDetailHandler from "./routes/BookingDetail/bookingDetail";
 
 import * as url from "url";
 import { PrismaClient } from "@prisma/client";
@@ -25,6 +30,9 @@ import userDashboardHandler from "./routes/UserDashboard/UserDashboard";
 import ticketHanlder from "./routes/Ticket/ticket";
 import bodyParser from "body-parser";
 
+import { adminAddRouteDetailHandler, adminEditRouteDetailHandler, addRouteDetailHandler, editRouteDetailHandler, deleteRouteDetailHandler } from "./routes/RouteDetailAdmin/routeDetailAdmin";
+import adminRouteDetailHandler from "./routes/RouteDetailAdmin/routeDetailAdmin";
+
 import adminDashBoard from "./routes/Admin/admin";
 import adminTicketAPI from "./routes/Admin/ticket";
 
@@ -36,6 +44,8 @@ export { sessionManager };
 
 dotenv.config();
 const app: Express = express();
+
+app.use(methodOverride('_method'));
 
 const handlebars = new ExpressHandlebars({
   layoutsDir: `${__dirname}/views/layouts`,
@@ -86,6 +96,19 @@ app.get("/", indexHandler);
 
 app.get("/search", searchRouteHandler);
 app.get("/userDashboard", userDashboardHandler);
+
+app.get("/user/ticket", bookingDetailHandler);
+app.get("/user/ticket/callback", bookingDetailCallbackHandler);
+app.post("/api/ticket", bodyPraseObj, createTicket);
+app.get("/search", searchRouteHandler);
+
+
+app.get("/admin/route_detail", adminRouteDetailHandler);
+app.get("/admin/route_detail/add", adminAddRouteDetailHandler);
+app.get("/admin/route_detail/edit/:id", adminEditRouteDetailHandler); // pass query route detail id
+app.post("/api/route_detail/add", addRouteDetailHandler);
+app.put("/api/route_detail/edit/:id", editRouteDetailHandler);
+app.delete("/api/route_detail/delete/:id", deleteRouteDetailHandler);
 
 app.get("/user/ticket",ticketDetailHandler);
 app.post("/api/ticket",bodyPraseObj,ticketHanlder)
