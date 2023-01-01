@@ -1,6 +1,13 @@
 import { prisma, sessionManager } from "../../server";
 import { getUserFromDB } from "../db/checkUser";
 import { singleIntQueryHandler } from "../db/queryHandler";
+const makeStar = (amount = 0) => {
+    let starts = "";
+    for (let index = 0; index < amount; index++) {
+        starts += "⭐";
+    }
+    return starts;
+};
 const ticketDetailHandler = async (req, res) => {
     if (!req.oidc.isAuthenticated() || !req.oidc.user || !req.oidc.user.sub) {
         res.redirect("/login");
@@ -21,9 +28,16 @@ const ticketDetailHandler = async (req, res) => {
     const ticket = await prisma.ticket.findFirst({
         where: {
             AND: [{ id: ticketId }, { userId: userData.id }]
+        },
+        include: {
+            Rating: {
+                select: {
+                    rating: true,
+                    comment: true
+                }
+            }
         }
     });
-    console.log(ticket);
     if (!ticket) {
         res.redirect("/");
         return;
@@ -61,6 +75,8 @@ const ticketDetailHandler = async (req, res) => {
             }
         }
     });
+    const star = makeStar(ticket.Rating?.rating ? ticket.Rating.rating : 0);
+    console.log(star);
     res.render("ticket", {
         ticket: ticket,
         detail: routeDetail,
@@ -70,6 +86,11 @@ const ticketDetailHandler = async (req, res) => {
             ...(ticket.status === "WAITING" ? { canPaid: true, canCancel: true } : {}),
             ...(ticket.status === "CANCELED" ? { canCancel: false, canPaid: false } : {}),
             ...(ticket.status === "PAID" ? { canPaid: false, canCancel: true } : {}),
+            ...(routeDetail && (!ticket.Rating) ? { canRate: true } : { canRate: false })
+        },
+        rating: {
+            ...ticket.Rating,
+            star: star
         }
     });
 };

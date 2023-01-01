@@ -30,6 +30,7 @@ import adminDashBoard from "./routes/Admin/admin";
 import adminTicketAPI from "./routes/Admin/ticket";
 import busAdminHandler from "./routes/BusAdmin/busAdmin";
 import ticketDetailHandler from "./routes/BookingDetail/bookingDetail";
+import createRating from "./routes/BookingDetail/createRating";
 const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 const sessionManager = new UserSessionManager();
 export { sessionManager };
@@ -60,6 +61,7 @@ if (process.env.RENDER_EXTERNAL_URL) {
 app.use(auth(configAuth));
 app.use(bodyParser.urlencoded({ extended: false }));
 const bodyPraseObj = bodyParser.json();
+bodyParser.urlencoded;
 app.use((req, res, next) => {
     res.locals.user = req.oidc.user;
     res.locals.userName = req.oidc.user ? req.oidc.user.name : null;
@@ -83,12 +85,13 @@ app.get("/admin/route_detail/edit/:id", adminEditRouteDetailHandler); // pass qu
 app.post("/api/route_detail/add", addRouteDetailHandler);
 app.put("/api/route_detail/edit/:id", editRouteDetailHandler);
 app.delete("/api/route_detail/delete/:id", deleteRouteDetailHandler);
-app.get("/search", searchRouteHandler);
+//USER TICKET
 app.get("/user/ticket/pay", bookingPaymentHandler);
 app.get("/user/ticket/callback", bookingDetailCallbackHandler);
 app.get("/user/ticket", ticketDetailHandler);
 app.post("/api/ticket", bodyPraseObj, createTicket);
-app.get("/search", searchRouteHandler);
+app.post("/user/ticket/rate", bodyPraseObj, createRating);
+//========
 //MOCK DATA
 app.get("/api/test/generate/locations", locationGenerate);
 app.get("/api/test/generate/routes", routeGenerate);
