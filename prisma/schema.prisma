@@ -1,10 +1,10 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
-}
-
-generator client {
-  provider = "prisma-client-js"
 }
 
 model Bus {
@@ -73,7 +73,6 @@ model Ticket {
 
 enum TicketStatus {
   WAITING
-  ACCEPT
   PAID
   CANCELED
 }
@@ -91,4 +90,10 @@ model User {
 model testtable {
   id      Int  @id @default(autoincrement())
   randNum Int?
+}
+
+enum TicketStatus {
+  WAITING
+  PAID
+  CANCELED
 }

@@ -1,10 +1,7 @@
-interface UserDataInput {
-  id: number,
-  Name: string,
-  email?: string | null | undefined,
-  phone?: string | null | undefined,
-}
-interface UserData extends UserDataInput {
+import { User } from "@prisma/client";
+
+
+interface UserData extends User {
   createTime: Date
 }
 class UserSessionManager {
@@ -32,7 +29,7 @@ class UserSessionManager {
     });
   }
 
-  addUser(sid: string, userData: UserDataInput) {
+  addUser(sid: string, userData: User) {
     if (this.isLogged(sid)) {
       return false;
     }

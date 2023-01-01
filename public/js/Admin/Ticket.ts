@@ -1,0 +1,117 @@
+import TicketElement from "./TicketEleClass.js";
+
+
+
+type Ticket = {
+  id: number;
+  comment: string | null;
+  routeDetailId: number;
+  status: "WAITING" | "PAID" | "CANCELED";
+  userId: number;
+}
+class TicketsInfo{
+  // public ticket: TicketElement[]
+  public ticketMap: {[key:number]:TicketElement}
+  constructor(){
+    // this.ticket = [];
+    this.ticketMap = {};
+  }
+  public setTickets(tickets: TicketElement[]){
+    // this.ticket = tickets;
+    this.ticketMap = {};
+    // this.ticket.forEach((ticket)=>{
+    //   this.ticketMap[ticket.getTicket().id] = ticket;
+    // })
+    tickets.forEach((ticket)=>{
+      this.ticketMap[ticket.getTicket().id] = ticket;
+    })
+  }
+  public addElement(ticket: TicketElement){
+    // this.ticket.push(ticket);
+    this.ticketMap[ticket.getTicket().id] = ticket;
+  }
+  public updateElement(ticketId:number,comment:string,status:("WAITING" | "PAID" | "CANCELED")){
+    if(this.ticketMap[ticketId]){
+      this.ticketMap[ticketId].updateTicketData(comment,status);
+    }
+  }
+}
+
+
+const ticketInfo = new TicketsInfo();
+
+
+async function fetchTicket() {
+  const ticketForm = <HTMLFormElement> document.getElementById("ticket-display-form");
+  const ticketList = <HTMLUListElement> document.getElementById("ticket-display-list");
+
+  if(!ticketForm || !ticketList){
+    return;
+  }
+
+  console.log("Fetching ticket...")
+  const fetchData = await fetch("/admin/api/ticket");
+  try {
+    const tickets = await fetchData.json();
+    console.log(tickets);
+    if(!Array.isArray(tickets)){
+      return null;
+    }
+
+    const ticketLi:HTMLLIElement[] = [];
+
+    tickets.forEach(ticket=>{
+      const newTicket = new TicketElement(ticket,ticketForm);
+      ticketInfo.addElement(newTicket);
+      const li = document.createElement("li");
+      li.appendChild(newTicket);
+      ticketLi.push(li);
+    })
+
+    console.log(ticketLi);
+    ticketList.replaceChildren(...ticketLi);
+    console.log(ticketList);
+
+    return null;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function updateTicket(event:SubmitEvent) {
+  event.preventDefault();
+  const form = <HTMLFormElement>event.target;
+  if(!form){
+    return;
+  }
+  const inputs = form.elements;
+  const ticketId = (<HTMLInputElement>inputs.namedItem("ticket-id"))?.valueAsNumber;
+  const comment = (<HTMLInputElement>inputs.namedItem("comment"))?.value;
+  const status = (<HTMLInputElement>inputs.namedItem("ticket-status"))?.value;
+
+  if(!(ticketId && status)){
+    console.log(inputs,ticketId,comment,status)
+    return;
+  }
+
+  const fetchUpdate = await fetch("/admin/api/ticket",{
+    method:"PUT",
+    cache:"no-cache",
+    credentials:"same-origin",
+    headers:{"Content-Type":"application/json"},
+    body: JSON.stringify({
+      ticketId: ticketId,
+      status: status,
+      comment: comment
+    })
+  });
+  console.log(fetchUpdate);
+  try {
+    const updateTicket:Ticket = await fetchUpdate.json();
+    ticketInfo.updateElement(updateTicket.id,updateTicket.comment ? updateTicket.comment : "",updateTicket.status);
+    console.log(updateTicket);
+  } catch (error) {console.log(error)}
+}
+
+document.getElementById("ticket-refresh-btn")?.addEventListener("click",fetchTicket);
+document.getElementById("ticket-display-form")?.addEventListener("submit",updateTicket)

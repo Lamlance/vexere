@@ -5,7 +5,7 @@
 
 <main>
   <section id="banner" class="container-fluid">
-    <p class="text-center text-light display-6 fw-bolder">
+    <p class="text-center text-light display-6 fw-bolder text_slogan">
       VeXeRe - Cam kết hoàn 150% nếu nhà xe không giữ vé
     </p>
     <form method="get" action="/search" class="search_bar container">
@@ -13,28 +13,31 @@
         <thead>
           <tr>
             <td>
-              <div style="width: 100%" class="btn btn-light start col-4 py-3 rounded-0 rounded-start">
+              <div style="width: 100%" class="btn btn-light start col-4 py-3 rounded-0 rounded-start pick-up">
+                <img src="/assets/pickup_vex_blue_24dp.svg" alt="pickup">
                 <input name="fromId" type="text" class="bg-light form-control border-0" id="start-place"
                   placeholder="Điểm đi" autocomplete="off" required />
               </div>
             </td>
 
             <td>
-              <div class="btn btn-light end col-4 py-3 rounded-0">
+              <div class="btn btn-light end col-4 py-3 rounded-0 pick-up">
+                <img src="/assets/pickup_negative_24dp.svg" alt="pickup">
                 <input name="toId" type="text" placeholder="Điểm đến" class="bg-light form-control border-0"
                   id="end-place" autocomplete="off" required />
               </div>
             </td>
 
             <td>
-              <div class="btn btn-light date col-2 py-3 rounded-0">
+              <div class="btn btn-light date col-2 py-3 rounded-0 ">
+                {{!-- <img src="/assets/pickdate_vex_blue_24dp.svg" alt="pickup"> --}}
                 <input id="start-date-input" type="date" name="date" placeholder="Ngày khởi hành"
                   class="bg-light border-0 form-control" required />
               </div>
             </td>
-            <td style="background-color: rgb(248, 174, 0); border-end-end-radius: 5px; border-start-end-radius: 5px;">
-              <div style="display: flex; justify-content:center;">
-                <button style="border: none; padding:0 2rem" class="vexere_search_btn" type="submit">Tìm vé</button>
+            <td style="background-color: #ffd333; border-end-end-radius: 50px; border-start-end-radius: 50px;">
+              <div class="search_div" style="display: flex; justify-content:center;">
+                <button style="margin-top:.8em; background-color: #ffd333; border: none; padding:0 2rem" class="vexere_search_btn" type="submit"><p>Tìm chuyến</p></button>  
               </div>
             </td>
           </tr>

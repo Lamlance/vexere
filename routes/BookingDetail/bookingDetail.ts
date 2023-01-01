@@ -6,7 +6,6 @@ import dotenv from "dotenv";
 import { createHmac, randomUUID } from "crypto";
 import fetch from "node-fetch";
 
-dotenv.config();
 
 const MOMO_PARTNER_CODE: String | undefined = process.env.MOMO_PARTNER_CODE;
 const MOMO_ACCESS_KEY: String | undefined = process.env.MOMO_ACCESS_KEY;
@@ -14,10 +13,7 @@ const MOMO_SECRET_KEY: String | undefined = process.env.MOMO_SECRET_KEY;
 
 
 
-const bookingDetailHandler = async (req: Request<
-  {}, {}, {}, {
-    ticketId: string
-  }>, res: Response) => {
+const bookingDetailHandler = async (req: Request<{}, {}, {}, {ticketId: string}>, res: Response) => {
 
   if (!req.oidc.isAuthenticated() || !req.oidc.user || !req.oidc.user.sub) {
     res.redirect("/login");
@@ -195,4 +191,4 @@ export const bookingDetailCallbackHandler = async (req: Request, res: Response) 
   }
 }
 
-export default bookingDetailHandler;
+export default ticketDetailHandler;
