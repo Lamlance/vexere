@@ -6,8 +6,8 @@ import { ExpressHandlebars } from "express-handlebars";
 import indexHandler from "./routes/Index/index";
 
 //AN
-import { bookingDetailCallbackHandler } from "./routes/BookingDetail/bookingDetail";
-import bookingDetailHandler from "./routes/BookingDetail/bookingDetail";
+import { bookingDetailCallbackHandler } from "./routes/BookingDetail/bookingPaymentl";
+import bookingPaymentHandler from "./routes/BookingDetail/bookingPaymentl";
 // import bookingDetailHandler,{PaymentLogic} from "./routes/Ticket/TicketAn/TicketAn";
 //import ticketDetailHandler from "./routes/BookingDetail/bookingDetail";
 
@@ -27,7 +27,7 @@ import checkUser from "./routes/db/checkUser";
 import searchRouteAPI from "./routes/db/searchRoute";
 import searchRouteHandler from "./routes/Search/search";
 import userDashboardHandler from "./routes/UserDashboard/UserDashboard";
-import ticketHanlder from "./routes/Ticket/ticket";
+import createTicket from "./routes/Ticket/ticket";
 import bodyParser from "body-parser";
 
 import { adminAddRouteDetailHandler, adminEditRouteDetailHandler, addRouteDetailHandler, editRouteDetailHandler, deleteRouteDetailHandler } from "./routes/RouteDetailAdmin/routeDetailAdmin";
@@ -37,6 +37,7 @@ import adminDashBoard from "./routes/Admin/admin";
 import adminTicketAPI from "./routes/Admin/ticket";
 
 import busAdminHandler from "./routes/BusAdmin/busAdmin";
+import ticketDetailHandler from "./routes/BookingDetail/bookingDetail";
 
 const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 const sessionManager = new UserSessionManager();
@@ -91,15 +92,12 @@ app.engine("hbs", handlebars.engine);
 app.set("view engine", "hbs");
 
 app.get("/", indexHandler);
-// app.get("/booking_detail", bookingDetailHandler);
-// app.get("/ticket/pay",bookingDetailHandler,PaymentLogic);
 
 app.get("/search", searchRouteHandler);
 app.get("/userDashboard", userDashboardHandler);
 
-app.get("/user/ticket", bookingDetailHandler);
-app.get("/user/ticket/callback", bookingDetailCallbackHandler);
-app.post("/api/ticket", bodyPraseObj, createTicket);
+// app.get("/user/ticket", bookingDetailHandler);
+// app.get("/user/ticket",ticketDetailHandler);
 app.get("/search", searchRouteHandler);
 
 
@@ -110,14 +108,16 @@ app.post("/api/route_detail/add", addRouteDetailHandler);
 app.put("/api/route_detail/edit/:id", editRouteDetailHandler);
 app.delete("/api/route_detail/delete/:id", deleteRouteDetailHandler);
 
-app.get("/user/ticket",ticketDetailHandler);
-app.post("/api/ticket",bodyPraseObj,ticketHanlder)
 app.get("/search",searchRouteHandler);
 
-app.get("/user/ticket", bookingDetailHandler);
-app.post("/api/ticket", bodyPraseObj, createTicket);
+app.get("/user/ticket/pay", bookingPaymentHandler);
+app.get("/user/ticket/callback", bookingDetailCallbackHandler);
+app.get("/user/ticket",ticketDetailHandler);
+app.post("/api/ticket",bodyPraseObj,createTicket)
+
 app.get("/search", searchRouteHandler);
 
+//MOCK DATA
 app.get("/api/test/generate/locations", locationGenerate);
 app.get("/api/test/generate/routes", routeGenerate);
 app.get("/api/test/generate/bushouses", busHouseGenerate);
@@ -125,6 +125,7 @@ app.get("/api/test/generate/users", usersGenerate);
 app.get("/api/test/generate/buses", busGenerate);
 app.get("/api/test/generate/details", routeDetailGenerate);
 app.get("/api/test/search", searchRouteAPI);
+//============
 
 app.get("/api/test/profile", (req, res) => {
   res.json({

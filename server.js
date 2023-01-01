@@ -3,8 +3,11 @@ import dotenv from "dotenv";
 import methodOverride from "method-override";
 import { ExpressHandlebars } from "express-handlebars";
 import indexHandler from "./routes/Index/index";
-import { bookingDetailCallbackHandler } from "./routes/BookingDetail/bookingDetail";
-import bookingDetailHandler from "./routes/BookingDetail/bookingDetail";
+//AN
+import { bookingDetailCallbackHandler } from "./routes/BookingDetail/bookingPaymentl";
+import bookingPaymentHandler from "./routes/BookingDetail/bookingPaymentl";
+// import bookingDetailHandler,{PaymentLogic} from "./routes/Ticket/TicketAn/TicketAn";
+//import ticketDetailHandler from "./routes/BookingDetail/bookingDetail";
 import * as url from "url";
 import { PrismaClient } from "@prisma/client";
 import { auth } from "express-openid-connect";
@@ -23,6 +26,10 @@ import createTicket from "./routes/Ticket/ticket";
 import bodyParser from "body-parser";
 import { adminAddRouteDetailHandler, adminEditRouteDetailHandler, addRouteDetailHandler, editRouteDetailHandler, deleteRouteDetailHandler } from "./routes/RouteDetailAdmin/routeDetailAdmin";
 import adminRouteDetailHandler from "./routes/RouteDetailAdmin/routeDetailAdmin";
+import adminDashBoard from "./routes/Admin/admin";
+import adminTicketAPI from "./routes/Admin/ticket";
+import busAdminHandler from "./routes/BusAdmin/busAdmin";
+import ticketDetailHandler from "./routes/BookingDetail/bookingDetail";
 const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 const sessionManager = new UserSessionManager();
 export { sessionManager };
@@ -65,12 +72,10 @@ app.use(express.static(__dirname + "/public"));
 app.engine("hbs", handlebars.engine);
 app.set("view engine", "hbs");
 app.get("/", indexHandler);
-app.get("/booking_detail", bookingDetailHandler);
 app.get("/search", searchRouteHandler);
 app.get("/userDashboard", userDashboardHandler);
-app.get("/user/ticket", bookingDetailHandler);
-app.get("/user/ticket/callback", bookingDetailCallbackHandler);
-app.post("/api/ticket", bodyPraseObj, createTicket);
+// app.get("/user/ticket", bookingDetailHandler);
+// app.get("/user/ticket",ticketDetailHandler);
 app.get("/search", searchRouteHandler);
 app.get("/admin/route_detail", adminRouteDetailHandler);
 app.get("/admin/route_detail/add", adminAddRouteDetailHandler);
@@ -78,6 +83,13 @@ app.get("/admin/route_detail/edit/:id", adminEditRouteDetailHandler); // pass qu
 app.post("/api/route_detail/add", addRouteDetailHandler);
 app.put("/api/route_detail/edit/:id", editRouteDetailHandler);
 app.delete("/api/route_detail/delete/:id", deleteRouteDetailHandler);
+app.get("/search", searchRouteHandler);
+app.get("/user/ticket/pay", bookingPaymentHandler);
+app.get("/user/ticket/callback", bookingDetailCallbackHandler);
+app.get("/user/ticket", ticketDetailHandler);
+app.post("/api/ticket", bodyPraseObj, createTicket);
+app.get("/search", searchRouteHandler);
+//MOCK DATA
 app.get("/api/test/generate/locations", locationGenerate);
 app.get("/api/test/generate/routes", routeGenerate);
 app.get("/api/test/generate/bushouses", busHouseGenerate);
@@ -85,6 +97,7 @@ app.get("/api/test/generate/users", usersGenerate);
 app.get("/api/test/generate/buses", busGenerate);
 app.get("/api/test/generate/details", routeDetailGenerate);
 app.get("/api/test/search", searchRouteAPI);
+//============
 app.get("/api/test/profile", (req, res) => {
     res.json({
         status: req.oidc.isAuthenticated() ? "Logged in" : "Logged out",
@@ -92,6 +105,9 @@ app.get("/api/test/profile", (req, res) => {
         userDB: null,
     });
 });
+app.get("/admin", adminDashBoard);
+app.use("/admin/api/ticket", bodyPraseObj, adminTicketAPI);
+app.use("/admin/api/bus", busAdminHandler);
 app.listen(port, () => {
     console.log(`App listening on http://localhost:${port}`);
 });
