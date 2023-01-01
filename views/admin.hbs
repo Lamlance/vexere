@@ -8,7 +8,9 @@
 <div id="admin-wrapper">
   <ul id="admin-tab-select">
     <li value="0">Quản lí nhà xe</li>
-    <li value="1">Quản lí xe</li>
+    <li value="1">
+      <a href="/admin/route_detail"> Quản lí chuyến xe</a>
+    </li>
     <li value="2">Quản lí vé xe</li>
   </ul>
 
@@ -22,7 +24,7 @@
             <li> THÊM NHÀ XE </li>
           </ul>
         </section>
-        
+
         <section class="tab-display-form">
           Form Quản lí nhà xe
         </section>
@@ -32,15 +34,11 @@
     <li class="js-tab-display">
       <section class="tab-display">
         <section class="tab-display-option">
-          <ul>
-            <li> REFRESH </li>
-            <li> THÊM XE </li>
-          </ul>
         </section>
 
         <section class="tab-display-form">
-          Form Quản lí xe
         </section>
+        
       </section>
 
     </li>
@@ -51,9 +49,9 @@
           <div id="ticket-refresh-btn">REFRESH</div>
           <ul id="ticket-display-list">
           </ul>
-        </section class="tab-display-form">
+        </section>
 
-        <section>
+        <section class="tab-display-form">
           <form id="ticket-display-form">
             <input name="ticket-id" type="number" readonly />
             <textarea name="comment" rows="5" cols="12" placeholder="Ticket Commet"></textarea>
@@ -67,6 +65,7 @@
         </section>
       </section>
     </li>
+
 
   </ul>
 </div>
