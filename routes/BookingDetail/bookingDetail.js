@@ -66,6 +66,11 @@ const ticketDetailHandler = async (req, res) => {
         detail: routeDetail,
         route: route,
         transactionStatus: ticket.status,
+        statusAction: {
+            ...(ticket.status === "WAITING" ? { canPaid: true, canCancel: true } : {}),
+            ...(ticket.status === "CANCELED" ? { canCancel: false, canPaid: false } : {}),
+            ...(ticket.status === "PAID" ? { canPaid: false, canCancel: true } : {}),
+        }
     });
 };
 export default ticketDetailHandler;

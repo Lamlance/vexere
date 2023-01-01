@@ -68,6 +68,7 @@ const bookingPaymentHandler = async (req, res) => {
     const MOMO_PARTNER_CODE = process.env.MOMO_PARTNER_CODE;
     const MOMO_ACCESS_KEY = process.env.MOMO_ACCESS_KEY;
     const MOMO_SECRET_KEY = process.env.MOMO_SECRET_KEY;
+    const REAL_URL = process.env.RENDER_EXTERNAL_URL;
     console.log("MOMO DATA", MOMO_PARTNER_CODE, MOMO_ACCESS_KEY, MOMO_SECRET_KEY);
     let transactionStatus = ticketStatus === "WAITING" ? "Chưa thanh toán" : "Đã thanh toán";
     if (MOMO_ACCESS_KEY && MOMO_PARTNER_CODE && MOMO_SECRET_KEY) {
@@ -96,8 +97,8 @@ const bookingPaymentHandler = async (req, res) => {
             amount: newPayment.amount,
             orderId: id,
             orderInfo: newPayment.payment_info,
-            redirectUrl: `http://localhost:8000/user/ticket/callback`,
-            ipnUrl: `http://localhost:8000/user/ticket/pay?ticketId=${ticket.id}`,
+            redirectUrl: `${REAL_URL ? REAL_URL : "http://localhost:8000"}/user/ticket/callback`,
+            ipnUrl: `${REAL_URL ? REAL_URL : "http://localhost:8000"}/user/ticket/pay?ticketId=${ticket.id}`,
             requestType: "captureWallet",
             extraData: ticket.id,
             lang: "vi",
@@ -152,15 +153,14 @@ export const bookingDetailCallbackHandler = async (req, res) => {
             transactionStatus: transactionStatus,
             ticketId: ticketId,
         });
+        return;
     }
-    else {
-        let transactionStatus = "Thanh toán thất bại! Hãy thử lại.";
-        res.locals.title = "Thông tin thanh toán";
-        // Render lại trong trang thanh toán thất bại
-        res.render("paymentStatus", {
-            transactionStatus: transactionStatus,
-            ticketId: ticketId,
-        });
-    }
+    let transactionStatus = "Thanh toán thất bại! Hãy thử lại.";
+    res.locals.title = "Thông tin thanh toán";
+    // Render lại trong trang thanh toán thất bại
+    res.render("paymentStatus", {
+        transactionStatus: transactionStatus,
+        ticketId: ticketId,
+    });
 };
 export default bookingPaymentHandler;
