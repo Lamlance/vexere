@@ -15,7 +15,7 @@ interface UpdateTicketBody {
 
 type TicketRequestBody = UpdateTicketBody & CreateTicketBody
 
-async function ticketHanlder(req: Request<{}, {}, TicketRequestBody, {}>, res: Response) {
+async function createTicket(req: Request<{}, {}, TicketRequestBody, {}>, res: Response) {
   if (!req.oidc.user || !req.oidc.isAuthenticated()) {
     console.log("User haven't logged in");
     res.redirect("/");
@@ -41,8 +41,6 @@ async function ticketHanlder(req: Request<{}, {}, TicketRequestBody, {}>, res: R
   res.redirect("/")
 
 }
-
-
 
 async function POST(req: Request<{}, {}, CreateTicketBody>) {
   if (!req.oidc.user || !req.oidc.isAuthenticated()) {
@@ -102,4 +100,4 @@ async function POST(req: Request<{}, {}, CreateTicketBody>) {
   }
 }
 
-export default ticketHanlder;
+export default createTicket;

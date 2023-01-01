@@ -1,7 +1,7 @@
 import { prisma, sessionManager } from "../../server";
 import { getUserFromDB } from "../db/checkUser";
 import { singleIntQueryHandler } from "../db/queryHandler";
-async function ticketHanlder(req, res) {
+async function createTicket(req, res) {
     if (!req.oidc.user || !req.oidc.isAuthenticated()) {
         console.log("User haven't logged in");
         res.redirect("/");
@@ -72,4 +72,4 @@ async function POST(req) {
         data: ticketData
     };
 }
-export default ticketHanlder;
+export default createTicket;

@@ -21,6 +21,7 @@ model BusHouse {
   id   Int    @id @default(autoincrement())
   Name String @db.Char(50)
   Bus  Bus[]
+  Rating Rating[]
 }
 
 model Location {
@@ -35,6 +36,9 @@ model Rating {
   rating   Int
   comment  String?
   ticketId Int     @unique
+  busHouseId Int 
+
+  BusHouse BusHouse @relation(fields: [busHouseId],references: [id])
   Ticket   Ticket  @relation(fields: [ticketId], references: [id])
 }
 
@@ -86,8 +90,3 @@ model testtable {
   randNum Int?
 }
 
-enum TicketStatus {
-  WAITING
-  PAID
-  CANCELED
-}
