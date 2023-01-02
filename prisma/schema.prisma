@@ -90,3 +90,8 @@ model testtable {
   randNum Int?
 }
 
+enum TicketStatus {
+  WAITING
+  PAID
+  CANCELED
+}

@@ -35,7 +35,7 @@
   grid-template-columns: 0.5fr 1.5fr;
 }
 
-.tab-display-option>ul>li, #ticket-refresh-btn {
+.tab-display-option>ul>li, #ticket-refresh-btn,#house-refresh-btn,#house-add-btn {
   min-height: 4rem;
   display: grid;
   place-items: center;
@@ -50,4 +50,9 @@
 #ticket-display-form {
   display: flex;
   flex-direction: column;
+}
+
+.display-form > label{
+  display: grid;
+  grid-template-columns: 0.3fr 1.7fr;
 }

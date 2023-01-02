@@ -1,8 +1,8 @@
 import { prisma } from '../../../server';
 const busHouseData = [
-    { "Name": "Mayer, Mayer and Jerde", "id": 1 },
-    { "Name": "Green-Murazik", "id": 2 },
-    { "Name": "Vandervort, Crona and Boyle", "id": 3 }
+    { "Name": "Mayer, Mayer and Jerde" },
+    { "Name": "Green-Murazik" },
+    { "Name": "Vandervort, Crona and Boyle" }
 ];
 const busHouseGenerate = async (req, res) => {
     if (req.query && req.query.password && req.query.password === "vexere123") {

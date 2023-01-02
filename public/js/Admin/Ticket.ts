@@ -1,7 +1,5 @@
 import TicketElement from "./TicketEleClass.js";
 
-
-
 type Ticket = {
   id: number;
   comment: string | null;
@@ -10,24 +8,17 @@ type Ticket = {
   userId: number;
 }
 class TicketsInfo{
-  // public ticket: TicketElement[]
   public ticketMap: {[key:number]:TicketElement}
   constructor(){
-    // this.ticket = [];
     this.ticketMap = {};
   }
   public setTickets(tickets: TicketElement[]){
-    // this.ticket = tickets;
     this.ticketMap = {};
-    // this.ticket.forEach((ticket)=>{
-    //   this.ticketMap[ticket.getTicket().id] = ticket;
-    // })
     tickets.forEach((ticket)=>{
       this.ticketMap[ticket.getTicket().id] = ticket;
     })
   }
   public addElement(ticket: TicketElement){
-    // this.ticket.push(ticket);
     this.ticketMap[ticket.getTicket().id] = ticket;
   }
   public updateElement(ticketId:number,comment:string,status:("WAITING" | "PAID" | "CANCELED")){
@@ -36,10 +27,7 @@ class TicketsInfo{
     }
   }
 }
-
-
 const ticketInfo = new TicketsInfo();
-
 
 async function fetchTicket() {
   const ticketForm = <HTMLFormElement> document.getElementById("ticket-display-form");
@@ -68,9 +56,7 @@ async function fetchTicket() {
       ticketLi.push(li);
     })
 
-    console.log(ticketLi);
     ticketList.replaceChildren(...ticketLi);
-    console.log(ticketList);
 
     return null;
   } catch (error) {

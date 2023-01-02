@@ -8,19 +8,19 @@ interface AdminBusGet {
 }
 interface AdminBusPOST {
   plate: string;
-  seatAmount: number;
-  type: number;
-  busHouse: number;
+  seatAmount: string;
+  type: string;
+  busHouse: string;
 }
 interface AdminBusPUT {
-  busId: number;
+  busId: string;
   plate: string;
-  seatAmount: number;
-  type: number;
-  busHouse: number;
+  seatAmount: string;
+  type: string;
+  busHouse: string;
 }
 interface AdminBusDELETE {
-  busId: number;
+  busId: string;
 }
 
 type AdminBusBody = AdminBusPOST & AdminBusPUT & AdminBusDELETE;
@@ -65,8 +65,11 @@ const getBusAdminHandler = async (req: Request<{}, {}, {}, AdminBusGet>) => {
 };
 
 const addBusAdminHandler = async (req: Request<{}, {}, AdminBusPOST, {}>) => {
-  const { plate, seatAmount, type, busHouse } = req.body;
-  if (!(plate && seatAmount && type && busHouse)) {
+  const { plate } = req.body;
+  const seatAmount = singleIntQueryHandler(req.body.seatAmount,-1);
+  const type = singleIntQueryHandler(req.body.type,-1);
+  const busHouse = singleIntQueryHandler(req.body.busHouse,-1);
+  if (!(plate && seatAmount>=0 && type>=0 && busHouse>=0)) {
     return null;
   }
   await myPrisma.$connect();
@@ -85,16 +88,6 @@ const addBusAdminHandler = async (req: Request<{}, {}, AdminBusPOST, {}>) => {
   }
 };
 
-const editBusAdminHanlder = async (req: Request<{}, {}, AdminBusPUT, {}>) => {};
 
-const deleteBusAdminHanlder = async (
-  req: Request<{}, {}, AdminBusDELETE, {}>
-) => {};
-
-const addBus = async (req: Request, res: Response) => {};
-
-const editBus = async (req: Request, res: Response) => {};
-
-const deleteBus = async (req: Request, res: Response) => {};
 
 export default busAdminHandler;
