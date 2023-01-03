@@ -40,6 +40,7 @@ import busAdminHandler from "./routes/BusAdmin/busAdmin";
 import ticketDetailHandler from "./routes/BookingDetail/bookingDetail";
 import createRating from "./routes/BookingDetail/createRating";
 import adminBusHouseHandler from "./routes/Admin/bushouse";
+import userTicketsApi from "./routes/UserDashboard/Ticket";
 
 const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 const sessionManager = new UserSessionManager();
@@ -97,6 +98,7 @@ app.get("/", indexHandler);
 
 app.get("/search", searchRouteHandler);
 app.get("/user", userDashboardHandler);
+app.use("/user/api/tickets",userTicketsApi)
 
 
 // app.get("/user/ticket", bookingDetailHandler);

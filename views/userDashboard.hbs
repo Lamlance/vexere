@@ -2,7 +2,7 @@
 
 <main>
   <script src="https://kit.fontawesome.com/3233d35d96.js" crossorigin="anonymous"></script>
-
+  <script src="/js/UserDashboard/FetchTicket.js" type="module"></script>
   <div class="container">
     <div class="sidebar">
       <div class="user-infor">
@@ -14,7 +14,8 @@
       <div class="sidebar-navigation">
         <ul class="sidebar-list">
           <li class="list-item active-tab"> <i class="fa-solid fa-user"></i> Thay đổi thông tin tài khoản</li>
-          <li class="list-item"><i class="fa-solid fa-tags"></i> Thành viên <span class="user-rank-span">{{userRank}}</span>
+          <li class="list-item"><i class="fa-solid fa-tags"></i> Thành viên <span
+              class="user-rank-span">{{userRank}}</span>
           </li>
           <li class="list-item"><i class="fa-solid fa-ticket"></i> Vé của tôi</li>
           {{!-- <li class="list-item"><i class="fa-solid fa-gift"></i> Ưu đãi</li>
@@ -95,57 +96,33 @@
       <div class="sidebar-display-list  user-invoice-ticket-display unactive">
         <div class="tab">
           <div>
-            <button class="tab-links active-tab">Hiện tại</button>
+            <button class="tab-links active-tab" id="ticket-fetch-current">Hiện tại</button>
             <button class="tab-links">Đã đi</button>
             <button class="tab-links">Đã huỷ</button>
           </div>
 
-          <div class="tab-content active">
-            <p>Bạn chưa có chuyến sắp đi nào, <span class="book-ticket-span"><a href="#">đặt
-                  vé ngay</a></span></p>
-          </div>
-          <div class="tab-content unactive">
-            <div class="ticket-container">
-              <div>
-                <h4 class="booked-date">{{bookedDate}}</h4>
-                <div class="paid-ticket">
-                  <div class="paid-ticket-information">
-                    <div>
-                      <h3 class="paid-ticket-time">{{bookedTime}}</h3>
-                      <p>{{busHouse}}</p>
-                      <p>{{route}}</p>
-                      <p>Biển số xe: <span class="license-plate">{{busPlate}}</span></p>
+          <ul class="tab-content active" id="ticket-display-ul">
+            <li>
+              <div class="ticket-container">
+                <div>
+                  <h4 class="booked-date">{{bookedDate}}</h4>
+                  <div class="paid-ticket">
+                    <div class="paid-ticket-information">
+                      <div>
+                        <h3 class="paid-ticket-time">{{bookedTime}}</h3>
+                        <p>{{busHouse}}</p>
+                        <p>{{route}}</p>
+                        <p>Biển số xe: <span class="license-plate">{{busPlate}}</span></p>
+                      </div>
+                      <span class="paid-span">{{payStatus}}</span>
                     </div>
-                    <span class="paid-span">{{payStatus}}</span>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="rebook">
-              <a href="#"><i class="fa-solid fa-ticket"></i> Đặt khứ hồi</a>
-            </div>
-          </div>
-          <div class="tab-content unactive">
-            <div class="ticket-container">
-              <div>
-                <h4 class="booked-date">{{bookedDate}}</h4>
-                <div class="paid-ticket">
-                  <div class="paid-ticket-information">
-                    <div>
-                      <h3 class="paid-ticket-time">{{bookedTime}}</h3>
-                      <p>{{busHouse}}</p>
-                      <p>{{route}}</p>
-                      <p>Biển số xe: <span class="license-plate">{{busPlate}}</span></p>
-                    </div>
-                    <span class="paid-span">{{payStatus}}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="rebook">
-              <a href="#"><i class="fa-solid fa-ticket"></i> Đặt lại</a>
-            </div>
-          </div>
+            </li>
+          </ul>
+
+
         </div>
       </div>
 
