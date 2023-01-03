@@ -97,12 +97,12 @@ const ticketDetailHandler = async (req: Request<{}, {}, {}, { ticketId: string }
       ...(ticket.status === "WAITING" ? { canPaid: true, canCancel: true } : {}),
       ...(ticket.status === "CANCELED" ? { canCancel: false, canPaid: false } : {}),
       ...(ticket.status === "PAID" ? { canPaid: false, canCancel: true } : {}),
-      ...(routeDetail && (!ticket.Rating) ? { canRate: true } : { canRate: false })
+      ...((routeDetail && !ticket.Rating && ticket.status === "PAID") ? { canRate: true } : { canRate: false })
     },
-    rating: { 
+    ...(!ticket.Rating ? {} : {rating: ({ 
       ...ticket.Rating ,
       star: star
-    }
+    })})
   });
 }
 
