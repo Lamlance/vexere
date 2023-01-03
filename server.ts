@@ -96,7 +96,7 @@ app.set("view engine", "hbs");
 app.get("/", indexHandler);
 
 app.get("/search", searchRouteHandler);
-app.get("/userDashboard", userDashboardHandler);
+app.get("/user", userDashboardHandler);
 
 
 // app.get("/user/ticket", bookingDetailHandler);

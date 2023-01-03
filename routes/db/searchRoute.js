@@ -1,6 +1,6 @@
 import { prisma } from '../../server';
 import { singleIntQueryHandler } from './queryHandler';
-async function searchRouteFromDB(fromId, toId, page = 0) {
+async function searchRouteFromDB(fromId, toId, houses, min, max, page = 0) {
     const itemPerPage = 5;
     await prisma.$connect();
     const route = await prisma.route.findFirst({
@@ -35,8 +35,19 @@ async function searchRouteFromDB(fromId, toId, page = 0) {
             AND: [
                 { startTime: { gt: new Date("05 October 2011 14:48 UTC") } },
                 { remainSeat: { gt: 0 } },
-                { routeId: route.id }
-            ]
+                { routeId: route.id },
+                { ...(isNaN(min) ? {} : { price: { gte: min } }) },
+                { ...(isNaN(max) ? {} : { price: { lte: max } }) }
+            ],
+            ...((houses.length === 0) ? {} : {
+                OR: [
+                    {
+                        Bus: {
+                            OR: [{ busHouse: { in: houses } }]
+                        }
+                    }
+                ]
+            })
         },
         select: {
             id: true,
@@ -70,7 +81,7 @@ async function searchRouteAPI(req, res) {
     const page = singleIntQueryHandler(req.query.page, 0);
     const fromId = singleIntQueryHandler(req.query.fromId);
     const toId = singleIntQueryHandler(req.query.toId);
-    const ans = await searchRouteFromDB(fromId, toId, page);
+    const ans = await searchRouteFromDB(fromId, toId, [], NaN, NaN, page);
     res.json(ans);
 }
 export default searchRouteAPI;

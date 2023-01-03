@@ -164,10 +164,21 @@ const bookingPaymentHandler = async (req: Request<{}, {}, {}, { ticketId: string
   return;
 }
 
-export const bookingDetailCallbackHandler = async (req: Request, res: Response) => {
-  let ticketId = parseInt(req.query.extraData);
+export const bookingDetailCallbackHandler = async (req: Request<{}, {}, {}, { extraData: string, resultCode: string }>, res: Response) => {
+  const ticketId = singleIntQueryHandler(req.query.extraData, -1);
+  const result = singleIntQueryHandler(req.query.resultCode, -1);
 
-  if (req.query.resultCode == 0) {
+  if (ticketId < 0 || result != 0) {
+    const transactionStatus = "Thanh toán thất bại! Hãy thử lại."
+    res.locals.title = "Thông tin thanh toán";
+    res.render("paymentStatus", {
+      transactionStatus: transactionStatus,
+      ticketId: ticketId,
+    });
+    return;
+  }
+
+  if (result == 0) {
     // cập nhật trong database
     let transactionStatus = "Thanh toán thành công!";
     const updateTicket = await prisma.ticket.update({
@@ -177,6 +188,26 @@ export const bookingDetailCallbackHandler = async (req: Request, res: Response) 
       data: {
         status: "PAID",
       },
+    })
+    const detail = await prisma.routeDetail.findFirst({
+      where: { id: updateTicket.routeDetailId }
+    })
+
+    if (!detail) {
+      const transactionStatus = "Thanh toán thất bại! Hãy thử lại."
+      res.locals.title = "Thông tin thanh toán";
+      res.render("paymentStatus", {
+        transactionStatus: transactionStatus,
+        ticketId: ticketId,
+      });
+      return;
+    }
+
+    await prisma.routeDetail.update({
+      where: { id: detail.id },
+      data: {
+        remainSeat: detail.remainSeat - 1
+      }
     })
     res.locals.title = "Thông tin thanh toán";
 
@@ -188,14 +219,10 @@ export const bookingDetailCallbackHandler = async (req: Request, res: Response) 
     return
   }
 
-  let transactionStatus = "Thanh toán thất bại! Hãy thử lại."
-  res.locals.title = "Thông tin thanh toán";
+
 
   // Render lại trong trang thanh toán thất bại
-  res.render("paymentStatus", {
-    transactionStatus: transactionStatus,
-    ticketId: ticketId,
-  });
+
 
 }
 

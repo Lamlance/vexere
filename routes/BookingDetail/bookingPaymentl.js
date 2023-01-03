@@ -135,8 +135,18 @@ const bookingPaymentHandler = async (req, res) => {
     return;
 };
 export const bookingDetailCallbackHandler = async (req, res) => {
-    let ticketId = parseInt(req.query.extraData);
-    if (req.query.resultCode == 0) {
+    const ticketId = singleIntQueryHandler(req.query.extraData, -1);
+    const result = singleIntQueryHandler(req.query.resultCode, -1);
+    if (ticketId < 0 || result != 0) {
+        const transactionStatus = "Thanh toán thất bại! Hãy thử lại.";
+        res.locals.title = "Thông tin thanh toán";
+        res.render("paymentStatus", {
+            transactionStatus: transactionStatus,
+            ticketId: ticketId,
+        });
+        return;
+    }
+    if (result == 0) {
         // cập nhật trong database
         let transactionStatus = "Thanh toán thành công!";
         const updateTicket = await prisma.ticket.update({
@@ -147,6 +157,24 @@ export const bookingDetailCallbackHandler = async (req, res) => {
                 status: "PAID",
             },
         });
+        const detail = await prisma.routeDetail.findFirst({
+            where: { id: updateTicket.routeDetailId }
+        });
+        if (!detail) {
+            const transactionStatus = "Thanh toán thất bại! Hãy thử lại.";
+            res.locals.title = "Thông tin thanh toán";
+            res.render("paymentStatus", {
+                transactionStatus: transactionStatus,
+                ticketId: ticketId,
+            });
+            return;
+        }
+        await prisma.routeDetail.update({
+            where: { id: detail.id },
+            data: {
+                remainSeat: detail.remainSeat - 1
+            }
+        });
         res.locals.title = "Thông tin thanh toán";
         // Render lại trong trang thanh toán thành công
         res.render("paymentStatus", {
@@ -155,12 +183,6 @@ export const bookingDetailCallbackHandler = async (req, res) => {
         });
         return;
     }
-    let transactionStatus = "Thanh toán thất bại! Hãy thử lại.";
-    res.locals.title = "Thông tin thanh toán";
     // Render lại trong trang thanh toán thất bại
-    res.render("paymentStatus", {
-        transactionStatus: transactionStatus,
-        ticketId: ticketId,
-    });
 };
 export default bookingPaymentHandler;
