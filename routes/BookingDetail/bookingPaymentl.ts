@@ -32,6 +32,13 @@ const bookingPaymentHandler = async (req: Request<{}, {}, {}, { ticketId: string
   const ticket = await prisma.ticket.findFirst({
     where: {
       AND: [{ id: ticketId }, { userId: userData.id }]
+    },
+    include:{
+      RouteDetail:{
+        select:{
+          price: true
+        }
+      }
     }
   });
   console.log(ticket);
@@ -40,42 +47,6 @@ const bookingPaymentHandler = async (req: Request<{}, {}, {}, { ticketId: string
     res.redirect("/");
     return;
   }
-
-  // const routeDetail = await prisma.routeDetail.findFirst({
-  //   where: {
-  //     AND: [
-  //       { id: { equals: ticket.routeDetailId } },
-  //     ]
-  //   },
-  //   include: {
-  //     Bus: {
-  //       select: {
-  //         plate: true,
-  //         type: true,
-  //         BusHouse: {
-  //           select: {
-  //             Name: true
-  //           }
-  //         }
-  //       }
-  //     }
-  //   }
-  // })
-
-  // const route = await prisma.route.findFirst({
-  //   where: {
-  //     AND: [{ id: { equals: routeDetail?.routeId } }]
-  //   },
-  //   select: {
-  //     Location_Route_startLocIdToLocation: {
-  //       select: { name: true }
-  //     },
-  //     Location_Route_endLocIdToLocation: {
-  //       select: { name: true }
-  //     }
-  //   }
-  // });
-
 
   // Get status
   const ticketStatus = ticket.status;
@@ -110,7 +81,7 @@ const bookingPaymentHandler = async (req: Request<{}, {}, {}, { ticketId: string
     console.log("Chưa thanh toán");
     let payUrl = "";
     const newPayment = {
-      amount: 50000,
+      amount: ticket.RouteDetail.price,
       payment_info: `Thanh toán vé xe`
     }
 
