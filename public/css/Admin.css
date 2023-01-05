@@ -1,0 +1,53 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+#admin-wrapper {
+  display: grid;
+  grid-template-columns: 0.4fr 1.6fr;
+  background-color: azure;
+  height: 100vh;
+}
+
+#admin-tab-select {
+  background-color: #ace4f8;
+}
+
+#admin-tab-select>li {
+  min-height: 4rem;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+#admin-tab-select>li:hover {
+  background-color: #56b3ac;
+}
+
+#admin-tab-display {
+  background-color: #e3e5e4;
+}
+
+
+.tab-display {
+  display: grid;
+  grid-template-columns: 0.5fr 1.5fr;
+}
+
+.tab-display-option>ul>li, #ticket-refresh-btn {
+  min-height: 4rem;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.tab-display-option>ul>li:hover, #ticket-refresh-btn:hover {
+  background-color: #303246;
+  color: white;
+}
+
+#ticket-display-form {
+  display: flex;
+  flex-direction: column;
+}

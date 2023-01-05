@@ -1,10 +1,10 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
-}
-
-generator client {
-  provider = "prisma-client-js"
 }
 
 model Bus {
@@ -21,6 +21,7 @@ model BusHouse {
   id   Int    @id @default(autoincrement())
   Name String @db.Char(50)
   Bus  Bus[]
+  Rating Rating[]
 }
 
 model Location {
@@ -35,6 +36,9 @@ model Rating {
   rating   Int
   comment  String?
   ticketId Int     @unique
+  busHouseId Int 
+
+  BusHouse BusHouse @relation(fields: [busHouseId],references: [id])
   Ticket   Ticket  @relation(fields: [ticketId], references: [id])
 }
 
@@ -68,14 +72,7 @@ model Ticket {
   userId        Int
   Rating        Rating?
   RouteDetail   RouteDetail  @relation(fields: [routeDetailId], references: [id])
-  User          User        @relation(fields: [userId], references: [id])
-}
-
-enum TicketStatus {
-  WAITING
-  ACCEPT
-  PAID
-  CANCELED
+  User          User         @relation(fields: [userId], references: [id])
 }
 
 model User {
@@ -92,3 +89,4 @@ model testtable {
   id      Int  @id @default(autoincrement())
   randNum Int?
 }
+

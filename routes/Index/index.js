@@ -6,7 +6,7 @@ const indexHandler = async (req, res) => {
             id: true
         }
     });
-    // let locations = data.map(loc => loc.name);
+    let locations = data.map(loc => loc.name);
     res.locals.title = "Trang chủ";
     res.locals.locations = data;
     res.render("index");
