@@ -1,21 +1,15 @@
 import TicketElement from "./TicketEleClass.js";
 class TicketsInfo {
     constructor() {
-        // this.ticket = [];
         this.ticketMap = {};
     }
     setTickets(tickets) {
-        // this.ticket = tickets;
         this.ticketMap = {};
-        // this.ticket.forEach((ticket)=>{
-        //   this.ticketMap[ticket.getTicket().id] = ticket;
-        // })
         tickets.forEach((ticket) => {
             this.ticketMap[ticket.getTicket().id] = ticket;
         });
     }
     addElement(ticket) {
-        // this.ticket.push(ticket);
         this.ticketMap[ticket.getTicket().id] = ticket;
     }
     updateElement(ticketId, comment, status) {
@@ -47,9 +41,7 @@ async function fetchTicket() {
             li.appendChild(newTicket);
             ticketLi.push(li);
         });
-        console.log(ticketLi);
         ticketList.replaceChildren(...ticketLi);
-        console.log(ticketList);
         return null;
     }
     catch (error) {

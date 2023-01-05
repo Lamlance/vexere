@@ -4,6 +4,7 @@
 
 <script type="module" src="/js/Admin/Admin.js" defer></script>
 <script type="module" src="/js/Admin/Ticket.js" defer></script>
+<script type="module" src="/js/Admin/House.js" defer></script>
 
 <div id="admin-wrapper">
   <ul id="admin-tab-select">
@@ -15,22 +16,32 @@
   </ul>
 
   <ul id="admin-tab-display">
-
+    {{!-- Quản lí nhà xe --}}
     <li class="js-tab-display">
       <section class="tab-display ">
         <section class="tab-display-option">
-          <ul>
-            <li> REFRESH </li>
-            <li> THÊM NHÀ XE </li>
-          </ul>
+          <div id="house-refresh-btn"> REFRESH </div>
+          <div id="house-add-btn"> THÊM NHÀ XE </div>
+          <ul id="house-display-list"></ul>
         </section>
 
         <section class="tab-display-form">
-          Form Quản lí nhà xe
+          <form class="display-form" id="house-display-form" style="display: flex;flex-direction:column">
+            <label>
+              <span>House ID:</span>
+              <input name="house-id" type="number" readonly />
+            </label>
+            <label>
+              <span>House Name:</span>
+              <input name="house-name" type="text" placeholder="Bus House Name" required />
+            </label>
+            <input type="submit" value="Submit Bus House" />
+          </form>
         </section>
       </section>
     </li>
 
+    {{!-- Quản lí chuyến xe --}}
     <li class="js-tab-display">
       <section class="tab-display">
         <section class="tab-display-option">
@@ -38,28 +49,37 @@
 
         <section class="tab-display-form">
         </section>
-        
+
       </section>
 
     </li>
 
+    {{!-- Quản lí vé xe --}}
     <li class="js-tab-display">
       <section class="tab-display">
         <section class="tab-display-option">
           <div id="ticket-refresh-btn">REFRESH</div>
-          <ul id="ticket-display-list">
-          </ul>
+          <ul id="ticket-display-list"></ul>
         </section>
 
         <section class="tab-display-form">
-          <form id="ticket-display-form">
-            <input name="ticket-id" type="number" readonly />
-            <textarea name="comment" rows="5" cols="12" placeholder="Ticket Commet"></textarea>
-            <select name="ticket-status">
-              <option value="WAITING">WAITING</option>
-              <option value="PAID">PAID</option>
-              <option value="CANCELED">CANCELED</option>
-            </select>
+          <form class="display-form" id="ticket-display-form">
+            <label>
+              <span> TicketID: </span>
+              <input name="ticket-id" type="number" readonly />
+            </label>
+            <label>
+              <span>Comment</span>
+              <textarea name="comment" rows="3" cols="12" placeholder="Ticket Commet"></textarea>
+            </label>
+            <label>
+              <span> Ticket Status:</span>
+              <select name="ticket-status">
+                <option value="WAITING">WAITING</option>
+                <option value="PAID">PAID</option>
+                <option value="CANCELED">CANCELED</option>
+              </select>
+            </label>
             <input type="submit" value="Update Ticket" />
           </form>
         </section>

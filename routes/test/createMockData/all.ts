@@ -1,5 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
 import { prisma } from '../../../server';
+const busHouseData = [
+  { "Name": "Mayer, Mayer and Jerde"  },
+  { "Name": "Green-Murazik" },
+  { "Name": "Vandervort, Crona and Boyle" }
+]
 
 const busData = [
   { "plate": "WBAYB6C53FG161804", "seatAmount": 19, "type": 2, "busHouse": 2 },
@@ -11,23 +16,10 @@ const busData = [
   { "plate": "KNADM5A39D6068518", "seatAmount": 29, "type": 2, "busHouse": 2 },
   { "plate": "1D7RE5GK1BS454204", "seatAmount": 36, "type": 3, "busHouse": 2 }
 ]
-
-const busGenerate = async (req: Request, res: Response,next:NextFunction) => {
-
-  if (req.query && req.query.password && req.query.password === "vexere123") {
-    await prisma.$connect();
-    const inserted = await prisma.bus.createMany({
-      data: busData,
-      skipDuplicates: true
-    });
-
+const allGenerate = async (req: Request, res: Response,next:NextFunction) => {
+  if (!(req.query && req.query.password && req.query.password === "vexere123")){
+    res.status(404);
     next();
     return;
   }
-
-  res.status(200).json({
-    error: "Wrong queuery params"
-  })
 }
-
-export default busGenerate;

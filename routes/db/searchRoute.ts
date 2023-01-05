@@ -2,28 +2,28 @@ import { Request, Response, NextFunction } from 'express';
 import { prisma } from '../../server';
 import { singleIntQueryHandler } from './queryHandler';
 
-async function searchRouteFromDB(fromId:number,toId:number,page:number = 0) {
+async function searchRouteFromDB(fromId: number, toId: number, houses: number[],min:number ,max:number,page: number = 0) {
   const itemPerPage = 5;
   await prisma.$connect();
   const route = await prisma.route.findFirst({
-    select:{
-      id:true,
-      Location_Route_startLocIdToLocation:{
-        select:{name:true}
+    select: {
+      id: true,
+      Location_Route_startLocIdToLocation: {
+        select: { name: true }
       },
-      Location_Route_endLocIdToLocation:{
-        select:{name:true}
+      Location_Route_endLocIdToLocation: {
+        select: { name: true }
       }
     },
-    where:{
-      AND:[
-        {startLocId: fromId},
-        {endLocId: toId},
+    where: {
+      AND: [
+        { startLocId: fromId },
+        { endLocId: toId },
       ]
     }
   })
 
-  if(!route){
+  if (!route) {
     return {
       route: {},
       routeDetail: [],
@@ -31,29 +31,40 @@ async function searchRouteFromDB(fromId:number,toId:number,page:number = 0) {
   }
 
   const today = new Date();
-  const tommorrow = new Date(today.getTime() + 1*8.64e+7)
+  const tommorrow = new Date(today.getTime() + 1 * 8.64e+7)
   const routeDetail = await prisma.routeDetail.findMany({
     take: itemPerPage,
     skip: itemPerPage * page,
-    where:{
-      AND:[
-        {startTime:{gt: new Date("05 October 2011 14:48 UTC")}},
-        {remainSeat:{gt:0}},
-        {routeId:route.id}
-      ]
+    where: {
+      AND: [
+        { startTime: { gt: new Date("05 October 2011 14:48 UTC") } },
+        { remainSeat: { gt: 0 } },
+        { routeId: route.id },
+        { ...(isNaN(min) ? {} : {price:{gte: min}} ) },
+        { ...(isNaN(max) ? {} : {price:{lte: max}} ) }
+      ],
+      ...( (houses.length === 0) ? {} : {
+        OR: [
+          {
+            Bus: {
+              OR: [{ busHouse: { in: houses } }]
+            }
+          }]
+      }
+      )
     },
-    select:{
-      id:true,
-      startTime:true,
+    select: {
+      id: true,
+      startTime: true,
       endTime: true,
       price: true,
       remainSeat: true,
-      Bus:{
-        select:{
+      Bus: {
+        select: {
           type: true,
-          BusHouse:{
-            select:{
-              Name:true,
+          BusHouse: {
+            select: {
+              Name: true,
               id: true
             }
           }
@@ -61,7 +72,6 @@ async function searchRouteFromDB(fromId:number,toId:number,page:number = 0) {
       }
     }
   })
-
   return {
     route: route,
     routeDetail: routeDetail
@@ -73,7 +83,7 @@ async function searchRouteAPI(
     page?: string,
     fromId: string,
     toId: string
-  },{}>,
+  }, {}>,
   res: Response) {
 
   if (!(req.query && req.query.fromId && req.query.toId)) {
@@ -81,14 +91,14 @@ async function searchRouteAPI(
     return;
   }
 
-  const page = singleIntQueryHandler(req.query.page,0);
+  const page = singleIntQueryHandler(req.query.page, 0);
   const fromId = singleIntQueryHandler(req.query.fromId);
   const toId = singleIntQueryHandler(req.query.toId);
 
-  const ans = await searchRouteFromDB(fromId,toId,page);
-  
+  const ans = await searchRouteFromDB(fromId, toId, [],NaN,NaN, page);
+
   res.json(ans);
 }
 
 export default searchRouteAPI;
-export {searchRouteFromDB}
+export { searchRouteFromDB }

@@ -8,15 +8,19 @@
   <form method="get" accept="/search" class="search_result_filter">
     <!-- Price range -->
     <section>
+      <input style="display: none;" name="fromId" value="{{route.Location_Route_startLocIdToLocation.name}}">
+      <input style="display: none;" name="toId" value="{{route.Location_Route_endLocIdToLocation.name}}">
+      <input style="display: none;" name="date" type="date" value="{{date}}">
+
       <div style="width: 100%;">
         <div id="price-label">Giá vé</div>
 
         <div class="price-range">
           <label> Giá thấp nhất
-            <input id="min-price-slider" type="number" class="range-min" min="0" max="2000000" step="1000">
+            <input id="min-price-slider" name="min" type="number" class="range-min" min="0" max="2000000" step="1000">
           </label>
           <label> Giá cao nhất
-            <input id="max-price-slider" type="number" class="range-max" min="0" max="2000000" step="1000">
+            <input id="max-price-slider" name="max" type="number" class="range-max" min="0" max="2000000" step="1000">
           </label>
         </div>
       </div>

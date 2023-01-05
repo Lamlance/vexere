@@ -39,6 +39,8 @@ import adminTicketAPI from "./routes/Admin/ticket";
 import busAdminHandler from "./routes/BusAdmin/busAdmin";
 import ticketDetailHandler from "./routes/BookingDetail/bookingDetail";
 import createRating from "./routes/BookingDetail/createRating";
+import adminBusHouseHandler from "./routes/Admin/bushouse";
+import userTicketsApi from "./routes/UserDashboard/Ticket";
 
 const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 const sessionManager = new UserSessionManager();
@@ -95,20 +97,28 @@ app.set("view engine", "hbs");
 app.get("/", indexHandler);
 
 app.get("/search", searchRouteHandler);
-app.get("/userDashboard", userDashboardHandler);
+app.get("/user", userDashboardHandler);
+app.use("/user/api/tickets",userTicketsApi)
 
 
 // app.get("/user/ticket", bookingDetailHandler);
 // app.get("/user/ticket",ticketDetailHandler);
 app.get("/search", searchRouteHandler);
 
-
+//ADMIN
 app.get("/admin/route_detail", adminRouteDetailHandler);
 app.get("/admin/route_detail/add", adminAddRouteDetailHandler);
 app.get("/admin/route_detail/edit/:id", adminEditRouteDetailHandler); // pass query route detail id
 app.post("/api/route_detail/add", addRouteDetailHandler);
 app.put("/api/route_detail/edit/:id", editRouteDetailHandler);
 app.delete("/api/route_detail/delete/:id", deleteRouteDetailHandler);
+
+app.get("/admin", adminDashBoard);
+app.use("/admin/api/ticket", bodyPraseObj, adminTicketAPI);
+app.use("/admin/api/bushouse", bodyPraseObj, adminBusHouseHandler);
+app.use("/admin/api/bus", bodyPraseObj, busAdminHandler);
+//==========
+
 
 //USER TICKET
 app.get("/user/ticket/pay", bookingPaymentHandler);
@@ -137,10 +147,7 @@ app.get("/api/test/profile", (req, res) => {
   });
 });
 
-app.get("/admin", adminDashBoard);
-app.use("/admin/api/ticket", bodyPraseObj, adminTicketAPI);
 
-app.use("/admin/api/bus", bodyPraseObj, busAdminHandler);
 
 app.listen(port, () => {
   console.log(`App listening on http://localhost:${port}`);
