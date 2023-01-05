@@ -103,6 +103,17 @@ const updateBusAdminHanlder = async (
   });
 };
 
+const deleteBusAdminHanlder = async (
+  req: Request<{}, {}, AdminBusDELETE, {}>
+) => {
+  await myPrisma.$connect();
+  await myPrisma.bus.delete({
+    where: {
+      id: 12,
+    },
+  });
+};
+
 const addBus = async (req: Request, res: Response) => {};
 
 const editBus = async (req: Request, res: Response) => {};
