@@ -88,7 +88,7 @@ const addBusAdminHandler = async (req: Request<{}, {}, AdminBusPOST, {}>) => {
 const updateBusAdminHanlder = async (
   req: Request<{}, {}, AdminBusPOST, {}>
 ) => {
-  const { id, plate, seatAmount, type, busHouse } = req.body;
+  const { plate, seatAmount, type, busHouse } = req.body;
   if (!(!plate && seatAmount && type && busHouse)) {
     return null;
   }
@@ -113,7 +113,7 @@ const deleteBusAdminHanlder = async (
   await myPrisma.$connect();
   await myPrisma.bus.delete({
     where: {
-      id: 12,
+      id: singleIntQueryHandler(req.params.id),
     },
   });
 };
