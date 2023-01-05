@@ -85,9 +85,7 @@ const addBusAdminHandler = async (req: Request<{}, {}, AdminBusPOST, {}>) => {
   }
 };
 
-const updateBusAdminHanlder = async (
-  req: Request<{}, {}, AdminBusPOST, {}>
-) => {
+const updateBusAdminHanlder = async (req: Request<{}, {}, AdminBusPUT, {}>) => {
   const { plate, seatAmount, type, busHouse } = req.body;
   if (!(!plate && seatAmount && type && busHouse)) {
     return null;
