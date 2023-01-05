@@ -88,7 +88,7 @@ const addBusAdminHandler = async (req: Request<{}, {}, AdminBusPOST, {}>) => {
 const updateBusAdminHanlder = async (
   req: Request<{}, {}, AdminBusPOST, {}>
 ) => {
-  const { plate, seatAmount, type, busHouse } = req.body;
+  const { id, plate, seatAmount, type, busHouse } = req.body;
   if (!(!plate && seatAmount && type && busHouse)) {
     return null;
   }
@@ -101,11 +101,9 @@ const updateBusAdminHanlder = async (
   };
   const newBus = await myPrisma.bus.update({
     where: {
-      id: 12,
+      id: singleIntQueryHandler(req.params.id),
     },
-    data: {
-      {busData}
-    },
+    data: busData,
   });
 };
 
