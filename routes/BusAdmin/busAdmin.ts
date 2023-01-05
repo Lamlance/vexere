@@ -93,12 +93,18 @@ const updateBusAdminHanlder = async (
     return null;
   }
   await myPrisma.$connect();
+  const busData = {
+    plate: singleIntQueryHandler(req.body.plate),
+    seatAmount: singleIntQueryHandler(req.body.seatAmount),
+    type: singleIntQueryHandler(req.body.type),
+    busHouse: singleIntQueryHandler(req.body.busHouse),
+  };
   const newBus = await myPrisma.bus.update({
     where: {
       id: 12,
     },
     data: {
-      plate: "12K012938",
+      {busData}
     },
   });
 };
