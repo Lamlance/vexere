@@ -41,6 +41,7 @@ const getBusAdminHandler = async (req: Request<{}, {}, {}, AdminBusGET>) => {
 
 const addBusAdminHandler = async (req: Request<{}, {}, AdminBusPOST, {}>) => {
   const { plate, seatAmount, type, busHouse } = req.body;
+  console.log(req.body);
   if (!(plate && seatAmount >= 0 && type >= 0 && busHouse >= 0)) {
     return null;
   }
@@ -56,13 +57,15 @@ const addBusAdminHandler = async (req: Request<{}, {}, AdminBusPOST, {}>) => {
     });
     return newBus;
   } catch (error) {
+    console.log(error);
     return null;
   }
 };
 
 const updateBusAdminHanlder = async (req: Request<{}, {}, AdminBusPUT, {}>) => {
   const { plate, seatAmount, type, busId } = req.body;
-  if (!(!plate && seatAmount && type)) {
+  
+  if (!(plate && seatAmount && type)) {
     return null;
   }
   try {

@@ -1,4 +1,3 @@
-"use strict";
 class BusElement extends HTMLElement {
     constructor(busId, busPlate, busSeats, busType, house, houseName, form) {
         super();
@@ -18,6 +17,16 @@ class BusElement extends HTMLElement {
         inputs.namedItem("plate").value = this.plate;
         inputs.namedItem("busType").valueAsNumber = this.type;
         inputs.namedItem("seats").valueAsNumber = this.seats;
-        inputs.namedItem("house").value = this.houseName;
+        inputs.namedItem("house").value = `${this.houseId}`;
+    }
+    getBusId() {
+        return this.busId;
+    }
+    updateBus(data) {
+        this.busId = data.id;
+        this.plate = data.plate;
+        this.seats = data.seatAmount;
     }
 }
+customElements.define('li-bus-element', BusElement);
+export default BusElement;

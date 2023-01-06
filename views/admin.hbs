@@ -17,7 +17,7 @@
 
   <ul id="admin-tab-display">
     {{!-- Quản lí nhà xe --}}
-    <li class="js-tab-display">
+    <li class="js-tab-display" style="height: 100%; display:block">
       <section class="tab-display ">
         <section class="tab-display-option">
           <div id="house-refresh-btn"> REFRESH </div>
@@ -42,10 +42,11 @@
     </li>
 
     {{!-- Quản lí xe --}}
-    <li class="js-tab-display">
+    <li class="js-tab-display" style="height: 100%; display:none">
       <section class="tab-display">
         <section class="tab-display-option">
           <div id="bus-refresh-btn">REFRESH</div>
+          <div id="bus-add-btn">ADD BUS</div>
           <ul id="bus-display-list"></ul>
         </section>
 
@@ -65,11 +66,11 @@
             </label>
             <label>
               <span>Bus seats</span>
-              <input name="seats" type="number" required />
+              <input name="seats" min="1" type="number" required />
             </label>
             <label>
               <span>BusHouse</span>
-              <select name="house" id="bus-house-select">
+              <select name="house" id="bus-house-select" required>
               </select>
             </label>
             <input type="submit" value="Submit Bus" />
@@ -79,7 +80,7 @@
     </li>
 
     {{!-- Quản lí chuyến xe --}}
-    <li class="js-tab-display">
+    <li class="js-tab-display" style="height: 100%; display:none">
       <section class="tab-display">
         <section class="tab-display-option">
         </section>
@@ -92,7 +93,7 @@
     </li>
 
     {{!-- Quản lí vé xe --}}
-    <li class="js-tab-display">
+    <li class="js-tab-display" style="height: 100%; display:none">
       <section class="tab-display">
         <section class="tab-display-option">
           <div id="ticket-refresh-btn">REFRESH</div>

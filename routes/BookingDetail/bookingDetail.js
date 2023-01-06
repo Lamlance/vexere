@@ -75,6 +75,10 @@ const ticketDetailHandler = async (req, res) => {
             }
         }
     });
+    if (!route || !routeDetail) {
+        res.redirect("/");
+        return;
+    }
     const star = makeStar(ticket.Rating?.rating ? ticket.Rating.rating : 0);
     console.log(star);
     res.render("ticket", {
@@ -82,6 +86,7 @@ const ticketDetailHandler = async (req, res) => {
         detail: routeDetail,
         route: route,
         transactionStatus: ticket.status,
+        price: routeDetail.price,
         statusAction: {
             ...(ticket.status === "WAITING" ? { canPaid: true, canCancel: true } : {}),
             ...(ticket.status === "CANCELED" ? { canCancel: false, canPaid: false } : {}),
