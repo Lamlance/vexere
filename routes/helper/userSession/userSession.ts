@@ -9,7 +9,7 @@ class UserSessionManager {
 
   constructor() {
     this.users = {};
-    setInterval(this.infLoopSessionKiller,60000);
+    setInterval(this.infLoopSessionKiller,36e5);
   }
 
   private async infLoopSessionKiller() {
