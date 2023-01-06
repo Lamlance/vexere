@@ -8,24 +8,97 @@ interface AdminBusGET {
 }
 interface AdminBusPOST {
   plate: string;
-  seatAmount: string;
-  type: string;
-  busHouse: string;
+  seatAmount: number;
+  type: number;
+  busHouse: number;
 }
 interface AdminBusPUT {
-  busId: string;
+  busId: number;
   plate: string;
-  seatAmount: string;
-  type: string;
-  busHouse: string;
+  seatAmount: number;
+  type: number;
 }
 interface AdminBusDELETE {
-  busId: string;
+  busId: number;
 }
 
 type AdminBusBody = AdminBusPOST & AdminBusPUT & AdminBusDELETE;
 
-const busAdminHandler = async (
+const getBusAdminHandler = async (req: Request<{}, {}, {}, AdminBusGET>) => {
+  const page = singleIntQueryHandler(req.query.page, 0);
+  await myPrisma.$connect();
+  const buses = await myPrisma.bus.findMany({
+    take: 5,
+    skip: 5 * page,
+    include:{
+      BusHouse:{
+        select:{Name:true}
+      }
+    }
+  });
+  return buses;
+};
+
+const addBusAdminHandler = async (req: Request<{}, {}, AdminBusPOST, {}>) => {
+  const { plate, seatAmount, type, busHouse } = req.body;
+  if (!(plate && seatAmount >= 0 && type >= 0 && busHouse >= 0)) {
+    return null;
+  }
+  await myPrisma.$connect();
+  try {
+    const newBus = await myPrisma.bus.create({
+      data: {
+        plate: plate,
+        seatAmount: seatAmount,
+        type: type,
+        busHouse: busHouse,
+      },
+    });
+    return newBus;
+  } catch (error) {
+    return null;
+  }
+};
+
+const updateBusAdminHanlder = async (req: Request<{}, {}, AdminBusPUT, {}>) => {
+  const { plate, seatAmount, type, busId } = req.body;
+  if (!(!plate && seatAmount && type)) {
+    return null;
+  }
+  try {
+    await myPrisma.$connect();
+    const newBus = await myPrisma.bus.update({
+      where: {
+        id: busId,
+      },
+      data: {
+        plate: plate,
+        seatAmount: seatAmount,
+        type: type
+      }
+    });
+    return newBus;
+  } catch (error) {
+
+  }
+  return null;
+};
+
+const deleteBusAdminHanlder = async (req: Request<{}, {}, AdminBusDELETE, {}>) => {
+  try {
+    await myPrisma.$connect();
+    const deletedBus = await myPrisma.bus.delete({
+      where: {
+        id: req.body.busId,
+      },
+    });
+    return deletedBus;
+  } catch (error) {}
+  return null;
+};
+
+
+const busAdminHandler = async ( 
   req: Request<{}, {}, AdminBusBody, AdminBusGET>,
   res: Response
 ) => {
@@ -45,80 +118,33 @@ const busAdminHandler = async (
       if (newBus) {
         res.status(200).json(newBus);
       } else {
-        res.status(400);
+        res.status(400).json(null);
       }
       return;
     }
-    default:
-      break;
+    case "PUT": {
+      const updated = await updateBusAdminHanlder(req);
+      if (updated) {
+        res.status(200).json(updated);
+      } else {
+        res.status(400).json(null);
+      }
+      return;
+    }
+    case "DELETE": {
+      const deleted = await deleteBusAdminHanlder(req);
+      if(deleted){
+        res.status(200).json(deleted);
+      }else{
+        res.status(400).json(null);
+      }
+      return;
+    }
   }
+
+  res.status(404).json(null);
 };
 
-const getBusAdminHandler = async (req: Request<{}, {}, {}, AdminBusGET>) => {
-  const page = singleIntQueryHandler(req.query.page, 0);
-  await myPrisma.$connect();
-  const buses = await myPrisma.bus.findMany({
-    take: 5,
-    skip: 5 * page,
-  });
-  return buses;
-};
 
-const addBusAdminHandler = async (req: Request<{}, {}, AdminBusPOST, {}>) => {
-  const { plate } = req.body;
-  const seatAmount = singleIntQueryHandler(req.body.seatAmount,-1);
-  const type = singleIntQueryHandler(req.body.type,-1);
-  const busHouse = singleIntQueryHandler(req.body.busHouse,-1);
-  if (!(plate && seatAmount>=0 && type>=0 && busHouse>=0)) {
-    return null;
-  }
-  await myPrisma.$connect();
-  try {
-    const newBus = await myPrisma.bus.create({
-      data: {
-        plate: plate,
-        seatAmount: seatAmount,
-        type: type,
-        busHouse: busHouse,
-      },
-    });
-    return newBus;
-  } catch (error) {
-    return null;
-  }
-};
-
-const updateBusAdminHanlder = async (
-  req: Request<{}, {}, AdminBusPOST, {}>
-) => {
-  const { plate, seatAmount, type, busHouse } = req.body;
-  if (!(!plate && seatAmount && type && busHouse)) {
-    return null;
-  }
-  await myPrisma.$connect();
-  const busData = {
-    plate: singleIntQueryHandler(req.body.plate),
-    seatAmount: singleIntQueryHandler(req.body.seatAmount),
-    type: singleIntQueryHandler(req.body.type),
-    busHouse: singleIntQueryHandler(req.body.busHouse),
-  };
-  const newBus = await myPrisma.bus.update({
-    where: {
-      id: singleIntQueryHandler(req.params.id),
-    },
-    data: busData,
-  });
-};
-
-const deleteBusAdminHanlder = async (
-  req: Request<{}, {}, AdminBusDELETE, {}>
-) => {
-  await myPrisma.$connect();
-  await myPrisma.bus.delete({
-    where: {
-      id: singleIntQueryHandler(req.params.id),
-    },
-  });
-};
 
 export default busAdminHandler;
