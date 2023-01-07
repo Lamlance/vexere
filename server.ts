@@ -61,11 +61,12 @@ const handlebars = new ExpressHandlebars({
 });
 
 const port = process.env.PORT || 8000;
+const myURL = process.env.RENDER_EXTERNAL_URL || `http://localhost:${port}`
 const configAuth = {
   authRequired: false,
   auth0Logout: true,
   secret: process.env.SECRETE,
-  baseURL: `http://localhost:${port}`,
+  baseURL: myURL ? myURL : `http://localhost:${port}`,
   clientID: process.env.CLIENT_ID,
   issuerBaseURL: "https://dev-j07rhfbc.us.auth0.com",
 };

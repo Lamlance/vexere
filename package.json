@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "build": "npx tsc",
-    "start": "node server.js",
+    "start": "node --experimental-modules --es-module-specifier-resolution=node server.js",
     "dev-ts": "concurrently \"npx tsc --watch\" \"nodemon --experimental-modules --es-module-specifier-resolution=node -q server.js\""
   },
   "author": "ptudw_Nhom9",
