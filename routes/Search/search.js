@@ -1,6 +1,9 @@
 import { arrayIntQueryHandler, singleIntQueryHandler, singleQueryHandler } from "../db/queryHandler";
 import { searchRouteFromDB } from "../db/searchRoute";
 import { prisma } from "../../server";
+//xe loại 1: ghế bus ngồi
+//xe loại 2: xe bus giường nằm
+//xe loại 3: xe Limousine
 const searchRouteHandler = async (req, res) => {
     if (!(req.query && req.query.fromId && req.query.toId)) {
         console.log(req.query);
@@ -11,6 +14,7 @@ const searchRouteHandler = async (req, res) => {
     const page = singleIntQueryHandler(req.query.page, 0);
     const min = singleIntQueryHandler(req.query.min, NaN);
     const max = singleIntQueryHandler(req.query.max, NaN);
+    const type = singleIntQueryHandler(req.query.busType, -1);
     const houses = req.query.busHouse ? arrayIntQueryHandler(req.query.busHouse) : [];
     await prisma.$connect();
     const fromLoc = await prisma.location.findMany({
@@ -28,7 +32,7 @@ const searchRouteHandler = async (req, res) => {
     }
     const fromId = (fromLoc[0].name.includes(req.query.fromId)) ? fromLoc[0].id : fromLoc[1].id;
     const toId = (fromLoc[0].name.includes(req.query.toId)) ? fromLoc[0].id : fromLoc[1].id;
-    const ans = await searchRouteFromDB(fromId, toId, houses, min, max, page);
+    const ans = await searchRouteFromDB(fromId, toId, houses, min, max, page, new Date(req.query.date), type);
     // console.log("House",ans)
     ans.routeDetail.forEach((detail) => {
         detail.startTime = detail.startTime.toLocaleString();

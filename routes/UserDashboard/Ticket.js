@@ -11,6 +11,13 @@ export default async function userTicketsApi(req, res) {
     const tickets = await prisma.ticket.findMany({
         take: 8,
         skip: 8 * page,
+        orderBy: [
+            {
+                RouteDetail: {
+                    startTime: "desc"
+                }
+            }
+        ],
         where: {
             userId: userData.id
         },
