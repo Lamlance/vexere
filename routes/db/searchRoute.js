@@ -1,6 +1,5 @@
 import { prisma } from '../../server';
-import { singleIntQueryHandler } from './queryHandler';
-async function searchRouteFromDB(fromId, toId, houses, min, max, page = 0) {
+async function searchRouteFromDB(fromId, toId, houses, min, max, page = 0, date, type = -1) {
     const itemPerPage = 5;
     await prisma.$connect();
     const route = await prisma.route.findFirst({
@@ -33,11 +32,12 @@ async function searchRouteFromDB(fromId, toId, houses, min, max, page = 0) {
         skip: itemPerPage * page,
         where: {
             AND: [
-                { startTime: { gt: new Date("05 October 2011 14:48 UTC") } },
+                { startTime: { gte: date } },
                 { remainSeat: { gt: 0 } },
                 { routeId: route.id },
                 { ...(isNaN(min) ? {} : { price: { gte: min } }) },
-                { ...(isNaN(max) ? {} : { price: { lte: max } }) }
+                { ...(isNaN(max) ? {} : { price: { lte: max } }) },
+                { ...(type <= 0 ? {} : { Bus: { type: { equals: type } } }) }
             ],
             ...((houses.length === 0) ? {} : {
                 OR: [
@@ -58,6 +58,7 @@ async function searchRouteFromDB(fromId, toId, houses, min, max, page = 0) {
             Bus: {
                 select: {
                     type: true,
+                    busHouse: true,
                     BusHouse: {
                         select: {
                             Name: true,
@@ -73,16 +74,22 @@ async function searchRouteFromDB(fromId, toId, houses, min, max, page = 0) {
         routeDetail: routeDetail
     };
 }
-async function searchRouteAPI(req, res) {
-    if (!(req.query && req.query.fromId && req.query.toId)) {
-        res.status(210).json([]);
-        return;
-    }
-    const page = singleIntQueryHandler(req.query.page, 0);
-    const fromId = singleIntQueryHandler(req.query.fromId);
-    const toId = singleIntQueryHandler(req.query.toId);
-    const ans = await searchRouteFromDB(fromId, toId, [], NaN, NaN, page);
-    res.json(ans);
-}
-export default searchRouteAPI;
+// async function searchRouteAPI(
+//   req: Request<{}, {}, {}, {
+//     page?: string,
+//     fromId: string,
+//     toId: string
+//   }, {}>,
+//   res: Response) {
+//   if (!(req.query && req.query.fromId && req.query.toId)) {
+//     res.status(210).json([]);
+//     return;
+//   }
+//   const page = singleIntQueryHandler(req.query.page, 0);
+//   const fromId = singleIntQueryHandler(req.query.fromId);
+//   const toId = singleIntQueryHandler(req.query.toId);
+//   const ans = await searchRouteFromDB(fromId, toId, [],NaN,NaN, page);
+//   res.json(ans);
+// }
+// export default searchRouteAPI;
 export { searchRouteFromDB };

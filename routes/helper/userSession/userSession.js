@@ -1,7 +1,7 @@
 class UserSessionManager {
     constructor() {
         this.users = {};
-        setInterval(this.infLoopSessionKiller, 60000);
+        setInterval(this.infLoopSessionKiller, 36e5);
     }
     async infLoopSessionKiller() {
         console.log("check to kill");

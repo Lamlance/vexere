@@ -5,19 +5,19 @@
 <script type="module" src="/js/Admin/Admin.js" defer></script>
 <script type="module" src="/js/Admin/Ticket.js" defer></script>
 <script type="module" src="/js/Admin/House.js" defer></script>
+<script type="module" src="/js/Admin/Bus.js" defer></script>
 
 <div id="admin-wrapper">
   <ul id="admin-tab-select">
     <li value="0">Quản lí nhà xe</li>
-    <li value="1">
-      <a href="/admin/route_detail"> Quản lí chuyến xe</a>
-    </li>
-    <li value="2">Quản lí vé xe</li>
+    <li value="1">Quản lí xe</li>
+    <li value="2"><a href="/admin/route_detail"> Quản lí chuyến xe</a></li>
+    <li value="3">Quản lí vé xe</li>
   </ul>
 
   <ul id="admin-tab-display">
     {{!-- Quản lí nhà xe --}}
-    <li class="js-tab-display">
+    <li class="js-tab-display" style="height: 100%; display:block">
       <section class="tab-display ">
         <section class="tab-display-option">
           <div id="house-refresh-btn"> REFRESH </div>
@@ -41,8 +41,46 @@
       </section>
     </li>
 
+    {{!-- Quản lí xe --}}
+    <li class="js-tab-display" style="height: 100%; display:none">
+      <section class="tab-display">
+        <section class="tab-display-option">
+          <div id="bus-refresh-btn">REFRESH</div>
+          <div id="bus-add-btn">ADD BUS</div>
+          <ul id="bus-display-list"></ul>
+        </section>
+
+        <section class="tab-display-form">
+          <form class="display-form" id="bus-display-form">
+            <label>
+              <span>Bus id</span>
+              <input name="busId" type="number" readonly="true" required="true" />
+            </label>
+            <label>
+              <span>Bus plate</span>
+              <input name="plate" type="text" required />
+            </label>
+            <label>
+              <span>Bus type</span>
+              <input name="busType" type="number" min="1" max="3" required />
+            </label>
+            <label>
+              <span>Bus seats</span>
+              <input name="seats" min="1" type="number" required />
+            </label>
+            <label>
+              <span>BusHouse</span>
+              <select name="house" id="bus-house-select" required>
+              </select>
+            </label>
+            <input type="submit" value="Submit Bus" />
+          </form>
+        </section>
+      </section>
+    </li>
+
     {{!-- Quản lí chuyến xe --}}
-    <li class="js-tab-display">
+    <li class="js-tab-display" style="height: 100%; display:none">
       <section class="tab-display">
         <section class="tab-display-option">
         </section>
@@ -55,7 +93,7 @@
     </li>
 
     {{!-- Quản lí vé xe --}}
-    <li class="js-tab-display">
+    <li class="js-tab-display" style="height: 100%; display:none">
       <section class="tab-display">
         <section class="tab-display-option">
           <div id="ticket-refresh-btn">REFRESH</div>
@@ -78,6 +116,7 @@
                 <option value="WAITING">WAITING</option>
                 <option value="PAID">PAID</option>
                 <option value="CANCELED">CANCELED</option>
+                <option value="FINISHED">FINISHED</option>
               </select>
             </label>
             <input type="submit" value="Update Ticket" />

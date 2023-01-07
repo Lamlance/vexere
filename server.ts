@@ -24,7 +24,6 @@ import busGenerate from "./routes/test/createMockData/mockBus";
 import routeDetailGenerate from "./routes/test/createMockData/mockRouteDetail";
 
 import checkUser from "./routes/db/checkUser";
-import searchRouteAPI from "./routes/db/searchRoute";
 import searchRouteHandler from "./routes/Search/search";
 import userDashboardHandler from "./routes/UserDashboard/UserDashboard";
 import createTicket from "./routes/Ticket/ticket";
@@ -41,6 +40,9 @@ import ticketDetailHandler from "./routes/BookingDetail/bookingDetail";
 import createRating from "./routes/BookingDetail/createRating";
 import adminBusHouseHandler from "./routes/Admin/bushouse";
 import userTicketsApi from "./routes/UserDashboard/Ticket";
+import BusHouseRouteHandler from "./routes/BusHouse/BusHouse";
+import {helpers} from "./views/helpers/helpers.js";
+
 
 const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 const sessionManager = new UserSessionManager();
@@ -48,12 +50,12 @@ export { sessionManager };
 
 dotenv.config();
 const app: Express = express();
-
 app.use(methodOverride('_method'));
 
 const handlebars = new ExpressHandlebars({
   layoutsDir: `${__dirname}/views/layouts`,
   partialsDir: `${__dirname}/views/partials`,
+  helpers:helpers,
   defaultLayout: "layout",
   extname: "hbs",
 });
@@ -99,7 +101,7 @@ app.get("/", indexHandler);
 app.get("/search", searchRouteHandler);
 app.get("/user", userDashboardHandler);
 app.use("/user/api/tickets",userTicketsApi)
-
+app.get("/house",BusHouseRouteHandler);
 
 // app.get("/user/ticket", bookingDetailHandler);
 // app.get("/user/ticket",ticketDetailHandler);
@@ -136,7 +138,7 @@ app.get("/api/test/generate/bushouses", busHouseGenerate);
 app.get("/api/test/generate/users", usersGenerate);
 app.get("/api/test/generate/buses", busGenerate);
 app.get("/api/test/generate/details", routeDetailGenerate);
-app.get("/api/test/search", searchRouteAPI);
+// app.get("/api/test/search", searchRouteAPI);
 //============
 
 app.get("/api/test/profile", (req, res) => {

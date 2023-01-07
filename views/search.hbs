@@ -2,6 +2,7 @@
 <link rel="stylesheet" href="/css/Search.css" />
 <link rel="stylesheet" href="/css/ChiTiet.css" />
 <link rel="stylesheet" href="/css/main.css" />
+<link rel="stylesheet" href="/css/index.css"/>
 
 <!-- main -->
 <div class="search_result_container">
@@ -42,13 +43,27 @@
         <input type="text" id="search-filter-by-bus-house" />
       </label>
       <ul>
-        {{#each routeDetail}}
+        {{#each houses}}
         <li><label>
-            <input type="checkbox" name="busHouse" value={{Bus.BusHouse.id}} />
-            {{Bus.BusHouse.Name}}
+            <input type="checkbox" name="busHouse" value={{this.id}} />
+            {{this.Name}}
           </label></li>
         {{/each}}
       </ul>
+    </section>
+
+    {{!-- Bus type --}}
+    <section style="display: flex; flex-direction:column">
+      <h4>Loại xe</h4>
+      <label> Xe bus ghế ngồi
+        <input type="radio" name="busType" value="1" >
+      </label>
+      <label> Xe bus giường nằm
+        <input type="radio" name="busType" value="2" >
+      </label>
+      <label> Xe Limousine
+        <input type="radio" name="busType" value="3" >
+      </label>
     </section>
 
     <input type="submit" value="Apply" />
