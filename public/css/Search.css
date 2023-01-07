@@ -23,10 +23,8 @@ body * {
 }
 
 .search_result_filter>section {
-  margin: 1rem 0;
-  border: 1px solid lightgrey;
+  margin: 1rem 1rem;
   max-height: 250px;
-  overflow: scroll;
 }
 
 .search_result_filter>section>* {
@@ -35,7 +33,10 @@ body * {
 
 .search_result_filter {
   padding-inline: 0.5rem;
-  background-color: rgba(226, 222, 222, 0.425);
+  background-color: #fefefe;
+  border: 1px solid #C0C0C0;
+  border-radius: 5px;
+  padding: .5em 1em 2em 1em;
 }
 
 #price-minmax-label {
@@ -54,6 +55,7 @@ body * {
 
 /* Empty seat */
 #filter_by_empty_seat * {
+  display: none;
   margin: 0;
   padding: 0;
 }
@@ -170,4 +172,61 @@ two-level-checkbox {
   background-position: 0 0;
   transition: 0.2s ease-in-out;
   transform: scale(1.005);
+}
+
+.range-min, .range-max {
+  outline: none;
+  height: 2em;
+  width: 8em;
+  font-size: .9em;
+  border-radius: .2em;
+  margin-left: 1em;
+}
+
+#search-filter-by-bus-house {
+  outline: none;
+  height: 2em;
+  width: 10em;
+  font-size: .9em;
+  border-radius: .2em;
+}
+
+.submit-apply {
+  margin: 1em 0 0 7.5em;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  background: #3e83e3;
+  border: 1px solid #6797bb;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 800;
+  line-height: 16px;
+  min-height: 40px;
+  width: 7em;
+  outline: 0;
+  padding: 12px 14px;
+  text-align: center;
+  text-rendering: geometricprecision;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+}
+
+.submit-apply:hover,
+.submit-apply:active {
+  background-color: initial;
+  background-position: 0 0;
+  color: #6797bb;
+  transition: 0.2s ease-in-out;
+  transform: scale(1.1);
+}
+
+.submit-apply:active {
+  opacity: .5;
 }
