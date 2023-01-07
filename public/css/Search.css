@@ -115,8 +115,8 @@ two-level-checkbox {
 
 .vexere_info_action>form>button {
   font-family: 'Roboto', sans-serif;
-  background: #3e83e3;
-  border: 1px solid #6797bb;
+  background: #ffc700;
+  border: 1px solid #efbd08;
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
   box-sizing: border-box;
@@ -142,7 +142,7 @@ two-level-checkbox {
 .vexere_info_action>form>button:active {
   background-color: initial;
   background-position: 0 0;
-  color: #6797bb;
+  color: #efbd08;
   transition: 0.2s ease-in-out;
   transform: scale(1.1);
 }
@@ -152,7 +152,6 @@ two-level-checkbox {
 }
 
 .vexere_info_action>h4>a {
-  text-decoration: none;
   color: #3e83e3;
 }
 
@@ -184,9 +183,10 @@ two-level-checkbox {
 }
 
 #search-filter-by-bus-house {
+  margin-top: .8em;
   outline: none;
   height: 2em;
-  width: 10em;
+  width: 18.2em;
   font-size: .9em;
   border-radius: .2em;
 }
@@ -229,4 +229,35 @@ two-level-checkbox {
 
 .submit-apply:active {
   opacity: .5;
+}
+
+input[type=radio] {
+  float: left;
+  height: 16px;
+  width: 16px;
+}
+
+.filter-bus-type label {
+  margin-top: 1em;
+}
+
+.filter-bus-type label p {
+  margin-left: 1.5em;
+}
+
+/* .filter-check-bus {
+  margin-top: 10em;
+} */
+
+.price-range {
+  margin-top: .8em;
+}
+
+.brown {
+  color: #484848;
+}
+
+input[type=checkbox] {
+  height: 16px;
+  width: 16px;
 }
