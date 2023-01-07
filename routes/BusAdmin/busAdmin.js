@@ -58,4 +58,31 @@ const addBusAdminHandler = async (req) => {
         return null;
     }
 };
+const updateBusAdminHanlder = async (req) => {
+    const { plate, seatAmount, type, busHouse } = req.body;
+    if (!(!plate && seatAmount && type && busHouse)) {
+        return null;
+    }
+    await myPrisma.$connect();
+    const busData = {
+        plate: singleIntQueryHandler(req.body.plate),
+        seatAmount: singleIntQueryHandler(req.body.seatAmount),
+        type: singleIntQueryHandler(req.body.type),
+        busHouse: singleIntQueryHandler(req.body.busHouse),
+    };
+    const newBus = await myPrisma.bus.update({
+        where: {
+            id: singleIntQueryHandler(req.params.id),
+        },
+        data: busData,
+    });
+};
+const deleteBusAdminHanlder = async (req) => {
+    await myPrisma.$connect();
+    await myPrisma.bus.delete({
+        where: {
+            id: singleIntQueryHandler(req.params.id),
+        },
+    });
+};
 export default busAdminHandler;
