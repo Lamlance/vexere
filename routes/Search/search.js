@@ -33,13 +33,14 @@ const searchRouteHandler = async (req, res) => {
     const fromId = (fromLoc[0].name.includes(req.query.fromId)) ? fromLoc[0].id : fromLoc[1].id;
     const toId = (fromLoc[0].name.includes(req.query.toId)) ? fromLoc[0].id : fromLoc[1].id;
     const ans = await searchRouteFromDB(fromId, toId, houses, min, max, page, new Date(req.query.date), type);
-    // console.log("House",ans)
+    const ansHouses = [...new Map(ans.routeDetail.map(item => [item.Bus.BusHouse.id, item.Bus.BusHouse])).values()];
     ans.routeDetail.forEach((detail) => {
         detail.startTime = detail.startTime.toLocaleString();
         detail.endTime = detail.endTime.toLocaleString();
     });
     res.render("search", {
         ...ans,
+        houses: ansHouses,
         date: req.query.date
     });
 };

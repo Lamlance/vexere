@@ -62,6 +62,7 @@ async function searchRouteFromDB(fromId, toId, houses, min, max, page = 0, date,
                     BusHouse: {
                         select: {
                             Name: true,
+                            id: true
                         }
                     }
                 }

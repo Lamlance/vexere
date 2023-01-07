@@ -67,6 +67,7 @@ async function searchRouteFromDB(fromId: number, toId: number, houses: number[],
           BusHouse: {
             select: {
               Name: true,
+              id:true
             }
           }
         }

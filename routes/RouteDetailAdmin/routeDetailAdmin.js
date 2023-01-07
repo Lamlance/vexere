@@ -30,9 +30,9 @@ const adminRouteDetailHandler = async (req, res) => {
             tmpRouteDetailData.price = routeDetail.price;
             tmpRouteDetailData.remainSeat = routeDetail.remainSeat;
             let startTime = new Date(routeDetail.startTime);
-            tmpRouteDetailData.startTime = startTime.getHours() + ":" + startTime.getMinutes();
+            tmpRouteDetailData.startTime = startTime.toLocaleString();
             let endTime = new Date(routeDetail.endTime);
-            tmpRouteDetailData.endTime = endTime.getHours() + ":" + endTime.getMinutes();
+            tmpRouteDetailData.endTime = endTime.toLocaleString();
             tmpRouteDetailData.busHouse = routeDetail.Bus.BusHouse.Name;
             tmpRouteDetailData.startPlace = routeDetail.Route.Location_Route_startLocIdToLocation.name;
             tmpRouteDetailData.endPlace = routeDetail.Route.Location_Route_endLocIdToLocation.name;

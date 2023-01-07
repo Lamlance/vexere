@@ -51,7 +51,9 @@ const searchRouteHandler = async (
   const toId =  (fromLoc[0].name.includes(req.query.toId)) ? fromLoc[0].id : fromLoc[1].id;
 
   const ans = await searchRouteFromDB(fromId, toId, houses,min,max,page,new Date(req.query.date),type);
-  // console.log("House",ans)
+  const ansHouses = [...new Map(ans.routeDetail.map(item =>
+    [item.Bus.BusHouse.id, item.Bus.BusHouse])).values()];
+
 
   ans.routeDetail.forEach((detail) => {
     detail.startTime = detail.startTime.toLocaleString();
@@ -61,6 +63,7 @@ const searchRouteHandler = async (
 
   res.render("search", {
     ...ans,
+    houses: ansHouses,
     date: req.query.date
   });
 }

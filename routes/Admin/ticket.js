@@ -83,8 +83,8 @@ async function adminTicketAPI(req, res) {
 async function GET(page = 0) {
     await prisma.$connect();
     const tickets = await prisma.ticket.findMany({
-        skip: page * 5,
-        take: 5
+        skip: page * 20,
+        take: 20
     });
     return tickets;
 }

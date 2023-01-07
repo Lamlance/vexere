@@ -43,10 +43,10 @@
         <input type="text" id="search-filter-by-bus-house" />
       </label>
       <ul>
-        {{#each routeDetail}}
+        {{#each houses}}
         <li><label>
-            <input type="checkbox" name="busHouse" value={{Bus.BusHouse.id}} />
-            {{Bus.BusHouse.Name}}
+            <input type="checkbox" name="busHouse" value={{this.id}} />
+            {{this.Name}}
           </label></li>
         {{/each}}
       </ul>
