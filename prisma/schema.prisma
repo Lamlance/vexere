@@ -18,11 +18,11 @@ model Bus {
 }
 
 model BusHouse {
-  id     Int      @id @default(autoincrement())
-  Name   String   @db.Char(50)
-  Desc   String?
-  Phone  String?
-  Bus    Bus[]
+  id   Int    @id @default(autoincrement())
+  Name String @db.Char(50)
+  Phone String?
+  Desc String?
+  Bus  Bus[]
   Rating Rating[]
 }
 

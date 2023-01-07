@@ -1,17 +1,21 @@
 "use strict";
-function BusHouseInfoNavHandler() {
-    const navs = document.querySelectorAll(".js_bus_house_info_nav");
-    const infoItems = document.querySelectorAll(".js_bus_house_info_item");
-    console.log(navs, infoItems);
-    infoItems.forEach((infoTab, tabId) => {
-        infoTab.style.display = (tabId == 0) ? "" : "none";
-    });
-    navs.forEach((nav, navId) => {
-        nav.addEventListener("click", (event) => {
-            infoItems.forEach((infoTab, tabId) => {
-                infoTab.style.display = (tabId == navId) ? "" : "none";
+function addNavEvent() {
+    const navs = document.querySelectorAll("#house-tab-select > li");
+    const tabs = document.querySelectorAll(".js-house-tab");
+    navs.forEach((nav, index) => {
+        nav.addEventListener("click", () => {
+            nav.style.borderBottom = "2px double rgb(0, 96, 196)";
+            nav.style.color = "rgb(0, 96, 196)";
+            navs.forEach((subNav, navId) => {
+                if (navId !== index) {
+                    subNav.style.borderBottom = "none";
+                    subNav.style.color = "black";
+                }
+            });
+            tabs.forEach((tab, tabId) => {
+                tab.style.display = (tabId === index) ? "block" : "none";
             });
         });
     });
 }
-BusHouseInfoNavHandler();
+addNavEvent();

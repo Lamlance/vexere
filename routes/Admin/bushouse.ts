@@ -9,9 +9,13 @@ interface AdminBusHouseGET{
 interface AdminBusHousePUT{
   busHouseId:number,
   name: string,
+  desc:string,
+  phone: string
 }
 interface AdminBusHousePOST{
   name: string
+  desc:string,
+  phone: string
 }
 
 type AdminBusHouseBody = AdminBusHousePOST & AdminBusHousePUT; 
@@ -71,12 +75,14 @@ async function GET(req:Request<{},{},{},AdminBusHouseGET>){
 }
 
 async function POST(req:Request<{},{},AdminBusHousePOST,{}>) {
-  const {name} = req.body;
+  const {name,desc,phone} = req.body;
   await prisma.$connect();
   try {
     const newBusHouse = await prisma.busHouse.create({
       data:{
-        Name: name
+        Name: name,
+        Desc: desc,
+        Phone: phone
       }
     }) 
     return newBusHouse
@@ -86,7 +92,7 @@ async function POST(req:Request<{},{},AdminBusHousePOST,{}>) {
 }
 
 async function PUT(req:Request<{},{},AdminBusHousePUT,{}>) {
-  const {busHouseId,name} = req.body;
+  const {busHouseId,name,desc,phone} = req.body;
 
   await prisma.$connect();
   try {
@@ -95,7 +101,9 @@ async function PUT(req:Request<{},{},AdminBusHousePUT,{}>) {
         id: busHouseId
       },
       data:{
-        Name: name
+        Name: name,
+        Desc: desc,
+        Phone: phone
       }
     })
     return update;
