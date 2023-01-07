@@ -1,6 +1,8 @@
 type BusHouse = {
   id: number;
   Name: string;
+  Phone: string;
+  Desc: string;
 }
 
 
@@ -20,13 +22,17 @@ class HouseElement extends HTMLElement {
     const inputs = this.houseForm.elements;
     const name = <HTMLInputElement>inputs.namedItem("house-name");
     const id = <HTMLInputElement>inputs.namedItem("house-id");
+    const desc = <HTMLInputElement>inputs.namedItem("desc");
+    const phone = <HTMLInputElement>inputs.namedItem("phone");
 
     if(!inputs || !name || !id){
       return null;
     }
 
     name.value = this.house.Name;
-    id.valueAsNumber = this.house.id
+    id.valueAsNumber = this.house.id;
+    desc.value = this.house.Desc;
+    phone.value = this.house.Phone;
   }
 
   public updateHouseData(name:string){

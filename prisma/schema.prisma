@@ -20,7 +20,7 @@ model Bus {
 model BusHouse {
   id   Int    @id @default(autoincrement())
   Name String @db.Char(50)
-  Phone String[]
+  Phone String?
   Desc String?
   Bus  Bus[]
   Rating Rating[]

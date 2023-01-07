@@ -47,13 +47,17 @@ async function NewBusHouseClick() {
     inputs.namedItem("house-id").valueAsNumber = -1;
     inputs.namedItem("house-name").value = "";
 }
-async function createBusHouse(name) {
+async function createBusHouse(name, phone, desc) {
     const fetchData = await fetch("/admin/api/bushouse", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({ name: name })
+        body: JSON.stringify({
+            name: name,
+            desc: desc,
+            phone: phone
+        })
     });
     try {
         const newHouse = await fetchData.json();
@@ -68,13 +72,18 @@ async function createBusHouse(name) {
         console.log(error);
     }
 }
-async function updateBusHouse(id, name) {
+async function updateBusHouse(id, name, phone, desc) {
     const fetchData = await fetch("/admin/api/bushouse", {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({ busHouseId: id, name: name })
+        body: JSON.stringify({
+            busHouseId: id,
+            name: name,
+            desc: desc,
+            phone: phone
+        })
     });
     try {
         const updatedHouse = await fetchData.json();
@@ -92,11 +101,13 @@ async function BusHouseFormSubmit(event) {
     }
     const id = form.elements.namedItem("house-id").valueAsNumber;
     const name = form.elements.namedItem("house-name").value;
+    const desc = form.elements.namedItem("desc").value;
+    const phone = form.elements.namedItem("phone").value;
     if (isNaN(id) || id < 0) {
-        const data = await createBusHouse(name);
+        const data = await createBusHouse(name, phone, desc);
         return;
     }
-    await updateBusHouse(id, name);
+    await updateBusHouse(id, name, phone, desc);
 }
 document.getElementById("house-refresh-btn")?.addEventListener("click", fetchBusHouse);
 document.getElementById("house-add-btn")?.addEventListener("click", NewBusHouseClick);

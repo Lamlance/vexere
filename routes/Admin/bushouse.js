@@ -49,12 +49,14 @@ async function GET(req) {
     return houses;
 }
 async function POST(req) {
-    const { name } = req.body;
+    const { name, desc, phone } = req.body;
     await prisma.$connect();
     try {
         const newBusHouse = await prisma.busHouse.create({
             data: {
-                Name: name
+                Name: name,
+                Desc: desc,
+                Phone: phone
             }
         });
         return newBusHouse;
@@ -65,7 +67,7 @@ async function POST(req) {
     return null;
 }
 async function PUT(req) {
-    const { busHouseId, name } = req.body;
+    const { busHouseId, name, desc, phone } = req.body;
     await prisma.$connect();
     try {
         const update = await prisma.busHouse.update({
@@ -73,7 +75,9 @@ async function PUT(req) {
                 id: busHouseId
             },
             data: {
-                Name: name
+                Name: name,
+                Desc: desc,
+                Phone: phone
             }
         });
         return update;
