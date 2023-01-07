@@ -33,16 +33,25 @@
 .tab-display {
   display: grid;
   grid-template-columns: 0.5fr 1.5fr;
-}
+  min-height: 95%;
 
-.tab-display-option>ul>li, #ticket-refresh-btn,#house-refresh-btn,#house-add-btn {
+}
+.tab-display-form {
+  min-height: 95%;
+  margin-top: 3rem;
+}
+.tab-display-option>ul>li, #ticket-refresh-btn,
+#house-refresh-btn,#house-add-btn,
+#bus-refresh-btn,#bus-add-btn {
   min-height: 4rem;
   display: grid;
   place-items: center;
   cursor: pointer;
 }
 
-.tab-display-option>ul>li:hover, #ticket-refresh-btn:hover {
+.tab-display-option>ul>li:hover, #ticket-refresh-btn:hover,
+#house-refresh-btn:hover,#house-add-btn:hover,
+#bus-refresh-btn:hover,#bus-add-btn:hover {
   background-color: #303246;
   color: white;
 }
@@ -55,4 +64,8 @@
 .display-form > label{
   display: grid;
   grid-template-columns: 0.3fr 1.7fr;
+}
+.display-form {
+  display: flex;
+  flex-direction: column;
 }

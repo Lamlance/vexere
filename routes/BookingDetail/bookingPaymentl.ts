@@ -7,6 +7,8 @@ import { createHmac, randomUUID } from "crypto";
 import fetch from "node-fetch";
 
 const bookingPaymentHandler = async (req: Request<{}, {}, {}, { ticketId: string }>, res: Response) => {
+  console.log("Ready to pay")
+
 
   if (!req.oidc.isAuthenticated() || !req.oidc.user || !req.oidc.user.sub) {
     res.redirect("/login");
@@ -78,10 +80,10 @@ const bookingPaymentHandler = async (req: Request<{}, {}, {}, { ticketId: string
 
     }
 
-    console.log("Chưa thanh toán");
+    console.log("Chưa thanh toán",ticket.RouteDetail.price);
     let payUrl = "";
     const newPayment = {
-      amount: ticket.RouteDetail.price,
+      amount: (ticket.RouteDetail.price != 0) ? ticket.RouteDetail.price : 300000,
       payment_info: `Thanh toán vé xe`
     }
 
@@ -125,7 +127,13 @@ const bookingPaymentHandler = async (req: Request<{}, {}, {}, { ticketId: string
       //   transactionStatus: transactionStatus,
       //   payUrl: payUrl,
       // });
-      res.redirect(payUrl);
+      console.log("Redirecting",payUrl);
+      if(payUrl){
+        res.redirect(payUrl);
+      }else{
+        res.redirect("/user/ticket/callback");
+        console.log(json);
+      }
       return;
     }
   }

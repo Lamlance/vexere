@@ -1,111 +1,39 @@
-* {
-  margin: 0;
-  padding: 0;
-}
-
-body > section , body > div{
-  margin: 1rem 0;
-}
-
-#bus_house_info_wrapper {
-  display: grid;
-  grid-template-columns: 0.4fr 1.6fr;
-  margin-inline: 6rem;
-  
-}
-
-#bus_house_image{
+#bus_house_image {
   overflow: hidden;
 }
-.bus_img_slide{
+
+.bus_img_slide {
   display: flex;
   max-width: calc(100% - 0.5rem);
   margin-inline: 0.5rem;
   border: 1px solid blue;
   overflow: scroll;
-  min-height: 300px;
+  min-height: 600px;
+  max-width: 600px;
+  margin: 0 auto;
 }
-.bus_img_slide > img{
+
+.bus_img_slide>img {
   flex-shrink: 0;
   width: 100%;
   height: inherit;
   border: 1px solid red;
   object-fit: fill;
 }
-/* nav */
-#bus_house_info_nav {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+
+.vexere_bushouse_name_wrapper {
+  margin: 0 auto;
+  text-align: center;
 }
 
-.js_bus_house_info_nav {
-  display: grid;
-  place-items: center;
-  cursor: pointer;
+.vexere_bushouse_name_wrapper>h1 {
+  font-size: xx-large;
 }
 
-.js_bus_house_info_nav:hover {
-  color: #1890ff;
-}
-
-/* contacts */
-.bus_house_contacts * {
-  padding: 0;
-  margin: 0;
-}
-
-.bus_house_contacts_wrapper {
+.vexere_rating_wrapper {
   display: flex;
-  flex-direction: column;
-}
-
-.bus_house_contacts_wrapper > section{
-  margin: 1.5rem;
-}
-
-.bus_house_contact_office > h4 {
-  background-color: rgb(255, 199, 0);
-  padding: 0.5rem;
-  border-radius: 1rem 1rem 0 0;
-}
-.bus_house_contacts_items {
-  display: grid;
-  grid-template-columns: 0.5fr 1.5fr;
-  padding: 0.5rem;
-  border: 0.5px solid rgba(169, 169, 169, 0.615);
-  background-color: rgba(255,255,244,255);
-}
-.bus_house_contacts_item_info>p:nth-of-type(1) {
-  color: #1890ff;
-}
-.bus_house_contacts_items>div:nth-of-type(2) {
-  display: flex;
-  align-items: center;
   justify-content: center;
-}
-.bus_house_contacts_items>div:nth-of-type(2)>button {
-  padding: 0.5rem;
-  flex-basis: 25%;
-  margin-inline: 0.5rem;
-  border-radius: 1rem;
-}
-.bus_house_contacts_items_select_btn {
-  color: white;
-  background-color: #0060c4;
-}
-
-/* ratting */
-.vexere_rating_item{
-  display: grid;
-  margin: 0.5rem;
-  grid-template-rows: 0.5fr 1.5fr;
-}
-.review_info{
-  display: flex;
-  flex-direction: row;
-}
-.review_info > img {
-  object-fit: contain;
-  max-width: 50px;
-  max-height: 50px;
+  flex-direction: column;
+  max-width: 800px;
+  margin:0 auto;
 }
