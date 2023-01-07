@@ -66,7 +66,7 @@
   grid-template-columns: 0.3fr 1.7fr;
   margin: 0.2rem 0;
 }
-.display-form > label > input{
+.display-form > label > input,.display-form > label > select{
   padding: 0.3rem;
 }
 .display-form > input[type=submit]{
@@ -75,4 +75,7 @@
 .display-form {
   display: flex;
   flex-direction: column;
+}
+.display-form textarea{
+  resize: vertical;
 }

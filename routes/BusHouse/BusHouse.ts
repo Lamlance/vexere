@@ -32,8 +32,13 @@ async function BusHouseRouteHandler(req: Request<{},{},{},{houseId:string}>, res
     }
   })
 
-  if(houseId){
-    res.render("house",{...house});
+
+  if(house){
+    res.render("house",{
+      ...house,
+      phones: (house.Phone) ? (house.Phone.split(",")) : null,
+      intro: (house.Desc) ? (house.Desc.split("\n")) : null
+    });
     return;
   }
   res.redirect("/")

@@ -2,6 +2,7 @@
 <link rel="stylesheet" href="/css/global.css" />
 <link rel="stylesheet" href="/css/BusHouse.css" />
 <link rel="stylesheet" href="/css/ChiTiet.css" />
+<script src="/js/BusHouse/BusHouse.js" defer></script>
 
 <section id="vexere_house_wrapper">
 
@@ -16,23 +17,59 @@
   </section>
 
   <section>
-    <section class="vexere_bushouse_name_wrapper">
-      <h1>Nhà xe {{Name}}</h1>
-    </section>
-    <section class="vexere_bushouse_desc_wrapper">
-      <p>{{Desc}}</p>
-    </section>
+    <ul id="house-tab-select">
+      <li>
+        <span>Thông tin nhà xe</span>
+      </li>
+      <li>
+        <span> Đánh giá</span>
+      </li>
+      <li>
+        <span>Số điện thoại</span>
+      </li>
+    </ul>
 
-    <section class="vexere_rating_wrapper">
+    <section class="js-house-tab" style="display: block;">
       <section class="vexere_bushouse_name_wrapper">
-        <h1>Đánh giá của các khách hàng</h1>
+        <h1>Nhà xe {{Name}}</h1>
       </section>
+      <section class="vexere_bushouse_desc_wrapper">
+        {{#each intro}}
+        <p style="line-height: 140%; margin:1rem 0">{{this}}</p>
+        {{/each}}
+      </section>
+    </section>
 
-      {{#each Rating}}
-      <div style="border: 1px solid black;margin-top:1.5rem">
-        {{> rating name=this.Ticket.User.Name rating=this.rating comment=this.comment }}
-      </div>
-      {{/each}}
+    <section class="js-house-tab" style="display: none;">
+      <section class="vexere_rating_wrapper">
+        <section class="vexere_bushouse_name_wrapper">
+          <h1>Đánh giá của các khách hàng</h1>
+        </section>
+        <hr style="margin: 1rem 0;">
+        {{#each Rating}}
+        <div style="marginp:1rem 0;background-color:#cce8f3;border-radius:1rem">
+          {{> rating name=this.Ticket.User.Name rating=this.rating comment=this.comment }}
+        </div>
+        <hr style="margin: 1rem 0;">
+        {{/each}}
+      </section>
+    </section>
+
+    <section class="js-house-tab" style="display: none;">
+      {{#if phones}}
+      <section class="vexere_bushouse_name_wrapper">
+        <h1>Các SĐT của nhà xe</h1>
+      </section>
+      <ul id="vexere_house_phonelist" style="border-radius: 3rem 3rem 3rem 3rem;">
+        <li style="min-height:0.5rem;background-color:rgb(255, 199, 0);border-radius:3rem 3rem 0 0"></li>
+        {{#each phones}}
+        <li>
+          <div> <a href="tel:+84{{this}}" style="text-decoration:none;">☎️ {{this}}</a> </div>
+        </li>
+        {{/each}}
+        <li style="border:none;min-height:0.5rem;background-color:rgb(255, 199, 0);border-radius:0 0 3rem 3rem"></li>
+      </ul>
+      {{/if}}
     </section>
   </section>
 
