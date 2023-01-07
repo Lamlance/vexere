@@ -153,5 +153,5 @@ app.get("/api/test/profile", (req, res) => {
 
 
 app.listen(port, () => {
-  console.log(`App listening on http://localhost:${port}`);
+  console.log(`App listening on my ${myURL ? myURL : `http://localhost:${port}`}`);
 });

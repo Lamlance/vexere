@@ -48,11 +48,12 @@ const handlebars = new ExpressHandlebars({
     extname: "hbs",
 });
 const port = process.env.PORT || 8000;
+const myURL = process.env.RENDER_EXTERNAL_URL || `http://localhost:${port}`;
 const configAuth = {
     authRequired: false,
     auth0Logout: true,
     secret: process.env.SECRETE,
-    baseURL: `http://localhost:${port}`,
+    baseURL: myURL ? myURL : `http://localhost:${port}`,
     clientID: process.env.CLIENT_ID,
     issuerBaseURL: "https://dev-j07rhfbc.us.auth0.com",
 };
@@ -121,5 +122,5 @@ app.get("/api/test/profile", (req, res) => {
     });
 });
 app.listen(port, () => {
-    console.log(`App listening on http://localhost:${port}`);
+    console.log(`App listening on my ${myURL ? myURL : `http://localhost:${port}`}`);
 });
