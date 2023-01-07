@@ -34,14 +34,13 @@ model Location {
 }
 
 model Rating {
-  id       Int     @id @default(autoincrement())
-  rating   Int
-  comment  String?
-  ticketId Int     @unique
-  busHouseId Int 
-
-  BusHouse BusHouse @relation(fields: [busHouseId],references: [id])
-  Ticket   Ticket  @relation(fields: [ticketId], references: [id])
+  id         Int      @id @default(autoincrement())
+  rating     Int
+  comment    String?
+  ticketId   Int      @unique
+  busHouseId Int
+  BusHouse   BusHouse @relation(fields: [busHouseId], references: [id])
+  Ticket     Ticket   @relation(fields: [ticketId], references: [id])
 }
 
 model Route {

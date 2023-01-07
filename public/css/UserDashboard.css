@@ -1,5 +1,5 @@
 * {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -33,6 +33,9 @@
   color: #0191ff;
 }
 
+.logout {
+  color: #FFCC33;
+}
 
 /* .brand {
   padding: .8em;
@@ -63,6 +66,8 @@
 .user-login-name {
   margin-left: .5em;
   font-weight: 500;
+  font-size: 20px;
+  font-weight: 400;
 }
 
 .user-login-name:hover {
@@ -83,7 +88,7 @@
   border-radius: 5px;
   border: 1px;
   width: 19em;
-  height: 21em;
+  height: 13em;
   border-style: solid;
   border-color: #B2B2B2;
 }
@@ -96,6 +101,7 @@
   margin-top: 1em;
   margin-bottom: 1em;
   padding-bottom: 0.4em;
+  margin-left: 1.2em;
 }
 
 .sidebar-list>li:last-child {
@@ -214,7 +220,8 @@
 .tab-content {
   margin-top: 3.5em;
 }
-.tab-content > li{
+
+.tab-content>li {
   padding: 0;
   margin: 0.5rem 0;
   border: 1px solid black;

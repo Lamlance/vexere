@@ -14,14 +14,14 @@
       <input style="display: none;" name="date" type="date" value="{{date}}">
 
       <div style="width: 100%;">
-        <div id="price-label">Giá vé</div>
+        <div id="price-label"><h4>Giá vé</h4></div>
 
         <div class="price-range">
-          <label> Giá thấp nhất
-            <input id="min-price-slider" name="min" type="number" class="range-min" min="0" max="2000000" step="1000">
+          <label> <p>  Giá thấp nhất</p>
+            <input id="min-price-slider" name="min" type="number" class="range-min" min="0" max="2000000" step="10000">
           </label>
-          <label> Giá cao nhất
-            <input id="max-price-slider" name="max" type="number" class="range-max" min="0" max="2000000" step="1000">
+          <label> <p>  Giá cao nhất</p>  
+            <input id="max-price-slider" name="max" type="number" class="range-max" min="0" max="2000000" step="10000">
           </label>
         </div>
       </div>
@@ -39,8 +39,8 @@
 
     <!-- Bus House -->
     <section>
-      <label>Nhà xe
-        <input type="text" id="search-filter-by-bus-house" />
+      <label><h4>Nhà xe</h4>
+        <input type="text" id="search-filter-by-bus-house" placeholder="Vd: Nhà xe Lâm Phú An"/>
       </label>
       <ul>
         {{#each houses}}
@@ -53,20 +53,23 @@
     </section>
 
     {{!-- Bus type --}}
-    <section style="display: flex; flex-direction:column">
+    <section class="filter-bus-type" style="display: flex; flex-direction:column">
       <h4>Loại xe</h4>
-      <label> Xe bus ghế ngồi
+      <label> 
         <input type="radio" name="busType" value="1" >
+        <p>Xe bus ghế ngồi</p>
       </label>
-      <label> Xe bus giường nằm
+      <label> 
         <input type="radio" name="busType" value="2" >
+        <p>Xe bus giường nằm</p>
       </label>
-      <label> Xe Limousine
+      <label> 
         <input type="radio" name="busType" value="3" >
+        <p>Xe Limousine</p>
       </label>
     </section>
 
-    <input type="submit" value="Apply" />
+    <input class="submit-apply" type="submit" value="Apply" />
   </form>
 
   <section id="search_result_display" class="search_result_display">

@@ -49,8 +49,9 @@
     </div>
     <div class="vexere_info_action">
       <h4><a target="_blank" href="/house?houseId={{detail.Bus.busHouse}}">
-          Thông tin chi tiết 🔽
-        </a></h4>
+          Thông tin chi tiết 
+        </a>
+        <img src="/assets/down-arrow.png" alt="" /></h4>
       <form method="post" target="_blank" action="/api/ticket">
         <input type="number" name="detailId" style="display: none;" value="{{detail.id}}" readonly>
         <button>Đặt vé</button>
