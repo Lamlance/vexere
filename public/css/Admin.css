@@ -64,6 +64,13 @@
 .display-form > label{
   display: grid;
   grid-template-columns: 0.3fr 1.7fr;
+  margin: 0.2rem 0;
+}
+.display-form > label > input{
+  padding: 0.3rem;
+}
+.display-form > input[type=submit]{
+  padding: 0.3rem;
 }
 .display-form {
   display: flex;

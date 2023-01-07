@@ -17,7 +17,7 @@
 
   <ul id="admin-tab-display">
     {{!-- Quản lí nhà xe --}}
-    <li class="js-tab-display" style="height: 100%; display:block">
+    <li class="js-tab-display" style="height: 100%; display:block;margin-right:2rem">
       <section class="tab-display ">
         <section class="tab-display-option">
           <div id="house-refresh-btn"> REFRESH </div>
@@ -35,6 +35,14 @@
               <span>House Name:</span>
               <input name="house-name" type="text" placeholder="Bus House Name" required />
             </label>
+            <label>
+              <span>Thông tin nhà xe</span>
+              <textarea name="desc" rows="8"></textarea>
+            </label>
+            <label>
+              Các số điện thoại của nhà xe
+              <textarea name="phone" rows="8"></textarea>
+            </label>
             <input type="submit" value="Submit Bus House" />
           </form>
         </section>
@@ -42,7 +50,7 @@
     </li>
 
     {{!-- Quản lí xe --}}
-    <li class="js-tab-display" style="height: 100%; display:none">
+    <li class="js-tab-display" style="height: 100%; display:none;margin-right:2rem">
       <section class="tab-display">
         <section class="tab-display-option">
           <div id="bus-refresh-btn">REFRESH</div>
@@ -80,7 +88,7 @@
     </li>
 
     {{!-- Quản lí chuyến xe --}}
-    <li class="js-tab-display" style="height: 100%; display:none">
+    <li class="js-tab-display" style="height: 100%; display:none;margin-right:2rem">
       <section class="tab-display">
         <section class="tab-display-option">
         </section>
@@ -93,7 +101,7 @@
     </li>
 
     {{!-- Quản lí vé xe --}}
-    <li class="js-tab-display" style="height: 100%; display:none">
+    <li class="js-tab-display" style="height: 100%; display:none;margin-right:2rem">
       <section class="tab-display">
         <section class="tab-display-option">
           <div id="ticket-refresh-btn">REFRESH</div>

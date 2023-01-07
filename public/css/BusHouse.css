@@ -1,3 +1,7 @@
+#vexere_house_wrapper{
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+}
 #bus_house_image {
   overflow: hidden;
 }
@@ -8,7 +12,8 @@
   margin-inline: 0.5rem;
   border: 1px solid blue;
   overflow: scroll;
-  min-height: 600px;
+  min-height: 400px;
+  max-height: 600px;
   max-width: 600px;
   margin: 0 auto;
 }
@@ -36,4 +41,8 @@
   flex-direction: column;
   max-width: 800px;
   margin:0 auto;
+}
+.vexere_bushouse_desc_wrapper {
+  max-width: 800px;
+  margin: 0 auto;
 }

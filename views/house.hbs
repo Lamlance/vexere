@@ -3,29 +3,37 @@
 <link rel="stylesheet" href="/css/BusHouse.css" />
 <link rel="stylesheet" href="/css/ChiTiet.css" />
 
-<section>
-  <section class="vexere_bushouse_name_wrapper">
-    <h1>Nhà xe {{Name}}</h1>
-  </section>
+<section id="vexere_house_wrapper">
+
   <section id="bus_house_image">
     <div class="bus_img_slide">
-      <img alt="bus image">
-      <img alt="bus image">
-      <img alt="bus image">
-      <img alt="bus image">
-      <img alt="bus image">
+      <img src="/assets/bushouse(1).jpeg" alt="bus image">
+      <img src="/assets/bushouse(2).jpeg" alt="bus image">
+      <img src="/assets/bushouse(3).jpeg" alt="bus image">
+      <img src="/assets/bushouse(4).jpeg" alt="bus image">
+      <img src="/assets/bushouse(5).jpeg" alt="bus image">
     </div>
   </section>
 
-  <section class="vexere_rating_wrapper">
+  <section>
     <section class="vexere_bushouse_name_wrapper">
-      <h1>Đánh giá của các khách hàng</h1>
+      <h1>Nhà xe {{Name}}</h1>
+    </section>
+    <section class="vexere_bushouse_desc_wrapper">
+      <p>{{Desc}}</p>
     </section>
 
-    {{#each Rating}}
-    <div style="border: 1px solid black;margin-top:1.5rem">
-      {{> rating name=this.Ticket.User.Name rating=this.rating comment=this.comment }}
-    </div>
-    {{/each}}
+    <section class="vexere_rating_wrapper">
+      <section class="vexere_bushouse_name_wrapper">
+        <h1>Đánh giá của các khách hàng</h1>
+      </section>
+
+      {{#each Rating}}
+      <div style="border: 1px solid black;margin-top:1.5rem">
+        {{> rating name=this.Ticket.User.Name rating=this.rating comment=this.comment }}
+      </div>
+      {{/each}}
+    </section>
   </section>
+
 </section>

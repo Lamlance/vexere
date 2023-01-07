@@ -10,11 +10,15 @@ class HouseElement extends HTMLElement {
         const inputs = this.houseForm.elements;
         const name = inputs.namedItem("house-name");
         const id = inputs.namedItem("house-id");
+        const desc = inputs.namedItem("desc");
+        const phone = inputs.namedItem("phone");
         if (!inputs || !name || !id) {
             return null;
         }
         name.value = this.house.Name;
         id.valueAsNumber = this.house.id;
+        desc.value = this.house.Desc;
+        phone.value = this.house.Phone;
     }
     updateHouseData(name) {
         this.house.Name = name;
