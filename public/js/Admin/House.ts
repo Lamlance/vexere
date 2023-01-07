@@ -63,13 +63,17 @@ async function NewBusHouseClick() {
   (<HTMLInputElement>inputs.namedItem("house-name")).value = "";
 }
 
-async function createBusHouse(name: string) {
+async function createBusHouse(name: string,phone:string,desc:string) {
   const fetchData = await fetch("/admin/api/bushouse", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({ name: name })
+    body: JSON.stringify({
+      name: name,
+      desc: desc,
+      phone: phone
+    })
   });
   try {
     const newHouse = await fetchData.json();
@@ -82,19 +86,24 @@ async function createBusHouse(name: string) {
   } catch (error) { console.log(error) }
 }
 
-async function updateBusHouse(id: number, name: string) {
+async function updateBusHouse(id: number, name: string, phone: string, desc: string) {
   const fetchData = await fetch("/admin/api/bushouse", {
     method: "PUT",
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({ busHouseId:id ,name: name })
+    body: JSON.stringify({
+      busHouseId: id,
+      name: name,
+      desc: desc,
+      phone: phone
+    })
   });
 
   try {
     const updatedHouse = await fetchData.json();
-    busHousesInfo.updateElement(updatedHouse.id,updatedHouse.Name);
-  } catch (error) {console.log(error)}
+    busHousesInfo.updateElement(updatedHouse.id, updatedHouse.Name);
+  } catch (error) { console.log(error) }
 }
 
 async function BusHouseFormSubmit(event: SubmitEvent) {
@@ -106,13 +115,15 @@ async function BusHouseFormSubmit(event: SubmitEvent) {
 
   const id = (<HTMLInputElement>form.elements.namedItem("house-id")).valueAsNumber;
   const name = (<HTMLInputElement>form.elements.namedItem("house-name")).value;
+  const desc = (<HTMLInputElement>form.elements.namedItem("desc")).value;
+  const phone = (<HTMLInputElement>form.elements.namedItem("phone")).value;
 
   if (isNaN(id) || id < 0) {
-    const data = await createBusHouse(name);
+    const data = await createBusHouse(name,phone,desc);
     return;
   }
 
-  await updateBusHouse(id,name);
+  await updateBusHouse(id, name, phone, desc);
 }
 
 document.getElementById("house-refresh-btn")?.addEventListener("click", fetchBusHouse);
