@@ -15,15 +15,21 @@
   background-color: #fafafa;
   border: 1px solid #ccc;
   border-radius: 10px;
-  height: 12rem;
-  width: 16rem;
+  width: 17rem;
+  height: fit-content;
+  padding: .5rem 0 1.2rem 0;
 }
 
 #admin-tab-select>li {
-  display: grid;
+  display: flex;
+  align-items: center;
   cursor: pointer;
   margin-top: 1em;
   margin-left: 2rem;
+}
+
+#admin-tab-select>li span {
+  margin-left: .3rem;
 }
 
 #admin-tab-select>li:not(:first-child) {
