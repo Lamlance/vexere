@@ -37,10 +37,6 @@
   color: #FFCC33;
 }
 
-/* .brand {
-  padding: .8em;
-} */
-
 /* Container */
 .container {
   background-color: #fff;
@@ -93,7 +89,6 @@
   border: 1px;
   width: 19.5em;
   height: fit-content;
-  /* border-style: solid; */
   border-color: #fff;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }

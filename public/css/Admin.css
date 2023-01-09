@@ -59,13 +59,7 @@
   color: #0A6EBD;
   transform: scale(1.05);
   transition: .3s ease-in-out;
-  /* background-color: #0A6EBD; */
 }
-
-#admin-tab-display {
-  /* background-color: #e3e5e4; */
-}
-
 
 .tab-display {
   display: grid;
@@ -80,22 +74,9 @@
   width: 80%;
 }
 
-
 .tab-display-option {
   display: flex;
   flex-direction: column;
-}
-
-/* .tab-display-option>div {
-  width: 10rem;
-  margin: .5rem 0rem;
-} */
-
-.tab-display-option {
-  /* border: 1px solid #ccc;
-  border-radius: 10px;
-  height: fit-content;
-  padding: 1rem 0rem; */
   height: fit-content;
   max-height: 50%;
   overflow-y: scroll;
@@ -126,8 +107,6 @@
 .house-display-list {
   display: flex;
   flex-direction: column;
-  /* margin: 5rem 0rem; */
-
 }
 
 .tab-display-option>ul>li {
@@ -150,29 +129,6 @@
   background-color: #0A6EBD;
   border-radius: 5px;
 }
-
-/* .tab-display-option>ul>li {
-  align-items: center;
-} */
-
-
-
-/* .tab-display-option>ul>li, #ticket-refresh-btn,
-#house-refresh-btn, #house-add-btn,
-#bus-refresh-btn, #bus-add-btn {
-  min-height: 4rem;
-  display: grid;
-  place-items: center;
-  cursor: pointer;
-}
-
-.tab-display-option>ul>li:hover, #ticket-refresh-btn:hover,
-#house-refresh-btn:hover, #house-add-btn:hover,
-#bus-refresh-btn:hover, #bus-add-btn:hover {
-  color: #0A6EBD;
-  transform: scale(1.05);
-  transition: .3s ease-in-out;
-} */
 
 #ticket-display-form {
   display: flex;
@@ -207,7 +163,6 @@
   outline: none;
   padding: .8em;
   height: 1.5em;
-  /* width: 30em; */
   font-size: .9em;
   border-radius: .2em;
   float: right;
@@ -218,7 +173,6 @@
   outline: none;
   padding: .8em;
   height: 5em;
-  /* width: 29.2em; */
   font-size: .9em;
   border-radius: .2em;
   float: right;

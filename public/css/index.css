@@ -3,8 +3,7 @@
 #banner {
 	background: url(/assets/leaderboard.png);
 	background-size: cover;
-	height: max(800px, 80vh);
-
+	height: max(600px, 80vh);
 	display: flex;
 	justify-content: center;
 	align-content: center;
@@ -38,25 +37,6 @@ nav {
 	padding: 0.5em 0.5em;
 }
 
-/* .container {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
-
-.nav-logo {
-	width: 50em;
-}
-
-.nav-ul {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
-
-.nav-links {
-	width: 40em;
-} */
 .vexere-container {
 	padding-inline: 5rem;
 }
@@ -140,10 +120,6 @@ nav {
 	transition: 0.2s ease-in-out;
 }
 
-/* table {
-	width: 80em;
-} */
-
 .text_slogan {
 	font-size: 34px;
 	font-weight: 500;
@@ -191,43 +167,8 @@ ul>li>a:hover {
 	display: grid;
 	place-items: center;
 	width: 70%;
+	margin-bottom: 3rem;
 }
-
-/* input[type="date"]::-webkit-inner-spin-button,
-input[type="date"]::-webkit-calendar-picker-indicator {
-	/* display: none;
-	-webkit-appearance: none; */
-/* opacity: 0; */
-/* } */
-
-/* */
-/* input[type="date"]::-webkit-calendar-picker-indicator {
-	display: none;
-	-webkit-appearance: none;
-
-} */
-
-/* input[type="date"]::-webkit-calendar-picker-indicator {
-	content: url("/assets/pickdate_vex_blue_24dp.svg");
-	color: rgba(0, 0, 0, 0);
-}
-
-
-::-webkit-calendar-picker-indicator:hover {
-	-webkit-box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.04);
-	box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.04);
-} */
-
-/* ::-webkit-search-cancel-button,
-::-webkit-clear-button {
-	-webkit-appearance: none;
-	background-image: url('data:image/svg+xml;charset=utf8,%3Csvg fill="%23000" fill-opacity=".54" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M12,2C17.53,2 22,6.47 22,12C22,17.53 17.53,22 12,22C6.47,22 2,17.53 2,12C2,6.47 6.47,2 12,2M15.59,7L12,10.59L8.41,7L7,8.41L10.59,12L7,15.59L8.41,17L12,13.41L15.59,17L17,15.59L13.41,12L17,8.41L15.59,7Z"/%3E%3Cpath d="M0 0h24v24H0z" fill="none"/%3E%3C/svg%3E');
-	color: rgba(0, 0, 0, 0.54);
-	cursor: pointer;
-	height: 1.5rem;
-	margin-right: 0;
-	width: 1.5rem;
-} */
 
 ::-webkit-calendar-picker-indicator {
 	color: rgba(0, 0, 0, 0);
@@ -239,11 +180,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 	border-radius: 50%;
 	margin-left: 0.5rem;
 }
-
-/* ::-webkit-calendar-picker-indicator:hover {
-	-webkit-box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.04);
-	box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.04);
-} */
 
 .pick-up {
 	display: flex;
@@ -351,11 +287,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .search_bar>table>thead>tr>td {
 	max-height: 80px;
 }
-
-/* .search_div:hover {
-	transition: .2s ease-in-out;
-	background-color: #e6ba1c;
-} */
 
 .vexere_search_btn {
 	border-radius: 8px;
