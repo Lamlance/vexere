@@ -12,7 +12,7 @@
 }
 
 .other-links {
-	background-color: lightgrey;
+	/* background-color: #ecf4fd; */
 }
 
 * {
@@ -92,13 +92,13 @@ nav {
 }
 
 .login, .user_loggedin {
+	color: #FFFFFF;
 	font-family: 'Roboto', sans-serif;
 	background: #1861c5;
 	border: 1px solid #6797bb;
 	border-radius: 50px;
 	box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
 	box-sizing: border-box;
-	color: #FFFFFF;
 	cursor: pointer;
 	display: inline-block;
 	font-size: 16px;
@@ -374,7 +374,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .other-links {
-	background-color: #f8f8f8;
+	background-color: #ecf4fd;
 }
 
 .footer {

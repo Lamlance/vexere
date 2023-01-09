@@ -37,6 +37,8 @@ body * {
   border: 1px solid #C0C0C0;
   border-radius: 5px;
   padding: .5em 1em 2em 1em;
+  border-color: #fff;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 #price-minmax-label {
@@ -112,9 +114,10 @@ two-level-checkbox {
 /* .vexere_bus_image_wrapper {
   width: 300px;
 } */
-.search_result_display{
+.search_result_display {
   padding-right: 4.5rem;
 }
+
 .vexere_info_action>form>button {
   font-family: 'Roboto', sans-serif;
   background: #ffc700;
@@ -166,6 +169,14 @@ two-level-checkbox {
 .vexere_info_action>h4>img {
   margin-left: .5em;
   margin-bottom: .2em;
+}
+
+.vexere_info_wrapper {
+  box-shadow: rgba(60, 64, 67, .3) 0 4px 4px 0, rgba(60, 64, 67, .15) 0 8px 12px 6px;
+}
+
+.vexere_info_wrapper:not(:first-child) {
+  margin-top: 1.5rem;
 }
 
 .vexere_info_wrapper:hover {
