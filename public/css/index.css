@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro&family=Poppins:wght@300;400;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Anonymous+Pro&family=Poppins:wght@300;400;600&display=swap");
 
 #banner {
 	background: url(/assets/leaderboard.png);
@@ -25,17 +25,17 @@ ul {
 	padding-left: 0;
 }
 
-ul>li {
+ul > li {
 	padding: 0.25rem 0rem;
 }
 
-ul>li>a {
+ul > li > a {
 	text-decoration: none;
 	color: #212529;
 }
 
 nav {
-	padding: .5em .5em;
+	padding: 0.5em 0.5em;
 }
 
 /* .container {
@@ -73,11 +73,11 @@ nav {
 	background-position: 0 0;
 	color: #1861c5;
 	transform: scale(1.1);
-	transition: .2s ease-in-out;
+	transition: 0.2s ease-in-out;
 }
 
 .nav-links {
-	margin-top: .5em;
+	margin-top: 0.5em;
 	max-width: 80%;
 }
 
@@ -85,20 +85,21 @@ nav {
 	margin-right: 2em;
 }
 
-.nav-links>ul {
+.nav-links > ul {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 }
 
-.login, .user_loggedin {
-	font-family: 'Roboto', sans-serif;
+.login,
+.user_loggedin {
+	font-family: "Roboto", sans-serif;
 	background: #1861c5;
 	border: 1px solid #6797bb;
 	border-radius: 50px;
 	box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
 	box-sizing: border-box;
-	color: #FFFFFF;
+	color: #ffffff;
 	cursor: pointer;
 	display: inline-block;
 	font-size: 16px;
@@ -116,9 +117,10 @@ nav {
 	vertical-align: middle;
 }
 
-
 .login:hover,
-.login:active, .user_loggedin:hover, .user_loggedin:active {
+.login:active,
+.user_loggedin:hover,
+.user_loggedin:active {
 	background-color: initial;
 	background-position: 0 0;
 	color: #6797bb;
@@ -126,8 +128,9 @@ nav {
 	transform: scale(1.1);
 }
 
-.login:active, .user_loggedin:active {
-	opacity: .5;
+.login:active,
+.user_loggedin:active {
+	opacity: 0.5;
 }
 
 .nav-li-item:not(:last-child):hover {
@@ -135,7 +138,7 @@ nav {
 	background-position: 0 0;
 	color: #1861c5;
 	transform: scale(1.1);
-	transition: .2s ease-in-out;
+	transition: 0.2s ease-in-out;
 }
 
 /* table {
@@ -154,11 +157,10 @@ nav {
 	margin-bottom: 1em;
 }
 
-
 .item:hover,
 .item:focus {
 	background-color: #fafafa;
-	color: #D1822B;
+	color: #d1822b;
 }
 
 .disabled {
@@ -168,27 +170,23 @@ nav {
 	opacity: 0.3;
 }
 
-
-ul>li {
+ul > li {
 	padding: 0.25rem 0.25rem;
 }
 
-ul>li>a {
+ul > li > a {
 	text-decoration: none;
 }
 
-ul>li>a:hover {
-	color: #0A6EBD;
+ul > li > a:hover {
+	color: #0a6ebd;
 	transform: scale(1.05);
-	transition: .3s ease-in-out;
+	transition: 0.3s ease-in-out;
 }
 
-.search_bar>table>thead div {
+.search_bar > table > thead div {
 	width: 100%;
 }
-
-.search_bar>table>thead div {}
-
 
 .search_bar {
 	display: grid;
@@ -235,12 +233,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 ::-webkit-calendar-picker-indicator {
 	color: rgba(0, 0, 0, 0);
 	opacity: 1;
-	background-image: url('/assets/pickdate_vex_blue_24dp.svg');
+	background-image: url("/assets/pickdate_vex_blue_24dp.svg");
 	width: 24px;
 	height: 21px;
 	cursor: pointer;
 	border-radius: 50%;
-	margin-left: .5rem;
+	margin-left: 0.5rem;
 }
 
 /* ::-webkit-calendar-picker-indicator:hover {
@@ -253,52 +251,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 	align-items: center;
 }
 
-.search_bar>table {
-	width: 100%;
-}
-
-.auto_complete_place {
-	margin-top: 0.5rem;
-	position: absolute;
-	width: 95%;
-	overflow: auto;
-	z-index: 100;
-	max-height: 250px;
-	border-radius: 0.5rem;
-}
-
-.auto_complete_place>ul {
-	border-radius: 0.5rem;
-}
-
-.auto_complete_place>ul>li {
-	padding-inline: 0.5rem;
-	cursor: pointer;
-}
-
-.auto_complete_place>ul>li {
-	padding-inline: 0.5rem;
-	cursor: pointer;
-}
-
-.auto_complete_place>ul>li:hover {
-	background-image: linear-gradient(rgb(0 0 0/40%) 0 0);
-}
-
-.auto_complete_place>ul>li:first-of-type {
-	border-radius: 0.5rem 0.5rem 0 0;
-}
-
-.auto_complete_place>ul>li:last-of-type {
-	border-radius: 0 0 0.5rem 0.5rem;
-}
-
-.auto_complete_place>ul {
-	background-color: #fafafa;
-}
-
-.search_bar>table {
-	margin-bottom: 2em;
+.search_bar > table {
 	width: 100%;
 }
 
@@ -310,45 +263,93 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 	z-index: 100;
 	max-height: 250px;
 	border-radius: 0.5rem;
-	overflow: scroll;
-	display: none;
 }
 
-.auto_complete_place>ul {
+.auto_complete_place > ul {
 	border-radius: 0.5rem;
 }
 
-.auto_complete_place>ul>li {
+.auto_complete_place > ul > li {
 	padding-inline: 0.5rem;
 	cursor: pointer;
 }
 
-.auto_complete_place>ul>li {
+.auto_complete_place > ul > li {
 	padding-inline: 0.5rem;
 	cursor: pointer;
 }
 
-.auto_complete_place>ul>li:hover {
+.auto_complete_place > ul > li:hover {
 	background-image: linear-gradient(rgb(0 0 0/40%) 0 0);
 }
 
-.auto_complete_place>ul>li:first-of-type {
+.auto_complete_place > ul > li:first-of-type {
 	border-radius: 0.5rem 0.5rem 0 0;
 }
 
-.auto_complete_place>ul>li:last-of-type {
+.auto_complete_place > ul > li:last-of-type {
 	border-radius: 0 0 0.5rem 0.5rem;
 }
 
-.auto_complete_place>ul {
+.auto_complete_place > ul {
 	background-color: #fafafa;
 }
 
-.search_bar>table>tbody>tr:first-of-type>td {
+.search_bar > table {
+	margin-bottom: 2em;
+	width: 100%;
+}
+
+.auto_complete_place {
+	margin-top: 0.5rem;
+	position: absolute;
+	width: 95%;
+	overflow: auto;
+	z-index: 100;
+	max-height: 250px;
+	border-radius: 0.5rem;
+	display: none;
+}
+
+.auto_complete_place::-webkit-scrollbar {
+	display: none;
+}
+
+.auto_complete_place > ul {
+	border-radius: 0.5rem;
+}
+
+.auto_complete_place > ul > li {
+	padding-inline: 0.5rem;
+	cursor: pointer;
+}
+
+.auto_complete_place > ul > li {
+	padding-inline: 0.5rem;
+	cursor: pointer;
+}
+
+.auto_complete_place > ul > li:hover {
+	background-image: linear-gradient(rgb(0 0 0/40%) 0 0);
+}
+
+.auto_complete_place > ul > li:first-of-type {
+	border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.auto_complete_place > ul > li:last-of-type {
+	border-radius: 0 0 0.5rem 0.5rem;
+}
+
+.auto_complete_place > ul {
+	background-color: #fafafa;
+}
+
+.search_bar > table > tbody > tr:first-of-type > td {
 	position: relative;
 }
 
-.search_bar>table>thead>tr>td {
+.search_bar > table > thead > tr > td {
 	max-height: 80px;
 }
 
@@ -362,14 +363,13 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 	height: 100%;
 }
 
-
 .vexere_search_btn p {
 	color: #564f48;
 	font-size: 18px;
 	font-weight: 700;
 }
 
-.search_bar>table>tbody>tr:first-of-type>td {
+.search_bar > table > tbody > tr:first-of-type > td {
 	position: relative;
 }
 
@@ -379,7 +379,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .footer {
 	padding: 1em 0em;
-	font-family: 'Roboto', sans-serif;
+	font-family: "Roboto", sans-serif;
 	font-size: 14px;
 	background-color: #f1f1f1;
 }
+
+
