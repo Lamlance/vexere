@@ -17,7 +17,7 @@ function mainAdmin() {
 
     select.addEventListener("click", (event) => {
       subUL.forEach((sub)=>{sub.style.display = "none";});
-      console.log(subList);
+      subList.style.display = "block";
 
       displayTab.forEach((display, displayId) => {
         display.style.display = (selectId === displayId) ? "block" : "none"

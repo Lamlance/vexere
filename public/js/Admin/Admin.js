@@ -13,7 +13,7 @@ function mainAdmin() {
         const subList = select.querySelector(".sub-tab-select");
         select.addEventListener("click", (event) => {
             subUL.forEach((sub) => { sub.style.display = "none"; });
-            console.log(subList);
+            subList.style.display = "block";
             displayTab.forEach((display, displayId) => {
                 display.style.display = (selectId === displayId) ? "block" : "none";
             });
