@@ -16,7 +16,7 @@
                 <img src="/assets/route-data.jpg" alt="Route image" style="aspect-ratio: 1/1" ; width="170px" />
             </div>
 
-            <div class="col-9 route-detail-content">
+            <div class="col-9 route-detail-content w-75">
                 <div class="row">
                     <h4 class="col-6 text-start">{{ busHouse }} - Xe số {{ busId }}</h4>
                     <h4 class="col-6 text-end">{{ price }}</h4>
@@ -27,8 +27,8 @@
                 </div>
                 <div class="start row">
                     <h5 class="fw-bold col-3">{{ startTime }}</h5>
-                    <h5 class="fw-normal col-6">{{ startPlace }}</h5>
-                    <a class="btn btn-primary btn-sm col-3" href="/admin/route_detail/edit/{{id}}">
+                    <h5 class="fw-normal col-7">{{ startPlace }}</h5>
+                    <a class="btn btn-primary btn-sm col-2" href="/admin/route_detail/edit/{{id}}">
                         Chỉnh sửa tuyến xe
                     </a>
                 </div>
@@ -37,8 +37,8 @@
                 </div>
                 <div class="end row">
                     <h5 class="fw-bold col-3">{{ endTime }}</h5>
-                    <h5 class="fw-normal col-6">{{ endPlace }}</h5>
-                    <a class="btn btn-danger btn-sm col-3" href="/admin/route_detail/delete/{{id}}">
+                    <h5 class="fw-normal col-7">{{ endPlace }}</h5>
+                    <a class="btn btn-danger btn-sm col-2" href="/admin/route_detail/delete/{{id}}">
                         Xoá tuyến xe
                     </a>
                 </div>
