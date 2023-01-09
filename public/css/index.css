@@ -31,6 +31,7 @@ ul>li {
 
 ul>li>a {
 	text-decoration: none;
+	color: #212529;
 }
 
 nav {
@@ -56,9 +57,10 @@ nav {
 .nav-links {
 	width: 40em;
 } */
-.vexere-container{
+.vexere-container {
 	padding-inline: 5rem;
 }
+
 .vexere-nav-container {
 	display: flex;
 	justify-content: space-between;
@@ -173,6 +175,12 @@ ul>li {
 
 ul>li>a {
 	text-decoration: none;
+}
+
+ul>li>a:hover {
+	color: #0A6EBD;
+	transform: scale(1.05);
+	transition: .3s ease-in-out;
 }
 
 .search_bar>table>thead div {
