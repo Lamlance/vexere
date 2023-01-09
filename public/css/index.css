@@ -56,8 +56,10 @@ nav {
 .nav-links {
 	width: 40em;
 } */
-
-.nav-container {
+.vexere-container{
+	padding-inline: 5rem;
+}
+.vexere-nav-container {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;

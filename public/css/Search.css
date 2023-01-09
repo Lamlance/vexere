@@ -19,7 +19,7 @@ body * {
   display: grid;
   grid-template-columns: 0.5fr 1.5fr;
   margin-inline: 5rem;
-  column-gap: 1rem;
+  column-gap: 3rem;
 }
 
 .search_result_filter>section {
@@ -109,10 +109,12 @@ two-level-checkbox {
   margin-left: 2rem;
 }
 
-.vexere_bus_image_wrapper {
+/* .vexere_bus_image_wrapper {
   width: 300px;
+} */
+.search_result_display{
+  padding-right: 4.5rem;
 }
-
 .vexere_info_action>form>button {
   font-family: 'Roboto', sans-serif;
   background: #ffc700;

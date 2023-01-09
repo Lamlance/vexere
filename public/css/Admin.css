@@ -6,12 +6,17 @@
 #admin-wrapper {
   display: grid;
   grid-template-columns: 0.4fr 1.6fr;
-  background-color: azure;
+  /* background-color: azure; */
   height: 100vh;
+  margin-top: 3em;
+  padding-inline: 2.5rem;
 }
 
 #admin-tab-select {
-  background-color: #ace4f8;
+  background-color: #fafafa;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  height: fit-content;
 }
 
 #admin-tab-select>li {
@@ -21,12 +26,17 @@
   cursor: pointer;
 }
 
+#admin-tab-select>li:not(:first-child) {
+  margin-top: 15px;
+}
+
 #admin-tab-select>li:hover {
-  background-color: #56b3ac;
+  color: #fff;
+  background-color: #0A6EBD;
 }
 
 #admin-tab-display {
-  background-color: #e3e5e4;
+  /* background-color: #e3e5e4; */
 }
 
 
@@ -71,7 +81,7 @@
   padding: 0.3rem;
 }
 .display-form > input[type=submit]{
-  padding: 0.3rem;
+  width: 2rem;
 }
 .display-form {
   display: flex;
