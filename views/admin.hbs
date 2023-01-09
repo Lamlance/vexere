@@ -9,11 +9,35 @@
 
 <div id="admin-wrapper">
   <ul id="admin-tab-select">
-    <li value="0"> <img src="/assets/admin-manager.png" alt="">
-    <span>Quản lí nhà xe</span> </li>
-    <li value="1"> <img src="/assets/admin-bus-driver.png" alt=""><span>Quản lí xe</span></li>
-    <li value="2"><a href="/admin/route_detail"><img src="/assets/admin-admin.png" alt=""><span>Quản lí chuyến xe</span> </a></li>
-    <li value="3"><img src="/assets/admin-bus-ticket.png" alt=""><span>Quản lí vé xe</span></li>
+    <li value="0">
+      <img src="/assets/admin-manager.png" alt="">
+      <span>Quản lí nhà xe</span>
+      <ul class="sub-tab-select">
+        <li><div id="house-refresh-btn"> Làm Mới </div></li>
+        <li><div id="house-add-btn"> Thêm Nhà Xe </div></li>
+      </ul>
+    </li>
+    <li value="1">
+      <img src="/assets/admin-bus-driver.png" alt="">
+      <span>Quản lí xe</span>
+      <ul class="sub-tab-select">
+        <li><div id="bus-refresh-btn">Làm mới</div></li>
+        <li><div id="bus-add-btn">Thêm xe</div></li>
+      </ul>
+    </li>
+    <li value="2">
+      <a href="/admin/route_detail"><img src="/assets/admin-admin.png" alt="">
+        <span>Quản lí chuyến xe</span>
+      </a>
+      <ul class="sub-tab-select"></ul>
+    </li>
+    <li value="3">
+      <img src="/assets/admin-bus-ticket.png" alt="">
+      <span>Quản lí vé xe</span>
+      <ul class="sub-tab-select">
+        <li><div id="ticket-refresh-btn">Làm Mới</div></li>
+      </ul>
+    </li>
   </ul>
 
   <ul id="admin-tab-display">
@@ -21,8 +45,6 @@
     <li class="js-tab-display" style="height: 100%; display:block;margin-right:2rem">
       <section class="tab-display ">
         <section class="tab-display-option">
-          <div id="house-refresh-btn"> Làm Mới </div>
-          <div id="house-add-btn"> Thêm Nhà Xe </div>
           <ul id="house-display-list"></ul>
         </section>
 
@@ -57,8 +79,6 @@
     <li class="js-tab-display" style="height: 100%; display:none;margin-right:2rem">
       <section class="tab-display">
         <section class="tab-display-option">
-          <div id="bus-refresh-btn">Làm mới</div>
-          <div id="bus-add-btn">Thêm xe</div>
           <ul id="bus-display-list"></ul>
         </section>
 
@@ -96,7 +116,6 @@
       <section class="tab-display">
         <section class="tab-display-option">
         </section>
-
         <section class="tab-display-form">
         </section>
 
@@ -108,10 +127,8 @@
     <li class="js-tab-display" style="height: 100%; display:none;margin-right:2rem">
       <section class="tab-display">
         <section class="tab-display-option">
-          <div id="ticket-refresh-btn">Làm Mới</div>
           <ul id="ticket-display-list"></ul>
         </section>
-
         <section class="tab-display-form">
           <form class="display-form" id="ticket-display-form">
             <label>

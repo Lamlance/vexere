@@ -26,6 +26,7 @@
   cursor: pointer;
   margin-top: 1em;
   margin-left: 2rem;
+  flex-wrap: wrap;
 }
 
 #admin-tab-select>li span {
@@ -35,9 +36,20 @@
 #admin-tab-select>li:not(:first-child) {
   margin-top: 15px;
 }
-
-
-#admin-tab-select>li:hover {
+.sub-tab-select{
+  margin-top:0;
+  flex-basis: 100%;
+  list-style-type: "↳";
+}
+.sub-tab-select > li{
+  margin-left: 3rem;
+}
+.sub-tab-select > li:hover{
+  transform: scale(1.05);
+  transition: .2s ease-in-out;
+  color: #0A6EBD;
+}
+#admin-tab-select>li>span:hover {
   color: #0A6EBD;
   transform: scale(1.05);
   transition: .3s ease-in-out;
@@ -63,32 +75,6 @@
   width: 80%;
 }
 
-#ticket-refresh-btn,
-#house-refresh-btn, #house-add-btn,
-#bus-refresh-btn, #bus-add-btn {
-  font-family: 'Roboto', sans-serif;
-  background: #4679c2;
-  border: 1px solid #6797bb;
-  border-radius: 10px;
-  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
-  box-sizing: border-box;
-  color: #FFFFFF;
-  cursor: pointer;
-  display: inline-block;
-  font-size: 16px;
-  font-weight: 800;
-  line-height: 16px;
-  min-height: 40px;
-  outline: 0;
-  padding: 12px 14px;
-  text-align: center;
-  text-rendering: geometricprecision;
-  text-transform: none;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  vertical-align: middle;
-}
 
 .tab-display-option:not(:last-child) {
   display: flex;
@@ -102,22 +88,6 @@
 
 .tab-display-option>ul {
   margin-top: 2rem;
-}
-
-#ticket-refresh-btn:hover,
-#house-refresh-btn:hover, #house-add-btn:hover,
-#bus-refresh-btn:hover, #bus-add-btn:hover {
-  background-color: initial;
-  background-position: 0 0;
-  color: #6797bb;
-  transition: 0.2s ease-in-out;
-  transform: scale(1.1);
-}
-
-#ticket-refresh-btn:active,
-#house-refresh-btn:active, #house-add-btn:active,
-#bus-refresh-btn:active, #bus-add-btn:active {
-  opacity: .5;
 }
 
 .house-display-list {

@@ -9,7 +9,6 @@ const adminDashBoard = async (req, res) => {
     await prisma.$connect();
     const userData = sessionManager.users[req.oidc.user.sid] ||
         (await getUserFromDB(req.oidc.user.sub, req.oidc.user.email));
-    console.log(userData);
     if (!userData.isAdmin) {
         return {
             status: 400,
