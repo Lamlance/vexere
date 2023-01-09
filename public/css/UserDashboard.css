@@ -46,10 +46,14 @@
   background-color: #fff;
   display: flex;
   justify-content: space-between;
-  margin: 2em 9em;
+  margin: 3em 9em;
 }
 
 /* Change infor */
+
+.user-change-information-form {
+  margin-top: 3rem;
+}
 
 .user-infor {
   margin-bottom: 3em;
@@ -128,6 +132,10 @@
 
 .user-change-title>h2 {
   font-size: 1.5em;
+}
+
+.user-change-title>p {
+  margin-top: .5rem;
 }
 
 .container label {
@@ -224,7 +232,8 @@
 .tab-content>li {
   padding: 0;
   margin: 0.5rem 0;
-  border: 1px solid black;
+  border: 1px solid #ccc;
+  border-radius: 10px;
 }
 
 .book-ticket-span>a {
@@ -235,8 +244,6 @@
 .ticket-container {
   margin-top: 3.5em;
   border: 1px solid #B2B2B2;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
 }
 
 .ticket-container:hover {
@@ -258,6 +265,8 @@
   color: #fff;
   height: fit-content;
   padding: .3em .5em;
+  border: 1px solid #0191ff;
+  border-radius: 5px;
   background-color: #0A6EBD;
 }
 
@@ -282,8 +291,7 @@
   padding: 1em;
   border: 1px solid #B2B2B2;
   border-top: none;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
+
   color: #0A6EBD;
 }
 

@@ -5,9 +5,9 @@
 
 #admin-wrapper {
   display: grid;
-  grid-template-columns: 0.4fr 1.6fr;
+  grid-template-columns: 0.5fr 1.5fr;
   height: 100vh;
-  margin-top: 3em;
+  margin: 3em 3em;
   padding-inline: 2.5rem;
 }
 
@@ -15,7 +15,7 @@
   background-color: #fafafa;
   border: 1px solid #ccc;
   border-radius: 10px;
-  width: 17rem;
+  width: 16rem;
   height: fit-content;
   padding: .5rem 0 1.2rem 0;
 }
@@ -36,19 +36,23 @@
 #admin-tab-select>li:not(:first-child) {
   margin-top: 15px;
 }
-.sub-tab-select{
-  margin-top:0;
+
+.sub-tab-select {
+  margin-top: 0;
   flex-basis: 100%;
   list-style-type: "↳";
 }
-.sub-tab-select > li{
+
+.sub-tab-select>li {
   margin-left: 3rem;
 }
-.sub-tab-select > li:hover{
+
+.sub-tab-select>li:hover {
   transform: scale(1.05);
   transition: .2s ease-in-out;
   color: #0A6EBD;
 }
+
 #admin-tab-select>li>span:hover {
   color: #0A6EBD;
   transform: scale(1.05);
@@ -71,41 +75,49 @@
 
 .tab-display-form {
   min-height: 95%;
-  margin-top: 3rem;
   width: 80%;
 }
 
 
-.tab-display-option:not(:last-child) {
+.tab-display-option {
   display: flex;
   flex-direction: column;
 }
 
-.tab-display-option>div {
+/* .tab-display-option>div {
   width: 10rem;
   margin: .5rem 0rem;
+} */
+
+.tab-display-option {
+  /* border: 1px solid #ccc;
+  border-radius: 10px;
+  height: fit-content;
+  padding: 1rem 0rem; */
 }
 
-.tab-display-option>ul {
-  margin-top: 2rem;
-}
+.tab-display-option>ul {}
 
 .house-display-list {
   display: flex;
   flex-direction: column;
-  margin: .5rem 0rem;
+  /* margin: 5rem 0rem; */
 }
 
 .tab-display-option>ul>li {
   cursor: pointer;
+  margin-left: .5rem;
 }
 
-.tab-display-option>ul>li {
-  margin-top: .5rem;
+.tab-display-option>ul>li:not(:first-child) {
+  margin-top: 1rem;
 }
 
 .tab-display-option>ul>li:hover {
-  color: #ffd333;
+  color: #0A6EBD;
+  opacity: .8;
+  transform: scale(1.02);
+  transition: .2s ease-in-out;
 }
 
 /* .tab-display-option>ul>li {
@@ -150,10 +162,6 @@
   padding: 0.3rem;
 }
 
-.display-form>input[type=submit] {
-  /* width: 2rem; */
-}
-
 .display-form {
   display: flex;
   flex-direction: column;
@@ -186,18 +194,24 @@
 }
 
 .display-form input[type=submit] {
-  width: 12rem;
+  width: 6rem;
   height: 3rem;
   color: #fff;
   font-weight: 600;
-  font-size: 1.1em;
+  font-size: 1em;
   border: none;
   background-color: #0A6EBD;
-  padding: .8em 1em;
+  padding: .6em .6em;
   cursor: pointer;
   border-radius: 10px;
   opacity: 0.8;
   margin-left: auto;
+}
+
+.display-form input[type=submit]:hover {
+  transform: scale(1.05);
+  transition: .2s ease-in-out;
+  opacity: .4;
 }
 
 .display-form select {
