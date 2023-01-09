@@ -54,6 +54,7 @@
 .tab-display-form {
   min-height: 95%;
   margin-top: 3rem;
+  width: 80%;
 }
 
 #ticket-refresh-btn,
@@ -161,7 +162,7 @@
 
 .display-form>label {
   display: grid;
-  grid-template-columns: 0.3fr 1.7fr;
+  grid-template-columns: 0.5fr 1.5fr;
   margin: 0.2rem 0;
 }
 
@@ -174,7 +175,7 @@
 }
 
 .display-form>input[type=submit] {
-  width: 2rem;
+  /* width: 2rem; */
 }
 
 .display-form {
@@ -190,7 +191,7 @@
   outline: none;
   padding: .8em;
   height: 1.5em;
-  width: 30em;
+  /* width: 30em; */
   font-size: .9em;
   border-radius: .2em;
   float: right;
@@ -201,7 +202,7 @@
   outline: none;
   padding: .8em;
   height: 3em;
-  width: 29.2em;
+  /* width: 29.2em; */
   font-size: .9em;
   border-radius: .2em;
   float: right;
@@ -220,6 +221,7 @@
   cursor: pointer;
   border-radius: 10px;
   opacity: 0.8;
+  margin-left: auto;
 }
 
 .display-form select {
