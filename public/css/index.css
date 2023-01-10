@@ -71,6 +71,11 @@ nav {
 	align-items: center;
 }
 
+.login-button {
+	border: none;
+	background-color: #fff;
+}
+
 .login, .user_loggedin {
 	font-family: 'Roboto', sans-serif;
 	background: #1861c5;
