@@ -22,7 +22,11 @@ const adminDashBoard = async (req: Request, res: Response) => {
     };
   }
 
-  res.render("admin");
+  const locations = await prisma.location.findMany();
+
+  res.render("admin",{
+    locations: locations
+  });
 };
 
 export default adminDashBoard;

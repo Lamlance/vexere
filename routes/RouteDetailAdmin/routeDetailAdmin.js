@@ -42,6 +42,38 @@ const adminRouteDetailHandler = async (req, res) => {
     res.locals.routeDetailList = routeDetailList;
     res.render("RouteDetailAdmin/routeDetailList");
 };
+export const adminRouteDetailAPI = async (req, res) => {
+    if (!req.oidc.isAuthenticated() || !req.oidc.user || !req.oidc.user.sub) {
+        res.redirect("/login");
+        return;
+    }
+    const fromId = singleIntQueryHandler(req.query.fromId, NaN);
+    const toId = singleIntQueryHandler(req.query.toId, NaN);
+    const date1 = new Date(req.query.time1);
+    const date2 = new Date(req.query.time2);
+    const details = await prisma.routeDetail.findMany({
+        take: 30,
+        where: {
+            AND: [
+                { startTime: { gte: date1 } },
+                { startTime: { lte: date2 } },
+                { Route: {
+                        startLocId: { equals: fromId },
+                        endLocId: { equals: toId }
+                    } }
+            ]
+        },
+        include: {
+            Route: {
+                select: {
+                    startLocId: true,
+                    endLocId: true,
+                }
+            }
+        }
+    });
+    res.status(200).json(details);
+};
 export const adminAddRouteDetailHandler = (req, res) => {
     if (!req.oidc.isAuthenticated() || !req.oidc.user || !req.oidc.user.sub) {
         res.redirect("/login");
