@@ -173,7 +173,10 @@
   float: right;
   margin: 0 0 1em 2em;
 }
-
+.display-form select {
+  margin-left: 1.8rem;
+  padding: 1em;
+}
 .display-form textarea {
   outline: none;
   padding: .8em;
@@ -200,7 +203,3 @@
   margin-left: auto;
 }
 
-.display-form select {
-  width: 33.3em;
-  margin-left: 1.8rem;
-}

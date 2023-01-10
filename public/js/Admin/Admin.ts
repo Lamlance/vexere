@@ -17,10 +17,14 @@ function mainAdmin() {
 
     select.addEventListener("click", (event) => {
       subUL.forEach((sub)=>{sub.style.display = "none";});
-      subList.style.display = "block";
+      try {
+        subList.style.display = "block";
+      } catch (error) {
+        
+      }
 
       displayTab.forEach((display, displayId) => {
-        display.style.display = (selectId === displayId) ? "block" : "none"
+        display.style.display = (selectId === displayId) ? "block" : "none";
       })
     })
   })

@@ -6,6 +6,7 @@
 <script type="module" src="/js/Admin/Ticket.js" defer></script>
 <script type="module" src="/js/Admin/House.js" defer></script>
 <script type="module" src="/js/Admin/Bus.js" defer></script>
+<script type="module" src="/js/Admin/Detail.js" defer></script>
 
 <div id="admin-wrapper">
   <ul id="admin-tab-select">
@@ -13,28 +14,48 @@
       <img src="/assets/admin-manager.png" alt="">
       <span>Quản lí nhà xe</span>
       <ul class="sub-tab-select">
-        <li><div id="house-refresh-btn"> Làm Mới </div></li>
-        <li><div id="house-add-btn"> Thêm Nhà Xe </div></li>
+        <li>
+          <div id="house-refresh-btn"> Làm Mới </div>
+        </li>
+        <li>
+          <div id="house-add-btn"> Thêm Nhà Xe </div>
+        </li>
       </ul>
     </li>
     <li value="1">
       <img src="/assets/admin-bus-driver.png" alt="">
       <span>Quản lí xe</span>
       <ul class="sub-tab-select" style="display: none;">
-        <li><div id="bus-refresh-btn">Làm mới</div></li>
-        <li><div id="bus-add-btn">Thêm xe</div></li>
+        <li>
+          <div id="bus-refresh-btn">Làm mới</div>
+        </li>
+        <li>
+          <div id="bus-add-btn">Thêm xe</div>
+        </li>
       </ul>
     </li>
     <li value="2">
-      <a href="/admin/route_detail"><img src="/assets/admin-admin.png" alt="">
+      {{!-- <a href="/admin/route_detail"> --}}
+        <img src="/assets/admin-admin.png" alt="">
         <span>Quản lí chuyến xe</span>
-      </a>
+        <ul class="sub-tab-select" style="display: none;">
+          <li>
+            <div id="route-detail-find">Tìm chuyến</div>
+          </li>
+          <li>
+            <div id="route-detail-add">Thêm / sửa chuyến đi</div>
+          </li>
+        </ul>
+        {{!--
+      </a> --}}
     </li>
     <li value="3">
       <img src="/assets/admin-bus-ticket.png" alt="">
       <span>Quản lí vé xe</span>
       <ul class="sub-tab-select" style="display: none;">
-        <li><div id="ticket-refresh-btn">Làm Mới</div></li>
+        <li>
+          <div id="ticket-refresh-btn">Làm Mới</div>
+        </li>
       </ul>
     </li>
   </ul>
@@ -114,8 +135,50 @@
     <li class="js-tab-display" style="height: 100%; display:none;margin-right:2rem">
       <section class="tab-display">
         <section class="tab-display-option">
+          <ul id="route-display-list">
+
+          </ul>
         </section>
         <section class="tab-display-form">
+          <form method="GET" class="display-form" id="route-detail-form">
+            <label class="js-post-label" style="display: none;"><span>Mã chuyến đi</span>
+              <input type="number" name="detailId">
+            </label>
+            <label><span>Điểm đi</span>
+              <select name="from-location">
+                {{#each locations}}
+                <option value="{{this.id}}">{{this.name}}</option>
+                {{/each}}
+              </select>
+            </label>
+            <label><span>Điểm đến</span>
+              <select name="to-location">
+                {{#each locations}}
+                <option value="{{this.id}}">{{this.name}}</option>
+                {{/each}}
+              </select>
+            </label>
+            <label class="js-time-label"><span>Ngày đi sớm nhất</span>
+              <input name="time1" type="date">
+            </label>
+            <label class="js-time-label"><span>Ngày đi trễ nhất</span>
+              <input name="time2" type="date">
+            </label>
+            <label style="display: none;" class="js-post-label"><span>Mã xe bus</span>
+              <input type="number" name="busId">
+            </label>
+            <label style="display: none;" class="js-post-label"><span>Số ghế còn trống</span>
+              <input type="number" name="seat">
+            </label>
+            <label style="display: none;" class="js-post-label"><span>Đơn giá ghế</span>
+              <input type="number" name="price">
+            </label>
+
+            <label>
+              <span></span>
+              <input type="submit" value="Chấp nhận">
+            </label>
+          </form>
         </section>
 
       </section>

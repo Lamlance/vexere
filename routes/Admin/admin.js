@@ -15,6 +15,9 @@ const adminDashBoard = async (req, res) => {
             data: null,
         };
     }
-    res.render("admin");
+    const locations = await prisma.location.findMany();
+    res.render("admin", {
+        locations: locations
+    });
 };
 export default adminDashBoard;
