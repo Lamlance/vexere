@@ -71,24 +71,24 @@
         <section class="tab-display-form">
           <form class="display-form" id="house-display-form" style="display: flex;flex-direction:column">
             <label>
-              <span>Mã nhà xe</span>
+              Mã nhà xe
               <input name="house-id" type="number" placeholder="Auto generate" readonly />
             </label>
             <label>
-              <span>Tên nhà xe</span>
+              Tên nhà xe
               <input name="house-name" type="text" placeholder="Bus House Name" required />
             </label>
             <label>
-              <span>Thông tin nhà xe</span>
+              Thông tin nhà xe
               <textarea name="desc" rows="8"></textarea>
             </label>
             <label>
-              <span>Số điện thoại</span>
+              Số điện thoại
               <textarea name="phone" rows="4"></textarea>
             </label>
             <label>
               <span></span>
-              <input type="submit" value="Chấp Nhận" />
+              <input type="submit" value="Đồng ý" />
             </label>
           </form>
         </section>
@@ -106,7 +106,7 @@
           <form class="display-form" id="bus-display-form">
             <label>
               <span>Mã xe</span>
-              <input name="busId" type="number" readonly="true" required="true" />
+              <input name="busId" type="number" readonly="true" required="true" placeholder="Auto generate"/>
             </label>
             <label>
               <span>Biển số</span>
@@ -125,7 +125,7 @@
               <select name="house" id="bus-house-select" required>
               </select>
             </label>
-            <input type="submit" value="Submit Bus" />
+            <input type="submit" value="Đồng ý" />
           </form>
         </section>
       </section>
@@ -195,7 +195,7 @@
           <form class="display-form" id="ticket-display-form">
             <label>
               <span> TicketID: </span>
-              <input name="ticket-id" type="number" readonly />
+              <input name="ticket-id" type="number" readonly placeholder="Auto generate"/>
             </label>
             <label>
               <span>Comment</span>
@@ -210,7 +210,7 @@
                 <option value="FINISHED">FINISHED</option>
               </select>
             </label>
-            <input type="submit" value="Update Ticket" />
+            <input type="submit" value="Cập nhật" />
           </form>
         </section>
       </section>

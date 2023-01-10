@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="/css/index.css"/>
 
 <main>
-    <div class="route-detail-form container w-50">
+    <div class="route-detail-form container w-25 my-2">
         <h2> Chỉnh sửa tuyến xe </h2>
         <form action="/api/route_detail/edit/{{id}}?_method=PUT" method="POST">
             <input type="hidden" name="_method" value="PUT">
@@ -32,7 +32,7 @@
             <input type="number" id="routeId" name="routeId" placeholder="Mã tuyến" value={{routeId}}
                 class="form-control my-3 required" />
             
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" class="btn btn-primary align-self-end">
                 Submit
             </button>
         </form>

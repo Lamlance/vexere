@@ -236,8 +236,7 @@
 
 .vexere_checout_seat_select_action {
   margin: 1rem;
-  /* display: grid;
-  grid-template-columns: repeat(auto-fill,minmax(1rem,3rem)); */
+
   display: flex;
   justify-content: center;
 }

@@ -47,7 +47,6 @@ export default async function userTicketsApi(req: Request<{}, {}, {}, { page?: s
         }
       }
     },
-    
   })
   res.status(200).json(tickets);
 }
