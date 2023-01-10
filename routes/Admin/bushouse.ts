@@ -68,8 +68,8 @@ async function GET(req:Request<{},{},{},AdminBusHouseGET>){
 
   await prisma.$connect();
   const houses = await prisma.busHouse.findMany({
-    take: 5,
-    skip: 5 * page
+    take: 30,
+    skip: 30 * page
   })
   return houses;
 }

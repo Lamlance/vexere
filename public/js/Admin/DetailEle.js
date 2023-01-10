@@ -21,6 +21,8 @@ class DetailElement extends HTMLElement {
         inputs.namedItem("busId").valueAsNumber = this.data.busId;
         inputs.namedItem("from-location").value = `${this.data.Route.startLocId}`;
         inputs.namedItem("to-location").value = `${this.data.Route.endLocId}`;
+        inputs.namedItem("seat").valueAsNumber = this.data.remainSeat;
+        inputs.namedItem("price").valueAsNumber = this.data.price;
     }
 }
 customElements.define("detail-element", DetailElement);
