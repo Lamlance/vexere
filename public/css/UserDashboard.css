@@ -37,19 +37,19 @@
   color: #FFCC33;
 }
 
-/* .brand {
-  padding: .8em;
-} */
-
 /* Container */
 .container {
   background-color: #fff;
   display: flex;
   justify-content: space-between;
-  margin: 2em 9em;
+  margin: 3em 9em;
 }
 
 /* Change infor */
+
+.user-change-information-form {
+  margin-top: 3rem;
+}
 
 .user-infor {
   margin-bottom: 3em;
@@ -87,21 +87,25 @@
 .sidebar-navigation {
   border-radius: 5px;
   border: 1px;
-  width: 19em;
-  height: 13em;
-  border-style: solid;
-  border-color: #B2B2B2;
+  width: 19.5em;
+  height: fit-content;
+  border-color: #fff;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .user-rank-span {
   font-weight: 600;
 }
 
+.sidebar-list {
+  padding-top: .4em;
+}
+
 .sidebar-list>li {
-  margin-top: 1em;
+  margin-top: .8em;
   margin-bottom: 1em;
-  padding-bottom: 0.4em;
-  margin-left: 1.2em;
+  padding-bottom: 1em;
+  margin-left: 1.5em;
 }
 
 .sidebar-list>li:last-child {
@@ -118,7 +122,7 @@
 
 .sidebar-navigation>ul>li {
   list-style-type: none;
-  padding-right: 2em;
+  font-size: 18px;
 }
 
 /* User change account infor */
@@ -128,6 +132,10 @@
 
 .user-change-title>h2 {
   font-size: 1.5em;
+}
+
+.user-change-title>p {
+  margin-top: .5rem;
 }
 
 .container label {
@@ -168,13 +176,14 @@
   background-color: #0A6EBD;
   padding: .5em 1em;
   cursor: pointer;
-  border-radius: 10%;
-  opacity: 0.8;
+  border-radius: 10px;
+  opacity: 0.6;
 }
 
 .container .save-button:hover {
-  transform: scale(1.1);
-  transition: .3s ease-in-out;
+  transform: scale(1.05);
+  transition: .2s ease-in-out;
+  opacity: .8;
 }
 
 .mgl5 {
@@ -224,7 +233,13 @@
 .tab-content>li {
   padding: 0;
   margin: 0.5rem 0;
-  border: 1px solid black;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: rgba(60, 64, 67, .3) 0 4px 4px 0, rgba(60, 64, 67, .15) 0 8px 12px 6px;
+}
+
+.tab-content>li:not(:first-child) {
+  margin-top: 2rem;
 }
 
 .book-ticket-span>a {
@@ -234,9 +249,6 @@
 
 .ticket-container {
   margin-top: 3.5em;
-  border: 1px solid #B2B2B2;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
 }
 
 .ticket-container:hover {
@@ -258,6 +270,8 @@
   color: #fff;
   height: fit-content;
   padding: .3em .5em;
+  border: 1px solid #0191ff;
+  border-radius: 5px;
   background-color: #0A6EBD;
 }
 
@@ -282,8 +296,7 @@
   padding: 1em;
   border: 1px solid #B2B2B2;
   border-top: none;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
+
   color: #0A6EBD;
 }
 

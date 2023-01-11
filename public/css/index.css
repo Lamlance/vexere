@@ -1,10 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro&family=Poppins:wght@300;400;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Anonymous+Pro&family=Poppins:wght@300;400;600&display=swap");
 
 #banner {
 	background: url(/assets/leaderboard.png);
 	background-size: cover;
-	height: max(800px, 80vh);
-
+	height: max(600px, 80vh);
 	display: flex;
 	justify-content: center;
 	align-content: center;
@@ -12,7 +11,7 @@
 }
 
 .other-links {
-	background-color: lightgrey;
+	/* background-color: #ecf4fd; */
 }
 
 * {
@@ -31,34 +30,17 @@ ul>li {
 
 ul>li>a {
 	text-decoration: none;
+	color: #212529;
 }
 
 nav {
-	padding: .5em .5em;
+	padding: 0.5em 0.5em;
 }
 
-/* .container {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
-
-.nav-logo {
-	width: 50em;
-}
-
-.nav-ul {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
-
-.nav-links {
-	width: 40em;
-} */
-.vexere-container{
+.vexere-container {
 	padding-inline: 5rem;
 }
+
 .vexere-nav-container {
 	display: flex;
 	justify-content: space-between;
@@ -71,11 +53,11 @@ nav {
 	background-position: 0 0;
 	color: #1861c5;
 	transform: scale(1.1);
-	transition: .2s ease-in-out;
+	transition: 0.2s ease-in-out;
 }
 
 .nav-links {
-	margin-top: .5em;
+	margin-top: 0.5em;
 	max-width: 80%;
 }
 
@@ -87,6 +69,11 @@ nav {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+}
+
+.login-button {
+	border: none;
+	background-color: #fff;
 }
 
 .login, .user_loggedin {
@@ -114,9 +101,10 @@ nav {
 	vertical-align: middle;
 }
 
-
 .login:hover,
-.login:active, .user_loggedin:hover, .user_loggedin:active {
+.login:active,
+.user_loggedin:hover,
+.user_loggedin:active {
 	background-color: initial;
 	background-position: 0 0;
 	color: #6797bb;
@@ -124,8 +112,9 @@ nav {
 	transform: scale(1.1);
 }
 
-.login:active, .user_loggedin:active {
-	opacity: .5;
+.login:active,
+.user_loggedin:active {
+	opacity: 0.5;
 }
 
 .nav-li-item:not(:last-child):hover {
@@ -133,12 +122,8 @@ nav {
 	background-position: 0 0;
 	color: #1861c5;
 	transform: scale(1.1);
-	transition: .2s ease-in-out;
+	transition: 0.2s ease-in-out;
 }
-
-/* table {
-	width: 80em;
-} */
 
 .text_slogan {
 	font-size: 34px;
@@ -152,11 +137,10 @@ nav {
 	margin-bottom: 1em;
 }
 
-
 .item:hover,
 .item:focus {
 	background-color: #fafafa;
-	color: #D1822B;
+	color: #d1822b;
 }
 
 .disabled {
@@ -166,7 +150,6 @@ nav {
 	opacity: 0.3;
 }
 
-
 ul>li {
 	padding: 0.25rem 0.25rem;
 }
@@ -175,70 +158,33 @@ ul>li>a {
 	text-decoration: none;
 }
 
+ul>li>a:hover {
+	color: #0a6ebd;
+	transform: scale(1.05);
+	transition: 0.3s ease-in-out;
+}
+
 .search_bar>table>thead div {
 	width: 100%;
 }
-
-.search_bar>table>thead div {}
-
 
 .search_bar {
 	display: grid;
 	place-items: center;
 	width: 70%;
+	margin-bottom: 3rem;
 }
-
-/* input[type="date"]::-webkit-inner-spin-button,
-input[type="date"]::-webkit-calendar-picker-indicator {
-	/* display: none;
-	-webkit-appearance: none; */
-/* opacity: 0; */
-/* } */
-
-/* */
-/* input[type="date"]::-webkit-calendar-picker-indicator {
-	display: none;
-	-webkit-appearance: none;
-
-} */
-
-/* input[type="date"]::-webkit-calendar-picker-indicator {
-	content: url("/assets/pickdate_vex_blue_24dp.svg");
-	color: rgba(0, 0, 0, 0);
-}
-
-
-::-webkit-calendar-picker-indicator:hover {
-	-webkit-box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.04);
-	box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.04);
-} */
-
-/* ::-webkit-search-cancel-button,
-::-webkit-clear-button {
-	-webkit-appearance: none;
-	background-image: url('data:image/svg+xml;charset=utf8,%3Csvg fill="%23000" fill-opacity=".54" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M12,2C17.53,2 22,6.47 22,12C22,17.53 17.53,22 12,22C6.47,22 2,17.53 2,12C2,6.47 6.47,2 12,2M15.59,7L12,10.59L8.41,7L7,8.41L10.59,12L7,15.59L8.41,17L12,13.41L15.59,17L17,15.59L13.41,12L17,8.41L15.59,7Z"/%3E%3Cpath d="M0 0h24v24H0z" fill="none"/%3E%3C/svg%3E');
-	color: rgba(0, 0, 0, 0.54);
-	cursor: pointer;
-	height: 1.5rem;
-	margin-right: 0;
-	width: 1.5rem;
-} */
 
 ::-webkit-calendar-picker-indicator {
 	color: rgba(0, 0, 0, 0);
 	opacity: 1;
-	background-image: url('/assets/pickdate_vex_blue_24dp.svg');
+	background-image: url("/assets/pickdate_vex_blue_24dp.svg");
 	width: 24px;
 	height: 21px;
 	cursor: pointer;
 	border-radius: 50%;
-	margin-left: .5rem;
+	margin-left: 0.5rem;
 }
-
-/* ::-webkit-calendar-picker-indicator:hover {
-	-webkit-box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.04);
-	box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.04);
-} */
 
 .pick-up {
 	display: flex;
@@ -253,7 +199,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 	margin-top: 0.5rem;
 	position: absolute;
 	width: 95%;
-	overflow: auto;
+	overflow: hidden;
 	z-index: 100;
 	max-height: 250px;
 	border-radius: 0.5rem;
@@ -298,11 +244,14 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 	margin-top: 0.5rem;
 	position: absolute;
 	width: 95%;
-	overflow: hidden;
+	overflow: auto;
 	z-index: 100;
 	max-height: 250px;
 	border-radius: 0.5rem;
-	overflow: scroll;
+	display: none;
+}
+
+.auto_complete_place::-webkit-scrollbar {
 	display: none;
 }
 
@@ -344,16 +293,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 	max-height: 80px;
 }
 
-/* .search_div:hover {
-	transition: .2s ease-in-out;
-	background-color: #e6ba1c;
-} */
-
 .vexere_search_btn {
 	border-radius: 8px;
 	height: 100%;
 }
-
 
 .vexere_search_btn p {
 	color: #564f48;
@@ -366,12 +309,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .other-links {
-	background-color: #f8f8f8;
+	background-color: #ecf4fd;
 }
 
 .footer {
 	padding: 1em 0em;
-	font-family: 'Roboto', sans-serif;
+	font-family: "Roboto", sans-serif;
 	font-size: 14px;
 	background-color: #f1f1f1;
 }

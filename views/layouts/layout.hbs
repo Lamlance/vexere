@@ -12,38 +12,6 @@
 </head>
 
 <body>
-  <!--header-->
-  {{!-- <nav class="navbar navbar-expand-lg bg-light p-3">
-    <div class="container-fluid">
-      <a href="#" class="brand">
-        <img src="/assets/icon_vxr_full.svg" alt="Logo" />
-      </a>
-
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="#">Thuê xe</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="#">Trở thành đối tác</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="#">EN</a>
-            </li>
-            <li class="nav-item">
-              {{#if userName}}
-              <a class="nav-link active" aria-current="page" href="#">{{userName}}</a>
-              {{else}}
-              <a class="nav-link active" aria-current="page" href="#">Đăng nhập</a>
-              {{/if}}
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </nav> --}}
-  <!--/header-->
   <nav>
     <div class="vexere-container">
       <div class="vexere-nav-container">
@@ -55,10 +23,10 @@
         <div class="nav-links">
           <ul class="nav-ul">
             <li class="nav-li-item">
-              <a class="nav-link" aria-current="page" href="#">Thuê xe</a>
+              <a class="nav-link" target="_blank" aria-current="page" href="https://vexere.com/vn/thue-xe/">Thuê xe</a>
             </li>
             <li class="nav-li-item">
-              <a class="nav-link" aria-current="page" href="#">Trở thành đối tác</a>
+              <a class="nav-link" target="_blank" aria-current="page" href="https://bms.vexere.com/mo-ban-ve-tren-vexere-com?utm_source=vex&utm_medium=header&utme_campaign=referral">Trở thành đối tác</a>
             </li>
             <li class="nav-li-item">
               <a class="nav-link" aria-current="page" href="#">EN</a>
@@ -67,7 +35,8 @@
               {{#if userName}}
               <a class="nav-link active user_loggedin" aria-current="page" href="/user">{{userName}}</a>
               {{else}}
-              <button class="login"><a class="nav-link active" aria-current="page" href="/login">Đăng nhập</a></button>
+              <button class="login-button"><a class="nav-link active login"
+              style="text-decoration:none;" aria-current="page" href="/login">Đăng nhập</a></button>
               {{/if}}
             </li>
           </ul>
@@ -77,13 +46,13 @@
     </div>
   </nav>
 
-  <section style="min-height:95vh;margin-top:3rem;">
+  <section style="min-height:95vh;">
     {{{body}}}
   </section>
 
   <!--footer-->
   <footer class="container-fluid text-center footer"
-    style="text-align: center;left: 0;bottom: 0;width:100%;margin-top:5rem">
+    style="text-align: center;left: 0;bottom: 0;width:100%; background-color: #0a2e5c; color:#fff;">
     Copyright &copy; 2022 by Group09-20KTPM04
     <br>
     CONTACT US:
