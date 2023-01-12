@@ -118,7 +118,7 @@ two-level-checkbox {
   padding-right: 4.5rem;
 }
 
-.vexere_info_action>form>button {
+.vexere_info_action button {
   font-family: 'Roboto', sans-serif;
   background: #ffc700;
   border: 1px solid #efbd08;

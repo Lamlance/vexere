@@ -38,7 +38,7 @@ const addBusAdminHandler = async (req) => {
     }
 };
 const updateBusAdminHanlder = async (req) => {
-    const { plate, seatAmount, type, busId } = req.body;
+    const { plate, seatAmount, type, busId, house } = req.body;
     if (!(plate && seatAmount && type)) {
         return null;
     }
@@ -51,7 +51,8 @@ const updateBusAdminHanlder = async (req) => {
             data: {
                 plate: plate,
                 seatAmount: seatAmount,
-                type: type
+                type: type,
+                busHouse: house
             }
         });
         return newBus;

@@ -43,10 +43,14 @@ class BusElement extends HTMLElement {
     return this.busId;
   }
 
-  public updateBus(data:{id:number,plate:string,seatAmount:number}){
+  public updateBus(data:{id:number,plate:string,seatAmount:number},houseName:string){
     this.busId = data.id;
     this.plate = data.plate;
     this.seats = data.seatAmount;
+    this.houseName = houseName;
+    
+    this.innerText = `${this.plate} - ${this.houseName}`
+
   }
 }
 

@@ -22,10 +22,12 @@ class BusElement extends HTMLElement {
     getBusId() {
         return this.busId;
     }
-    updateBus(data) {
+    updateBus(data, houseName) {
         this.busId = data.id;
         this.plate = data.plate;
         this.seats = data.seatAmount;
+        this.houseName = houseName;
+        this.innerText = `${this.plate} - ${this.houseName}`;
     }
 }
 customElements.define('li-bus-element', BusElement);
