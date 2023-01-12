@@ -67,7 +67,8 @@ const searchRouteHandler = async (
   res.render("search", {
     ...ans,
     houses: ansHouses,
-    date: req.query.date
+    date: req.query.date,
+    empty: (ans.routeDetail.length === 0 ) ? true : false 
   });
 }
 

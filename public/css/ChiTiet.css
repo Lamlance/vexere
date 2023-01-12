@@ -13,37 +13,41 @@
   border-radius: 1rem;
 }
 
-.vexere-ticket-submit-info{
+.vexere-ticket-submit-info {
   grid-column: 1 / 4;
   margin-top: 1.5rem;
 }
-.vexere-ticket-submit-info > label{
+
+.vexere-ticket-submit-info>label {
   display: grid;
   grid-template-columns: 0.5fr 1.5fr;
   margin: 1rem 0;
 }
 
-.vexere-ticket-submit-info > label > *{
+.vexere-ticket-submit-info>label>* {
   padding: 0.5rem;
 }
-.vexere-ticket-submit-info > label > textarea{
+
+.vexere-ticket-submit-info>label>textarea {
   resize: vertical;
 }
+
 .vexere_bus_image_wrapper {
   margin: 0.5rem;
   min-height: 100px;
   /* background-image: url("../assets/bus-img2.png"); */
   /* background-repeat: repeat-x; */
   background-size: contain;
-  background-color: azure;
+  /* background-color: azure; */
   display: grid;
   place-items: center;
 }
 
 .vexere_bus_image_wrapper>img {
   width: calc(100% - 1rem);
-  max-height: 100px;
-  object-fit: contain;
+  object-fit: fill;
+  height: 90%;
+  border-radius: 5px;
 }
 
 .vexere_time_container {
