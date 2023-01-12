@@ -3,6 +3,15 @@ class DetailInfo {
     constructor() {
         this.elements = [];
     }
+    update(detail, data, start, end) {
+        for (let index = 0; index < this.elements.length; index++) {
+            if (this.elements[index].getDetailId() === detail) {
+                console.log(data, start, end);
+                this.elements[index].setData(data, start, end);
+                break;
+            }
+        }
+    }
 }
 const detailInfo = new DetailInfo();
 function SwitchGETFrom() {
@@ -32,6 +41,7 @@ function SwitchPOSTForm() {
     detailForm.elements.namedItem("detailId").valueAsNumber = -1;
     detailForm.elements.namedItem("detailId").required = true;
     detailForm.elements.namedItem("busId").required = true;
+    detailForm.elements.namedItem("busId").readOnly = false;
     detailForm.elements.namedItem("seat").required = true;
     detailForm.elements.namedItem("price").required = true;
     const postLabel = detailForm.querySelectorAll(".js-post-label");
@@ -56,7 +66,7 @@ function getFormData() {
     };
     return data;
 }
-async function fetchTicket() {
+async function fetchDetail() {
     const data = getFormData();
     const fetchData = await fetch(`/admin/api/route_detail?fromId=${data.fromId}&toId=${data.toId}&time1=${data.time1}&time2=${data.time2}`);
     const routeUL = document.getElementById("route-display-list");
@@ -79,6 +89,62 @@ async function fetchTicket() {
     catch (error) {
     }
 }
+async function createDetail() {
+    const routeUL = document.getElementById("route-display-list");
+    const detailForm = document.getElementById("route-detail-form");
+    const data = getFormData();
+    const fetchData = await fetch("/admin/api/route_detail", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            fromId: data.fromId,
+            toId: data.toId,
+            start: data.time1,
+            end: data.time2,
+            seats: data.seat,
+            price: data.price,
+            busId: data.busId,
+        })
+    });
+    try {
+        const newRouteDetail = await fetchData.json();
+        if (newRouteDetail) {
+            const newElement = new DetailElement(newRouteDetail, data.fromName, data.toName, detailForm);
+            detailInfo.elements.push(newElement);
+            const li = document.createElement("li");
+            li.appendChild(newElement);
+            routeUL.appendChild(li);
+        }
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+async function updateDetail() {
+    const data = getFormData();
+    const fetchData = await fetch("/admin/api/route_detail", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            detailId: data.detailId,
+            fromId: data.fromId,
+            toId: data.toId,
+            start: data.time1,
+            end: data.time2,
+            price: data.price,
+            seats: data.seat
+        })
+    });
+    try {
+        const updatedRoute = await fetchData.json();
+        if (updatedRoute) {
+            detailInfo.update(updatedRoute.id, updatedRoute, data.fromName, data.toName);
+        }
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
 function handleFormSubmit(e) {
     e.preventDefault();
     const detailForm = document.getElementById("route-detail-form");
@@ -86,12 +152,18 @@ function handleFormSubmit(e) {
         case "get":
         case "GET": {
             console.log("Fetching ticket");
-            fetchTicket();
+            fetchDetail();
             break;
         }
         case "post":
         case "POST": {
-            console.log("Add/Update ticket");
+            const data = getFormData();
+            if (data.detailId === -1) {
+                createDetail();
+            }
+            else {
+                updateDetail();
+            }
             break;
         }
     }

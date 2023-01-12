@@ -29,7 +29,7 @@ import userDashboardHandler from "./routes/UserDashboard/UserDashboard";
 import createTicket from "./routes/Ticket/ticket";
 import bodyParser from "body-parser";
 
-import { adminAddRouteDetailHandler, adminEditRouteDetailHandler, addRouteDetailHandler, editRouteDetailHandler, deleteRouteDetailHandler,adminRouteDetailAPI } from "./routes/RouteDetailAdmin/routeDetailAdmin";
+import { adminAddRouteDetailHandler, adminEditRouteDetailHandler, addRouteDetailHandler, editRouteDetailHandler, deleteRouteDetailHandler, adminRouteDetailAPI_GET, adminRouteDetailAPI_POST, adminRouteDetailAPI_PUT } from "./routes/RouteDetailAdmin/routeDetailAdmin";
 import adminRouteDetailHandler from "./routes/RouteDetailAdmin/routeDetailAdmin";
 
 import adminDashBoard from "./routes/Admin/admin";
@@ -109,12 +109,15 @@ app.get("/search", searchRouteHandler);
 
 //ADMIN
 app.get("/admin/route_detail", adminRouteDetailHandler);
-app.get("/admin/api/route_detail", adminRouteDetailAPI);
 app.get("/admin/route_detail/add", adminAddRouteDetailHandler);
 app.get("/admin/route_detail/edit/:id", adminEditRouteDetailHandler); // pass query route detail id
 app.post("/api/route_detail/add", addRouteDetailHandler);
 app.put("/api/route_detail/edit/:id", editRouteDetailHandler);
 app.delete("/api/route_detail/delete/:id", deleteRouteDetailHandler);
+
+app.get("/admin/api/route_detail", adminRouteDetailAPI_GET);
+app.post("/admin/api/route_detail",bodyPraseObj,adminRouteDetailAPI_POST);
+app.put("/admin/api/route_detail",bodyPraseObj,adminRouteDetailAPI_PUT)
 
 app.get("/admin", adminDashBoard);
 app.use("/admin/api/ticket", bodyPraseObj, adminTicketAPI);
