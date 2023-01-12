@@ -248,7 +248,26 @@ export const adminRouteDetailAPI_POST = async (req: Request<{}, {}, PostRouteDet
 		}
 	});
 
+
+	let routeId = route?.id;
 	if (!route) {
+		try {
+			const newRoute = await prisma.route.create({
+				data: {
+					startLocId: req.body.fromId,
+					endLocId: req.body.toId
+				}
+			})
+			routeId = newRoute.id;
+		} catch (error) {
+			console.log(error);
+			res.status(404).json(null);
+			return;
+		}
+
+	}
+
+	if (!routeId) {
 		res.status(404).json(null);
 		return;
 	}
@@ -256,7 +275,7 @@ export const adminRouteDetailAPI_POST = async (req: Request<{}, {}, PostRouteDet
 	try {
 		const newRotueDetail = await prisma.routeDetail.create({
 			data: {
-				routeId: route.id,
+				routeId: routeId,
 				busId: req.body.busId,
 				startTime: req.body.start,
 				endTime: req.body.end,
@@ -267,8 +286,8 @@ export const adminRouteDetailAPI_POST = async (req: Request<{}, {}, PostRouteDet
 		const returnData: RouteDetailRespond = {
 			...newRotueDetail,
 			Route: {
-				startLocId: route.startLocId,
-				endLocId: route.endLocId
+				startLocId: req.body.fromId,
+				endLocId: req.body.toId
 			}
 		}
 
@@ -317,17 +336,17 @@ export const adminRouteDetailAPI_PUT = async (req: Request<{}, {}, PutRouteDetai
 				routeId: route.id
 			}
 		});
-		const returnData:RouteDetailRespond = {
+		const returnData: RouteDetailRespond = {
 			...routeDetail,
-			Route:{
+			Route: {
 				startLocId: route.startLocId,
 				endLocId: route.endLocId
 			}
 		}
 		res.status(200).json(returnData);
 		return;
-	} catch (error) {console.log(error);}
-	
+	} catch (error) { console.log(error); }
+
 	res.status(200).json(null);
 }
 

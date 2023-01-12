@@ -1,3 +1,4 @@
+
 #vexere_house_wrapper{
   display: grid;
   grid-template-columns: 0.9fr 1.1fr;
@@ -6,6 +7,7 @@
   margin-inline: 1.5rem;
   column-gap: 1.5rem;
   margin-inline: 5rem;
+  margin-top: 3rem;
 }
 
 #house-tab-select{

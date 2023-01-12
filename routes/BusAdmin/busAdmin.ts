@@ -17,6 +17,7 @@ interface AdminBusPUT {
   plate: string;
   seatAmount: number;
   type: number;
+  house:number
 }
 interface AdminBusDELETE {
   busId: number;
@@ -63,7 +64,7 @@ const addBusAdminHandler = async (req: Request<{}, {}, AdminBusPOST, {}>) => {
 };
 
 const updateBusAdminHanlder = async (req: Request<{}, {}, AdminBusPUT, {}>) => {
-  const { plate, seatAmount, type, busId } = req.body;
+  const { plate, seatAmount, type, busId ,house} = req.body;
   
   if (!(plate && seatAmount && type)) {
     return null;
@@ -77,7 +78,8 @@ const updateBusAdminHanlder = async (req: Request<{}, {}, AdminBusPUT, {}>) => {
       data: {
         plate: plate,
         seatAmount: seatAmount,
-        type: type
+        type: type,
+        busHouse:house
       }
     });
     return newBus;

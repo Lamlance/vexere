@@ -7,7 +7,7 @@ class BusList {
     updateBus(bus) {
         for (let index = 0; index < this.busList.length; index++) {
             if (bus.id === this.busList[index].getBusId()) {
-                this.busList[index].updateBus({ id: bus.id, plate: bus.plate, seatAmount: bus.seatAmount });
+                this.busList[index].updateBus({ id: bus.id, plate: bus.plate, seatAmount: bus.seatAmount }, houseMap[bus.busHouse]);
                 break;
             }
         }
@@ -24,6 +24,7 @@ const busList = new BusList();
 async function fetchBuses() {
     const list = document.getElementById("bus-display-list");
     const form = document.getElementById("bus-display-form");
+    await fetchBusHouses();
     const fetchData = await fetch("/admin/api/bus");
     toastMsg.fetchBusMsg.showToast();
     try {
@@ -76,7 +77,7 @@ async function addBus(plate, busType, seats, house, form) {
     }
     toastMsg.failedMsg.showToast();
 }
-async function updateBus(id, plate, type, seats) {
+async function updateBus(id, plate, type, seats, house) {
     toastMsg.updateBusMsg.showToast();
     const fetchData = await fetch("/admin/api/bus", {
         method: "PUT",
@@ -85,7 +86,8 @@ async function updateBus(id, plate, type, seats) {
             busId: id,
             plate: plate,
             seatAmount: seats,
-            type: type
+            type: type,
+            house: house
         })
     });
     try {
@@ -117,7 +119,7 @@ async function handleBusForm(e) {
         addBus(plate, busType, seats, house, form);
         return;
     }
-    updateBus(id, plate, busType, seats);
+    updateBus(id, plate, busType, seats, house);
 }
 async function fetchBusHouses() {
     const fetchData = await fetch("/admin/api/bushouse");

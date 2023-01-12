@@ -13,6 +13,22 @@
   border-radius: 1rem;
 }
 
+.vexere-ticket-submit-info{
+  grid-column: 1 / 4;
+  margin-top: 1.5rem;
+}
+.vexere-ticket-submit-info > label{
+  display: grid;
+  grid-template-columns: 0.5fr 1.5fr;
+  margin: 1rem 0;
+}
+
+.vexere-ticket-submit-info > label > *{
+  padding: 0.5rem;
+}
+.vexere-ticket-submit-info > label > textarea{
+  resize: vertical;
+}
 .vexere_bus_image_wrapper {
   margin: 0.5rem;
   min-height: 100px;
@@ -37,7 +53,7 @@
 }
 
 .vexere_departure_icon {
-  grid-row: 1 / 3;
+  grid-row: 1 / 4;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -65,7 +81,7 @@
   cursor: pointer;
 }
 
-.vexere_info_action>form>button {
+.vexere_info_action button {
   padding: 1rem 2rem;
 }
 

@@ -39,8 +39,9 @@ async function POST(req) {
         };
     }
     const detailId = singleIntQueryHandler(req.body.detailId, -1);
+    const amount = singleIntQueryHandler(req.body.amount, -1);
     console.log(req.body.detailId);
-    if (detailId < 0) {
+    if (detailId < 0 || amount < 0) {
         console.log("Failed Id");
         return {
             status: 400,
@@ -64,7 +65,9 @@ async function POST(req) {
     const ticketData = await prisma.ticket.create({
         data: {
             userId: userData.id,
-            routeDetailId: detailInfo.id
+            routeDetailId: detailInfo.id,
+            amount: amount,
+            comment: req.body.comment ? req.body.comment : null
         }
     });
     return {

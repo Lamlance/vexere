@@ -56,8 +56,11 @@ const searchRouteHandler = async (
 
 
   ans.routeDetail.forEach((detail) => {
+    const expectDate = (Math.abs(detail.endTime.getTime() - detail.startTime.getTime()) / (1000 * 60 * 60));
+
     detail.startTime = detail.startTime.toLocaleString();
     detail.endTime = detail.endTime.toLocaleString();
+    detail.expect = expectDate.toPrecision(2);
   })
 
 
