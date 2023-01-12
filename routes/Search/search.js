@@ -35,8 +35,10 @@ const searchRouteHandler = async (req, res) => {
     const ans = await searchRouteFromDB(fromId, toId, houses, min, max, page, new Date(req.query.date), type);
     const ansHouses = [...new Map(ans.routeDetail.map(item => [item.Bus.BusHouse.id, item.Bus.BusHouse])).values()];
     ans.routeDetail.forEach((detail) => {
+        const expectDate = (Math.abs(detail.endTime.getTime() - detail.startTime.getTime()) / (1000 * 60 * 60));
         detail.startTime = detail.startTime.toLocaleString();
         detail.endTime = detail.endTime.toLocaleString();
+        detail.expect = expectDate.toPrecision(2);
     });
     res.render("search", {
         ...ans,
