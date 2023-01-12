@@ -134,11 +134,13 @@
   display: flex;
   flex-direction: column;
 }
-
+.display-form > *{
+  margin: 0.5rem 0;
+}
 .display-form>label {
   display: grid;
+  column-gap: 1rem;
   grid-template-columns: 0.5fr 1.5fr;
-  margin: 0.2rem 0;
 }
 
 .display-form>label {
@@ -166,20 +168,16 @@
   font-size: .9em;
   border-radius: .2em;
   float: right;
-  margin: 0 0 1em 2em;
 }
 .display-form select {
-  margin-left: 1.8rem;
   padding: 1em;
 }
 .display-form textarea {
   outline: none;
   padding: .8em;
-  height: 5em;
   font-size: .9em;
   border-radius: .2em;
   float: right;
-  margin: 0 0 1em 2em;
 }
 
 .display-form input[type=submit] {
@@ -203,6 +201,3 @@
   opacity: .8;
 }
 
-.display-form select {
-  margin-left: 1.8rem;
-}
