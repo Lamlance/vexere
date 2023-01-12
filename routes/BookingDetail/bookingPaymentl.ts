@@ -83,7 +83,7 @@ const bookingPaymentHandler = async (req: Request<{}, {}, {}, { ticketId: string
     console.log("Chưa thanh toán",ticket.RouteDetail.price);
     let payUrl = "";
     const newPayment = {
-      amount: (ticket.RouteDetail.price != 0) ? ticket.RouteDetail.price : 300000,
+      amount: (ticket.RouteDetail.price != 0) ? (ticket.RouteDetail.price*ticket.amount) : 300000,
       payment_info: `Thanh toán vé xe`
     }
 
@@ -158,6 +158,7 @@ export const bookingDetailCallbackHandler = async (req: Request<{}, {}, {}, { ex
   }
 
   if (result == 0) {
+    console.log(req.query,req.body);
     // cập nhật trong database
     let transactionStatus = "Thanh toán thành công!";
     const updateTicket = await prisma.ticket.update({
@@ -171,8 +172,8 @@ export const bookingDetailCallbackHandler = async (req: Request<{}, {}, {}, { ex
     const detail = await prisma.routeDetail.findFirst({
       where: { id: updateTicket.routeDetailId }
     })
-
-    if (!detail) {
+   
+    if (!detail || !updateTicket) {
       const transactionStatus = "Thanh toán thất bại! Hãy thử lại."
       res.locals.title = "Thông tin thanh toán";
       res.render("paymentStatus", {
@@ -185,7 +186,7 @@ export const bookingDetailCallbackHandler = async (req: Request<{}, {}, {}, { ex
     await prisma.routeDetail.update({
       where: { id: detail.id },
       data: {
-        remainSeat: detail.remainSeat - 1
+        remainSeat: detail.remainSeat - updateTicket.amount
       }
     })
     res.locals.title = "Thông tin thanh toán";

@@ -1,4 +1,5 @@
-<div class="vexere_info_wrapper">
+
+<form class="vexere_info_wrapper js-ticket-form" method="post" target="_blank" action="/api/ticket">
 
   <!-- Hình xe -->
   <div class="vexere_bus_image_wrapper">
@@ -51,17 +52,26 @@
     <div>
       <h3><span class="js-empty-seat">{{detail.remainSeat}}</span> chỗ còn trống</h3>
     </div>
-    <div class="vexere_info_action">
-      <h4><a target="_blank" href="/house?houseId={{detail.Bus.busHouse}}">
-          Thông tin chi tiết
-        </a>
+    <div class="vexere_info_action js-vexere-info-action">
+      <h4>
+        <a target="_blank" href="/house?houseId={{detail.Bus.busHouse}}">Thông tin chi tiết</a>
         <img src="/assets/down-arrow.png" alt="" />
       </h4>
-      <form method="post" target="_blank" action="/api/ticket">
-        <input type="number" name="detailId" style="display: none;" value="{{detail.id}}" readonly>
-        <button>Đặt vé</button>
-      </form>
+      <input type="number" name="detailId" style="display: none;" value="{{detail.id}}" readonly>
+      <button>Đặt vé</button>
+
     </div>
   </div>
 
-</div>
+  <div class="vexere-ticket-submit-info" style="display: none;">
+    <label>
+      <span>Số lượng vé</span>
+      <input name="amount" type="number" min="1" max="{{detail.remainSeat}}" required>
+    </label>
+    <label>
+      <span>Thông tin thêm</span>
+      <textarea name="comment" rows="3"></textarea>
+    </label>
+  </div>
+
+</form>

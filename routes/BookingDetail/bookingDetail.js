@@ -80,10 +80,11 @@ const ticketDetailHandler = async (req, res) => {
         return;
     }
     res.render("ticket", {
-        ticket: ticket,
+        ticket: { ...ticket, totalPrice: ticket.amount * routeDetail.price },
         detail: routeDetail,
         route: route,
         transactionStatus: ticket.status,
+        amount: ticket.amount,
         price: routeDetail.price,
         ...(!ticket.Rating ? {} : { rating: ({
                 ...ticket.Rating,
