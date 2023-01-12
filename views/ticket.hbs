@@ -62,15 +62,15 @@
       {{#if statusAction.canRate}}
       <h4>Đánh giá</h4>
       <form method="post" action="/user/ticket/rate"
-        style="display: flex; flex-direction:column;border:1px solid black">
+        style="display: flex; flex-direction:column;border:1px solid black;border-radius:10px;padding:0.2rem">
         <input type="number" name="ticketId" style="display: none;" value="{{ticket.id}}" readonly>
         <label> Comment
           <textarea style="width: 100%;" name="comment"></textarea>
         </label>
-        <label> Rating
+        <label style="margin-top: 1rem;"> Rating
           <input type="number" name="rating" min="0" max="5" required />
         </label>
-        <button>Submit rating</button>
+        <button style="margin-top: 1rem;width: 80%;align-self: center;border-radius:10px;background-color:#1861C5;color:white;border:none;padding:0.5rem" >Submit rating</button>
       </form>
       {{else}}
       {{#if rating}}
