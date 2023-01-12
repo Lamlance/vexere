@@ -173,14 +173,31 @@ export const adminRouteDetailAPI_POST = async (req, res) => {
             AND: [{ startLocId: req.body.fromId }, { endLocId: req.body.toId }]
         }
     });
+    let routeId = route?.id;
     if (!route) {
+        try {
+            const newRoute = await prisma.route.create({
+                data: {
+                    startLocId: req.body.fromId,
+                    endLocId: req.body.toId
+                }
+            });
+            routeId = newRoute.id;
+        }
+        catch (error) {
+            console.log(error);
+            res.status(404).json(null);
+            return;
+        }
+    }
+    if (!routeId) {
         res.status(404).json(null);
         return;
     }
     try {
         const newRotueDetail = await prisma.routeDetail.create({
             data: {
-                routeId: route.id,
+                routeId: routeId,
                 busId: req.body.busId,
                 startTime: req.body.start,
                 endTime: req.body.end,
@@ -191,8 +208,8 @@ export const adminRouteDetailAPI_POST = async (req, res) => {
         const returnData = {
             ...newRotueDetail,
             Route: {
-                startLocId: route.startLocId,
-                endLocId: route.endLocId
+                startLocId: req.body.fromId,
+                endLocId: req.body.toId
             }
         };
         res.status(200).json(returnData);
