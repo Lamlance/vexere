@@ -1,4 +1,5 @@
 import BusElement from "./BusEle.js";
+import toastMsg from "./Toast.js";
 class BusList {
     constructor() {
         this.busList = [];
@@ -24,6 +25,7 @@ async function fetchBuses() {
     const list = document.getElementById("bus-display-list");
     const form = document.getElementById("bus-display-form");
     const fetchData = await fetch("/admin/api/bus");
+    toastMsg.fetchBusMsg.showToast();
     try {
         const buses = await fetchData.json();
         busList.clearElement();
@@ -37,13 +39,17 @@ async function fetchBuses() {
         });
         list.replaceChildren(...liArr);
         console.log(buses);
+        toastMsg.successMsg.showToast();
+        return;
     }
     catch (error) {
         console.log(error);
     }
+    toastMsg.failedMsg.showToast();
 }
 async function addBus(plate, busType, seats, house, form) {
     const ul = document.getElementById("bus-display-list");
+    toastMsg.createBusMsg.showToast();
     const fetchData = await fetch("/admin/api/bus", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -61,13 +67,17 @@ async function addBus(plate, busType, seats, house, form) {
             const li = document.createElement("li");
             li.appendChild(busEle);
             ul.appendChild(li);
+            toastMsg.successMsg.showToast();
+            return;
         }
     }
     catch (error) {
         console.log(error);
     }
+    toastMsg.failedMsg.showToast();
 }
 async function updateBus(id, plate, type, seats) {
+    toastMsg.updateBusMsg.showToast();
     const fetchData = await fetch("/admin/api/bus", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -82,11 +92,14 @@ async function updateBus(id, plate, type, seats) {
         const updateBus = await fetchData.json();
         if (updateBus) {
             busList.updateBus(updateBus);
+            toastMsg.successMsg.showToast();
+            return;
         }
     }
     catch (error) {
         console.log(error);
     }
+    toastMsg.failedMsg.showToast();
 }
 async function handleBusForm(e) {
     const form = document.getElementById("bus-display-form");

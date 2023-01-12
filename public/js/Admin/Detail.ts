@@ -1,4 +1,5 @@
 import DetailElement from "./DetailEle.js";
+import toastMsg from "./Toast.js";
 
 type RouteDetail = {
   id: number,
@@ -94,6 +95,8 @@ function getFormData() {
 }
 
 async function fetchDetail() {
+  toastMsg.fetchDetailMsg.showToast();
+
   const data = getFormData();
   const fetchData = await fetch(`/admin/api/route_detail?fromId=${data.fromId}&toId=${data.toId}&time1=${data.time1}&time2=${data.time2}`);
   const routeUL = <HTMLUListElement>document.getElementById("route-display-list");
@@ -112,13 +115,18 @@ async function fetchDetail() {
         liArr.push(li);
       })
       routeUL.replaceChildren(...liArr);
+      toastMsg.successMsg.showToast();
+      return;
     }
   } catch (error) {
-
+    console.log(error);
   }
+  toastMsg.failedMsg.showToast();
 }
 
 async function createDetail() {
+  toastMsg.createDetailMsg.showToast();
+
   const routeUL = <HTMLUListElement>document.getElementById("route-display-list");
   const detailForm = <HTMLFormElement>document.getElementById("route-detail-form");
   const data = getFormData();
@@ -143,11 +151,16 @@ async function createDetail() {
       const li = document.createElement("li");
       li.appendChild(newElement);
       routeUL.appendChild(li);
+      toastMsg.successMsg.showToast();
+      return;
     }
   } catch (error) { console.log(error); }
+  toastMsg.failedMsg.showToast();
 }
 
 async function updateDetail() {
+  toastMsg.updateDetailMsg.showToast();
+
   const data = getFormData();
   const fetchData = await fetch("/admin/api/route_detail", {
     method: "PUT",
@@ -166,8 +179,11 @@ async function updateDetail() {
     const updatedRoute:RouteDetail = await fetchData.json();
     if(updatedRoute){
       detailInfo.update(updatedRoute.id,updatedRoute,data.fromName,data.toName);
+      toastMsg.successMsg.showToast();
+      return;
     }
   } catch (error) {console.log(error);}
+  toastMsg.failedMsg.showToast();
 }
 
 function handleFormSubmit(e: SubmitEvent) {

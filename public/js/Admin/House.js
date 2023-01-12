@@ -1,4 +1,5 @@
 import HouseElement from "./HouseEleClass.js";
+import toastMsg from "./Toast.js";
 class BusHousesInfo {
     constructor() {
         this.houseMap = {};
@@ -19,12 +20,14 @@ async function fetchBusHouse() {
     if (!houseForm || !houseList) {
         return;
     }
+    toastMsg.fetchHouseMsg.showToast();
     console.log("Fetching bus house...");
     const fetchData = await fetch("/admin/api/bushouse");
     try {
         const houses = await fetchData.json();
         console.log(houses);
         if (!Array.isArray(houses)) {
+            toastMsg.failedMsg.showToast();
             return null;
         }
         const houseLi = [];
@@ -36,10 +39,13 @@ async function fetchBusHouse() {
             houseLi.push(li);
         });
         houseList.replaceChildren(...houseLi);
+        toastMsg.successMsg.showToast();
         return;
     }
     catch (error) {
+        console.log(error);
     }
+    toastMsg.failedMsg.showToast();
 }
 async function NewBusHouseClick() {
     const houseForm = document.getElementById("house-display-form");
@@ -48,6 +54,7 @@ async function NewBusHouseClick() {
     inputs.namedItem("house-name").value = "";
 }
 async function createBusHouse(name, phone, desc) {
+    toastMsg.createHouseMsg.showToast();
     const fetchData = await fetch("/admin/api/bushouse", {
         method: "POST",
         headers: {
@@ -67,12 +74,16 @@ async function createBusHouse(name, phone, desc) {
         const li = document.createElement("li");
         li.appendChild(newHouseElement);
         houseList.appendChild(li);
+        toastMsg.successMsg.showToast();
+        return;
     }
     catch (error) {
         console.log(error);
     }
+    toastMsg.failedMsg.showToast();
 }
 async function updateBusHouse(id, name, phone, desc) {
+    toastMsg.updateHouseMsg.showToast();
     const fetchData = await fetch("/admin/api/bushouse", {
         method: "PUT",
         headers: {
@@ -88,10 +99,13 @@ async function updateBusHouse(id, name, phone, desc) {
     try {
         const updatedHouse = await fetchData.json();
         busHousesInfo.updateElement(updatedHouse.id, updatedHouse.Name);
+        toastMsg.successMsg.showToast();
+        return;
     }
     catch (error) {
         console.log(error);
     }
+    toastMsg.failedMsg.showToast();
 }
 async function BusHouseFormSubmit(event) {
     event.preventDefault();

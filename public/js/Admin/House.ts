@@ -1,4 +1,5 @@
 import HouseElement from "./HouseEleClass.js";
+import toastMsg from "./Toast.js";
 
 type BusHouse = {
   id: number;
@@ -29,7 +30,7 @@ async function fetchBusHouse() {
   if (!houseForm || !houseList) {
     return;
   }
-
+  toastMsg.fetchHouseMsg.showToast();
   console.log("Fetching bus house...");
   const fetchData = await fetch("/admin/api/bushouse");
 
@@ -37,6 +38,7 @@ async function fetchBusHouse() {
     const houses = await fetchData.json();
     console.log(houses);
     if (!Array.isArray(houses)) {
+      toastMsg.failedMsg.showToast();
       return null;
     }
 
@@ -50,10 +52,10 @@ async function fetchBusHouse() {
     })
 
     houseList.replaceChildren(...houseLi);
+    toastMsg.successMsg.showToast();
     return;
-  } catch (error) {
-
-  }
+  } catch (error) {console.log(error);}
+  toastMsg.failedMsg.showToast();
 }
 
 async function NewBusHouseClick() {
@@ -64,6 +66,7 @@ async function NewBusHouseClick() {
 }
 
 async function createBusHouse(name: string,phone:string,desc:string) {
+  toastMsg.createHouseMsg.showToast();
   const fetchData = await fetch("/admin/api/bushouse", {
     method: "POST",
     headers: {
@@ -83,10 +86,14 @@ async function createBusHouse(name: string,phone:string,desc:string) {
     const li = document.createElement("li");
     li.appendChild(newHouseElement);
     houseList.appendChild(li);
+    toastMsg.successMsg.showToast();
+    return;
   } catch (error) { console.log(error) }
+  toastMsg.failedMsg.showToast();
 }
 
 async function updateBusHouse(id: number, name: string, phone: string, desc: string) {
+  toastMsg.updateHouseMsg.showToast();
   const fetchData = await fetch("/admin/api/bushouse", {
     method: "PUT",
     headers: {
@@ -103,7 +110,10 @@ async function updateBusHouse(id: number, name: string, phone: string, desc: str
   try {
     const updatedHouse = await fetchData.json();
     busHousesInfo.updateElement(updatedHouse.id, updatedHouse.Name);
+    toastMsg.successMsg.showToast();
+    return;
   } catch (error) { console.log(error) }
+  toastMsg.failedMsg.showToast();
 }
 
 async function BusHouseFormSubmit(event: SubmitEvent) {
