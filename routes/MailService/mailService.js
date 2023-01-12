@@ -1,61 +1,43 @@
+
 "use strict";
-// const { appendFile } = require("fs");
-// const nodeMailer = require("nodemailer");
-// require("dotenv/config");
-// let PORT = process.env.PORT || 8080;
-// let transporter = nodeMailer.createTransport({
-//   service: "gmail",
-//   auth: {
-//     user: "hanhu2325@gmail.com",
-//     pass: "abcyxz",
-//   },
-//   tls: {
-//     rejectUnauthorized: false;
-//   }
-// });
-// let mailOptions = {
-//   from: "hanhu2325@gmail.com",
-//   to: "phuhanld@gmail.com",
-//   subject: "XIN CHAO ANH PHU DEP TRAI",
-//   text: "ANH PHU DEP TRAI DA TEST MAIL THANH CONG"
-// };
-// transporter.sendMail(mailOptions, function(err, success) {
-//   if (err) {
-//     console.log(err);
-//   }
-//   else {
-//     console.log("Sent successfully!");
-//   }
-// });
-// app.get("/", (req, res) => {
-//   res.send("Hello");
-// })
-// "use strict";
-// const nodemailer = require("nodemailer");
-// async function main() {
-//   let hostname = "hostname from account page";
-//   let username = "username from account page";
-//   let password = "password from account page";
-//   let transporter = nodemailer.createTransport({
-//     host: hostname,
-//     port: 587,
-//     secure: false,
-//     requireTLS: true,
-//     auth: {
-//       user: username,
-//       pass: password,
-//     },
-//     logger: true,
-//   });
-//   // send mail with defined transport object
-//   let info = await transporter.sendMail({
-//     from: '"Group09 VEXERE" <hanphu2325@gmail.com>',
-//     to: "phuhanld@gmail.com",
-//     subject: "Hello from node",
-//     text: "Hello world?",
-//     html: "<strong>Hello world?</strong>",
-//     headers: { "x-cloudmta-class": "standard" },
-//   });
-//   console.log("Message sent: %s", info.response);
-// }
-// main().catch(console.error);
+import nodemailer from 'nodemailer';
+
+
+const myTransport = nodemailer.createTransport({
+  service: 'Gmail',
+  auth: {
+    user: 'phuhanld@gmail.com', 
+    pass: 'flvttwcljjaogkqr',
+  }
+});
+
+const mailOptions = {
+  from: 'GROUP09 VEXERE<phuhanld@gmail.com>', 
+  to: 'hanphu2325@gmail.com, ttmq38@gmail.com',
+  subject: 'Cảm ơn bạn đã tin tưởng sử dụng VEXERE để phục vụ chuyến đi', 
+  html: `<h1 style="font-size: 20px;color: #1861c5;text-align:center;">Xin chân thành cảm ơn quý khách ABCXYZ đã sử dụng dịch vụ của chúng tôi!</h1>
+          <p style="color: black;"><b><i>Sau đây là thông tin vé của bạn:</i></b></p>
+          <p style="color: black; margin-left: 30px;">Khách hàng: <b> @123 </b></p>
+          <p style="color: black; margin-left: 30px;">Nhà xe: <b> ABC </b></p>
+          <p style="color: black; margin-left: 30px;">Loại xe: <b> DÉP LÀO XE BUS </b></p>
+          <p style="color: black; margin-left: 30px;">Biển kiểm soát xe: <b> OIWJDUIAHIUDNIW </b></p>
+          <p style="color: black; margin-left: 30px;">Tuyến đi: <b> DDD - EEE </b></p>
+          <p style="color: black; margin-left: 30px;">Ngày đi: <b> XXX </b></p>
+          <p style="color: black; margin-left: 30px;">Giờ đi: <b> YYY </b></p>
+          <p style="color: black; margin-left: 30px;">Thời gian chuyến đi (dự tính): <b> n tiếng </b></p>
+          <p style="color: black; margin-left: 30px;">Số lượng vé: <b> n </b></p>
+          <p style="color: black; text-align:center;">Sẽ rất tuyệt vời nếu chúng tôi được phục vụ bạn thêm nhiều lần nữa ☆*: .｡. o(≧▽≦)o .｡.:*☆</p>
+          <p style="color: black; text-align:center;">Chúc bạn có một chuyến đi  <span style="color: #1861c5;">thượng lộ, bình an!</span></p>
+          <p color: black;>Trân trọng,</p>
+          <p color: black;>GROUP09-VEXERE</p>`,
+}
+
+// sending the email
+myTransport.sendMail(mailOptions, (err) => {
+  if (err) {
+    console.log(`Email is failed to send!`);
+    console.error(err);
+  } else {
+    console.log(`Email is successfully sent!`);
+  }
+})
