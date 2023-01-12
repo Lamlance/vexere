@@ -28,8 +28,8 @@ const getBusAdminHandler = async (req: Request<{}, {}, {}, AdminBusGET>) => {
   const page = singleIntQueryHandler(req.query.page, 0);
   await myPrisma.$connect();
   const buses = await myPrisma.bus.findMany({
-    take: 5,
-    skip: 5 * page,
+    take: 30,
+    skip: 30 * page,
     include:{
       BusHouse:{
         select:{Name:true}
