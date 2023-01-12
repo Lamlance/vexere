@@ -3,7 +3,7 @@ import { prisma } from '../../server';
 import { singleIntQueryHandler } from './queryHandler';
 
 async function searchRouteFromDB(fromId: number, toId: number, houses: number[], min: number, max: number, page: number = 0, date: Date, type: number = -1) {
-  const itemPerPage = 5;
+  const itemPerPage = 8;
   await prisma.$connect();
   const route = await prisma.route.findFirst({
     select: {
@@ -35,6 +35,9 @@ async function searchRouteFromDB(fromId: number, toId: number, houses: number[],
   const routeDetail = await prisma.routeDetail.findMany({
     take: itemPerPage,
     skip: itemPerPage * page,
+    orderBy:[
+      {startTime:"asc"}
+    ],
     where: {
       AND: [
         { startTime: { gte: date } },
