@@ -1,4 +1,5 @@
 import BusElement from "./BusEle.js";
+import toastMsg from "./Toast.js";
 
 interface GetBusesRespond {
   id: number,
@@ -18,23 +19,23 @@ type Bus = {
   type: number
   busHouse: number
 }
-class BusList{
-  public busList:BusElement[] = [];
-  constructor(){}
-  public updateBus(bus:Bus){
+class BusList {
+  public busList: BusElement[] = [];
+  constructor() { }
+  public updateBus(bus: Bus) {
     for (let index = 0; index < this.busList.length; index++) {
-      if(bus.id === this.busList[index].getBusId()){
-        this.busList[index].updateBus({id:bus.id,plate:bus.plate,seatAmount:bus.seatAmount});
+      if (bus.id === this.busList[index].getBusId()) {
+        this.busList[index].updateBus({ id: bus.id, plate: bus.plate, seatAmount: bus.seatAmount });
         break;
       }
     }
   }
 
-  public addBusElement(ele:BusElement){
+  public addBusElement(ele: BusElement) {
     this.busList.push(ele);
   }
 
-  public clearElement(){
+  public clearElement() {
     this.busList = [];
   }
 }
@@ -42,18 +43,22 @@ class BusList{
 const houseMap: { [key: number]: string } = {}
 const busList = new BusList();
 
+
 async function fetchBuses() {
   const list = <HTMLUListElement>document.getElementById("bus-display-list");
   const form = <HTMLFormElement>document.getElementById("bus-display-form");
   const fetchData = await fetch("/admin/api/bus");
+
+  toastMsg.fetchBusMsg.showToast();
+
   try {
     const buses: GetBusesRespond[] = await fetchData.json();
     busList.clearElement();
 
-    const liArr:HTMLLIElement[] = [];
+    const liArr: HTMLLIElement[] = [];
 
-    buses.forEach(bus=>{
-      const newEle = new BusElement(bus.id, bus.plate,bus.seatAmount,bus.type,bus.busHouse,houseMap[bus.busHouse],form);
+    buses.forEach(bus => {
+      const newEle = new BusElement(bus.id, bus.plate, bus.seatAmount, bus.type, bus.busHouse, houseMap[bus.busHouse], form);
       busList.addBusElement(newEle);
       const li = document.createElement("li");
       li.appendChild(newEle);
@@ -61,13 +66,16 @@ async function fetchBuses() {
     })
 
     list.replaceChildren(...liArr);
-
     console.log(buses);
+    toastMsg.successMsg.showToast();
+    return;
   } catch (error) { console.log(error) }
+  toastMsg.failedMsg.showToast();
 }
 
 async function addBus(plate: string, busType: number, seats: number, house: number, form: HTMLFormElement) {
   const ul = <HTMLUListElement>document.getElementById("bus-display-list");
+  toastMsg.createBusMsg.showToast();
   const fetchData = await fetch("/admin/api/bus", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -86,11 +94,15 @@ async function addBus(plate: string, busType: number, seats: number, house: numb
       const li = document.createElement("li");
       li.appendChild(busEle);
       ul.appendChild(li);
+      toastMsg.successMsg.showToast();
+      return;
     }
   } catch (error) { console.log(error) }
+  toastMsg.failedMsg.showToast();
 }
 
 async function updateBus(id: number, plate: string, type: number, seats: number) {
+  toastMsg.updateBusMsg.showToast();
   const fetchData = await fetch("/admin/api/bus", {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
@@ -103,11 +115,14 @@ async function updateBus(id: number, plate: string, type: number, seats: number)
   })
 
   try {
-    const updateBus:Bus = await fetchData.json();
-    if(updateBus){
+    const updateBus: Bus = await fetchData.json();
+    if (updateBus) {
       busList.updateBus(updateBus);
+      toastMsg.successMsg.showToast();
+      return;
     }
-  } catch (error) {console.log(error)}
+  } catch (error) { console.log(error) }
+  toastMsg.failedMsg.showToast();
 }
 
 async function handleBusForm(e: SubmitEvent) {
@@ -125,10 +140,10 @@ async function handleBusForm(e: SubmitEvent) {
   }
 
   if (id < 0) {
-    addBus(plate,busType,seats,house,form);
+    addBus(plate, busType, seats, house, form);
     return;
   }
-  updateBus(id,plate,busType,seats);
+  updateBus(id, plate, busType, seats);
 }
 
 async function fetchBusHouses() {

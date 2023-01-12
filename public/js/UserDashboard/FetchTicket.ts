@@ -50,8 +50,8 @@ const makeTicketElement = ({ startDate, busHouse, route, busPlate, status,id }: 
   return template;
 }
 
-const handleFetchTicket = async () => {
-  const fetchData = await fetch("/user/api/tickets");
+const handleFetchTicket = async (status:("CANCELED" | "FINISHED" | null) = null) => {
+  const fetchData = await fetch(`/user/api/tickets${!status ? "" : `?status=${status}`}`);
   try {
     const ticketDatas: HTMLLIElement[] = [];
     const tickets: FetchTicketData[] = await fetchData.json();
@@ -78,4 +78,7 @@ const handleFetchTicket = async () => {
   }
 }
 
-document.getElementById("ticket-fetch-current")?.addEventListener("click",handleFetchTicket);
+document.getElementById("ticket-fetch-current")?.addEventListener("click",()=>{handleFetchTicket()});
+document.getElementById("ticket-fetch-finished")?.addEventListener("click",()=>{handleFetchTicket("FINISHED")});
+document.getElementById("ticket-fetch-canceled")?.addEventListener("click",()=>{handleFetchTicket("CANCELED")});
+document.getElementById("ticket-tab-nav")?.addEventListener("click",()=>{handleFetchTicket()});

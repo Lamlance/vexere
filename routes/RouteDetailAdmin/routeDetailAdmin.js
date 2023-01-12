@@ -1,4 +1,5 @@
-import { prisma } from "../../server";
+import { prisma, sessionManager } from "../../server";
+import { getUserFromDB } from "../db/checkUser";
 import { singleIntQueryHandler } from "../db/queryHandler";
 const adminRouteDetailHandler = async (req, res) => {
     if (!req.oidc.isAuthenticated() || !req.oidc.user || !req.oidc.user.sub) {
@@ -41,38 +42,6 @@ const adminRouteDetailHandler = async (req, res) => {
     }
     res.locals.routeDetailList = routeDetailList;
     res.render("RouteDetailAdmin/routeDetailList");
-};
-export const adminRouteDetailAPI = async (req, res) => {
-    if (!req.oidc.isAuthenticated() || !req.oidc.user || !req.oidc.user.sub) {
-        res.redirect("/login");
-        return;
-    }
-    const fromId = singleIntQueryHandler(req.query.fromId, NaN);
-    const toId = singleIntQueryHandler(req.query.toId, NaN);
-    const date1 = new Date(req.query.time1);
-    const date2 = new Date(req.query.time2);
-    const details = await prisma.routeDetail.findMany({
-        take: 30,
-        where: {
-            AND: [
-                { startTime: { gte: date1 } },
-                { startTime: { lte: date2 } },
-                { Route: {
-                        startLocId: { equals: fromId },
-                        endLocId: { equals: toId }
-                    } }
-            ]
-        },
-        include: {
-            Route: {
-                select: {
-                    startLocId: true,
-                    endLocId: true,
-                }
-            }
-        }
-    });
-    res.status(200).json(details);
 };
 export const adminAddRouteDetailHandler = (req, res) => {
     if (!req.oidc.isAuthenticated() || !req.oidc.user || !req.oidc.user.sub) {
@@ -153,5 +122,134 @@ export const editRouteDetailHandler = async (req, res) => {
 };
 export const deleteRouteDetailHandler = async (req, res) => {
     res.redirect("/admin/route_detail");
+};
+export const adminRouteDetailAPI_GET = async (req, res) => {
+    if (!req.oidc.isAuthenticated() || !req.oidc.user || !req.oidc.user.sub) {
+        res.status(400).json(null);
+        return;
+    }
+    const fromId = singleIntQueryHandler(req.query.fromId, NaN);
+    const toId = singleIntQueryHandler(req.query.toId, NaN);
+    const date1 = new Date(req.query.time1);
+    const date2 = new Date(req.query.time2);
+    const details = await prisma.routeDetail.findMany({
+        take: 30,
+        where: {
+            AND: [
+                { startTime: { gte: date1 } },
+                { startTime: { lte: date2 } },
+                {
+                    Route: {
+                        startLocId: { equals: fromId },
+                        endLocId: { equals: toId }
+                    }
+                }
+            ]
+        },
+        include: {
+            Route: {
+                select: {
+                    startLocId: true,
+                    endLocId: true,
+                }
+            }
+        }
+    });
+    res.status(200).json(details);
+};
+export const adminRouteDetailAPI_POST = async (req, res) => {
+    if (!req.oidc.isAuthenticated() || !req.oidc.user || !req.oidc.user.sub) {
+        res.status(400).json(null);
+        return;
+    }
+    await prisma.$connect();
+    const userData = sessionManager.users[req.oidc.user.sid] || await getUserFromDB(req.oidc.user.sub, req.oidc.user.email);
+    if (!userData.isAdmin) {
+        res.status(400).json(null);
+        return;
+    }
+    const route = await prisma.route.findFirst({
+        where: {
+            AND: [{ startLocId: req.body.fromId }, { endLocId: req.body.toId }]
+        }
+    });
+    if (!route) {
+        res.status(404).json(null);
+        return;
+    }
+    try {
+        const newRotueDetail = await prisma.routeDetail.create({
+            data: {
+                routeId: route.id,
+                busId: req.body.busId,
+                startTime: req.body.start,
+                endTime: req.body.end,
+                price: req.body.price,
+                remainSeat: req.body.seats
+            }
+        });
+        const returnData = {
+            ...newRotueDetail,
+            Route: {
+                startLocId: route.startLocId,
+                endLocId: route.endLocId
+            }
+        };
+        res.status(200).json(returnData);
+        return;
+    }
+    catch (error) {
+        console.log(error);
+    }
+    ;
+    res.status(200).json(null);
+};
+export const adminRouteDetailAPI_PUT = async (req, res) => {
+    if (!req.oidc.isAuthenticated() || !req.oidc.user || !req.oidc.user.sub) {
+        res.status(400).json(null);
+        return;
+    }
+    await prisma.$connect();
+    const userData = sessionManager.users[req.oidc.user.sid] || await getUserFromDB(req.oidc.user.sub, req.oidc.user.email);
+    if (!userData.isAdmin) {
+        res.status(400).json(null);
+        return;
+    }
+    const route = await prisma.route.findFirst({
+        where: {
+            AND: [{ startLocId: req.body.fromId }, { endLocId: req.body.toId }]
+        }
+    });
+    if (!route) {
+        res.status(404).json(null);
+        return;
+    }
+    try {
+        const routeDetail = await prisma.routeDetail.update({
+            where: {
+                id: req.body.detailId
+            },
+            data: {
+                price: req.body.price,
+                remainSeat: req.body.seats,
+                startTime: req.body.start,
+                endTime: req.body.end,
+                routeId: route.id
+            }
+        });
+        const returnData = {
+            ...routeDetail,
+            Route: {
+                startLocId: route.startLocId,
+                endLocId: route.endLocId
+            }
+        };
+        res.status(200).json(returnData);
+        return;
+    }
+    catch (error) {
+        console.log(error);
+    }
+    res.status(200).json(null);
 };
 export default adminRouteDetailHandler;

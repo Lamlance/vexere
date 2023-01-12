@@ -16,10 +16,12 @@
 .vexere_bus_image_wrapper {
   margin: 0.5rem;
   min-height: 100px;
-  background-image: url("../assets/bus-img2.png");
-  background-repeat: repeat-x;
+  /* background-image: url("../assets/bus-img2.png"); */
+  /* background-repeat: repeat-x; */
   background-size: contain;
   background-color: azure;
+  display: grid;
+  place-items: center;
 }
 
 .vexere_bus_image_wrapper>img {

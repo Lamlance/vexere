@@ -1,4 +1,5 @@
 import TicketElement from "./TicketEleClass.js";
+import toastMsg from "./Toast.js";
 
 type Ticket = {
   id: number;
@@ -36,13 +37,14 @@ async function fetchTicket() {
   if(!ticketForm || !ticketList){
     return;
   }
-
+  toastMsg.fetchDetailMsg.showToast();
   console.log("Fetching ticket...")
   const fetchData = await fetch("/admin/api/ticket");
   try {
     const tickets = await fetchData.json();
     console.log(tickets);
     if(!Array.isArray(tickets)){
+      toastMsg.failedMsg.showToast();
       return null;
     }
 
@@ -57,11 +59,12 @@ async function fetchTicket() {
     })
 
     ticketList.replaceChildren(...ticketLi);
-
+    toastMsg.successMsg.showToast();
     return null;
   } catch (error) {
     console.log(error);
   }
+  toastMsg.failedMsg.showToast();
 }
 
 async function updateTicket(event:SubmitEvent) {
@@ -80,6 +83,7 @@ async function updateTicket(event:SubmitEvent) {
     return;
   }
 
+  toastMsg.updateDetailMsg.showToast();
   const fetchUpdate = await fetch("/admin/api/ticket",{
     method:"PUT",
     cache:"no-cache",
@@ -95,8 +99,12 @@ async function updateTicket(event:SubmitEvent) {
   try {
     const updateTicket:Ticket = await fetchUpdate.json();
     ticketInfo.updateElement(updateTicket.id,updateTicket.comment ? updateTicket.comment : "",updateTicket.status);
+    toastMsg.successMsg.showToast();
     console.log(updateTicket);
-  } catch (error) {console.log(error)}
+    return null;
+  } catch (error) {console.log(error)};
+
+  toastMsg.failedMsg.showToast();
 }
 
 document.getElementById("ticket-refresh-btn")?.addEventListener("click",fetchTicket);

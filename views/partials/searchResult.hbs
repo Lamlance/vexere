@@ -2,7 +2,11 @@
 
   <!-- Hình xe -->
   <div class="vexere_bus_image_wrapper">
-    <!-- <img src="/assets/bus-img2.png" alt="Hinh xe"> -->
+    {{#switch detail.Bus.type}}
+    {{#case 1}}<img src="/assets/bus-img2.png" alt="Hinh xe">{{/case}}
+    {{#case 2}}<img src="/assets/bushouse(1).jpeg" alt="Hinh xe">{{/case}}
+    {{#case 3}}<img src="/assets/thue-xe-may-da-lat-4.jpg" alt="Hinh xe">{{/case}}
+    {{/switch}}
   </div>
 
   <!-- Thông tin cơ bản đi đến -->
@@ -49,9 +53,10 @@
     </div>
     <div class="vexere_info_action">
       <h4><a target="_blank" href="/house?houseId={{detail.Bus.busHouse}}">
-          Thông tin chi tiết 
+          Thông tin chi tiết
         </a>
-        <img src="/assets/down-arrow.png" alt="" /></h4>
+        <img src="/assets/down-arrow.png" alt="" />
+      </h4>
       <form method="post" target="_blank" action="/api/ticket">
         <input type="number" name="detailId" style="display: none;" value="{{detail.id}}" readonly>
         <button>Đặt vé</button>

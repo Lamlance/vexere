@@ -13,7 +13,7 @@ model Bus {
   seatAmount  Int
   type        Int
   busHouse    Int
-  BusHouse    BusHouse      @relation(fields: [busHouse], references: [id])
+  BusHouse    BusHouse      @relation(fields: [busHouse], references: [id],onDelete: Cascade)
   RouteDetail RouteDetail[]
 }
 
@@ -39,16 +39,16 @@ model Rating {
   comment    String?
   ticketId   Int      @unique
   busHouseId Int
-  BusHouse   BusHouse @relation(fields: [busHouseId], references: [id])
-  Ticket     Ticket   @relation(fields: [ticketId], references: [id])
+  BusHouse   BusHouse @relation(fields: [busHouseId], references: [id],onDelete: Cascade)
+  Ticket     Ticket   @relation(fields: [ticketId], references: [id],onDelete: Cascade)
 }
 
 model Route {
   id                                  Int           @id @default(autoincrement())
   startLocId                          Int
   endLocId                            Int
-  Location_Route_endLocIdToLocation   Location      @relation("Route_endLocIdToLocation", fields: [endLocId], references: [id])
-  Location_Route_startLocIdToLocation Location      @relation("Route_startLocIdToLocation", fields: [startLocId], references: [id])
+  Location_Route_endLocIdToLocation   Location      @relation("Route_endLocIdToLocation", fields: [endLocId], references: [id],onDelete: Cascade)
+  Location_Route_startLocIdToLocation Location      @relation("Route_startLocIdToLocation", fields: [startLocId], references: [id],onDelete: Cascade)
   RouteDetail                         RouteDetail[]
 }
 
@@ -60,8 +60,8 @@ model RouteDetail {
   startTime  DateTime
   remainSeat Int
   routeId    Int
-  Bus        Bus      @relation(fields: [busId], references: [id])
-  Route      Route    @relation(fields: [routeId], references: [id])
+  Bus        Bus      @relation(fields: [busId], references: [id],onDelete: Cascade)
+  Route      Route    @relation(fields: [routeId], references: [id],onDelete: Cascade)
   Ticket     Ticket[]
 }
 
@@ -71,9 +71,10 @@ model Ticket {
   routeDetailId Int
   status        TicketStatus @default(WAITING)
   userId        Int
+  amount Int @default(1)
   Rating        Rating?
-  RouteDetail   RouteDetail  @relation(fields: [routeDetailId], references: [id])
-  User          User         @relation(fields: [userId], references: [id])
+  RouteDetail   RouteDetail  @relation(fields: [routeDetailId], references: [id],onDelete: Cascade)
+  User          User         @relation(fields: [userId], references: [id],onDelete: Cascade)
 }
 
 model User {

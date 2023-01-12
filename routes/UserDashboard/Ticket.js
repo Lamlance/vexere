@@ -9,8 +9,8 @@ export default async function userTicketsApi(req, res) {
     const userData = sessionManager.users[req.oidc.user.sid] || await getUserFromDB(req.oidc.user.sub, req.oidc.user.email);
     const page = singleIntQueryHandler(req.query.page, 0);
     const tickets = await prisma.ticket.findMany({
-        take: 8,
-        skip: 8 * page,
+        take: 30,
+        skip: 30 * page,
         orderBy: [
             {
                 RouteDetail: {
@@ -19,7 +19,11 @@ export default async function userTicketsApi(req, res) {
             }
         ],
         where: {
-            userId: userData.id
+            userId: userData.id,
+            ...(!req.query.status ? { OR: [
+                    { status: { equals: "WAITING" } },
+                    { status: { equals: "PAID" } }
+                ] } : { status: { equals: req.query.status } })
         },
         select: {
             id: true,
@@ -44,4 +48,28 @@ export default async function userTicketsApi(req, res) {
         },
     });
     res.status(200).json(tickets);
+}
+export async function cancelTicketHandler(req, res) {
+    if (!req.oidc.user || !req.oidc.isAuthenticated()) {
+        res.redirect("/");
+        return;
+    }
+    const userData = sessionManager.users[req.oidc.user.sid] || await getUserFromDB(req.oidc.user.sub, req.oidc.user.email);
+    const ticketId = singleIntQueryHandler(req.body.ticketId, -1);
+    if (ticketId <= 0) {
+        res.redirect("/");
+        return;
+    }
+    try {
+        const ticket = await prisma.ticket.update({
+            where: { id: ticketId },
+            data: {
+                status: "CANCELED"
+            }
+        });
+        res.redirect(`/user/ticket?ticketId=${ticket.id}`);
+    }
+    catch (error) {
+        console.log(error);
+    }
 }

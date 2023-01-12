@@ -103,8 +103,8 @@ async function adminTicketAPI(req:Request<{},{},UpdateTicketBody,{page:string}>,
 async function GET(page:number = 0) {
   await prisma.$connect();
   const tickets = await prisma.ticket.findMany({
-    skip: page*20,
-    take:20
+    skip: page*30,
+    take:30
   })
   return tickets;
 }
