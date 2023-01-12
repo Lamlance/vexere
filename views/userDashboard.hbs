@@ -37,14 +37,14 @@
               <div>
                 <label for="username">
                   Tên đăng nhập
-                  <input type="text" name="user-login-name" id="user-login-name" value="hanphu234" />
+                  <input type="text" name="user-login-name" id="user-login-name" value="{{data.Name}}" />
                 </label>
                 <div class="user-name-display inline-block mgl5"></div>
               </div>
               <div>
                 <label for="user-name-display">
                   Tên
-                  <input type="text" name="user-name-display" id="user-name-display" value="Hàn Thọ Nhật Phú" />
+                  <input type="text" name="user-name-display" id="user-name-display" value="{{data.Name}}" />
                 </label>
                 <div class="user-name-display inline-block mgl5"></div>
               </div>
@@ -58,7 +58,7 @@
               <div class="test">
                 <label for="email">
                   Email
-                  <input type="text" name="email" id="email" value="phu@testemail.com"
+                  <input type="text" name="email" id="email" value="{{data.email}}"
                     pattern="[^@\s]+@[^@\s]+\.[^@\s]+" title="Invalid email address" />
                 </label>
                 <div class="email inline-block"></div>
@@ -66,7 +66,7 @@
               <div>
                 <label for="phone-number">
                   Số điện thoại
-                  <input type="text" name="phone-number" id="phone-number" value="0123456789" />
+                  <input type="text" name="phone-number" id="phone-number" value="{{data.phone}}" />
                 </label>
                 <div class="inline-block"></div>
               </div>

@@ -1,7 +1,9 @@
 import express, { Express, Request, Response } from "express";
+import { sessionManager } from "../../server";
+import { getUserFromDB } from "../db/checkUser";
 
-const userDashboardHandler = (req: Request, res: Response) => {
-  if (!req.oidc.isAuthenticated()) {
+const userDashboardHandler = async (req: Request, res: Response) => {
+  if (!req.oidc.isAuthenticated() || !req.oidc.user) {
     res.redirect("/");
     return;
   }
@@ -9,8 +11,11 @@ const userDashboardHandler = (req: Request, res: Response) => {
   res.locals.title = "Thông tin cá nhân";
   res.locals.cssPath = "/css/UserDashboard.css";
 
+  const userData = sessionManager.users[req.oidc.user.sid] || await getUserFromDB(req.oidc.user.sub,req.oidc.user.email);
+
   res.render("userDashboard", {
     user: req.oidc.user,
+    data:{...userData}
   });
 };
 
