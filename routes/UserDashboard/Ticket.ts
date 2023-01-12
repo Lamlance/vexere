@@ -1,9 +1,10 @@
+import { TicketStatus } from "@prisma/client";
 import express, { Express, Request, Response } from "express";
 import { prisma, sessionManager } from "../../server";
 import { getUserFromDB } from "../db/checkUser";
 import { singleIntQueryHandler } from "../db/queryHandler";
 
-export default async function userTicketsApi(req: Request<{}, {}, {}, { page?: string }>, res: Response) {
+export default async function userTicketsApi(req: Request<{}, {}, {}, { page?: string,status?:TicketStatus }>, res: Response) {
   if (!req.oidc.user || !req.oidc.isAuthenticated()) {
     res.redirect("/");
     return;
@@ -13,8 +14,8 @@ export default async function userTicketsApi(req: Request<{}, {}, {}, { page?: s
   const page = singleIntQueryHandler(req.query.page, 0);
 
   const tickets = await prisma.ticket.findMany({
-    take: 8,
-    skip: 8 * page,
+    take: 30,
+    skip: 30 * page,
     orderBy:[
       {
         RouteDetail:{
@@ -23,7 +24,8 @@ export default async function userTicketsApi(req: Request<{}, {}, {}, { page?: s
       }
     ],
     where: {
-      userId: userData.id
+      userId: userData.id,
+      ...(!req.query.status ? {} : { status: {equals: req.query.status} })
     },
     select: {
       id:true,
@@ -49,4 +51,28 @@ export default async function userTicketsApi(req: Request<{}, {}, {}, { page?: s
     },
   })
   res.status(200).json(tickets);
+}
+
+export async function cancelTicketHandler(req:Request<{},{},{ticketId:string},{}>,res:Response) {
+  if (!req.oidc.user || !req.oidc.isAuthenticated()) {
+    res.redirect("/");
+    return;
+  }
+
+  const userData = sessionManager.users[req.oidc.user.sid] || await getUserFromDB(req.oidc.user.sub, req.oidc.user.email);
+  const ticketId = singleIntQueryHandler(req.body.ticketId, -1);
+
+  if(ticketId <= 0){
+    res.redirect("/");
+    return;
+  }
+
+  try {
+    const ticket = await prisma.ticket.update({
+      where:{id: ticketId},
+      data:{
+        status: "CANCELED"
+      }
+    })
+  } catch (error) {console.log(error);}
 }

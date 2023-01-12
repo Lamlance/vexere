@@ -31,7 +31,7 @@ import busAdminHandler from "./routes/BusAdmin/busAdmin";
 import ticketDetailHandler from "./routes/BookingDetail/bookingDetail";
 import createRating from "./routes/BookingDetail/createRating";
 import adminBusHouseHandler from "./routes/Admin/bushouse";
-import userTicketsApi from "./routes/UserDashboard/Ticket";
+import userTicketsApi, { cancelTicketHandler } from "./routes/UserDashboard/Ticket";
 import BusHouseRouteHandler from "./routes/BusHouse/BusHouse";
 import { helpers } from "./views/helpers/helpers.js";
 const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
@@ -80,7 +80,6 @@ app.set("view engine", "hbs");
 app.get("/", indexHandler);
 app.get("/search", searchRouteHandler);
 app.get("/user", userDashboardHandler);
-app.use("/user/api/tickets", userTicketsApi);
 app.get("/house", BusHouseRouteHandler);
 // app.get("/user/ticket", bookingDetailHandler);
 // app.get("/user/ticket",ticketDetailHandler);
@@ -101,6 +100,8 @@ app.use("/admin/api/bushouse", bodyPraseObj, adminBusHouseHandler);
 app.use("/admin/api/bus", bodyPraseObj, busAdminHandler);
 //==========
 //USER TICKET
+app.use("/user/api/tickets", userTicketsApi);
+app.post("/user/ticket/cancel", cancelTicketHandler);
 app.get("/user/ticket/pay", bookingPaymentHandler);
 app.get("/user/ticket/callback", bookingDetailCallbackHandler);
 app.get("/user/ticket", ticketDetailHandler);

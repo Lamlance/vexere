@@ -42,38 +42,3 @@ sidebarNavigation?.forEach((item, index) => {
 });
 
 // History Ticket view event Handler
-
-const tabLinks = <NodeListOf<HTMLElement>>(
-  document.querySelectorAll(".tab-links")
-);
-
-tabLinks?.forEach((element) => {
-  element.addEventListener("click", function () {
-    tabLinks.forEach((tabLinks) => {
-      tabLinks.classList.remove("active-tab");
-    });
-    this.classList.add("active-tab");
-  });
-});
-
-class TicketTabDisplayHandler {
-  private contentDisplay = <NodeListOf<HTMLDivElement>>(
-    document.querySelectorAll(".tab-content")
-  );
-  constructor() {}
-  setDisplay(index: number) {
-    this.contentDisplay.forEach((item, id) => {
-      if (id === index) {
-        item.style.display = "block";
-      } else {
-        item.style.display = "none";
-      }
-    });
-  }
-}
-const ticketTabDisplayHandler = new TicketTabDisplayHandler();
-tabLinks?.forEach((item, index) => {
-  item.onclick = (ev) => {
-    ticketTabDisplayHandler.setDisplay(index);
-  };
-});

@@ -31,35 +31,5 @@ sidebarNavigation?.forEach((item, index) => {
         sidebarDisplayListHandler.setDisplay(index);
     };
 });
-// History Ticket view event Handler
-const tabLinks = (document.querySelectorAll(".tab-links"));
-tabLinks?.forEach((element) => {
-    element.addEventListener("click", function () {
-        tabLinks.forEach((tabLinks) => {
-            tabLinks.classList.remove("active-tab");
-        });
-        this.classList.add("active-tab");
-    });
-});
-class TicketTabDisplayHandler {
-    constructor() {
-        this.contentDisplay = (document.querySelectorAll(".tab-content"));
-    }
-    setDisplay(index) {
-        this.contentDisplay.forEach((item, id) => {
-            if (id === index) {
-                item.style.display = "block";
-            }
-            else {
-                item.style.display = "none";
-            }
-        });
-    }
-}
-const ticketTabDisplayHandler = new TicketTabDisplayHandler();
-tabLinks?.forEach((item, index) => {
-    item.onclick = (ev) => {
-        ticketTabDisplayHandler.setDisplay(index);
-    };
-});
 export {};
+// History Ticket view event Handler
