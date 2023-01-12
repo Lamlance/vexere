@@ -5,6 +5,8 @@ import { singleIntQueryHandler } from "../db/queryHandler";
 import dotenv from "dotenv";
 import { createHmac, randomUUID } from "crypto";
 import fetch from "node-fetch";
+import nodemailer from 'nodemailer';
+import { RouteDetail, Ticket, User } from "@prisma/client";
 
 const bookingPaymentHandler = async (req: Request<{}, {}, {}, { ticketId: string }>, res: Response) => {
   console.log("Ready to pay")
@@ -35,9 +37,9 @@ const bookingPaymentHandler = async (req: Request<{}, {}, {}, { ticketId: string
     where: {
       AND: [{ id: ticketId }, { userId: userData.id }]
     },
-    include:{
-      RouteDetail:{
-        select:{
+    include: {
+      RouteDetail: {
+        select: {
           price: true
         }
       }
@@ -80,10 +82,10 @@ const bookingPaymentHandler = async (req: Request<{}, {}, {}, { ticketId: string
 
     }
 
-    console.log("Chưa thanh toán",ticket.RouteDetail.price);
+    console.log("Chưa thanh toán", ticket.RouteDetail.price);
     let payUrl = "";
     const newPayment = {
-      amount: (ticket.RouteDetail.price != 0) ? (ticket.RouteDetail.price*ticket.amount) : 300000,
+      amount: (ticket.RouteDetail.price != 0) ? (ticket.RouteDetail.price * ticket.amount) : 300000,
       payment_info: `Thanh toán vé xe`
     }
 
@@ -127,10 +129,10 @@ const bookingPaymentHandler = async (req: Request<{}, {}, {}, { ticketId: string
       //   transactionStatus: transactionStatus,
       //   payUrl: payUrl,
       // });
-      console.log("Redirecting",payUrl);
-      if(payUrl){
+      console.log("Redirecting", payUrl);
+      if (payUrl) {
         res.redirect(payUrl);
-      }else{
+      } else {
         res.redirect("/user/ticket/callback");
         console.log(json);
       }
@@ -147,7 +149,7 @@ export const bookingDetailCallbackHandler = async (req: Request<{}, {}, {}, { ex
   const ticketId = singleIntQueryHandler(req.query.extraData, -1);
   const result = singleIntQueryHandler(req.query.resultCode, -1);
 
-  if (ticketId < 0 || result != 0) {
+  if (ticketId < 0 || result != 0 || !req.oidc.user) {
     const transactionStatus = "Thanh toán thất bại! Hãy thử lại."
     res.locals.title = "Thông tin thanh toán";
     res.render("paymentStatus", {
@@ -158,7 +160,7 @@ export const bookingDetailCallbackHandler = async (req: Request<{}, {}, {}, { ex
   }
 
   if (result == 0) {
-    console.log(req.query,req.body);
+    console.log(req.query, req.body);
     // cập nhật trong database
     let transactionStatus = "Thanh toán thành công!";
     const updateTicket = await prisma.ticket.update({
@@ -168,11 +170,14 @@ export const bookingDetailCallbackHandler = async (req: Request<{}, {}, {}, { ex
       data: {
         status: "PAID",
       },
-    })
+    });
+
+    const userData = sessionManager.users[req.oidc.user.sid] || await getUserFromDB(req.oidc.user.sub, req.oidc.user.email);
+
     const detail = await prisma.routeDetail.findFirst({
       where: { id: updateTicket.routeDetailId }
     })
-   
+
     if (!detail || !updateTicket) {
       const transactionStatus = "Thanh toán thất bại! Hãy thử lại."
       res.locals.title = "Thông tin thanh toán";
@@ -183,12 +188,14 @@ export const bookingDetailCallbackHandler = async (req: Request<{}, {}, {}, { ex
       return;
     }
 
-    await prisma.routeDetail.update({
+    const updatedRouteDetail = await prisma.routeDetail.update({
       where: { id: detail.id },
       data: {
         remainSeat: detail.remainSeat - updateTicket.amount
       }
     })
+
+    sendPaymentEmail(userData, updatedRouteDetail, updateTicket);
     res.locals.title = "Thông tin thanh toán";
 
     // Render lại trong trang thanh toán thành công
@@ -200,10 +207,91 @@ export const bookingDetailCallbackHandler = async (req: Request<{}, {}, {}, { ex
   }
 
 
-
   // Render lại trong trang thanh toán thất bại
 
 
+}
+
+
+async function sendPaymentEmail(user: User, detail: RouteDetail, ticket: Ticket) {
+  const myTransport = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+      user: 'phuhanld@gmail.com',
+      pass: 'flvttwcljjaogkqr',
+    }
+  });
+
+  const bus = await prisma.bus.findUnique({
+    where: {
+      id: detail.busId
+    },
+    include: {
+      BusHouse: { select: { Name: true } }
+    }
+  });
+
+  const detailData = await prisma.route.findUnique({
+    where: {
+      id: detail.routeId
+    },
+    include: {
+      Location_Route_startLocIdToLocation: { select: { name: true } },
+      Location_Route_endLocIdToLocation: { select: { name: true } }
+    }
+  })
+
+  if (!bus || !detailData) {
+    return;
+  }
+
+  const busType = (() => {
+    switch (bus.type) {
+      case 1: {
+        return "Xe ghế ngồi"
+      }
+      case 2: {
+        return "Xe giường nằm"
+      }
+      case 3: {
+        return "Xe limousine"
+      }
+    }
+    return "Xe buýt"
+  })();
+
+  const mailOptions = {
+    from: 'GROUP09 VEXERE<phuhanld@gmail.com>',
+    to: user.email ? user.email : "lamhoangdien113@gmail.com,hanphu2325@gmail.com",
+    subject: 'Cảm ơn bạn đã tin tưởng sử dụng VEXERE để phục vụ chuyến đi',
+    html: `
+    <h1 style="font-size: 20px;color: #1861c5;text-align:center;">Xin chân thành cảm ơn quý khách ${user.Name} đã sử dụng dịch vụ của chúng tôi!</h1>
+    <p style="color: black;"><b><i>Sau đây là thông tin vé của bạn:</i></b></p>
+    <p style="color: black; margin-left: 30px;">Khách hàng: <b> ${user.Name} </b></p>
+    <p style="color: black; margin-left: 30px;">Nhà xe: <b> ${bus.BusHouse.Name} </b></p>
+    <p style="color: black; margin-left: 30px;">Loại xe: <b> ${busType} </b></p>
+    <p style="color: black; margin-left: 30px;">Biển kiểm soát xe: <b> ${bus.plate} </b></p>
+    <p style="color: black; margin-left: 30px;">Tuyến đi: <b> ${detailData.Location_Route_startLocIdToLocation.name} - ${detailData.Location_Route_endLocIdToLocation.name} </b></p>
+    <p style="color: black; margin-left: 30px;">Ngày đi: <b> ${detail.startTime.toLocaleDateString()} </b></p>
+    <p style="color: black; margin-left: 30px;">Giờ đi: <b> ${detail.startTime.toLocaleTimeString()} </b></p>
+    <p style="color: black; margin-left: 30px;">Thời gian chuyến đi (dự tính): <b> ${Math.ceil(Math.abs(detail.endTime.getTime() - detail.startTime.getTime()) / (1000 * 60 * 60))} tiếng </b></p>
+    <p style="color: black; margin-left: 30px;">Số lượng vé: <b> ${ticket.amount} </b></p>
+    <p style="color: black; margin-left: 30px;">Tổng tiền: <b> ${(ticket.amount * detail.price).toLocaleString("en-US", {style:"currency", currency:"VND"})} </b></p>
+    <p style="color: black; text-align:center;">Sẽ rất tuyệt vời nếu chúng tôi được phục vụ bạn thêm nhiều lần nữa ☆*: .｡. o(≧▽≦)o .｡.:*☆</p>
+    <p style="color: black; text-align:center;">Chúc bạn có một chuyến đi  <span style="color: #1861c5;">thượng lộ, bình an!</span></p>
+    <p color: black;>Trân trọng,</p>
+    <p color: black;><i>GROUP09-VEXERE</i></p>`,
+  }
+
+  // sending the email
+  myTransport.sendMail(mailOptions, (err) => {
+    if (err) {
+      console.log(`Email is failed to send!`);
+      console.error(err);
+    } else {
+      console.log(`Email is successfully sent!`);
+    }
+  });
 }
 
 export default bookingPaymentHandler;
