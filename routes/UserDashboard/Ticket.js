@@ -14,7 +14,7 @@ export default async function userTicketsApi(req, res) {
         orderBy: [
             {
                 RouteDetail: {
-                    startTime: "desc"
+                    startTime: "asc"
                 }
             }
         ],
