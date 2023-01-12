@@ -34,17 +34,30 @@
         </button>
       </div>
 
-      {{#if statusAction.canPaid}}
-      <a href="/user/ticket/pay?ticketId={{ticket.id}}" class="btn btn-primary w-100 mt-2"> Thanh Toán Bằng MoMo </a>
-      {{else}}
+      {{#switch ticket.status}}
+      {{#case "WAITING"}}
+      <a href="/user/ticket/pay?ticketId={{ticket.id}}" class="btn btn-primary w-100 mt-2">
+        Thanh Toán Bằng MoMo
+      </a>
+      <form method="post" action="/user/ticket/cancel">
+        <input type="number" name="ticketId" style="display: none;" value="{{ticket.id}}" readonly>
+        <button class="btn btn-danger w-100 mt-2"> Huỷ vé </button>
+      </form>
+      {{/case}}
+      {{#case "PAID"}}
       <a href="#" class="btn btn-success w-100 mt-2"> Vé đã được thanh toán </a>
-      {{/if}}
-
-      {{#if statusAction.canCancel}}
-      <a href="#" class="btn btn-danger w-100 mt-2"> Huỷ vé </a>
-      {{else}}
-      <a href="#" class="btn btn-danger w-100 mt-2"> Đã hủy vé </a>
-      {{/if}}
+      <form method="post" action="/user/ticket/cancel">
+        <input type="number" name="ticketId" style="display: none;" value="{{ticket.id}}" readonly>
+        <button class="btn btn-danger w-100 mt-2"> Huỷ vé </button>
+      </form>
+      {{/case}}
+      {{#case "FINISHED"}}
+      <a href="#" class="btn btn-success w-100 mt-2"> Bạn đã đi </a>
+      {{/case}}
+      {{#case "CANCELED"}}
+      <a class="btn btn-danger w-100 mt-2">Đã hủy vé</a>
+      {{/case}}
+      {{/switch}}
 
       {{#if statusAction.canRate}}
       <h4>Đánh giá</h4>

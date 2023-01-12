@@ -25,7 +25,10 @@ export default async function userTicketsApi(req: Request<{}, {}, {}, { page?: s
     ],
     where: {
       userId: userData.id,
-      ...(!req.query.status ? {} : { status: {equals: req.query.status} })
+      ...(!req.query.status ? {OR:[
+        {status: {equals: "WAITING"}},
+        {status: {equals: "PAID"}}
+      ]} : { status: {equals: req.query.status} })
     },
     select: {
       id:true,
@@ -74,5 +77,6 @@ export async function cancelTicketHandler(req:Request<{},{},{ticketId:string},{}
         status: "CANCELED"
       }
     })
+    res.redirect(`/user/ticket?ticketId=${ticket.id}`);
   } catch (error) {console.log(error);}
 }

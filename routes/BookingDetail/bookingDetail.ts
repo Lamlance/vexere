@@ -92,24 +92,18 @@ const ticketDetailHandler = async (req: Request<{}, {}, {}, { ticketId: string }
     return;
   }
 
-  const star = makeStar(ticket.Rating?.rating ? ticket.Rating.rating : 0);
-  console.log(star);
   res.render("ticket", {
     ticket: ticket,
     detail: routeDetail,
     route: route,
     transactionStatus: ticket.status,
     price:routeDetail.price,
-    statusAction: {
-      ...(ticket.status === "WAITING" ? { canPaid: true, canCancel: true } : {}),
-      ...(ticket.status === "CANCELED" ? { canCancel: false, canPaid: false } : {}),
-      ...(ticket.status === "PAID" ? { canPaid: false, canCancel: true } : {}),
-      ...((routeDetail && !ticket.Rating && ticket.status === "FINISHED") ? { canRate: true } : { canRate: false })
-    },
     ...(!ticket.Rating ? {} : {rating: ({ 
       ...ticket.Rating ,
-      star: star
-    })})
+    })}),
+    statusAction:{
+      canRate: ticket.status === "FINISHED" && !ticket.Rating
+    }
   });
 }
 
