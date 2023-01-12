@@ -29,7 +29,7 @@ const mailOptions = {
           <p style="color: black; text-align:center;">Sẽ rất tuyệt vời nếu chúng tôi được phục vụ bạn thêm nhiều lần nữa ☆*: .｡. o(≧▽≦)o .｡.:*☆</p>
           <p style="color: black; text-align:center;">Chúc bạn có một chuyến đi  <span style="color: #1861c5;">thượng lộ, bình an!</span></p>
           <p color: black;>Trân trọng,</p>
-          <p color: black;>GROUP09-VEXERE</p>`,
+          <p color: black;><i>GROUP09-VEXERE</i></p>`,
 }
 
 // sending the email
