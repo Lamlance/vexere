@@ -74,6 +74,10 @@
   </form>
 
   <section id="search_result_display" class="search_result_display">
+
+    {{#if empty}}
+    <h4>Xin lỗi quý khách vexereGroup09 hiện tại chưa khai thác tuyến đường này </h4>
+    {{/if}}
     {{#each routeDetail}}
     {{> searchResult detail=this route=../route }}
     {{/each}}
